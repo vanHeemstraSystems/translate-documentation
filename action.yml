@@ -1,6 +1,6 @@
-name: Translate Readme Action
+name: Translate Documentation Action
 author: Ephraim Atta-Duncan
-description: Translate the Readme to another language
+description: Translate the Documentation to another language
 
 inputs:
   LANG:
