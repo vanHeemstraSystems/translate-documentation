@@ -16,9 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@k3rn31p4nic/google-translate-api": "^1.1.1",
+    "google-translate-api": "^2.3.0",
     "http-proxy-agent": "^4.0.1",
-    "remark-parse": "^8.0.3",
+    "remark-parse": "^11.0.0",
     "remark-stringify": "^8.1.1",
     "simple-git": "^3.15.0",
     "tunnel": "0.0.6",
