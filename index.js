@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync, readdirSync } = require("fs");
+tioconst { readFileSync, writeFileSync, readdirSync } = require("fs");
 const { join } = require("path");
 const core = require("@actions/core");
 const $ = require("@k3rn31p4nic/google-translate-api");
@@ -65,7 +65,7 @@ async function commitChanges(lang) {
   console.log("pushed");
 }
 
-async function translateReadme() {
+async function translateDocumentation() {
   try {
     await writeToFile();
     await commitChanges(lang);
@@ -75,4 +75,4 @@ async function translateReadme() {
   }
 }
 
-translateReadme();
+translateDocumentation();
