@@ -87,7 +87,7 @@ A new package will be build and stored in the ```dist``` directory.
 
 You can configure the action further with the following options:
 
-- `LANG`: The language you want to translate your readme to. The default is Simplified Chinese. (I'm a Ghanaian) The supported languages can be found below.
+- `LANG`: The language you want to translate your readme to. The default is Simplified Chinese. The supported languages can be found below.
   (default: `zh-CH`) (required: `false`)
 
 ## Supported Languages
@@ -96,7 +96,7 @@ Languages supported can be found here https://cloud.google.com/translate/docs/la
 
 ### Issues
 
-Check [here](https://github.com/dephraiim/translate-readme/issues/1) for issues related to this action.
+Check [here](https://github.com/vanHeemstraSystems/translate-documentation/issues/1) for issues related to this action.
 
 ### Development
 
