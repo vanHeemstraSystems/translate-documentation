@@ -1,26 +1,24 @@
-# Traduire l'action Lisez-moi
+# Traduire l’action Lisez-moi
 
-## Traduction LISEZMOI
+## Traduction
 
--   [Anglais](README.md)
--   [Chinois simplifié](README.zh-CN.md)
--   [chinois traditionnel](README.zh-TW.md)
--   [hindi](README.hi.md)
--   [Française](README.fr.md)
--   [arabe](README.ar.md)
+-   [Anglais](DOCUMENTATION.md)
+-   [Chinois simplifié](DOCUMENTATION.zh-CN.md)
+-   [Chinois traditionnel](DOCUMENTATION.zh-TW.md)
+-   [hindi](DOCUMENTATION.hi.md)
+-   [Française](DOCUMENTATION.fr.md)
+-   [arabe](DOCUMENTATION.ar.md)
 
-**GitHub Action pour traduire Readme dans n'importe quelle langue**
+**GitHub Action pour traduire la documentation dans n'importe quelle langue**
 
-This is a GitHub Action that automatically translate the readme in your repo to a specified language.
+Il s'agit d'une action GitHub qui traduit automatiquement la documentation de votre dépôt dans une langue spécifiée.
 
-_Une soumission pour le[DEV : Actions GitHub pour l'Open Source !](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)hackathon_
+## Installation
 
-## Installer
-
-1.  **Ajouter un fichier de flux de travail**à votre projet (ex.`.github/workflows/readme.yml`):
+1.  **Ajouter un fichier de workflow**à votre projet (par ex.`.github/workflows/readme.yml`):
 
 ```yaml
-name: Translate README
+name: Translate DOCUMENTATION
 
 on:
   push:
@@ -37,35 +35,53 @@ jobs:
         with:
           node-version: 12.x
       # ISO Language Codes: https://cloud.google.com/translate/docs/languages  
-      - name: Adding README - Chinese Simplified
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - Chinese Simplified
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: zh-CN
-      - name: Adding README - Chinese Traditional
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - Chinese Traditional
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: zh-TW
-      - name: Adding README - Hindi
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - Hindi
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: hi
-      - name: Adding README - Arabic
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - Arabic
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: ar
-      - name: Adding README - French
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - French
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: fr
 ```
 
+## Construire
+
+Procédez comme suit :
+
+Linux/MacOS :
+
+    $ export NODE_OPTIONS=--openssl-legacy-provider
+
+Fenêtres :
+
+    $ setx NODE_OPTIONS=--openssl-legacy-provider
+
+Alors:
+
+    $ npm run build
+
+Un nouveau package sera construit et stocké dans le`dist`annuaire.
+
 ## Configuration
 
-### Choix
+### Possibilités
 
 Vous pouvez configurer davantage l'action avec les options suivantes :
 
--   `LANG`: La langue dans laquelle vous souhaitez traduire votre fichier readme. La valeur par défaut est le chinois simplifié. (Je suis un Ghanéen) Les langues prises en charge peuvent être trouvées ci-dessous.
+-   `LANG`: La langue dans laquelle vous souhaitez traduire votre fichier Lisez-moi. La valeur par défaut est le chinois simplifié. Les langues prises en charge peuvent être trouvées ci-dessous.
     (défaut:`zh-CH`) (requis:`false`)
 
 ## Langues prises en charge
@@ -74,7 +90,7 @@ Les langues prises en charge peuvent être trouvées ici<https://cloud.google.co
 
 ### Problèmes
 
-Vérifier[ici](https://github.com/dephraiim/translate-readme/issues/1)pour les problèmes liés à cette action.
+Vérifier[ici](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)pour les problèmes liés à cette action.
 
 ### Développement
 
