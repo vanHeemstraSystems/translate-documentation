@@ -56009,12 +56009,12 @@ var esm_default = gitInstanceFactory;
 
 const git = esm_default();
 
-const toAst = (markdown) => {
-  return unified().use(remarkParse).parse(markdown);
+const toAst = async (markdown) => {
+  return unified().use(remarkParse).parse(markdown)
 };
 
-const toMarkdown = (ast) => {
-  return unified().use((remark_stringify_default())).stringify(ast);
+const toMarkdown = async (ast) => {
+  return unified().use((remark_stringify_default())).stringify(ast)
 };
 
 const mainDir = ".";
