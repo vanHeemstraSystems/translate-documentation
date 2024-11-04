@@ -1,4 +1,4 @@
-# 翻译自述文件操作
+# Translate Readme Action
 
 ## 文档翻译
 
@@ -11,7 +11,7 @@
 
 **GitHub Action 将文档翻译成任何语言**
 
-This is a GitHub Action that automatically translate the documentation in your repo to a specified language.
+这是一个 GitHub Action，可自动将存储库中的文档翻译为指定语言。
 
 ## 设置
 
@@ -90,7 +90,7 @@ Linux / macOS：
 
 ### 问题
 
-查看[这里](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)对于与此操作相关的问题。
+查看[这里](https://github.com/vanHeemstraSystems/translate-documentation/issues/1) for issues related to this action.
 
 ### 发展
 
