@@ -56071,6 +56071,7 @@ async function translateDocumentation() {
     await commitChanges(lang);
     console.log("Done");
   } catch (error) {
+    console.log("error: ", error);
     throw new Error(error);
   }
 }
