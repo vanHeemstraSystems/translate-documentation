@@ -1,4 +1,4 @@
-tioconst { readFileSync, writeFileSync, readdirSync } = require("fs");
+const { readFileSync, writeFileSync, readdirSync } = require("fs");
 const { join } = require("path");
 const core = require("@actions/core");
 const $ = require("@k3rn31p4nic/google-translate-api");

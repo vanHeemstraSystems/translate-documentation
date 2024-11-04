@@ -36,26 +36,50 @@ jobs:
           node-version: 12.x
       # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
       - name: Adding README - Chinese Simplified
-        uses: dephraiim/translate-readme@main
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: zh-CN
       - name: Adding README - Chinese Traditional
-        uses: dephraiim/translate-readme@main
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: zh-TW
       - name: Adding README - Hindi
-        uses: dephraiim/translate-readme@main
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: hi
       - name: Adding README - Arabic
-        uses: dephraiim/translate-readme@main
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: ar
       - name: Adding README - French
-        uses: dephraiim/translate-readme@main
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: fr
 ```
+
+## Build
+
+Do the following:
+
+Linux / macOS:
+
+```
+$ export NODE_OPTIONS=--openssl-legacy-provider
+```
+
+Windows:
+
+```
+$ setx NODE_OPTIONS=--openssl-legacy-provider
+```
+
+Then:
+
+```
+$ npm run build
+```
+
+A new package will be build and stored in the ```dist``` directory.
 
 ## Configuration
 
