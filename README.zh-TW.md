@@ -1,26 +1,24 @@
-# 翻譯自述文件操作
+# Translate Readme Action
 
-## 自述文件翻譯
+## 文件翻譯
 
--   [英語](README.md)
--   [簡體中文](README.zh-CN.md)
--   [繁體中文](README.zh-TW.md)
--   [印地語](README.hi.md)
--   [法語](README.fr.md)
--   [阿拉伯](README.ar.md)
+-   [英語](DOCUMENTATION.md)
+-   [簡體中文](DOCUMENTATION.zh-CN.md)
+-   [繁體中文](DOCUMENTATION.zh-TW.md)
+-   [हिंदी](DOCUMENTATION.hi.md)
+-   [法語](DOCUMENTATION.fr.md)
+-   [阿拉伯](DOCUMENTATION.ar.md)
 
-**GitHub Action 將自述文件翻譯成任何語言**
+**GitHub Action 將文件翻譯成任何語言**
 
-這是一個 GitHub Action，可以自動將你的 repo 中的自述文件翻譯成指定的語言。
+這是一個 GitHub Action，可自動將儲存庫中的文件翻譯為指定語言。
 
-_提交的[DEV：GitHub 開源行動！](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)黑客馬拉松_
+## 設定
 
-## 設置
-
-1.  **添加工作流文件**到您的項目（例如`.github/workflows/readme.yml`):
+1.  **新增工作流程文件**到您的專案（例如`.github/workflows/readme.yml`):
 
 ```yaml
-name: Translate README
+name: Translate DOCUMENTATION
 
 on:
   push:
@@ -37,27 +35,45 @@ jobs:
         with:
           node-version: 12.x
       # ISO Language Codes: https://cloud.google.com/translate/docs/languages  
-      - name: Adding README - Chinese Simplified
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - Chinese Simplified
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: zh-CN
-      - name: Adding README - Chinese Traditional
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - Chinese Traditional
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: zh-TW
-      - name: Adding README - Hindi
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - Hindi
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: hi
-      - name: Adding README - Arabic
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - Arabic
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: ar
-      - name: Adding README - French
-        uses: dephraiim/translate-readme@main
+      - name: Adding DOCUMENTATION - French
+        uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: fr
 ```
+
+## 建造
+
+執行以下操作：
+
+Linux / macOS：
+
+    $ export NODE_OPTIONS=--openssl-legacy-provider
+
+視窗：
+
+    $ setx NODE_OPTIONS=--openssl-legacy-provider
+
+然後：
+
+    $ npm run build
+
+將建立一個新包並將其儲存在`dist` directory.
 
 ## 配置
 
@@ -65,16 +81,16 @@ jobs:
 
 您可以使用以下選項進一步配置操作：
 
--   `LANG`：您要將自述文件翻譯成的語言。默認為簡體中文。 （我是加納人）可在下方找到支持的語言。
-    （默認：`zh-CH`） （必需的：`false`)
+-   `LANG`：您要將自述文件翻譯成的語言。預設為簡體中文。支援的語言可以在下面找到。
+    (預設:`zh-CH`) (required: `false`)
 
-## 支持的語言
+## Supported Languages
 
-可在此處找到支持的語言<https://cloud.google.com/translate/docs/languages>
+可以在此處找到支援的語言<https://cloud.google.com/translate/docs/languages>
 
 ### 問題
 
-查看[這裡](https://github.com/dephraiim/translate-readme/issues/1)與此操作相關的問題。
+查看[這裡](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)對於與此操作相關的問題。
 
 ### 發展
 
