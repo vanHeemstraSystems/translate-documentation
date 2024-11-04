@@ -81,8 +81,8 @@ Linux / macOS：
 
 您可以使用以下選項進一步配置操作：
 
--   `LANG`: The language you want to translate your readme to. The default is Simplified Chinese. The supported languages can be found below.
-    (default: `zh-CH`） （必需的：`false`)
+-   `LANG`：您要將自述文件翻譯成的語言。預設為簡體中文。可以在下面找到支援的語言。
+    (預設:`zh-CH`） （必需的：`false`)
 
 ## 支援的語言
 
