@@ -11,7 +11,7 @@
 
 **GitHub Action 将文档翻译成任何语言**
 
-这是一个 GitHub Action，可自动将存储库中的文档翻译为指定语言。
+This is a GitHub Action that automatically translate the documentation in your repo to a specified language.
 
 ## 设置
 
@@ -98,4 +98,4 @@ Linux / macOS：
 
 ### 执照
 
-[MIT](./LICENSE)
+[和](./LICENSE)
