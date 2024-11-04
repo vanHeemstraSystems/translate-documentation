@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
+      # ISO Language Codes: https://cloud.google.com/translate/docs/languages  
       - name: Adding DOCUMENTATION - Chinese Simplified
         uses: vanHeemstraSystems/translate-documentation@main
         with:
