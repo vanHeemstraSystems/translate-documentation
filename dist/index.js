@@ -56031,9 +56031,14 @@ console.log('AST CREATED AND READ')
 let originalText = []
 
 unist_util_visit_default()(documentationAST, async node => {
-  if (node.type === 'text') {
-    originalText.push(node.value)
-    node.value = (await google_translate_api_default()(node.value, { to: lang })).text
+  try {
+    if (node.type === 'text') {
+      originalText.push(node.value)
+      node.value = (await google_translate_api_default()(node.value, { to: lang })).text
+    }
+  } catch (error) {
+    console.log('visit error: ', error)
+    throw new Error(error)
   }
 })
 

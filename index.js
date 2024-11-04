@@ -31,9 +31,14 @@ console.log('AST CREATED AND READ')
 let originalText = []
 
 visit(documentationAST, async node => {
-  if (node.type === 'text') {
-    originalText.push(node.value)
-    node.value = (await $(node.value, { to: lang })).text
+  try {
+    if (node.type === 'text') {
+      originalText.push(node.value)
+      node.value = (await $(node.value, { to: lang })).text
+    }
+  } catch (error) {
+    console.log('visit error: ', error)
+    throw new Error(error)
   }
 })
 
