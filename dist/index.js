@@ -3275,9 +3275,10 @@ exports.READABLE = exports.FILE + exports.FOLDER;
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
+var __webpack_unused_export__;
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.createDeferred = exports.deferred = void 0;
+__webpack_unused_export__ = ({ value: true });
+exports.ud = exports.yX = void 0;
 /**
  * Creates a new `DeferredPromise`
  *
@@ -3315,7 +3316,7 @@ function deferred() {
         },
     };
 }
-exports.deferred = deferred;
+exports.yX = deferred;
 /**
  * Alias of the exported `deferred` function, to help consumers wanting to use `deferred` as the
  * local variable name rather than the factory import name, without needing to rename on import.
@@ -3324,7 +3325,7 @@ exports.deferred = deferred;
  import {createDeferred} from '@kwsites/promise-deferred`;
  ```
  */
-exports.createDeferred = deferred;
+exports.ud = deferred;
 /**
  * Default export allows use as:
  *
@@ -3332,7 +3333,7 @@ exports.createDeferred = deferred;
  import deferred from '@kwsites/promise-deferred`;
  ```
  */
-exports["default"] = deferred;
+__webpack_unused_export__ = deferred;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -4609,131 +4610,6 @@ module.exports = function duplex2(options, writable, readable) {
 };
 
 module.exports.DuplexWrapper = DuplexWrapper;
-
-
-/***/ }),
-
-/***/ 3860:
-/***/ ((module) => {
-
-"use strict";
-
-
-var hasOwn = Object.prototype.hasOwnProperty;
-var toStr = Object.prototype.toString;
-var defineProperty = Object.defineProperty;
-var gOPD = Object.getOwnPropertyDescriptor;
-
-var isArray = function isArray(arr) {
-	if (typeof Array.isArray === 'function') {
-		return Array.isArray(arr);
-	}
-
-	return toStr.call(arr) === '[object Array]';
-};
-
-var isPlainObject = function isPlainObject(obj) {
-	if (!obj || toStr.call(obj) !== '[object Object]') {
-		return false;
-	}
-
-	var hasOwnConstructor = hasOwn.call(obj, 'constructor');
-	var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
-	// Not own constructor property must be Object
-	if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
-		return false;
-	}
-
-	// Own properties are enumerated firstly, so to speed up,
-	// if last one is own, then all properties are own.
-	var key;
-	for (key in obj) { /**/ }
-
-	return typeof key === 'undefined' || hasOwn.call(obj, key);
-};
-
-// If name is '__proto__', and Object.defineProperty is available, define __proto__ as an own property on target
-var setProperty = function setProperty(target, options) {
-	if (defineProperty && options.name === '__proto__') {
-		defineProperty(target, options.name, {
-			enumerable: true,
-			configurable: true,
-			value: options.newValue,
-			writable: true
-		});
-	} else {
-		target[options.name] = options.newValue;
-	}
-};
-
-// Return undefined instead of __proto__ if '__proto__' is not an own property
-var getProperty = function getProperty(obj, name) {
-	if (name === '__proto__') {
-		if (!hasOwn.call(obj, name)) {
-			return void 0;
-		} else if (gOPD) {
-			// In early versions of node, obj['__proto__'] is buggy when obj has
-			// __proto__ as an own property. Object.getOwnPropertyDescriptor() works.
-			return gOPD(obj, name).value;
-		}
-	}
-
-	return obj[name];
-};
-
-module.exports = function extend() {
-	var options, name, src, copy, copyIsArray, clone;
-	var target = arguments[0];
-	var i = 1;
-	var length = arguments.length;
-	var deep = false;
-
-	// Handle a deep copy situation
-	if (typeof target === 'boolean') {
-		deep = target;
-		target = arguments[1] || {};
-		// skip the boolean and the target
-		i = 2;
-	}
-	if (target == null || (typeof target !== 'object' && typeof target !== 'function')) {
-		target = {};
-	}
-
-	for (; i < length; ++i) {
-		options = arguments[i];
-		// Only deal with non-null/undefined values
-		if (options != null) {
-			// Extend the base object
-			for (name in options) {
-				src = getProperty(target, name);
-				copy = getProperty(options, name);
-
-				// Prevent never-ending loop
-				if (target !== copy) {
-					// Recurse if we're merging plain objects or arrays
-					if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
-						if (copyIsArray) {
-							copyIsArray = false;
-							clone = src && isArray(src) ? src : [];
-						} else {
-							clone = src && isPlainObject(src) ? src : {};
-						}
-
-						// Never move original objects, clone them
-						setProperty(target, { name: name, newValue: extend(deep, clone, copy) });
-
-					// Don't bring in undefined values
-					} else if (typeof copy !== 'undefined') {
-						setProperty(target, { name: name, newValue: copy });
-					}
-				}
-			}
-		}
-	}
-
-	// Return the modified object
-	return target;
-};
 
 
 /***/ }),
@@ -10732,4971 +10608,6 @@ module.exports = function safeEval (code, context, opts) {
   vm.runInNewContext(code, sandbox, opts)
   return sandbox[resultKey]
 }
-
-
-/***/ }),
-
-/***/ 9065:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
-};
-var __commonJS = (cb, mod) => function __require() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-};
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
-
-// src/lib/errors/git-error.ts
-var GitError;
-var init_git_error = __esm({
-  "src/lib/errors/git-error.ts"() {
-    "use strict";
-    GitError = class extends Error {
-      constructor(task, message) {
-        super(message);
-        this.task = task;
-        Object.setPrototypeOf(this, new.target.prototype);
-      }
-    };
-  }
-});
-
-// src/lib/errors/git-response-error.ts
-var GitResponseError;
-var init_git_response_error = __esm({
-  "src/lib/errors/git-response-error.ts"() {
-    "use strict";
-    init_git_error();
-    GitResponseError = class extends GitError {
-      constructor(git, message) {
-        super(void 0, message || String(git));
-        this.git = git;
-      }
-    };
-  }
-});
-
-// src/lib/args/pathspec.ts
-function pathspec(...paths) {
-  const key = new String(paths);
-  cache.set(key, paths);
-  return key;
-}
-function isPathSpec(path) {
-  return path instanceof String && cache.has(path);
-}
-function toPaths(pathSpec) {
-  return cache.get(pathSpec) || [];
-}
-var cache;
-var init_pathspec = __esm({
-  "src/lib/args/pathspec.ts"() {
-    "use strict";
-    cache = /* @__PURE__ */ new WeakMap();
-  }
-});
-
-// src/lib/errors/git-construct-error.ts
-var GitConstructError;
-var init_git_construct_error = __esm({
-  "src/lib/errors/git-construct-error.ts"() {
-    "use strict";
-    init_git_error();
-    GitConstructError = class extends GitError {
-      constructor(config, message) {
-        super(void 0, message);
-        this.config = config;
-      }
-    };
-  }
-});
-
-// src/lib/errors/git-plugin-error.ts
-var GitPluginError;
-var init_git_plugin_error = __esm({
-  "src/lib/errors/git-plugin-error.ts"() {
-    "use strict";
-    init_git_error();
-    GitPluginError = class extends GitError {
-      constructor(task, plugin, message) {
-        super(task, message);
-        this.task = task;
-        this.plugin = plugin;
-        Object.setPrototypeOf(this, new.target.prototype);
-      }
-    };
-  }
-});
-
-// src/lib/errors/task-configuration-error.ts
-var TaskConfigurationError;
-var init_task_configuration_error = __esm({
-  "src/lib/errors/task-configuration-error.ts"() {
-    "use strict";
-    init_git_error();
-    TaskConfigurationError = class extends GitError {
-      constructor(message) {
-        super(void 0, message);
-      }
-    };
-  }
-});
-
-// src/lib/utils/util.ts
-function asFunction(source) {
-  return typeof source === "function" ? source : NOOP;
-}
-function isUserFunction(source) {
-  return typeof source === "function" && source !== NOOP;
-}
-function splitOn(input, char) {
-  const index = input.indexOf(char);
-  if (index <= 0) {
-    return [input, ""];
-  }
-  return [input.substr(0, index), input.substr(index + 1)];
-}
-function first(input, offset = 0) {
-  return isArrayLike(input) && input.length > offset ? input[offset] : void 0;
-}
-function last(input, offset = 0) {
-  if (isArrayLike(input) && input.length > offset) {
-    return input[input.length - 1 - offset];
-  }
-}
-function isArrayLike(input) {
-  return !!(input && typeof input.length === "number");
-}
-function toLinesWithContent(input = "", trimmed2 = true, separator = "\n") {
-  return input.split(separator).reduce((output, line) => {
-    const lineContent = trimmed2 ? line.trim() : line;
-    if (lineContent) {
-      output.push(lineContent);
-    }
-    return output;
-  }, []);
-}
-function forEachLineWithContent(input, callback) {
-  return toLinesWithContent(input, true).map((line) => callback(line));
-}
-function folderExists(path) {
-  return (0, import_file_exists.exists)(path, import_file_exists.FOLDER);
-}
-function append(target, item) {
-  if (Array.isArray(target)) {
-    if (!target.includes(item)) {
-      target.push(item);
-    }
-  } else {
-    target.add(item);
-  }
-  return item;
-}
-function including(target, item) {
-  if (Array.isArray(target) && !target.includes(item)) {
-    target.push(item);
-  }
-  return target;
-}
-function remove(target, item) {
-  if (Array.isArray(target)) {
-    const index = target.indexOf(item);
-    if (index >= 0) {
-      target.splice(index, 1);
-    }
-  } else {
-    target.delete(item);
-  }
-  return item;
-}
-function asArray(source) {
-  return Array.isArray(source) ? source : [source];
-}
-function asCamelCase(str) {
-  return str.replace(/[\s-]+(.)/g, (_all, chr) => {
-    return chr.toUpperCase();
-  });
-}
-function asStringArray(source) {
-  return asArray(source).map(String);
-}
-function asNumber(source, onNaN = 0) {
-  if (source == null) {
-    return onNaN;
-  }
-  const num = parseInt(source, 10);
-  return isNaN(num) ? onNaN : num;
-}
-function prefixedArray(input, prefix) {
-  const output = [];
-  for (let i = 0, max = input.length; i < max; i++) {
-    output.push(prefix, input[i]);
-  }
-  return output;
-}
-function bufferToString(input) {
-  return (Array.isArray(input) ? Buffer.concat(input) : input).toString("utf-8");
-}
-function pick(source, properties) {
-  return Object.assign(
-    {},
-    ...properties.map((property) => property in source ? { [property]: source[property] } : {})
-  );
-}
-function delay(duration = 0) {
-  return new Promise((done) => setTimeout(done, duration));
-}
-function orVoid(input) {
-  if (input === false) {
-    return void 0;
-  }
-  return input;
-}
-var import_file_exists, NULL, NOOP, objectToString;
-var init_util = __esm({
-  "src/lib/utils/util.ts"() {
-    "use strict";
-    import_file_exists = __nccwpck_require__(7117);
-    NULL = "\0";
-    NOOP = () => {
-    };
-    objectToString = Object.prototype.toString.call.bind(Object.prototype.toString);
-  }
-});
-
-// src/lib/utils/argument-filters.ts
-function filterType(input, filter, def) {
-  if (filter(input)) {
-    return input;
-  }
-  return arguments.length > 2 ? def : void 0;
-}
-function filterPrimitives(input, omit) {
-  const type = isPathSpec(input) ? "string" : typeof input;
-  return /number|string|boolean/.test(type) && (!omit || !omit.includes(type));
-}
-function filterPlainObject(input) {
-  return !!input && objectToString(input) === "[object Object]";
-}
-function filterFunction(input) {
-  return typeof input === "function";
-}
-var filterArray, filterString, filterStringArray, filterStringOrStringArray, filterHasLength;
-var init_argument_filters = __esm({
-  "src/lib/utils/argument-filters.ts"() {
-    "use strict";
-    init_util();
-    init_pathspec();
-    filterArray = (input) => {
-      return Array.isArray(input);
-    };
-    filterString = (input) => {
-      return typeof input === "string";
-    };
-    filterStringArray = (input) => {
-      return Array.isArray(input) && input.every(filterString);
-    };
-    filterStringOrStringArray = (input) => {
-      return filterString(input) || Array.isArray(input) && input.every(filterString);
-    };
-    filterHasLength = (input) => {
-      if (input == null || "number|boolean|function".includes(typeof input)) {
-        return false;
-      }
-      return Array.isArray(input) || typeof input === "string" || typeof input.length === "number";
-    };
-  }
-});
-
-// src/lib/utils/exit-codes.ts
-var ExitCodes;
-var init_exit_codes = __esm({
-  "src/lib/utils/exit-codes.ts"() {
-    "use strict";
-    ExitCodes = /* @__PURE__ */ ((ExitCodes2) => {
-      ExitCodes2[ExitCodes2["SUCCESS"] = 0] = "SUCCESS";
-      ExitCodes2[ExitCodes2["ERROR"] = 1] = "ERROR";
-      ExitCodes2[ExitCodes2["NOT_FOUND"] = -2] = "NOT_FOUND";
-      ExitCodes2[ExitCodes2["UNCLEAN"] = 128] = "UNCLEAN";
-      return ExitCodes2;
-    })(ExitCodes || {});
-  }
-});
-
-// src/lib/utils/git-output-streams.ts
-var GitOutputStreams;
-var init_git_output_streams = __esm({
-  "src/lib/utils/git-output-streams.ts"() {
-    "use strict";
-    GitOutputStreams = class {
-      constructor(stdOut, stdErr) {
-        this.stdOut = stdOut;
-        this.stdErr = stdErr;
-      }
-      asStrings() {
-        return new GitOutputStreams(this.stdOut.toString("utf8"), this.stdErr.toString("utf8"));
-      }
-    };
-  }
-});
-
-// src/lib/utils/line-parser.ts
-var LineParser, RemoteLineParser;
-var init_line_parser = __esm({
-  "src/lib/utils/line-parser.ts"() {
-    "use strict";
-    LineParser = class {
-      constructor(regExp, useMatches) {
-        this.matches = [];
-        this.parse = (line, target) => {
-          this.resetMatches();
-          if (!this._regExp.every((reg, index) => this.addMatch(reg, index, line(index)))) {
-            return false;
-          }
-          return this.useMatches(target, this.prepareMatches()) !== false;
-        };
-        this._regExp = Array.isArray(regExp) ? regExp : [regExp];
-        if (useMatches) {
-          this.useMatches = useMatches;
-        }
-      }
-      useMatches(target, match) {
-        throw new Error(`LineParser:useMatches not implemented`);
-      }
-      resetMatches() {
-        this.matches.length = 0;
-      }
-      prepareMatches() {
-        return this.matches;
-      }
-      addMatch(reg, index, line) {
-        const matched = line && reg.exec(line);
-        if (matched) {
-          this.pushMatch(index, matched);
-        }
-        return !!matched;
-      }
-      pushMatch(_index, matched) {
-        this.matches.push(...matched.slice(1));
-      }
-    };
-    RemoteLineParser = class extends LineParser {
-      addMatch(reg, index, line) {
-        return /^remote:\s/.test(String(line)) && super.addMatch(reg, index, line);
-      }
-      pushMatch(index, matched) {
-        if (index > 0 || matched.length > 1) {
-          super.pushMatch(index, matched);
-        }
-      }
-    };
-  }
-});
-
-// src/lib/utils/simple-git-options.ts
-function createInstanceConfig(...options) {
-  const baseDir = process.cwd();
-  const config = Object.assign(
-    __spreadValues({ baseDir }, defaultOptions),
-    ...options.filter((o) => typeof o === "object" && o)
-  );
-  config.baseDir = config.baseDir || baseDir;
-  config.trimmed = config.trimmed === true;
-  return config;
-}
-var defaultOptions;
-var init_simple_git_options = __esm({
-  "src/lib/utils/simple-git-options.ts"() {
-    "use strict";
-    defaultOptions = {
-      binary: "git",
-      maxConcurrentProcesses: 5,
-      config: [],
-      trimmed: false
-    };
-  }
-});
-
-// src/lib/utils/task-options.ts
-function appendTaskOptions(options, commands = []) {
-  if (!filterPlainObject(options)) {
-    return commands;
-  }
-  return Object.keys(options).reduce((commands2, key) => {
-    const value = options[key];
-    if (isPathSpec(value)) {
-      commands2.push(value);
-    } else if (filterPrimitives(value, ["boolean"])) {
-      commands2.push(key + "=" + value);
-    } else {
-      commands2.push(key);
-    }
-    return commands2;
-  }, commands);
-}
-function getTrailingOptions(args, initialPrimitive = 0, objectOnly = false) {
-  const command = [];
-  for (let i = 0, max = initialPrimitive < 0 ? args.length : initialPrimitive; i < max; i++) {
-    if ("string|number".includes(typeof args[i])) {
-      command.push(String(args[i]));
-    }
-  }
-  appendTaskOptions(trailingOptionsArgument(args), command);
-  if (!objectOnly) {
-    command.push(...trailingArrayArgument(args));
-  }
-  return command;
-}
-function trailingArrayArgument(args) {
-  const hasTrailingCallback = typeof last(args) === "function";
-  return filterType(last(args, hasTrailingCallback ? 1 : 0), filterArray, []);
-}
-function trailingOptionsArgument(args) {
-  const hasTrailingCallback = filterFunction(last(args));
-  return filterType(last(args, hasTrailingCallback ? 1 : 0), filterPlainObject);
-}
-function trailingFunctionArgument(args, includeNoop = true) {
-  const callback = asFunction(last(args));
-  return includeNoop || isUserFunction(callback) ? callback : void 0;
-}
-var init_task_options = __esm({
-  "src/lib/utils/task-options.ts"() {
-    "use strict";
-    init_argument_filters();
-    init_util();
-    init_pathspec();
-  }
-});
-
-// src/lib/utils/task-parser.ts
-function callTaskParser(parser4, streams) {
-  return parser4(streams.stdOut, streams.stdErr);
-}
-function parseStringResponse(result, parsers12, texts, trim = true) {
-  asArray(texts).forEach((text) => {
-    for (let lines = toLinesWithContent(text, trim), i = 0, max = lines.length; i < max; i++) {
-      const line = (offset = 0) => {
-        if (i + offset >= max) {
-          return;
-        }
-        return lines[i + offset];
-      };
-      parsers12.some(({ parse }) => parse(line, result));
-    }
-  });
-  return result;
-}
-var init_task_parser = __esm({
-  "src/lib/utils/task-parser.ts"() {
-    "use strict";
-    init_util();
-  }
-});
-
-// src/lib/utils/index.ts
-var utils_exports = {};
-__export(utils_exports, {
-  ExitCodes: () => ExitCodes,
-  GitOutputStreams: () => GitOutputStreams,
-  LineParser: () => LineParser,
-  NOOP: () => NOOP,
-  NULL: () => NULL,
-  RemoteLineParser: () => RemoteLineParser,
-  append: () => append,
-  appendTaskOptions: () => appendTaskOptions,
-  asArray: () => asArray,
-  asCamelCase: () => asCamelCase,
-  asFunction: () => asFunction,
-  asNumber: () => asNumber,
-  asStringArray: () => asStringArray,
-  bufferToString: () => bufferToString,
-  callTaskParser: () => callTaskParser,
-  createInstanceConfig: () => createInstanceConfig,
-  delay: () => delay,
-  filterArray: () => filterArray,
-  filterFunction: () => filterFunction,
-  filterHasLength: () => filterHasLength,
-  filterPlainObject: () => filterPlainObject,
-  filterPrimitives: () => filterPrimitives,
-  filterString: () => filterString,
-  filterStringArray: () => filterStringArray,
-  filterStringOrStringArray: () => filterStringOrStringArray,
-  filterType: () => filterType,
-  first: () => first,
-  folderExists: () => folderExists,
-  forEachLineWithContent: () => forEachLineWithContent,
-  getTrailingOptions: () => getTrailingOptions,
-  including: () => including,
-  isUserFunction: () => isUserFunction,
-  last: () => last,
-  objectToString: () => objectToString,
-  orVoid: () => orVoid,
-  parseStringResponse: () => parseStringResponse,
-  pick: () => pick,
-  prefixedArray: () => prefixedArray,
-  remove: () => remove,
-  splitOn: () => splitOn,
-  toLinesWithContent: () => toLinesWithContent,
-  trailingFunctionArgument: () => trailingFunctionArgument,
-  trailingOptionsArgument: () => trailingOptionsArgument
-});
-var init_utils = __esm({
-  "src/lib/utils/index.ts"() {
-    "use strict";
-    init_argument_filters();
-    init_exit_codes();
-    init_git_output_streams();
-    init_line_parser();
-    init_simple_git_options();
-    init_task_options();
-    init_task_parser();
-    init_util();
-  }
-});
-
-// src/lib/tasks/check-is-repo.ts
-var check_is_repo_exports = {};
-__export(check_is_repo_exports, {
-  CheckRepoActions: () => CheckRepoActions,
-  checkIsBareRepoTask: () => checkIsBareRepoTask,
-  checkIsRepoRootTask: () => checkIsRepoRootTask,
-  checkIsRepoTask: () => checkIsRepoTask
-});
-function checkIsRepoTask(action) {
-  switch (action) {
-    case "bare" /* BARE */:
-      return checkIsBareRepoTask();
-    case "root" /* IS_REPO_ROOT */:
-      return checkIsRepoRootTask();
-  }
-  const commands = ["rev-parse", "--is-inside-work-tree"];
-  return {
-    commands,
-    format: "utf-8",
-    onError,
-    parser
-  };
-}
-function checkIsRepoRootTask() {
-  const commands = ["rev-parse", "--git-dir"];
-  return {
-    commands,
-    format: "utf-8",
-    onError,
-    parser(path) {
-      return /^\.(git)?$/.test(path.trim());
-    }
-  };
-}
-function checkIsBareRepoTask() {
-  const commands = ["rev-parse", "--is-bare-repository"];
-  return {
-    commands,
-    format: "utf-8",
-    onError,
-    parser
-  };
-}
-function isNotRepoMessage(error) {
-  return /(Not a git repository|Kein Git-Repository)/i.test(String(error));
-}
-var CheckRepoActions, onError, parser;
-var init_check_is_repo = __esm({
-  "src/lib/tasks/check-is-repo.ts"() {
-    "use strict";
-    init_utils();
-    CheckRepoActions = /* @__PURE__ */ ((CheckRepoActions2) => {
-      CheckRepoActions2["BARE"] = "bare";
-      CheckRepoActions2["IN_TREE"] = "tree";
-      CheckRepoActions2["IS_REPO_ROOT"] = "root";
-      return CheckRepoActions2;
-    })(CheckRepoActions || {});
-    onError = ({ exitCode }, error, done, fail) => {
-      if (exitCode === 128 /* UNCLEAN */ && isNotRepoMessage(error)) {
-        return done(Buffer.from("false"));
-      }
-      fail(error);
-    };
-    parser = (text) => {
-      return text.trim() === "true";
-    };
-  }
-});
-
-// src/lib/responses/CleanSummary.ts
-function cleanSummaryParser(dryRun, text) {
-  const summary = new CleanResponse(dryRun);
-  const regexp = dryRun ? dryRunRemovalRegexp : removalRegexp;
-  toLinesWithContent(text).forEach((line) => {
-    const removed = line.replace(regexp, "");
-    summary.paths.push(removed);
-    (isFolderRegexp.test(removed) ? summary.folders : summary.files).push(removed);
-  });
-  return summary;
-}
-var CleanResponse, removalRegexp, dryRunRemovalRegexp, isFolderRegexp;
-var init_CleanSummary = __esm({
-  "src/lib/responses/CleanSummary.ts"() {
-    "use strict";
-    init_utils();
-    CleanResponse = class {
-      constructor(dryRun) {
-        this.dryRun = dryRun;
-        this.paths = [];
-        this.files = [];
-        this.folders = [];
-      }
-    };
-    removalRegexp = /^[a-z]+\s*/i;
-    dryRunRemovalRegexp = /^[a-z]+\s+[a-z]+\s*/i;
-    isFolderRegexp = /\/$/;
-  }
-});
-
-// src/lib/tasks/task.ts
-var task_exports = {};
-__export(task_exports, {
-  EMPTY_COMMANDS: () => EMPTY_COMMANDS,
-  adhocExecTask: () => adhocExecTask,
-  configurationErrorTask: () => configurationErrorTask,
-  isBufferTask: () => isBufferTask,
-  isEmptyTask: () => isEmptyTask,
-  straightThroughBufferTask: () => straightThroughBufferTask,
-  straightThroughStringTask: () => straightThroughStringTask
-});
-function adhocExecTask(parser4) {
-  return {
-    commands: EMPTY_COMMANDS,
-    format: "empty",
-    parser: parser4
-  };
-}
-function configurationErrorTask(error) {
-  return {
-    commands: EMPTY_COMMANDS,
-    format: "empty",
-    parser() {
-      throw typeof error === "string" ? new TaskConfigurationError(error) : error;
-    }
-  };
-}
-function straightThroughStringTask(commands, trimmed2 = false) {
-  return {
-    commands,
-    format: "utf-8",
-    parser(text) {
-      return trimmed2 ? String(text).trim() : text;
-    }
-  };
-}
-function straightThroughBufferTask(commands) {
-  return {
-    commands,
-    format: "buffer",
-    parser(buffer) {
-      return buffer;
-    }
-  };
-}
-function isBufferTask(task) {
-  return task.format === "buffer";
-}
-function isEmptyTask(task) {
-  return task.format === "empty" || !task.commands.length;
-}
-var EMPTY_COMMANDS;
-var init_task = __esm({
-  "src/lib/tasks/task.ts"() {
-    "use strict";
-    init_task_configuration_error();
-    EMPTY_COMMANDS = [];
-  }
-});
-
-// src/lib/tasks/clean.ts
-var clean_exports = {};
-__export(clean_exports, {
-  CONFIG_ERROR_INTERACTIVE_MODE: () => CONFIG_ERROR_INTERACTIVE_MODE,
-  CONFIG_ERROR_MODE_REQUIRED: () => CONFIG_ERROR_MODE_REQUIRED,
-  CONFIG_ERROR_UNKNOWN_OPTION: () => CONFIG_ERROR_UNKNOWN_OPTION,
-  CleanOptions: () => CleanOptions,
-  cleanTask: () => cleanTask,
-  cleanWithOptionsTask: () => cleanWithOptionsTask,
-  isCleanOptionsArray: () => isCleanOptionsArray
-});
-function cleanWithOptionsTask(mode, customArgs) {
-  const { cleanMode, options, valid } = getCleanOptions(mode);
-  if (!cleanMode) {
-    return configurationErrorTask(CONFIG_ERROR_MODE_REQUIRED);
-  }
-  if (!valid.options) {
-    return configurationErrorTask(CONFIG_ERROR_UNKNOWN_OPTION + JSON.stringify(mode));
-  }
-  options.push(...customArgs);
-  if (options.some(isInteractiveMode)) {
-    return configurationErrorTask(CONFIG_ERROR_INTERACTIVE_MODE);
-  }
-  return cleanTask(cleanMode, options);
-}
-function cleanTask(mode, customArgs) {
-  const commands = ["clean", `-${mode}`, ...customArgs];
-  return {
-    commands,
-    format: "utf-8",
-    parser(text) {
-      return cleanSummaryParser(mode === "n" /* DRY_RUN */, text);
-    }
-  };
-}
-function isCleanOptionsArray(input) {
-  return Array.isArray(input) && input.every((test) => CleanOptionValues.has(test));
-}
-function getCleanOptions(input) {
-  let cleanMode;
-  let options = [];
-  let valid = { cleanMode: false, options: true };
-  input.replace(/[^a-z]i/g, "").split("").forEach((char) => {
-    if (isCleanMode(char)) {
-      cleanMode = char;
-      valid.cleanMode = true;
-    } else {
-      valid.options = valid.options && isKnownOption(options[options.length] = `-${char}`);
-    }
-  });
-  return {
-    cleanMode,
-    options,
-    valid
-  };
-}
-function isCleanMode(cleanMode) {
-  return cleanMode === "f" /* FORCE */ || cleanMode === "n" /* DRY_RUN */;
-}
-function isKnownOption(option) {
-  return /^-[a-z]$/i.test(option) && CleanOptionValues.has(option.charAt(1));
-}
-function isInteractiveMode(option) {
-  if (/^-[^\-]/.test(option)) {
-    return option.indexOf("i") > 0;
-  }
-  return option === "--interactive";
-}
-var CONFIG_ERROR_INTERACTIVE_MODE, CONFIG_ERROR_MODE_REQUIRED, CONFIG_ERROR_UNKNOWN_OPTION, CleanOptions, CleanOptionValues;
-var init_clean = __esm({
-  "src/lib/tasks/clean.ts"() {
-    "use strict";
-    init_CleanSummary();
-    init_utils();
-    init_task();
-    CONFIG_ERROR_INTERACTIVE_MODE = "Git clean interactive mode is not supported";
-    CONFIG_ERROR_MODE_REQUIRED = 'Git clean mode parameter ("n" or "f") is required';
-    CONFIG_ERROR_UNKNOWN_OPTION = "Git clean unknown option found in: ";
-    CleanOptions = /* @__PURE__ */ ((CleanOptions2) => {
-      CleanOptions2["DRY_RUN"] = "n";
-      CleanOptions2["FORCE"] = "f";
-      CleanOptions2["IGNORED_INCLUDED"] = "x";
-      CleanOptions2["IGNORED_ONLY"] = "X";
-      CleanOptions2["EXCLUDING"] = "e";
-      CleanOptions2["QUIET"] = "q";
-      CleanOptions2["RECURSIVE"] = "d";
-      return CleanOptions2;
-    })(CleanOptions || {});
-    CleanOptionValues = /* @__PURE__ */ new Set([
-      "i",
-      ...asStringArray(Object.values(CleanOptions))
-    ]);
-  }
-});
-
-// src/lib/responses/ConfigList.ts
-function configListParser(text) {
-  const config = new ConfigList();
-  for (const item of configParser(text)) {
-    config.addValue(item.file, String(item.key), item.value);
-  }
-  return config;
-}
-function configGetParser(text, key) {
-  let value = null;
-  const values = [];
-  const scopes = /* @__PURE__ */ new Map();
-  for (const item of configParser(text, key)) {
-    if (item.key !== key) {
-      continue;
-    }
-    values.push(value = item.value);
-    if (!scopes.has(item.file)) {
-      scopes.set(item.file, []);
-    }
-    scopes.get(item.file).push(value);
-  }
-  return {
-    key,
-    paths: Array.from(scopes.keys()),
-    scopes,
-    value,
-    values
-  };
-}
-function configFilePath(filePath) {
-  return filePath.replace(/^(file):/, "");
-}
-function* configParser(text, requestedKey = null) {
-  const lines = text.split("\0");
-  for (let i = 0, max = lines.length - 1; i < max; ) {
-    const file = configFilePath(lines[i++]);
-    let value = lines[i++];
-    let key = requestedKey;
-    if (value.includes("\n")) {
-      const line = splitOn(value, "\n");
-      key = line[0];
-      value = line[1];
-    }
-    yield { file, key, value };
-  }
-}
-var ConfigList;
-var init_ConfigList = __esm({
-  "src/lib/responses/ConfigList.ts"() {
-    "use strict";
-    init_utils();
-    ConfigList = class {
-      constructor() {
-        this.files = [];
-        this.values = /* @__PURE__ */ Object.create(null);
-      }
-      get all() {
-        if (!this._all) {
-          this._all = this.files.reduce((all, file) => {
-            return Object.assign(all, this.values[file]);
-          }, {});
-        }
-        return this._all;
-      }
-      addFile(file) {
-        if (!(file in this.values)) {
-          const latest = last(this.files);
-          this.values[file] = latest ? Object.create(this.values[latest]) : {};
-          this.files.push(file);
-        }
-        return this.values[file];
-      }
-      addValue(file, key, value) {
-        const values = this.addFile(file);
-        if (!values.hasOwnProperty(key)) {
-          values[key] = value;
-        } else if (Array.isArray(values[key])) {
-          values[key].push(value);
-        } else {
-          values[key] = [values[key], value];
-        }
-        this._all = void 0;
-      }
-    };
-  }
-});
-
-// src/lib/tasks/config.ts
-function asConfigScope(scope, fallback) {
-  if (typeof scope === "string" && GitConfigScope.hasOwnProperty(scope)) {
-    return scope;
-  }
-  return fallback;
-}
-function addConfigTask(key, value, append2, scope) {
-  const commands = ["config", `--${scope}`];
-  if (append2) {
-    commands.push("--add");
-  }
-  commands.push(key, value);
-  return {
-    commands,
-    format: "utf-8",
-    parser(text) {
-      return text;
-    }
-  };
-}
-function getConfigTask(key, scope) {
-  const commands = ["config", "--null", "--show-origin", "--get-all", key];
-  if (scope) {
-    commands.splice(1, 0, `--${scope}`);
-  }
-  return {
-    commands,
-    format: "utf-8",
-    parser(text) {
-      return configGetParser(text, key);
-    }
-  };
-}
-function listConfigTask(scope) {
-  const commands = ["config", "--list", "--show-origin", "--null"];
-  if (scope) {
-    commands.push(`--${scope}`);
-  }
-  return {
-    commands,
-    format: "utf-8",
-    parser(text) {
-      return configListParser(text);
-    }
-  };
-}
-function config_default() {
-  return {
-    addConfig(key, value, ...rest) {
-      return this._runTask(
-        addConfigTask(
-          key,
-          value,
-          rest[0] === true,
-          asConfigScope(rest[1], "local" /* local */)
-        ),
-        trailingFunctionArgument(arguments)
-      );
-    },
-    getConfig(key, scope) {
-      return this._runTask(
-        getConfigTask(key, asConfigScope(scope, void 0)),
-        trailingFunctionArgument(arguments)
-      );
-    },
-    listConfig(...rest) {
-      return this._runTask(
-        listConfigTask(asConfigScope(rest[0], void 0)),
-        trailingFunctionArgument(arguments)
-      );
-    }
-  };
-}
-var GitConfigScope;
-var init_config = __esm({
-  "src/lib/tasks/config.ts"() {
-    "use strict";
-    init_ConfigList();
-    init_utils();
-    GitConfigScope = /* @__PURE__ */ ((GitConfigScope2) => {
-      GitConfigScope2["system"] = "system";
-      GitConfigScope2["global"] = "global";
-      GitConfigScope2["local"] = "local";
-      GitConfigScope2["worktree"] = "worktree";
-      return GitConfigScope2;
-    })(GitConfigScope || {});
-  }
-});
-
-// src/lib/tasks/diff-name-status.ts
-function isDiffNameStatus(input) {
-  return diffNameStatus.has(input);
-}
-var DiffNameStatus, diffNameStatus;
-var init_diff_name_status = __esm({
-  "src/lib/tasks/diff-name-status.ts"() {
-    "use strict";
-    DiffNameStatus = /* @__PURE__ */ ((DiffNameStatus2) => {
-      DiffNameStatus2["ADDED"] = "A";
-      DiffNameStatus2["COPIED"] = "C";
-      DiffNameStatus2["DELETED"] = "D";
-      DiffNameStatus2["MODIFIED"] = "M";
-      DiffNameStatus2["RENAMED"] = "R";
-      DiffNameStatus2["CHANGED"] = "T";
-      DiffNameStatus2["UNMERGED"] = "U";
-      DiffNameStatus2["UNKNOWN"] = "X";
-      DiffNameStatus2["BROKEN"] = "B";
-      return DiffNameStatus2;
-    })(DiffNameStatus || {});
-    diffNameStatus = new Set(Object.values(DiffNameStatus));
-  }
-});
-
-// src/lib/tasks/grep.ts
-function grepQueryBuilder(...params) {
-  return new GrepQuery().param(...params);
-}
-function parseGrep(grep) {
-  const paths = /* @__PURE__ */ new Set();
-  const results = {};
-  forEachLineWithContent(grep, (input) => {
-    const [path, line, preview] = input.split(NULL);
-    paths.add(path);
-    (results[path] = results[path] || []).push({
-      line: asNumber(line),
-      path,
-      preview
-    });
-  });
-  return {
-    paths,
-    results
-  };
-}
-function grep_default() {
-  return {
-    grep(searchTerm) {
-      const then = trailingFunctionArgument(arguments);
-      const options = getTrailingOptions(arguments);
-      for (const option of disallowedOptions) {
-        if (options.includes(option)) {
-          return this._runTask(
-            configurationErrorTask(`git.grep: use of "${option}" is not supported.`),
-            then
-          );
-        }
-      }
-      if (typeof searchTerm === "string") {
-        searchTerm = grepQueryBuilder().param(searchTerm);
-      }
-      const commands = ["grep", "--null", "-n", "--full-name", ...options, ...searchTerm];
-      return this._runTask(
-        {
-          commands,
-          format: "utf-8",
-          parser(stdOut) {
-            return parseGrep(stdOut);
-          }
-        },
-        then
-      );
-    }
-  };
-}
-var disallowedOptions, Query, _a, GrepQuery;
-var init_grep = __esm({
-  "src/lib/tasks/grep.ts"() {
-    "use strict";
-    init_utils();
-    init_task();
-    disallowedOptions = ["-h"];
-    Query = Symbol("grepQuery");
-    GrepQuery = class {
-      constructor() {
-        this[_a] = [];
-      }
-      *[(_a = Query, Symbol.iterator)]() {
-        for (const query of this[Query]) {
-          yield query;
-        }
-      }
-      and(...and) {
-        and.length && this[Query].push("--and", "(", ...prefixedArray(and, "-e"), ")");
-        return this;
-      }
-      param(...param) {
-        this[Query].push(...prefixedArray(param, "-e"));
-        return this;
-      }
-    };
-  }
-});
-
-// src/lib/tasks/reset.ts
-var reset_exports = {};
-__export(reset_exports, {
-  ResetMode: () => ResetMode,
-  getResetMode: () => getResetMode,
-  resetTask: () => resetTask
-});
-function resetTask(mode, customArgs) {
-  const commands = ["reset"];
-  if (isValidResetMode(mode)) {
-    commands.push(`--${mode}`);
-  }
-  commands.push(...customArgs);
-  return straightThroughStringTask(commands);
-}
-function getResetMode(mode) {
-  if (isValidResetMode(mode)) {
-    return mode;
-  }
-  switch (typeof mode) {
-    case "string":
-    case "undefined":
-      return "soft" /* SOFT */;
-  }
-  return;
-}
-function isValidResetMode(mode) {
-  return ResetModes.includes(mode);
-}
-var ResetMode, ResetModes;
-var init_reset = __esm({
-  "src/lib/tasks/reset.ts"() {
-    "use strict";
-    init_task();
-    ResetMode = /* @__PURE__ */ ((ResetMode2) => {
-      ResetMode2["MIXED"] = "mixed";
-      ResetMode2["SOFT"] = "soft";
-      ResetMode2["HARD"] = "hard";
-      ResetMode2["MERGE"] = "merge";
-      ResetMode2["KEEP"] = "keep";
-      return ResetMode2;
-    })(ResetMode || {});
-    ResetModes = Array.from(Object.values(ResetMode));
-  }
-});
-
-// src/lib/api.ts
-var api_exports = {};
-__export(api_exports, {
-  CheckRepoActions: () => CheckRepoActions,
-  CleanOptions: () => CleanOptions,
-  DiffNameStatus: () => DiffNameStatus,
-  GitConfigScope: () => GitConfigScope,
-  GitConstructError: () => GitConstructError,
-  GitError: () => GitError,
-  GitPluginError: () => GitPluginError,
-  GitResponseError: () => GitResponseError,
-  ResetMode: () => ResetMode,
-  TaskConfigurationError: () => TaskConfigurationError,
-  grepQueryBuilder: () => grepQueryBuilder,
-  pathspec: () => pathspec
-});
-var init_api = __esm({
-  "src/lib/api.ts"() {
-    "use strict";
-    init_pathspec();
-    init_git_construct_error();
-    init_git_error();
-    init_git_plugin_error();
-    init_git_response_error();
-    init_task_configuration_error();
-    init_check_is_repo();
-    init_clean();
-    init_config();
-    init_diff_name_status();
-    init_grep();
-    init_reset();
-  }
-});
-
-// src/lib/plugins/abort-plugin.ts
-function abortPlugin(signal) {
-  if (!signal) {
-    return;
-  }
-  const onSpawnAfter = {
-    type: "spawn.after",
-    action(_data, context) {
-      function kill() {
-        context.kill(new GitPluginError(void 0, "abort", "Abort signal received"));
-      }
-      signal.addEventListener("abort", kill);
-      context.spawned.on("close", () => signal.removeEventListener("abort", kill));
-    }
-  };
-  const onSpawnBefore = {
-    type: "spawn.before",
-    action(_data, context) {
-      if (signal.aborted) {
-        context.kill(new GitPluginError(void 0, "abort", "Abort already signaled"));
-      }
-    }
-  };
-  return [onSpawnBefore, onSpawnAfter];
-}
-var init_abort_plugin = __esm({
-  "src/lib/plugins/abort-plugin.ts"() {
-    "use strict";
-    init_git_plugin_error();
-  }
-});
-
-// src/lib/plugins/block-unsafe-operations-plugin.ts
-function isConfigSwitch(arg) {
-  return typeof arg === "string" && arg.trim().toLowerCase() === "-c";
-}
-function preventProtocolOverride(arg, next) {
-  if (!isConfigSwitch(arg)) {
-    return;
-  }
-  if (!/^\s*protocol(.[a-z]+)?.allow/.test(next)) {
-    return;
-  }
-  throw new GitPluginError(
-    void 0,
-    "unsafe",
-    "Configuring protocol.allow is not permitted without enabling allowUnsafeExtProtocol"
-  );
-}
-function preventUploadPack(arg, method) {
-  if (/^\s*--(upload|receive)-pack/.test(arg)) {
-    throw new GitPluginError(
-      void 0,
-      "unsafe",
-      `Use of --upload-pack or --receive-pack is not permitted without enabling allowUnsafePack`
-    );
-  }
-  if (method === "clone" && /^\s*-u\b/.test(arg)) {
-    throw new GitPluginError(
-      void 0,
-      "unsafe",
-      `Use of clone with option -u is not permitted without enabling allowUnsafePack`
-    );
-  }
-  if (method === "push" && /^\s*--exec\b/.test(arg)) {
-    throw new GitPluginError(
-      void 0,
-      "unsafe",
-      `Use of push with option --exec is not permitted without enabling allowUnsafePack`
-    );
-  }
-}
-function blockUnsafeOperationsPlugin({
-  allowUnsafeProtocolOverride = false,
-  allowUnsafePack = false
-} = {}) {
-  return {
-    type: "spawn.args",
-    action(args, context) {
-      args.forEach((current, index) => {
-        const next = index < args.length ? args[index + 1] : "";
-        allowUnsafeProtocolOverride || preventProtocolOverride(current, next);
-        allowUnsafePack || preventUploadPack(current, context.method);
-      });
-      return args;
-    }
-  };
-}
-var init_block_unsafe_operations_plugin = __esm({
-  "src/lib/plugins/block-unsafe-operations-plugin.ts"() {
-    "use strict";
-    init_git_plugin_error();
-  }
-});
-
-// src/lib/plugins/command-config-prefixing-plugin.ts
-function commandConfigPrefixingPlugin(configuration) {
-  const prefix = prefixedArray(configuration, "-c");
-  return {
-    type: "spawn.args",
-    action(data) {
-      return [...prefix, ...data];
-    }
-  };
-}
-var init_command_config_prefixing_plugin = __esm({
-  "src/lib/plugins/command-config-prefixing-plugin.ts"() {
-    "use strict";
-    init_utils();
-  }
-});
-
-// src/lib/plugins/completion-detection.plugin.ts
-function completionDetectionPlugin({
-  onClose = true,
-  onExit = 50
-} = {}) {
-  function createEvents() {
-    let exitCode = -1;
-    const events = {
-      close: (0, import_promise_deferred.deferred)(),
-      closeTimeout: (0, import_promise_deferred.deferred)(),
-      exit: (0, import_promise_deferred.deferred)(),
-      exitTimeout: (0, import_promise_deferred.deferred)()
-    };
-    const result = Promise.race([
-      onClose === false ? never : events.closeTimeout.promise,
-      onExit === false ? never : events.exitTimeout.promise
-    ]);
-    configureTimeout(onClose, events.close, events.closeTimeout);
-    configureTimeout(onExit, events.exit, events.exitTimeout);
-    return {
-      close(code) {
-        exitCode = code;
-        events.close.done();
-      },
-      exit(code) {
-        exitCode = code;
-        events.exit.done();
-      },
-      get exitCode() {
-        return exitCode;
-      },
-      result
-    };
-  }
-  function configureTimeout(flag, event, timeout) {
-    if (flag === false) {
-      return;
-    }
-    (flag === true ? event.promise : event.promise.then(() => delay(flag))).then(timeout.done);
-  }
-  return {
-    type: "spawn.after",
-    action(_0, _1) {
-      return __async(this, arguments, function* (_data, { spawned, close }) {
-        var _a3, _b;
-        const events = createEvents();
-        let deferClose = true;
-        let quickClose = () => void (deferClose = false);
-        (_a3 = spawned.stdout) == null ? void 0 : _a3.on("data", quickClose);
-        (_b = spawned.stderr) == null ? void 0 : _b.on("data", quickClose);
-        spawned.on("error", quickClose);
-        spawned.on("close", (code) => events.close(code));
-        spawned.on("exit", (code) => events.exit(code));
-        try {
-          yield events.result;
-          if (deferClose) {
-            yield delay(50);
-          }
-          close(events.exitCode);
-        } catch (err) {
-          close(events.exitCode, err);
-        }
-      });
-    }
-  };
-}
-var import_promise_deferred, never;
-var init_completion_detection_plugin = __esm({
-  "src/lib/plugins/completion-detection.plugin.ts"() {
-    "use strict";
-    import_promise_deferred = __nccwpck_require__(9997);
-    init_utils();
-    never = (0, import_promise_deferred.deferred)().promise;
-  }
-});
-
-// src/lib/plugins/custom-binary.plugin.ts
-function isBadArgument(arg) {
-  return !arg || !/^([a-z]:)?([a-z0-9/.\\_-]+)$/i.test(arg);
-}
-function toBinaryConfig(input, allowUnsafe) {
-  if (input.length < 1 || input.length > 2) {
-    throw new GitPluginError(void 0, "binary", WRONG_NUMBER_ERR);
-  }
-  const isBad = input.some(isBadArgument);
-  if (isBad) {
-    if (allowUnsafe) {
-      console.warn(WRONG_CHARS_ERR);
-    } else {
-      throw new GitPluginError(void 0, "binary", WRONG_CHARS_ERR);
-    }
-  }
-  const [binary, prefix] = input;
-  return {
-    binary,
-    prefix
-  };
-}
-function customBinaryPlugin(plugins, input = ["git"], allowUnsafe = false) {
-  let config = toBinaryConfig(asArray(input), allowUnsafe);
-  plugins.on("binary", (input2) => {
-    config = toBinaryConfig(asArray(input2), allowUnsafe);
-  });
-  plugins.append("spawn.binary", () => {
-    return config.binary;
-  });
-  plugins.append("spawn.args", (data) => {
-    return config.prefix ? [config.prefix, ...data] : data;
-  });
-}
-var WRONG_NUMBER_ERR, WRONG_CHARS_ERR;
-var init_custom_binary_plugin = __esm({
-  "src/lib/plugins/custom-binary.plugin.ts"() {
-    "use strict";
-    init_git_plugin_error();
-    init_utils();
-    WRONG_NUMBER_ERR = `Invalid value supplied for custom binary, requires a single string or an array containing either one or two strings`;
-    WRONG_CHARS_ERR = `Invalid value supplied for custom binary, restricted characters must be removed or supply the unsafe.allowUnsafeCustomBinary option`;
-  }
-});
-
-// src/lib/plugins/error-detection.plugin.ts
-function isTaskError(result) {
-  return !!(result.exitCode && result.stdErr.length);
-}
-function getErrorMessage(result) {
-  return Buffer.concat([...result.stdOut, ...result.stdErr]);
-}
-function errorDetectionHandler(overwrite = false, isError = isTaskError, errorMessage = getErrorMessage) {
-  return (error, result) => {
-    if (!overwrite && error || !isError(result)) {
-      return error;
-    }
-    return errorMessage(result);
-  };
-}
-function errorDetectionPlugin(config) {
-  return {
-    type: "task.error",
-    action(data, context) {
-      const error = config(data.error, {
-        stdErr: context.stdErr,
-        stdOut: context.stdOut,
-        exitCode: context.exitCode
-      });
-      if (Buffer.isBuffer(error)) {
-        return { error: new GitError(void 0, error.toString("utf-8")) };
-      }
-      return {
-        error
-      };
-    }
-  };
-}
-var init_error_detection_plugin = __esm({
-  "src/lib/plugins/error-detection.plugin.ts"() {
-    "use strict";
-    init_git_error();
-  }
-});
-
-// src/lib/plugins/plugin-store.ts
-var import_node_events, PluginStore;
-var init_plugin_store = __esm({
-  "src/lib/plugins/plugin-store.ts"() {
-    "use strict";
-    import_node_events = __nccwpck_require__(8474);
-    init_utils();
-    PluginStore = class {
-      constructor() {
-        this.plugins = /* @__PURE__ */ new Set();
-        this.events = new import_node_events.EventEmitter();
-      }
-      on(type, listener) {
-        this.events.on(type, listener);
-      }
-      reconfigure(type, data) {
-        this.events.emit(type, data);
-      }
-      append(type, action) {
-        const plugin = append(this.plugins, { type, action });
-        return () => this.plugins.delete(plugin);
-      }
-      add(plugin) {
-        const plugins = [];
-        asArray(plugin).forEach((plugin2) => plugin2 && this.plugins.add(append(plugins, plugin2)));
-        return () => {
-          plugins.forEach((plugin2) => this.plugins.delete(plugin2));
-        };
-      }
-      exec(type, data, context) {
-        let output = data;
-        const contextual = Object.freeze(Object.create(context));
-        for (const plugin of this.plugins) {
-          if (plugin.type === type) {
-            output = plugin.action(output, contextual);
-          }
-        }
-        return output;
-      }
-    };
-  }
-});
-
-// src/lib/plugins/progress-monitor-plugin.ts
-function progressMonitorPlugin(progress) {
-  const progressCommand = "--progress";
-  const progressMethods = ["checkout", "clone", "fetch", "pull", "push"];
-  const onProgress = {
-    type: "spawn.after",
-    action(_data, context) {
-      var _a2;
-      if (!context.commands.includes(progressCommand)) {
-        return;
-      }
-      (_a2 = context.spawned.stderr) == null ? void 0 : _a2.on("data", (chunk) => {
-        const message = /^([\s\S]+?):\s*(\d+)% \((\d+)\/(\d+)\)/.exec(chunk.toString("utf8"));
-        if (!message) {
-          return;
-        }
-        progress({
-          method: context.method,
-          stage: progressEventStage(message[1]),
-          progress: asNumber(message[2]),
-          processed: asNumber(message[3]),
-          total: asNumber(message[4])
-        });
-      });
-    }
-  };
-  const onArgs = {
-    type: "spawn.args",
-    action(args, context) {
-      if (!progressMethods.includes(context.method)) {
-        return args;
-      }
-      return including(args, progressCommand);
-    }
-  };
-  return [onArgs, onProgress];
-}
-function progressEventStage(input) {
-  return String(input.toLowerCase().split(" ", 1)) || "unknown";
-}
-var init_progress_monitor_plugin = __esm({
-  "src/lib/plugins/progress-monitor-plugin.ts"() {
-    "use strict";
-    init_utils();
-  }
-});
-
-// src/lib/plugins/simple-git-plugin.ts
-var init_simple_git_plugin = __esm({
-  "src/lib/plugins/simple-git-plugin.ts"() {
-    "use strict";
-  }
-});
-
-// src/lib/plugins/spawn-options-plugin.ts
-function spawnOptionsPlugin(spawnOptions) {
-  const options = pick(spawnOptions, ["uid", "gid"]);
-  return {
-    type: "spawn.options",
-    action(data) {
-      return __spreadValues(__spreadValues({}, options), data);
-    }
-  };
-}
-var init_spawn_options_plugin = __esm({
-  "src/lib/plugins/spawn-options-plugin.ts"() {
-    "use strict";
-    init_utils();
-  }
-});
-
-// src/lib/plugins/timout-plugin.ts
-function timeoutPlugin({
-  block,
-  stdErr = true,
-  stdOut = true
-}) {
-  if (block > 0) {
-    return {
-      type: "spawn.after",
-      action(_data, context) {
-        var _a2, _b;
-        let timeout;
-        function wait() {
-          timeout && clearTimeout(timeout);
-          timeout = setTimeout(kill, block);
-        }
-        function stop() {
-          var _a3, _b2;
-          (_a3 = context.spawned.stdout) == null ? void 0 : _a3.off("data", wait);
-          (_b2 = context.spawned.stderr) == null ? void 0 : _b2.off("data", wait);
-          context.spawned.off("exit", stop);
-          context.spawned.off("close", stop);
-          timeout && clearTimeout(timeout);
-        }
-        function kill() {
-          stop();
-          context.kill(new GitPluginError(void 0, "timeout", `block timeout reached`));
-        }
-        stdOut && ((_a2 = context.spawned.stdout) == null ? void 0 : _a2.on("data", wait));
-        stdErr && ((_b = context.spawned.stderr) == null ? void 0 : _b.on("data", wait));
-        context.spawned.on("exit", stop);
-        context.spawned.on("close", stop);
-        wait();
-      }
-    };
-  }
-}
-var init_timout_plugin = __esm({
-  "src/lib/plugins/timout-plugin.ts"() {
-    "use strict";
-    init_git_plugin_error();
-  }
-});
-
-// src/lib/plugins/index.ts
-var init_plugins = __esm({
-  "src/lib/plugins/index.ts"() {
-    "use strict";
-    init_abort_plugin();
-    init_block_unsafe_operations_plugin();
-    init_command_config_prefixing_plugin();
-    init_completion_detection_plugin();
-    init_custom_binary_plugin();
-    init_error_detection_plugin();
-    init_plugin_store();
-    init_progress_monitor_plugin();
-    init_simple_git_plugin();
-    init_spawn_options_plugin();
-    init_timout_plugin();
-  }
-});
-
-// src/lib/plugins/suffix-paths.plugin.ts
-function suffixPathsPlugin() {
-  return {
-    type: "spawn.args",
-    action(data) {
-      const prefix = [];
-      let suffix;
-      function append2(args) {
-        (suffix = suffix || []).push(...args);
-      }
-      for (let i = 0; i < data.length; i++) {
-        const param = data[i];
-        if (isPathSpec(param)) {
-          append2(toPaths(param));
-          continue;
-        }
-        if (param === "--") {
-          append2(
-            data.slice(i + 1).flatMap((item) => isPathSpec(item) && toPaths(item) || item)
-          );
-          break;
-        }
-        prefix.push(param);
-      }
-      return !suffix ? prefix : [...prefix, "--", ...suffix.map(String)];
-    }
-  };
-}
-var init_suffix_paths_plugin = __esm({
-  "src/lib/plugins/suffix-paths.plugin.ts"() {
-    "use strict";
-    init_pathspec();
-  }
-});
-
-// src/lib/git-logger.ts
-function createLog() {
-  return (0, import_debug.default)("simple-git");
-}
-function prefixedLogger(to, prefix, forward) {
-  if (!prefix || !String(prefix).replace(/\s*/, "")) {
-    return !forward ? to : (message, ...args) => {
-      to(message, ...args);
-      forward(message, ...args);
-    };
-  }
-  return (message, ...args) => {
-    to(`%s ${message}`, prefix, ...args);
-    if (forward) {
-      forward(message, ...args);
-    }
-  };
-}
-function childLoggerName(name, childDebugger, { namespace: parentNamespace }) {
-  if (typeof name === "string") {
-    return name;
-  }
-  const childNamespace = childDebugger && childDebugger.namespace || "";
-  if (childNamespace.startsWith(parentNamespace)) {
-    return childNamespace.substr(parentNamespace.length + 1);
-  }
-  return childNamespace || parentNamespace;
-}
-function createLogger(label, verbose, initialStep, infoDebugger = createLog()) {
-  const labelPrefix = label && `[${label}]` || "";
-  const spawned = [];
-  const debugDebugger = typeof verbose === "string" ? infoDebugger.extend(verbose) : verbose;
-  const key = childLoggerName(filterType(verbose, filterString), debugDebugger, infoDebugger);
-  return step(initialStep);
-  function sibling(name, initial) {
-    return append(
-      spawned,
-      createLogger(label, key.replace(/^[^:]+/, name), initial, infoDebugger)
-    );
-  }
-  function step(phase) {
-    const stepPrefix = phase && `[${phase}]` || "";
-    const debug2 = debugDebugger && prefixedLogger(debugDebugger, stepPrefix) || NOOP;
-    const info = prefixedLogger(infoDebugger, `${labelPrefix} ${stepPrefix}`, debug2);
-    return Object.assign(debugDebugger ? debug2 : info, {
-      label,
-      sibling,
-      info,
-      step
-    });
-  }
-}
-var import_debug;
-var init_git_logger = __esm({
-  "src/lib/git-logger.ts"() {
-    "use strict";
-    import_debug = __toESM(__nccwpck_require__(2830));
-    init_utils();
-    import_debug.default.formatters.L = (value) => String(filterHasLength(value) ? value.length : "-");
-    import_debug.default.formatters.B = (value) => {
-      if (Buffer.isBuffer(value)) {
-        return value.toString("utf8");
-      }
-      return objectToString(value);
-    };
-  }
-});
-
-// src/lib/runners/tasks-pending-queue.ts
-var _TasksPendingQueue, TasksPendingQueue;
-var init_tasks_pending_queue = __esm({
-  "src/lib/runners/tasks-pending-queue.ts"() {
-    "use strict";
-    init_git_error();
-    init_git_logger();
-    _TasksPendingQueue = class {
-      constructor(logLabel = "GitExecutor") {
-        this.logLabel = logLabel;
-        this._queue = /* @__PURE__ */ new Map();
-      }
-      withProgress(task) {
-        return this._queue.get(task);
-      }
-      createProgress(task) {
-        const name = _TasksPendingQueue.getName(task.commands[0]);
-        const logger = createLogger(this.logLabel, name);
-        return {
-          task,
-          logger,
-          name
-        };
-      }
-      push(task) {
-        const progress = this.createProgress(task);
-        progress.logger("Adding task to the queue, commands = %o", task.commands);
-        this._queue.set(task, progress);
-        return progress;
-      }
-      fatal(err) {
-        for (const [task, { logger }] of Array.from(this._queue.entries())) {
-          if (task === err.task) {
-            logger.info(`Failed %o`, err);
-            logger(
-              `Fatal exception, any as-yet un-started tasks run through this executor will not be attempted`
-            );
-          } else {
-            logger.info(
-              `A fatal exception occurred in a previous task, the queue has been purged: %o`,
-              err.message
-            );
-          }
-          this.complete(task);
-        }
-        if (this._queue.size !== 0) {
-          throw new Error(`Queue size should be zero after fatal: ${this._queue.size}`);
-        }
-      }
-      complete(task) {
-        const progress = this.withProgress(task);
-        if (progress) {
-          this._queue.delete(task);
-        }
-      }
-      attempt(task) {
-        const progress = this.withProgress(task);
-        if (!progress) {
-          throw new GitError(void 0, "TasksPendingQueue: attempt called for an unknown task");
-        }
-        progress.logger("Starting task");
-        return progress;
-      }
-      static getName(name = "empty") {
-        return `task:${name}:${++_TasksPendingQueue.counter}`;
-      }
-    };
-    TasksPendingQueue = _TasksPendingQueue;
-    TasksPendingQueue.counter = 0;
-  }
-});
-
-// src/lib/runners/git-executor-chain.ts
-function pluginContext(task, commands) {
-  return {
-    method: first(task.commands) || "",
-    commands
-  };
-}
-function onErrorReceived(target, logger) {
-  return (err) => {
-    logger(`[ERROR] child process exception %o`, err);
-    target.push(Buffer.from(String(err.stack), "ascii"));
-  };
-}
-function onDataReceived(target, name, logger, output) {
-  return (buffer) => {
-    logger(`%s received %L bytes`, name, buffer);
-    output(`%B`, buffer);
-    target.push(buffer);
-  };
-}
-var import_child_process, GitExecutorChain;
-var init_git_executor_chain = __esm({
-  "src/lib/runners/git-executor-chain.ts"() {
-    "use strict";
-    import_child_process = __nccwpck_require__(5317);
-    init_git_error();
-    init_task();
-    init_utils();
-    init_tasks_pending_queue();
-    GitExecutorChain = class {
-      constructor(_executor, _scheduler, _plugins) {
-        this._executor = _executor;
-        this._scheduler = _scheduler;
-        this._plugins = _plugins;
-        this._chain = Promise.resolve();
-        this._queue = new TasksPendingQueue();
-      }
-      get cwd() {
-        return this._cwd || this._executor.cwd;
-      }
-      set cwd(cwd) {
-        this._cwd = cwd;
-      }
-      get env() {
-        return this._executor.env;
-      }
-      get outputHandler() {
-        return this._executor.outputHandler;
-      }
-      chain() {
-        return this;
-      }
-      push(task) {
-        this._queue.push(task);
-        return this._chain = this._chain.then(() => this.attemptTask(task));
-      }
-      attemptTask(task) {
-        return __async(this, null, function* () {
-          const onScheduleComplete = yield this._scheduler.next();
-          const onQueueComplete = () => this._queue.complete(task);
-          try {
-            const { logger } = this._queue.attempt(task);
-            return yield isEmptyTask(task) ? this.attemptEmptyTask(task, logger) : this.attemptRemoteTask(task, logger);
-          } catch (e) {
-            throw this.onFatalException(task, e);
-          } finally {
-            onQueueComplete();
-            onScheduleComplete();
-          }
-        });
-      }
-      onFatalException(task, e) {
-        const gitError = e instanceof GitError ? Object.assign(e, { task }) : new GitError(task, e && String(e));
-        this._chain = Promise.resolve();
-        this._queue.fatal(gitError);
-        return gitError;
-      }
-      attemptRemoteTask(task, logger) {
-        return __async(this, null, function* () {
-          const binary = this._plugins.exec("spawn.binary", "", pluginContext(task, task.commands));
-          const args = this._plugins.exec(
-            "spawn.args",
-            [...task.commands],
-            pluginContext(task, task.commands)
-          );
-          const raw = yield this.gitResponse(
-            task,
-            binary,
-            args,
-            this.outputHandler,
-            logger.step("SPAWN")
-          );
-          const outputStreams = yield this.handleTaskData(task, args, raw, logger.step("HANDLE"));
-          logger(`passing response to task's parser as a %s`, task.format);
-          if (isBufferTask(task)) {
-            return callTaskParser(task.parser, outputStreams);
-          }
-          return callTaskParser(task.parser, outputStreams.asStrings());
-        });
-      }
-      attemptEmptyTask(task, logger) {
-        return __async(this, null, function* () {
-          logger(`empty task bypassing child process to call to task's parser`);
-          return task.parser(this);
-        });
-      }
-      handleTaskData(task, args, result, logger) {
-        const { exitCode, rejection, stdOut, stdErr } = result;
-        return new Promise((done, fail) => {
-          logger(`Preparing to handle process response exitCode=%d stdOut=`, exitCode);
-          const { error } = this._plugins.exec(
-            "task.error",
-            { error: rejection },
-            __spreadValues(__spreadValues({}, pluginContext(task, args)), result)
-          );
-          if (error && task.onError) {
-            logger.info(`exitCode=%s handling with custom error handler`);
-            return task.onError(
-              result,
-              error,
-              (newStdOut) => {
-                logger.info(`custom error handler treated as success`);
-                logger(`custom error returned a %s`, objectToString(newStdOut));
-                done(
-                  new GitOutputStreams(
-                    Array.isArray(newStdOut) ? Buffer.concat(newStdOut) : newStdOut,
-                    Buffer.concat(stdErr)
-                  )
-                );
-              },
-              fail
-            );
-          }
-          if (error) {
-            logger.info(
-              `handling as error: exitCode=%s stdErr=%s rejection=%o`,
-              exitCode,
-              stdErr.length,
-              rejection
-            );
-            return fail(error);
-          }
-          logger.info(`retrieving task output complete`);
-          done(new GitOutputStreams(Buffer.concat(stdOut), Buffer.concat(stdErr)));
-        });
-      }
-      gitResponse(task, command, args, outputHandler, logger) {
-        return __async(this, null, function* () {
-          const outputLogger = logger.sibling("output");
-          const spawnOptions = this._plugins.exec(
-            "spawn.options",
-            {
-              cwd: this.cwd,
-              env: this.env,
-              windowsHide: true
-            },
-            pluginContext(task, task.commands)
-          );
-          return new Promise((done) => {
-            const stdOut = [];
-            const stdErr = [];
-            logger.info(`%s %o`, command, args);
-            logger("%O", spawnOptions);
-            let rejection = this._beforeSpawn(task, args);
-            if (rejection) {
-              return done({
-                stdOut,
-                stdErr,
-                exitCode: 9901,
-                rejection
-              });
-            }
-            this._plugins.exec("spawn.before", void 0, __spreadProps(__spreadValues({}, pluginContext(task, args)), {
-              kill(reason) {
-                rejection = reason || rejection;
-              }
-            }));
-            const spawned = (0, import_child_process.spawn)(command, args, spawnOptions);
-            spawned.stdout.on(
-              "data",
-              onDataReceived(stdOut, "stdOut", logger, outputLogger.step("stdOut"))
-            );
-            spawned.stderr.on(
-              "data",
-              onDataReceived(stdErr, "stdErr", logger, outputLogger.step("stdErr"))
-            );
-            spawned.on("error", onErrorReceived(stdErr, logger));
-            if (outputHandler) {
-              logger(`Passing child process stdOut/stdErr to custom outputHandler`);
-              outputHandler(command, spawned.stdout, spawned.stderr, [...args]);
-            }
-            this._plugins.exec("spawn.after", void 0, __spreadProps(__spreadValues({}, pluginContext(task, args)), {
-              spawned,
-              close(exitCode, reason) {
-                done({
-                  stdOut,
-                  stdErr,
-                  exitCode,
-                  rejection: rejection || reason
-                });
-              },
-              kill(reason) {
-                if (spawned.killed) {
-                  return;
-                }
-                rejection = reason;
-                spawned.kill("SIGINT");
-              }
-            }));
-          });
-        });
-      }
-      _beforeSpawn(task, args) {
-        let rejection;
-        this._plugins.exec("spawn.before", void 0, __spreadProps(__spreadValues({}, pluginContext(task, args)), {
-          kill(reason) {
-            rejection = reason || rejection;
-          }
-        }));
-        return rejection;
-      }
-    };
-  }
-});
-
-// src/lib/runners/git-executor.ts
-var git_executor_exports = {};
-__export(git_executor_exports, {
-  GitExecutor: () => GitExecutor
-});
-var GitExecutor;
-var init_git_executor = __esm({
-  "src/lib/runners/git-executor.ts"() {
-    "use strict";
-    init_git_executor_chain();
-    GitExecutor = class {
-      constructor(cwd, _scheduler, _plugins) {
-        this.cwd = cwd;
-        this._scheduler = _scheduler;
-        this._plugins = _plugins;
-        this._chain = new GitExecutorChain(this, this._scheduler, this._plugins);
-      }
-      chain() {
-        return new GitExecutorChain(this, this._scheduler, this._plugins);
-      }
-      push(task) {
-        return this._chain.push(task);
-      }
-    };
-  }
-});
-
-// src/lib/task-callback.ts
-function taskCallback(task, response, callback = NOOP) {
-  const onSuccess = (data) => {
-    callback(null, data);
-  };
-  const onError2 = (err) => {
-    if ((err == null ? void 0 : err.task) === task) {
-      callback(
-        err instanceof GitResponseError ? addDeprecationNoticeToError(err) : err,
-        void 0
-      );
-    }
-  };
-  response.then(onSuccess, onError2);
-}
-function addDeprecationNoticeToError(err) {
-  let log = (name) => {
-    console.warn(
-      `simple-git deprecation notice: accessing GitResponseError.${name} should be GitResponseError.git.${name}, this will no longer be available in version 3`
-    );
-    log = NOOP;
-  };
-  return Object.create(err, Object.getOwnPropertyNames(err.git).reduce(descriptorReducer, {}));
-  function descriptorReducer(all, name) {
-    if (name in err) {
-      return all;
-    }
-    all[name] = {
-      enumerable: false,
-      configurable: false,
-      get() {
-        log(name);
-        return err.git[name];
-      }
-    };
-    return all;
-  }
-}
-var init_task_callback = __esm({
-  "src/lib/task-callback.ts"() {
-    "use strict";
-    init_git_response_error();
-    init_utils();
-  }
-});
-
-// src/lib/tasks/change-working-directory.ts
-function changeWorkingDirectoryTask(directory, root) {
-  return adhocExecTask((instance) => {
-    if (!folderExists(directory)) {
-      throw new Error(`Git.cwd: cannot change to non-directory "${directory}"`);
-    }
-    return (root || instance).cwd = directory;
-  });
-}
-var init_change_working_directory = __esm({
-  "src/lib/tasks/change-working-directory.ts"() {
-    "use strict";
-    init_utils();
-    init_task();
-  }
-});
-
-// src/lib/tasks/checkout.ts
-function checkoutTask(args) {
-  const commands = ["checkout", ...args];
-  if (commands[1] === "-b" && commands.includes("-B")) {
-    commands[1] = remove(commands, "-B");
-  }
-  return straightThroughStringTask(commands);
-}
-function checkout_default() {
-  return {
-    checkout() {
-      return this._runTask(
-        checkoutTask(getTrailingOptions(arguments, 1)),
-        trailingFunctionArgument(arguments)
-      );
-    },
-    checkoutBranch(branchName, startPoint) {
-      return this._runTask(
-        checkoutTask(["-b", branchName, startPoint, ...getTrailingOptions(arguments)]),
-        trailingFunctionArgument(arguments)
-      );
-    },
-    checkoutLocalBranch(branchName) {
-      return this._runTask(
-        checkoutTask(["-b", branchName, ...getTrailingOptions(arguments)]),
-        trailingFunctionArgument(arguments)
-      );
-    }
-  };
-}
-var init_checkout = __esm({
-  "src/lib/tasks/checkout.ts"() {
-    "use strict";
-    init_utils();
-    init_task();
-  }
-});
-
-// src/lib/tasks/count-objects.ts
-function countObjectsResponse() {
-  return {
-    count: 0,
-    garbage: 0,
-    inPack: 0,
-    packs: 0,
-    prunePackable: 0,
-    size: 0,
-    sizeGarbage: 0,
-    sizePack: 0
-  };
-}
-function count_objects_default() {
-  return {
-    countObjects() {
-      return this._runTask({
-        commands: ["count-objects", "--verbose"],
-        format: "utf-8",
-        parser(stdOut) {
-          return parseStringResponse(countObjectsResponse(), [parser2], stdOut);
-        }
-      });
-    }
-  };
-}
-var parser2;
-var init_count_objects = __esm({
-  "src/lib/tasks/count-objects.ts"() {
-    "use strict";
-    init_utils();
-    parser2 = new LineParser(
-      /([a-z-]+): (\d+)$/,
-      (result, [key, value]) => {
-        const property = asCamelCase(key);
-        if (result.hasOwnProperty(property)) {
-          result[property] = asNumber(value);
-        }
-      }
-    );
-  }
-});
-
-// src/lib/parsers/parse-commit.ts
-function parseCommitResult(stdOut) {
-  const result = {
-    author: null,
-    branch: "",
-    commit: "",
-    root: false,
-    summary: {
-      changes: 0,
-      insertions: 0,
-      deletions: 0
-    }
-  };
-  return parseStringResponse(result, parsers, stdOut);
-}
-var parsers;
-var init_parse_commit = __esm({
-  "src/lib/parsers/parse-commit.ts"() {
-    "use strict";
-    init_utils();
-    parsers = [
-      new LineParser(/^\[([^\s]+)( \([^)]+\))? ([^\]]+)/, (result, [branch, root, commit]) => {
-        result.branch = branch;
-        result.commit = commit;
-        result.root = !!root;
-      }),
-      new LineParser(/\s*Author:\s(.+)/i, (result, [author]) => {
-        const parts = author.split("<");
-        const email = parts.pop();
-        if (!email || !email.includes("@")) {
-          return;
-        }
-        result.author = {
-          email: email.substr(0, email.length - 1),
-          name: parts.join("<").trim()
-        };
-      }),
-      new LineParser(
-        /(\d+)[^,]*(?:,\s*(\d+)[^,]*)(?:,\s*(\d+))/g,
-        (result, [changes, insertions, deletions]) => {
-          result.summary.changes = parseInt(changes, 10) || 0;
-          result.summary.insertions = parseInt(insertions, 10) || 0;
-          result.summary.deletions = parseInt(deletions, 10) || 0;
-        }
-      ),
-      new LineParser(
-        /^(\d+)[^,]*(?:,\s*(\d+)[^(]+\(([+-]))?/,
-        (result, [changes, lines, direction]) => {
-          result.summary.changes = parseInt(changes, 10) || 0;
-          const count = parseInt(lines, 10) || 0;
-          if (direction === "-") {
-            result.summary.deletions = count;
-          } else if (direction === "+") {
-            result.summary.insertions = count;
-          }
-        }
-      )
-    ];
-  }
-});
-
-// src/lib/tasks/commit.ts
-function commitTask(message, files, customArgs) {
-  const commands = [
-    "-c",
-    "core.abbrev=40",
-    "commit",
-    ...prefixedArray(message, "-m"),
-    ...files,
-    ...customArgs
-  ];
-  return {
-    commands,
-    format: "utf-8",
-    parser: parseCommitResult
-  };
-}
-function commit_default() {
-  return {
-    commit(message, ...rest) {
-      const next = trailingFunctionArgument(arguments);
-      const task = rejectDeprecatedSignatures(message) || commitTask(
-        asArray(message),
-        asArray(filterType(rest[0], filterStringOrStringArray, [])),
-        [...filterType(rest[1], filterArray, []), ...getTrailingOptions(arguments, 0, true)]
-      );
-      return this._runTask(task, next);
-    }
-  };
-  function rejectDeprecatedSignatures(message) {
-    return !filterStringOrStringArray(message) && configurationErrorTask(
-      `git.commit: requires the commit message to be supplied as a string/string[]`
-    );
-  }
-}
-var init_commit = __esm({
-  "src/lib/tasks/commit.ts"() {
-    "use strict";
-    init_parse_commit();
-    init_utils();
-    init_task();
-  }
-});
-
-// src/lib/tasks/first-commit.ts
-function first_commit_default() {
-  return {
-    firstCommit() {
-      return this._runTask(
-        straightThroughStringTask(["rev-list", "--max-parents=0", "HEAD"], true),
-        trailingFunctionArgument(arguments)
-      );
-    }
-  };
-}
-var init_first_commit = __esm({
-  "src/lib/tasks/first-commit.ts"() {
-    "use strict";
-    init_utils();
-    init_task();
-  }
-});
-
-// src/lib/tasks/hash-object.ts
-function hashObjectTask(filePath, write) {
-  const commands = ["hash-object", filePath];
-  if (write) {
-    commands.push("-w");
-  }
-  return straightThroughStringTask(commands, true);
-}
-var init_hash_object = __esm({
-  "src/lib/tasks/hash-object.ts"() {
-    "use strict";
-    init_task();
-  }
-});
-
-// src/lib/responses/InitSummary.ts
-function parseInit(bare, path, text) {
-  const response = String(text).trim();
-  let result;
-  if (result = initResponseRegex.exec(response)) {
-    return new InitSummary(bare, path, false, result[1]);
-  }
-  if (result = reInitResponseRegex.exec(response)) {
-    return new InitSummary(bare, path, true, result[1]);
-  }
-  let gitDir = "";
-  const tokens = response.split(" ");
-  while (tokens.length) {
-    const token = tokens.shift();
-    if (token === "in") {
-      gitDir = tokens.join(" ");
-      break;
-    }
-  }
-  return new InitSummary(bare, path, /^re/i.test(response), gitDir);
-}
-var InitSummary, initResponseRegex, reInitResponseRegex;
-var init_InitSummary = __esm({
-  "src/lib/responses/InitSummary.ts"() {
-    "use strict";
-    InitSummary = class {
-      constructor(bare, path, existing, gitDir) {
-        this.bare = bare;
-        this.path = path;
-        this.existing = existing;
-        this.gitDir = gitDir;
-      }
-    };
-    initResponseRegex = /^Init.+ repository in (.+)$/;
-    reInitResponseRegex = /^Rein.+ in (.+)$/;
-  }
-});
-
-// src/lib/tasks/init.ts
-function hasBareCommand(command) {
-  return command.includes(bareCommand);
-}
-function initTask(bare = false, path, customArgs) {
-  const commands = ["init", ...customArgs];
-  if (bare && !hasBareCommand(commands)) {
-    commands.splice(1, 0, bareCommand);
-  }
-  return {
-    commands,
-    format: "utf-8",
-    parser(text) {
-      return parseInit(commands.includes("--bare"), path, text);
-    }
-  };
-}
-var bareCommand;
-var init_init = __esm({
-  "src/lib/tasks/init.ts"() {
-    "use strict";
-    init_InitSummary();
-    bareCommand = "--bare";
-  }
-});
-
-// src/lib/args/log-format.ts
-function logFormatFromCommand(customArgs) {
-  for (let i = 0; i < customArgs.length; i++) {
-    const format = logFormatRegex.exec(customArgs[i]);
-    if (format) {
-      return `--${format[1]}`;
-    }
-  }
-  return "" /* NONE */;
-}
-function isLogFormat(customArg) {
-  return logFormatRegex.test(customArg);
-}
-var logFormatRegex;
-var init_log_format = __esm({
-  "src/lib/args/log-format.ts"() {
-    "use strict";
-    logFormatRegex = /^--(stat|numstat|name-only|name-status)(=|$)/;
-  }
-});
-
-// src/lib/responses/DiffSummary.ts
-var DiffSummary;
-var init_DiffSummary = __esm({
-  "src/lib/responses/DiffSummary.ts"() {
-    "use strict";
-    DiffSummary = class {
-      constructor() {
-        this.changed = 0;
-        this.deletions = 0;
-        this.insertions = 0;
-        this.files = [];
-      }
-    };
-  }
-});
-
-// src/lib/parsers/parse-diff-summary.ts
-function getDiffParser(format = "" /* NONE */) {
-  const parser4 = diffSummaryParsers[format];
-  return (stdOut) => parseStringResponse(new DiffSummary(), parser4, stdOut, false);
-}
-var statParser, numStatParser, nameOnlyParser, nameStatusParser, diffSummaryParsers;
-var init_parse_diff_summary = __esm({
-  "src/lib/parsers/parse-diff-summary.ts"() {
-    "use strict";
-    init_log_format();
-    init_DiffSummary();
-    init_diff_name_status();
-    init_utils();
-    statParser = [
-      new LineParser(
-        /^(.+)\s+\|\s+(\d+)(\s+[+\-]+)?$/,
-        (result, [file, changes, alterations = ""]) => {
-          result.files.push({
-            file: file.trim(),
-            changes: asNumber(changes),
-            insertions: alterations.replace(/[^+]/g, "").length,
-            deletions: alterations.replace(/[^-]/g, "").length,
-            binary: false
-          });
-        }
-      ),
-      new LineParser(
-        /^(.+) \|\s+Bin ([0-9.]+) -> ([0-9.]+) ([a-z]+)/,
-        (result, [file, before, after]) => {
-          result.files.push({
-            file: file.trim(),
-            before: asNumber(before),
-            after: asNumber(after),
-            binary: true
-          });
-        }
-      ),
-      new LineParser(
-        /(\d+) files? changed\s*((?:, \d+ [^,]+){0,2})/,
-        (result, [changed, summary]) => {
-          const inserted = /(\d+) i/.exec(summary);
-          const deleted = /(\d+) d/.exec(summary);
-          result.changed = asNumber(changed);
-          result.insertions = asNumber(inserted == null ? void 0 : inserted[1]);
-          result.deletions = asNumber(deleted == null ? void 0 : deleted[1]);
-        }
-      )
-    ];
-    numStatParser = [
-      new LineParser(
-        /(\d+)\t(\d+)\t(.+)$/,
-        (result, [changesInsert, changesDelete, file]) => {
-          const insertions = asNumber(changesInsert);
-          const deletions = asNumber(changesDelete);
-          result.changed++;
-          result.insertions += insertions;
-          result.deletions += deletions;
-          result.files.push({
-            file,
-            changes: insertions + deletions,
-            insertions,
-            deletions,
-            binary: false
-          });
-        }
-      ),
-      new LineParser(/-\t-\t(.+)$/, (result, [file]) => {
-        result.changed++;
-        result.files.push({
-          file,
-          after: 0,
-          before: 0,
-          binary: true
-        });
-      })
-    ];
-    nameOnlyParser = [
-      new LineParser(/(.+)$/, (result, [file]) => {
-        result.changed++;
-        result.files.push({
-          file,
-          changes: 0,
-          insertions: 0,
-          deletions: 0,
-          binary: false
-        });
-      })
-    ];
-    nameStatusParser = [
-      new LineParser(
-        /([ACDMRTUXB])([0-9]{0,3})\t(.[^\t]*)(\t(.[^\t]*))?$/,
-        (result, [status, similarity, from, _to, to]) => {
-          result.changed++;
-          result.files.push({
-            file: to != null ? to : from,
-            changes: 0,
-            insertions: 0,
-            deletions: 0,
-            binary: false,
-            status: orVoid(isDiffNameStatus(status) && status),
-            from: orVoid(!!to && from !== to && from),
-            similarity: asNumber(similarity)
-          });
-        }
-      )
-    ];
-    diffSummaryParsers = {
-      ["" /* NONE */]: statParser,
-      ["--stat" /* STAT */]: statParser,
-      ["--numstat" /* NUM_STAT */]: numStatParser,
-      ["--name-status" /* NAME_STATUS */]: nameStatusParser,
-      ["--name-only" /* NAME_ONLY */]: nameOnlyParser
-    };
-  }
-});
-
-// src/lib/parsers/parse-list-log-summary.ts
-function lineBuilder(tokens, fields) {
-  return fields.reduce(
-    (line, field, index) => {
-      line[field] = tokens[index] || "";
-      return line;
-    },
-    /* @__PURE__ */ Object.create({ diff: null })
-  );
-}
-function createListLogSummaryParser(splitter = SPLITTER, fields = defaultFieldNames, logFormat = "" /* NONE */) {
-  const parseDiffResult = getDiffParser(logFormat);
-  return function(stdOut) {
-    const all = toLinesWithContent(
-      stdOut.trim(),
-      false,
-      START_BOUNDARY
-    ).map(function(item) {
-      const lineDetail = item.split(COMMIT_BOUNDARY);
-      const listLogLine = lineBuilder(lineDetail[0].split(splitter), fields);
-      if (lineDetail.length > 1 && !!lineDetail[1].trim()) {
-        listLogLine.diff = parseDiffResult(lineDetail[1]);
-      }
-      return listLogLine;
-    });
-    return {
-      all,
-      latest: all.length && all[0] || null,
-      total: all.length
-    };
-  };
-}
-var START_BOUNDARY, COMMIT_BOUNDARY, SPLITTER, defaultFieldNames;
-var init_parse_list_log_summary = __esm({
-  "src/lib/parsers/parse-list-log-summary.ts"() {
-    "use strict";
-    init_utils();
-    init_parse_diff_summary();
-    init_log_format();
-    START_BOUNDARY = "\xF2\xF2\xF2\xF2\xF2\xF2 ";
-    COMMIT_BOUNDARY = " \xF2\xF2";
-    SPLITTER = " \xF2 ";
-    defaultFieldNames = ["hash", "date", "message", "refs", "author_name", "author_email"];
-  }
-});
-
-// src/lib/tasks/diff.ts
-var diff_exports = {};
-__export(diff_exports, {
-  diffSummaryTask: () => diffSummaryTask,
-  validateLogFormatConfig: () => validateLogFormatConfig
-});
-function diffSummaryTask(customArgs) {
-  let logFormat = logFormatFromCommand(customArgs);
-  const commands = ["diff"];
-  if (logFormat === "" /* NONE */) {
-    logFormat = "--stat" /* STAT */;
-    commands.push("--stat=4096");
-  }
-  commands.push(...customArgs);
-  return validateLogFormatConfig(commands) || {
-    commands,
-    format: "utf-8",
-    parser: getDiffParser(logFormat)
-  };
-}
-function validateLogFormatConfig(customArgs) {
-  const flags = customArgs.filter(isLogFormat);
-  if (flags.length > 1) {
-    return configurationErrorTask(
-      `Summary flags are mutually exclusive - pick one of ${flags.join(",")}`
-    );
-  }
-  if (flags.length && customArgs.includes("-z")) {
-    return configurationErrorTask(
-      `Summary flag ${flags} parsing is not compatible with null termination option '-z'`
-    );
-  }
-}
-var init_diff = __esm({
-  "src/lib/tasks/diff.ts"() {
-    "use strict";
-    init_log_format();
-    init_parse_diff_summary();
-    init_task();
-  }
-});
-
-// src/lib/tasks/log.ts
-function prettyFormat(format, splitter) {
-  const fields = [];
-  const formatStr = [];
-  Object.keys(format).forEach((field) => {
-    fields.push(field);
-    formatStr.push(String(format[field]));
-  });
-  return [fields, formatStr.join(splitter)];
-}
-function userOptions(input) {
-  return Object.keys(input).reduce((out, key) => {
-    if (!(key in excludeOptions)) {
-      out[key] = input[key];
-    }
-    return out;
-  }, {});
-}
-function parseLogOptions(opt = {}, customArgs = []) {
-  const splitter = filterType(opt.splitter, filterString, SPLITTER);
-  const format = !filterPrimitives(opt.format) && opt.format ? opt.format : {
-    hash: "%H",
-    date: opt.strictDate === false ? "%ai" : "%aI",
-    message: "%s",
-    refs: "%D",
-    body: opt.multiLine ? "%B" : "%b",
-    author_name: opt.mailMap !== false ? "%aN" : "%an",
-    author_email: opt.mailMap !== false ? "%aE" : "%ae"
-  };
-  const [fields, formatStr] = prettyFormat(format, splitter);
-  const suffix = [];
-  const command = [
-    `--pretty=format:${START_BOUNDARY}${formatStr}${COMMIT_BOUNDARY}`,
-    ...customArgs
-  ];
-  const maxCount = opt.n || opt["max-count"] || opt.maxCount;
-  if (maxCount) {
-    command.push(`--max-count=${maxCount}`);
-  }
-  if (opt.from || opt.to) {
-    const rangeOperator = opt.symmetric !== false ? "..." : "..";
-    suffix.push(`${opt.from || ""}${rangeOperator}${opt.to || ""}`);
-  }
-  if (filterString(opt.file)) {
-    command.push("--follow", pathspec(opt.file));
-  }
-  appendTaskOptions(userOptions(opt), command);
-  return {
-    fields,
-    splitter,
-    commands: [...command, ...suffix]
-  };
-}
-function logTask(splitter, fields, customArgs) {
-  const parser4 = createListLogSummaryParser(splitter, fields, logFormatFromCommand(customArgs));
-  return {
-    commands: ["log", ...customArgs],
-    format: "utf-8",
-    parser: parser4
-  };
-}
-function log_default() {
-  return {
-    log(...rest) {
-      const next = trailingFunctionArgument(arguments);
-      const options = parseLogOptions(
-        trailingOptionsArgument(arguments),
-        filterType(arguments[0], filterArray)
-      );
-      const task = rejectDeprecatedSignatures(...rest) || validateLogFormatConfig(options.commands) || createLogTask(options);
-      return this._runTask(task, next);
-    }
-  };
-  function createLogTask(options) {
-    return logTask(options.splitter, options.fields, options.commands);
-  }
-  function rejectDeprecatedSignatures(from, to) {
-    return filterString(from) && filterString(to) && configurationErrorTask(
-      `git.log(string, string) should be replaced with git.log({ from: string, to: string })`
-    );
-  }
-}
-var excludeOptions;
-var init_log = __esm({
-  "src/lib/tasks/log.ts"() {
-    "use strict";
-    init_log_format();
-    init_pathspec();
-    init_parse_list_log_summary();
-    init_utils();
-    init_task();
-    init_diff();
-    excludeOptions = /* @__PURE__ */ ((excludeOptions2) => {
-      excludeOptions2[excludeOptions2["--pretty"] = 0] = "--pretty";
-      excludeOptions2[excludeOptions2["max-count"] = 1] = "max-count";
-      excludeOptions2[excludeOptions2["maxCount"] = 2] = "maxCount";
-      excludeOptions2[excludeOptions2["n"] = 3] = "n";
-      excludeOptions2[excludeOptions2["file"] = 4] = "file";
-      excludeOptions2[excludeOptions2["format"] = 5] = "format";
-      excludeOptions2[excludeOptions2["from"] = 6] = "from";
-      excludeOptions2[excludeOptions2["to"] = 7] = "to";
-      excludeOptions2[excludeOptions2["splitter"] = 8] = "splitter";
-      excludeOptions2[excludeOptions2["symmetric"] = 9] = "symmetric";
-      excludeOptions2[excludeOptions2["mailMap"] = 10] = "mailMap";
-      excludeOptions2[excludeOptions2["multiLine"] = 11] = "multiLine";
-      excludeOptions2[excludeOptions2["strictDate"] = 12] = "strictDate";
-      return excludeOptions2;
-    })(excludeOptions || {});
-  }
-});
-
-// src/lib/responses/MergeSummary.ts
-var MergeSummaryConflict, MergeSummaryDetail;
-var init_MergeSummary = __esm({
-  "src/lib/responses/MergeSummary.ts"() {
-    "use strict";
-    MergeSummaryConflict = class {
-      constructor(reason, file = null, meta) {
-        this.reason = reason;
-        this.file = file;
-        this.meta = meta;
-      }
-      toString() {
-        return `${this.file}:${this.reason}`;
-      }
-    };
-    MergeSummaryDetail = class {
-      constructor() {
-        this.conflicts = [];
-        this.merges = [];
-        this.result = "success";
-      }
-      get failed() {
-        return this.conflicts.length > 0;
-      }
-      get reason() {
-        return this.result;
-      }
-      toString() {
-        if (this.conflicts.length) {
-          return `CONFLICTS: ${this.conflicts.join(", ")}`;
-        }
-        return "OK";
-      }
-    };
-  }
-});
-
-// src/lib/responses/PullSummary.ts
-var PullSummary, PullFailedSummary;
-var init_PullSummary = __esm({
-  "src/lib/responses/PullSummary.ts"() {
-    "use strict";
-    PullSummary = class {
-      constructor() {
-        this.remoteMessages = {
-          all: []
-        };
-        this.created = [];
-        this.deleted = [];
-        this.files = [];
-        this.deletions = {};
-        this.insertions = {};
-        this.summary = {
-          changes: 0,
-          deletions: 0,
-          insertions: 0
-        };
-      }
-    };
-    PullFailedSummary = class {
-      constructor() {
-        this.remote = "";
-        this.hash = {
-          local: "",
-          remote: ""
-        };
-        this.branch = {
-          local: "",
-          remote: ""
-        };
-        this.message = "";
-      }
-      toString() {
-        return this.message;
-      }
-    };
-  }
-});
-
-// src/lib/parsers/parse-remote-objects.ts
-function objectEnumerationResult(remoteMessages) {
-  return remoteMessages.objects = remoteMessages.objects || {
-    compressing: 0,
-    counting: 0,
-    enumerating: 0,
-    packReused: 0,
-    reused: { count: 0, delta: 0 },
-    total: { count: 0, delta: 0 }
-  };
-}
-function asObjectCount(source) {
-  const count = /^\s*(\d+)/.exec(source);
-  const delta = /delta (\d+)/i.exec(source);
-  return {
-    count: asNumber(count && count[1] || "0"),
-    delta: asNumber(delta && delta[1] || "0")
-  };
-}
-var remoteMessagesObjectParsers;
-var init_parse_remote_objects = __esm({
-  "src/lib/parsers/parse-remote-objects.ts"() {
-    "use strict";
-    init_utils();
-    remoteMessagesObjectParsers = [
-      new RemoteLineParser(
-        /^remote:\s*(enumerating|counting|compressing) objects: (\d+),/i,
-        (result, [action, count]) => {
-          const key = action.toLowerCase();
-          const enumeration = objectEnumerationResult(result.remoteMessages);
-          Object.assign(enumeration, { [key]: asNumber(count) });
-        }
-      ),
-      new RemoteLineParser(
-        /^remote:\s*(enumerating|counting|compressing) objects: \d+% \(\d+\/(\d+)\),/i,
-        (result, [action, count]) => {
-          const key = action.toLowerCase();
-          const enumeration = objectEnumerationResult(result.remoteMessages);
-          Object.assign(enumeration, { [key]: asNumber(count) });
-        }
-      ),
-      new RemoteLineParser(
-        /total ([^,]+), reused ([^,]+), pack-reused (\d+)/i,
-        (result, [total, reused, packReused]) => {
-          const objects = objectEnumerationResult(result.remoteMessages);
-          objects.total = asObjectCount(total);
-          objects.reused = asObjectCount(reused);
-          objects.packReused = asNumber(packReused);
-        }
-      )
-    ];
-  }
-});
-
-// src/lib/parsers/parse-remote-messages.ts
-function parseRemoteMessages(_stdOut, stdErr) {
-  return parseStringResponse({ remoteMessages: new RemoteMessageSummary() }, parsers2, stdErr);
-}
-var parsers2, RemoteMessageSummary;
-var init_parse_remote_messages = __esm({
-  "src/lib/parsers/parse-remote-messages.ts"() {
-    "use strict";
-    init_utils();
-    init_parse_remote_objects();
-    parsers2 = [
-      new RemoteLineParser(/^remote:\s*(.+)$/, (result, [text]) => {
-        result.remoteMessages.all.push(text.trim());
-        return false;
-      }),
-      ...remoteMessagesObjectParsers,
-      new RemoteLineParser(
-        [/create a (?:pull|merge) request/i, /\s(https?:\/\/\S+)$/],
-        (result, [pullRequestUrl]) => {
-          result.remoteMessages.pullRequestUrl = pullRequestUrl;
-        }
-      ),
-      new RemoteLineParser(
-        [/found (\d+) vulnerabilities.+\(([^)]+)\)/i, /\s(https?:\/\/\S+)$/],
-        (result, [count, summary, url]) => {
-          result.remoteMessages.vulnerabilities = {
-            count: asNumber(count),
-            summary,
-            url
-          };
-        }
-      )
-    ];
-    RemoteMessageSummary = class {
-      constructor() {
-        this.all = [];
-      }
-    };
-  }
-});
-
-// src/lib/parsers/parse-pull.ts
-function parsePullErrorResult(stdOut, stdErr) {
-  const pullError = parseStringResponse(new PullFailedSummary(), errorParsers, [stdOut, stdErr]);
-  return pullError.message && pullError;
-}
-var FILE_UPDATE_REGEX, SUMMARY_REGEX, ACTION_REGEX, parsers3, errorParsers, parsePullDetail, parsePullResult;
-var init_parse_pull = __esm({
-  "src/lib/parsers/parse-pull.ts"() {
-    "use strict";
-    init_PullSummary();
-    init_utils();
-    init_parse_remote_messages();
-    FILE_UPDATE_REGEX = /^\s*(.+?)\s+\|\s+\d+\s*(\+*)(-*)/;
-    SUMMARY_REGEX = /(\d+)\D+((\d+)\D+\(\+\))?(\D+(\d+)\D+\(-\))?/;
-    ACTION_REGEX = /^(create|delete) mode \d+ (.+)/;
-    parsers3 = [
-      new LineParser(FILE_UPDATE_REGEX, (result, [file, insertions, deletions]) => {
-        result.files.push(file);
-        if (insertions) {
-          result.insertions[file] = insertions.length;
-        }
-        if (deletions) {
-          result.deletions[file] = deletions.length;
-        }
-      }),
-      new LineParser(SUMMARY_REGEX, (result, [changes, , insertions, , deletions]) => {
-        if (insertions !== void 0 || deletions !== void 0) {
-          result.summary.changes = +changes || 0;
-          result.summary.insertions = +insertions || 0;
-          result.summary.deletions = +deletions || 0;
-          return true;
-        }
-        return false;
-      }),
-      new LineParser(ACTION_REGEX, (result, [action, file]) => {
-        append(result.files, file);
-        append(action === "create" ? result.created : result.deleted, file);
-      })
-    ];
-    errorParsers = [
-      new LineParser(/^from\s(.+)$/i, (result, [remote]) => void (result.remote = remote)),
-      new LineParser(/^fatal:\s(.+)$/, (result, [message]) => void (result.message = message)),
-      new LineParser(
-        /([a-z0-9]+)\.\.([a-z0-9]+)\s+(\S+)\s+->\s+(\S+)$/,
-        (result, [hashLocal, hashRemote, branchLocal, branchRemote]) => {
-          result.branch.local = branchLocal;
-          result.hash.local = hashLocal;
-          result.branch.remote = branchRemote;
-          result.hash.remote = hashRemote;
-        }
-      )
-    ];
-    parsePullDetail = (stdOut, stdErr) => {
-      return parseStringResponse(new PullSummary(), parsers3, [stdOut, stdErr]);
-    };
-    parsePullResult = (stdOut, stdErr) => {
-      return Object.assign(
-        new PullSummary(),
-        parsePullDetail(stdOut, stdErr),
-        parseRemoteMessages(stdOut, stdErr)
-      );
-    };
-  }
-});
-
-// src/lib/parsers/parse-merge.ts
-var parsers4, parseMergeResult, parseMergeDetail;
-var init_parse_merge = __esm({
-  "src/lib/parsers/parse-merge.ts"() {
-    "use strict";
-    init_MergeSummary();
-    init_utils();
-    init_parse_pull();
-    parsers4 = [
-      new LineParser(/^Auto-merging\s+(.+)$/, (summary, [autoMerge]) => {
-        summary.merges.push(autoMerge);
-      }),
-      new LineParser(/^CONFLICT\s+\((.+)\): Merge conflict in (.+)$/, (summary, [reason, file]) => {
-        summary.conflicts.push(new MergeSummaryConflict(reason, file));
-      }),
-      new LineParser(
-        /^CONFLICT\s+\((.+\/delete)\): (.+) deleted in (.+) and/,
-        (summary, [reason, file, deleteRef]) => {
-          summary.conflicts.push(new MergeSummaryConflict(reason, file, { deleteRef }));
-        }
-      ),
-      new LineParser(/^CONFLICT\s+\((.+)\):/, (summary, [reason]) => {
-        summary.conflicts.push(new MergeSummaryConflict(reason, null));
-      }),
-      new LineParser(/^Automatic merge failed;\s+(.+)$/, (summary, [result]) => {
-        summary.result = result;
-      })
-    ];
-    parseMergeResult = (stdOut, stdErr) => {
-      return Object.assign(parseMergeDetail(stdOut, stdErr), parsePullResult(stdOut, stdErr));
-    };
-    parseMergeDetail = (stdOut) => {
-      return parseStringResponse(new MergeSummaryDetail(), parsers4, stdOut);
-    };
-  }
-});
-
-// src/lib/tasks/merge.ts
-function mergeTask(customArgs) {
-  if (!customArgs.length) {
-    return configurationErrorTask("Git.merge requires at least one option");
-  }
-  return {
-    commands: ["merge", ...customArgs],
-    format: "utf-8",
-    parser(stdOut, stdErr) {
-      const merge = parseMergeResult(stdOut, stdErr);
-      if (merge.failed) {
-        throw new GitResponseError(merge);
-      }
-      return merge;
-    }
-  };
-}
-var init_merge = __esm({
-  "src/lib/tasks/merge.ts"() {
-    "use strict";
-    init_git_response_error();
-    init_parse_merge();
-    init_task();
-  }
-});
-
-// src/lib/parsers/parse-push.ts
-function pushResultPushedItem(local, remote, status) {
-  const deleted = status.includes("deleted");
-  const tag = status.includes("tag") || /^refs\/tags/.test(local);
-  const alreadyUpdated = !status.includes("new");
-  return {
-    deleted,
-    tag,
-    branch: !tag,
-    new: !alreadyUpdated,
-    alreadyUpdated,
-    local,
-    remote
-  };
-}
-var parsers5, parsePushResult, parsePushDetail;
-var init_parse_push = __esm({
-  "src/lib/parsers/parse-push.ts"() {
-    "use strict";
-    init_utils();
-    init_parse_remote_messages();
-    parsers5 = [
-      new LineParser(/^Pushing to (.+)$/, (result, [repo]) => {
-        result.repo = repo;
-      }),
-      new LineParser(/^updating local tracking ref '(.+)'/, (result, [local]) => {
-        result.ref = __spreadProps(__spreadValues({}, result.ref || {}), {
-          local
-        });
-      }),
-      new LineParser(/^[=*-]\s+([^:]+):(\S+)\s+\[(.+)]$/, (result, [local, remote, type]) => {
-        result.pushed.push(pushResultPushedItem(local, remote, type));
-      }),
-      new LineParser(
-        /^Branch '([^']+)' set up to track remote branch '([^']+)' from '([^']+)'/,
-        (result, [local, remote, remoteName]) => {
-          result.branch = __spreadProps(__spreadValues({}, result.branch || {}), {
-            local,
-            remote,
-            remoteName
-          });
-        }
-      ),
-      new LineParser(
-        /^([^:]+):(\S+)\s+([a-z0-9]+)\.\.([a-z0-9]+)$/,
-        (result, [local, remote, from, to]) => {
-          result.update = {
-            head: {
-              local,
-              remote
-            },
-            hash: {
-              from,
-              to
-            }
-          };
-        }
-      )
-    ];
-    parsePushResult = (stdOut, stdErr) => {
-      const pushDetail = parsePushDetail(stdOut, stdErr);
-      const responseDetail = parseRemoteMessages(stdOut, stdErr);
-      return __spreadValues(__spreadValues({}, pushDetail), responseDetail);
-    };
-    parsePushDetail = (stdOut, stdErr) => {
-      return parseStringResponse({ pushed: [] }, parsers5, [stdOut, stdErr]);
-    };
-  }
-});
-
-// src/lib/tasks/push.ts
-var push_exports = {};
-__export(push_exports, {
-  pushTagsTask: () => pushTagsTask,
-  pushTask: () => pushTask
-});
-function pushTagsTask(ref = {}, customArgs) {
-  append(customArgs, "--tags");
-  return pushTask(ref, customArgs);
-}
-function pushTask(ref = {}, customArgs) {
-  const commands = ["push", ...customArgs];
-  if (ref.branch) {
-    commands.splice(1, 0, ref.branch);
-  }
-  if (ref.remote) {
-    commands.splice(1, 0, ref.remote);
-  }
-  remove(commands, "-v");
-  append(commands, "--verbose");
-  append(commands, "--porcelain");
-  return {
-    commands,
-    format: "utf-8",
-    parser: parsePushResult
-  };
-}
-var init_push = __esm({
-  "src/lib/tasks/push.ts"() {
-    "use strict";
-    init_parse_push();
-    init_utils();
-  }
-});
-
-// src/lib/tasks/show.ts
-function show_default() {
-  return {
-    showBuffer() {
-      const commands = ["show", ...getTrailingOptions(arguments, 1)];
-      if (!commands.includes("--binary")) {
-        commands.splice(1, 0, "--binary");
-      }
-      return this._runTask(
-        straightThroughBufferTask(commands),
-        trailingFunctionArgument(arguments)
-      );
-    },
-    show() {
-      const commands = ["show", ...getTrailingOptions(arguments, 1)];
-      return this._runTask(
-        straightThroughStringTask(commands),
-        trailingFunctionArgument(arguments)
-      );
-    }
-  };
-}
-var init_show = __esm({
-  "src/lib/tasks/show.ts"() {
-    "use strict";
-    init_utils();
-    init_task();
-  }
-});
-
-// src/lib/responses/FileStatusSummary.ts
-var fromPathRegex, FileStatusSummary;
-var init_FileStatusSummary = __esm({
-  "src/lib/responses/FileStatusSummary.ts"() {
-    "use strict";
-    fromPathRegex = /^(.+)\0(.+)$/;
-    FileStatusSummary = class {
-      constructor(path, index, working_dir) {
-        this.path = path;
-        this.index = index;
-        this.working_dir = working_dir;
-        if (index === "R" || working_dir === "R") {
-          const detail = fromPathRegex.exec(path) || [null, path, path];
-          this.from = detail[2] || "";
-          this.path = detail[1] || "";
-        }
-      }
-    };
-  }
-});
-
-// src/lib/responses/StatusSummary.ts
-function renamedFile(line) {
-  const [to, from] = line.split(NULL);
-  return {
-    from: from || to,
-    to
-  };
-}
-function parser3(indexX, indexY, handler) {
-  return [`${indexX}${indexY}`, handler];
-}
-function conflicts(indexX, ...indexY) {
-  return indexY.map((y) => parser3(indexX, y, (result, file) => append(result.conflicted, file)));
-}
-function splitLine(result, lineStr) {
-  const trimmed2 = lineStr.trim();
-  switch (" ") {
-    case trimmed2.charAt(2):
-      return data(trimmed2.charAt(0), trimmed2.charAt(1), trimmed2.substr(3));
-    case trimmed2.charAt(1):
-      return data(" " /* NONE */, trimmed2.charAt(0), trimmed2.substr(2));
-    default:
-      return;
-  }
-  function data(index, workingDir, path) {
-    const raw = `${index}${workingDir}`;
-    const handler = parsers6.get(raw);
-    if (handler) {
-      handler(result, path);
-    }
-    if (raw !== "##" && raw !== "!!") {
-      result.files.push(new FileStatusSummary(path, index, workingDir));
-    }
-  }
-}
-var StatusSummary, parsers6, parseStatusSummary;
-var init_StatusSummary = __esm({
-  "src/lib/responses/StatusSummary.ts"() {
-    "use strict";
-    init_utils();
-    init_FileStatusSummary();
-    StatusSummary = class {
-      constructor() {
-        this.not_added = [];
-        this.conflicted = [];
-        this.created = [];
-        this.deleted = [];
-        this.ignored = void 0;
-        this.modified = [];
-        this.renamed = [];
-        this.files = [];
-        this.staged = [];
-        this.ahead = 0;
-        this.behind = 0;
-        this.current = null;
-        this.tracking = null;
-        this.detached = false;
-        this.isClean = () => {
-          return !this.files.length;
-        };
-      }
-    };
-    parsers6 = new Map([
-      parser3(
-        " " /* NONE */,
-        "A" /* ADDED */,
-        (result, file) => append(result.created, file)
-      ),
-      parser3(
-        " " /* NONE */,
-        "D" /* DELETED */,
-        (result, file) => append(result.deleted, file)
-      ),
-      parser3(
-        " " /* NONE */,
-        "M" /* MODIFIED */,
-        (result, file) => append(result.modified, file)
-      ),
-      parser3(
-        "A" /* ADDED */,
-        " " /* NONE */,
-        (result, file) => append(result.created, file) && append(result.staged, file)
-      ),
-      parser3(
-        "A" /* ADDED */,
-        "M" /* MODIFIED */,
-        (result, file) => append(result.created, file) && append(result.staged, file) && append(result.modified, file)
-      ),
-      parser3(
-        "D" /* DELETED */,
-        " " /* NONE */,
-        (result, file) => append(result.deleted, file) && append(result.staged, file)
-      ),
-      parser3(
-        "M" /* MODIFIED */,
-        " " /* NONE */,
-        (result, file) => append(result.modified, file) && append(result.staged, file)
-      ),
-      parser3(
-        "M" /* MODIFIED */,
-        "M" /* MODIFIED */,
-        (result, file) => append(result.modified, file) && append(result.staged, file)
-      ),
-      parser3("R" /* RENAMED */, " " /* NONE */, (result, file) => {
-        append(result.renamed, renamedFile(file));
-      }),
-      parser3("R" /* RENAMED */, "M" /* MODIFIED */, (result, file) => {
-        const renamed = renamedFile(file);
-        append(result.renamed, renamed);
-        append(result.modified, renamed.to);
-      }),
-      parser3("!" /* IGNORED */, "!" /* IGNORED */, (_result, _file) => {
-        append(_result.ignored = _result.ignored || [], _file);
-      }),
-      parser3(
-        "?" /* UNTRACKED */,
-        "?" /* UNTRACKED */,
-        (result, file) => append(result.not_added, file)
-      ),
-      ...conflicts("A" /* ADDED */, "A" /* ADDED */, "U" /* UNMERGED */),
-      ...conflicts(
-        "D" /* DELETED */,
-        "D" /* DELETED */,
-        "U" /* UNMERGED */
-      ),
-      ...conflicts(
-        "U" /* UNMERGED */,
-        "A" /* ADDED */,
-        "D" /* DELETED */,
-        "U" /* UNMERGED */
-      ),
-      [
-        "##",
-        (result, line) => {
-          const aheadReg = /ahead (\d+)/;
-          const behindReg = /behind (\d+)/;
-          const currentReg = /^(.+?(?=(?:\.{3}|\s|$)))/;
-          const trackingReg = /\.{3}(\S*)/;
-          const onEmptyBranchReg = /\son\s([\S]+)$/;
-          let regexResult;
-          regexResult = aheadReg.exec(line);
-          result.ahead = regexResult && +regexResult[1] || 0;
-          regexResult = behindReg.exec(line);
-          result.behind = regexResult && +regexResult[1] || 0;
-          regexResult = currentReg.exec(line);
-          result.current = regexResult && regexResult[1];
-          regexResult = trackingReg.exec(line);
-          result.tracking = regexResult && regexResult[1];
-          regexResult = onEmptyBranchReg.exec(line);
-          result.current = regexResult && regexResult[1] || result.current;
-          result.detached = /\(no branch\)/.test(line);
-        }
-      ]
-    ]);
-    parseStatusSummary = function(text) {
-      const lines = text.split(NULL);
-      const status = new StatusSummary();
-      for (let i = 0, l = lines.length; i < l; ) {
-        let line = lines[i++].trim();
-        if (!line) {
-          continue;
-        }
-        if (line.charAt(0) === "R" /* RENAMED */) {
-          line += NULL + (lines[i++] || "");
-        }
-        splitLine(status, line);
-      }
-      return status;
-    };
-  }
-});
-
-// src/lib/tasks/status.ts
-function statusTask(customArgs) {
-  const commands = [
-    "status",
-    "--porcelain",
-    "-b",
-    "-u",
-    "--null",
-    ...customArgs.filter((arg) => !ignoredOptions.includes(arg))
-  ];
-  return {
-    format: "utf-8",
-    commands,
-    parser(text) {
-      return parseStatusSummary(text);
-    }
-  };
-}
-var ignoredOptions;
-var init_status = __esm({
-  "src/lib/tasks/status.ts"() {
-    "use strict";
-    init_StatusSummary();
-    ignoredOptions = ["--null", "-z"];
-  }
-});
-
-// src/lib/tasks/version.ts
-function versionResponse(major = 0, minor = 0, patch = 0, agent = "", installed = true) {
-  return Object.defineProperty(
-    {
-      major,
-      minor,
-      patch,
-      agent,
-      installed
-    },
-    "toString",
-    {
-      value() {
-        return `${this.major}.${this.minor}.${this.patch}`;
-      },
-      configurable: false,
-      enumerable: false
-    }
-  );
-}
-function notInstalledResponse() {
-  return versionResponse(0, 0, 0, "", false);
-}
-function version_default() {
-  return {
-    version() {
-      return this._runTask({
-        commands: ["--version"],
-        format: "utf-8",
-        parser: versionParser,
-        onError(result, error, done, fail) {
-          if (result.exitCode === -2 /* NOT_FOUND */) {
-            return done(Buffer.from(NOT_INSTALLED));
-          }
-          fail(error);
-        }
-      });
-    }
-  };
-}
-function versionParser(stdOut) {
-  if (stdOut === NOT_INSTALLED) {
-    return notInstalledResponse();
-  }
-  return parseStringResponse(versionResponse(0, 0, 0, stdOut), parsers7, stdOut);
-}
-var NOT_INSTALLED, parsers7;
-var init_version = __esm({
-  "src/lib/tasks/version.ts"() {
-    "use strict";
-    init_utils();
-    NOT_INSTALLED = "installed=false";
-    parsers7 = [
-      new LineParser(
-        /version (\d+)\.(\d+)\.(\d+)(?:\s*\((.+)\))?/,
-        (result, [major, minor, patch, agent = ""]) => {
-          Object.assign(
-            result,
-            versionResponse(asNumber(major), asNumber(minor), asNumber(patch), agent)
-          );
-        }
-      ),
-      new LineParser(
-        /version (\d+)\.(\d+)\.(\D+)(.+)?$/,
-        (result, [major, minor, patch, agent = ""]) => {
-          Object.assign(result, versionResponse(asNumber(major), asNumber(minor), patch, agent));
-        }
-      )
-    ];
-  }
-});
-
-// src/lib/simple-git-api.ts
-var simple_git_api_exports = {};
-__export(simple_git_api_exports, {
-  SimpleGitApi: () => SimpleGitApi
-});
-var SimpleGitApi;
-var init_simple_git_api = __esm({
-  "src/lib/simple-git-api.ts"() {
-    "use strict";
-    init_task_callback();
-    init_change_working_directory();
-    init_checkout();
-    init_count_objects();
-    init_commit();
-    init_config();
-    init_first_commit();
-    init_grep();
-    init_hash_object();
-    init_init();
-    init_log();
-    init_merge();
-    init_push();
-    init_show();
-    init_status();
-    init_task();
-    init_version();
-    init_utils();
-    SimpleGitApi = class {
-      constructor(_executor) {
-        this._executor = _executor;
-      }
-      _runTask(task, then) {
-        const chain = this._executor.chain();
-        const promise = chain.push(task);
-        if (then) {
-          taskCallback(task, promise, then);
-        }
-        return Object.create(this, {
-          then: { value: promise.then.bind(promise) },
-          catch: { value: promise.catch.bind(promise) },
-          _executor: { value: chain }
-        });
-      }
-      add(files) {
-        return this._runTask(
-          straightThroughStringTask(["add", ...asArray(files)]),
-          trailingFunctionArgument(arguments)
-        );
-      }
-      cwd(directory) {
-        const next = trailingFunctionArgument(arguments);
-        if (typeof directory === "string") {
-          return this._runTask(changeWorkingDirectoryTask(directory, this._executor), next);
-        }
-        if (typeof (directory == null ? void 0 : directory.path) === "string") {
-          return this._runTask(
-            changeWorkingDirectoryTask(
-              directory.path,
-              directory.root && this._executor || void 0
-            ),
-            next
-          );
-        }
-        return this._runTask(
-          configurationErrorTask("Git.cwd: workingDirectory must be supplied as a string"),
-          next
-        );
-      }
-      hashObject(path, write) {
-        return this._runTask(
-          hashObjectTask(path, write === true),
-          trailingFunctionArgument(arguments)
-        );
-      }
-      init(bare) {
-        return this._runTask(
-          initTask(bare === true, this._executor.cwd, getTrailingOptions(arguments)),
-          trailingFunctionArgument(arguments)
-        );
-      }
-      merge() {
-        return this._runTask(
-          mergeTask(getTrailingOptions(arguments)),
-          trailingFunctionArgument(arguments)
-        );
-      }
-      mergeFromTo(remote, branch) {
-        if (!(filterString(remote) && filterString(branch))) {
-          return this._runTask(
-            configurationErrorTask(
-              `Git.mergeFromTo requires that the 'remote' and 'branch' arguments are supplied as strings`
-            )
-          );
-        }
-        return this._runTask(
-          mergeTask([remote, branch, ...getTrailingOptions(arguments)]),
-          trailingFunctionArgument(arguments, false)
-        );
-      }
-      outputHandler(handler) {
-        this._executor.outputHandler = handler;
-        return this;
-      }
-      push() {
-        const task = pushTask(
-          {
-            remote: filterType(arguments[0], filterString),
-            branch: filterType(arguments[1], filterString)
-          },
-          getTrailingOptions(arguments)
-        );
-        return this._runTask(task, trailingFunctionArgument(arguments));
-      }
-      stash() {
-        return this._runTask(
-          straightThroughStringTask(["stash", ...getTrailingOptions(arguments)]),
-          trailingFunctionArgument(arguments)
-        );
-      }
-      status() {
-        return this._runTask(
-          statusTask(getTrailingOptions(arguments)),
-          trailingFunctionArgument(arguments)
-        );
-      }
-    };
-    Object.assign(
-      SimpleGitApi.prototype,
-      checkout_default(),
-      commit_default(),
-      config_default(),
-      count_objects_default(),
-      first_commit_default(),
-      grep_default(),
-      log_default(),
-      show_default(),
-      version_default()
-    );
-  }
-});
-
-// src/lib/runners/scheduler.ts
-var scheduler_exports = {};
-__export(scheduler_exports, {
-  Scheduler: () => Scheduler
-});
-var import_promise_deferred2, createScheduledTask, Scheduler;
-var init_scheduler = __esm({
-  "src/lib/runners/scheduler.ts"() {
-    "use strict";
-    init_utils();
-    import_promise_deferred2 = __nccwpck_require__(9997);
-    init_git_logger();
-    createScheduledTask = (() => {
-      let id = 0;
-      return () => {
-        id++;
-        const { promise, done } = (0, import_promise_deferred2.createDeferred)();
-        return {
-          promise,
-          done,
-          id
-        };
-      };
-    })();
-    Scheduler = class {
-      constructor(concurrency = 2) {
-        this.concurrency = concurrency;
-        this.logger = createLogger("", "scheduler");
-        this.pending = [];
-        this.running = [];
-        this.logger(`Constructed, concurrency=%s`, concurrency);
-      }
-      schedule() {
-        if (!this.pending.length || this.running.length >= this.concurrency) {
-          this.logger(
-            `Schedule attempt ignored, pending=%s running=%s concurrency=%s`,
-            this.pending.length,
-            this.running.length,
-            this.concurrency
-          );
-          return;
-        }
-        const task = append(this.running, this.pending.shift());
-        this.logger(`Attempting id=%s`, task.id);
-        task.done(() => {
-          this.logger(`Completing id=`, task.id);
-          remove(this.running, task);
-          this.schedule();
-        });
-      }
-      next() {
-        const { promise, id } = append(this.pending, createScheduledTask());
-        this.logger(`Scheduling id=%s`, id);
-        this.schedule();
-        return promise;
-      }
-    };
-  }
-});
-
-// src/lib/tasks/apply-patch.ts
-var apply_patch_exports = {};
-__export(apply_patch_exports, {
-  applyPatchTask: () => applyPatchTask
-});
-function applyPatchTask(patches, customArgs) {
-  return straightThroughStringTask(["apply", ...customArgs, ...patches]);
-}
-var init_apply_patch = __esm({
-  "src/lib/tasks/apply-patch.ts"() {
-    "use strict";
-    init_task();
-  }
-});
-
-// src/lib/responses/BranchDeleteSummary.ts
-function branchDeletionSuccess(branch, hash) {
-  return {
-    branch,
-    hash,
-    success: true
-  };
-}
-function branchDeletionFailure(branch) {
-  return {
-    branch,
-    hash: null,
-    success: false
-  };
-}
-var BranchDeletionBatch;
-var init_BranchDeleteSummary = __esm({
-  "src/lib/responses/BranchDeleteSummary.ts"() {
-    "use strict";
-    BranchDeletionBatch = class {
-      constructor() {
-        this.all = [];
-        this.branches = {};
-        this.errors = [];
-      }
-      get success() {
-        return !this.errors.length;
-      }
-    };
-  }
-});
-
-// src/lib/parsers/parse-branch-delete.ts
-function hasBranchDeletionError(data, processExitCode) {
-  return processExitCode === 1 /* ERROR */ && deleteErrorRegex.test(data);
-}
-var deleteSuccessRegex, deleteErrorRegex, parsers8, parseBranchDeletions;
-var init_parse_branch_delete = __esm({
-  "src/lib/parsers/parse-branch-delete.ts"() {
-    "use strict";
-    init_BranchDeleteSummary();
-    init_utils();
-    deleteSuccessRegex = /(\S+)\s+\(\S+\s([^)]+)\)/;
-    deleteErrorRegex = /^error[^']+'([^']+)'/m;
-    parsers8 = [
-      new LineParser(deleteSuccessRegex, (result, [branch, hash]) => {
-        const deletion = branchDeletionSuccess(branch, hash);
-        result.all.push(deletion);
-        result.branches[branch] = deletion;
-      }),
-      new LineParser(deleteErrorRegex, (result, [branch]) => {
-        const deletion = branchDeletionFailure(branch);
-        result.errors.push(deletion);
-        result.all.push(deletion);
-        result.branches[branch] = deletion;
-      })
-    ];
-    parseBranchDeletions = (stdOut, stdErr) => {
-      return parseStringResponse(new BranchDeletionBatch(), parsers8, [stdOut, stdErr]);
-    };
-  }
-});
-
-// src/lib/responses/BranchSummary.ts
-var BranchSummaryResult;
-var init_BranchSummary = __esm({
-  "src/lib/responses/BranchSummary.ts"() {
-    "use strict";
-    BranchSummaryResult = class {
-      constructor() {
-        this.all = [];
-        this.branches = {};
-        this.current = "";
-        this.detached = false;
-      }
-      push(status, detached, name, commit, label) {
-        if (status === "*" /* CURRENT */) {
-          this.detached = detached;
-          this.current = name;
-        }
-        this.all.push(name);
-        this.branches[name] = {
-          current: status === "*" /* CURRENT */,
-          linkedWorkTree: status === "+" /* LINKED */,
-          name,
-          commit,
-          label
-        };
-      }
-    };
-  }
-});
-
-// src/lib/parsers/parse-branch.ts
-function branchStatus(input) {
-  return input ? input.charAt(0) : "";
-}
-function parseBranchSummary(stdOut) {
-  return parseStringResponse(new BranchSummaryResult(), parsers9, stdOut);
-}
-var parsers9;
-var init_parse_branch = __esm({
-  "src/lib/parsers/parse-branch.ts"() {
-    "use strict";
-    init_BranchSummary();
-    init_utils();
-    parsers9 = [
-      new LineParser(
-        /^([*+]\s)?\((?:HEAD )?detached (?:from|at) (\S+)\)\s+([a-z0-9]+)\s(.*)$/,
-        (result, [current, name, commit, label]) => {
-          result.push(branchStatus(current), true, name, commit, label);
-        }
-      ),
-      new LineParser(
-        new RegExp("^([*+]\\s)?(\\S+)\\s+([a-z0-9]+)\\s?(.*)$", "s"),
-        (result, [current, name, commit, label]) => {
-          result.push(branchStatus(current), false, name, commit, label);
-        }
-      )
-    ];
-  }
-});
-
-// src/lib/tasks/branch.ts
-var branch_exports = {};
-__export(branch_exports, {
-  branchLocalTask: () => branchLocalTask,
-  branchTask: () => branchTask,
-  containsDeleteBranchCommand: () => containsDeleteBranchCommand,
-  deleteBranchTask: () => deleteBranchTask,
-  deleteBranchesTask: () => deleteBranchesTask
-});
-function containsDeleteBranchCommand(commands) {
-  const deleteCommands = ["-d", "-D", "--delete"];
-  return commands.some((command) => deleteCommands.includes(command));
-}
-function branchTask(customArgs) {
-  const isDelete = containsDeleteBranchCommand(customArgs);
-  const commands = ["branch", ...customArgs];
-  if (commands.length === 1) {
-    commands.push("-a");
-  }
-  if (!commands.includes("-v")) {
-    commands.splice(1, 0, "-v");
-  }
-  return {
-    format: "utf-8",
-    commands,
-    parser(stdOut, stdErr) {
-      if (isDelete) {
-        return parseBranchDeletions(stdOut, stdErr).all[0];
-      }
-      return parseBranchSummary(stdOut);
-    }
-  };
-}
-function branchLocalTask() {
-  const parser4 = parseBranchSummary;
-  return {
-    format: "utf-8",
-    commands: ["branch", "-v"],
-    parser: parser4
-  };
-}
-function deleteBranchesTask(branches, forceDelete = false) {
-  return {
-    format: "utf-8",
-    commands: ["branch", "-v", forceDelete ? "-D" : "-d", ...branches],
-    parser(stdOut, stdErr) {
-      return parseBranchDeletions(stdOut, stdErr);
-    },
-    onError({ exitCode, stdOut }, error, done, fail) {
-      if (!hasBranchDeletionError(String(error), exitCode)) {
-        return fail(error);
-      }
-      done(stdOut);
-    }
-  };
-}
-function deleteBranchTask(branch, forceDelete = false) {
-  const task = {
-    format: "utf-8",
-    commands: ["branch", "-v", forceDelete ? "-D" : "-d", branch],
-    parser(stdOut, stdErr) {
-      return parseBranchDeletions(stdOut, stdErr).branches[branch];
-    },
-    onError({ exitCode, stdErr, stdOut }, error, _, fail) {
-      if (!hasBranchDeletionError(String(error), exitCode)) {
-        return fail(error);
-      }
-      throw new GitResponseError(
-        task.parser(bufferToString(stdOut), bufferToString(stdErr)),
-        String(error)
-      );
-    }
-  };
-  return task;
-}
-var init_branch = __esm({
-  "src/lib/tasks/branch.ts"() {
-    "use strict";
-    init_git_response_error();
-    init_parse_branch_delete();
-    init_parse_branch();
-    init_utils();
-  }
-});
-
-// src/lib/responses/CheckIgnore.ts
-var parseCheckIgnore;
-var init_CheckIgnore = __esm({
-  "src/lib/responses/CheckIgnore.ts"() {
-    "use strict";
-    parseCheckIgnore = (text) => {
-      return text.split(/\n/g).map((line) => line.trim()).filter((file) => !!file);
-    };
-  }
-});
-
-// src/lib/tasks/check-ignore.ts
-var check_ignore_exports = {};
-__export(check_ignore_exports, {
-  checkIgnoreTask: () => checkIgnoreTask
-});
-function checkIgnoreTask(paths) {
-  return {
-    commands: ["check-ignore", ...paths],
-    format: "utf-8",
-    parser: parseCheckIgnore
-  };
-}
-var init_check_ignore = __esm({
-  "src/lib/tasks/check-ignore.ts"() {
-    "use strict";
-    init_CheckIgnore();
-  }
-});
-
-// src/lib/tasks/clone.ts
-var clone_exports = {};
-__export(clone_exports, {
-  cloneMirrorTask: () => cloneMirrorTask,
-  cloneTask: () => cloneTask
-});
-function disallowedCommand(command) {
-  return /^--upload-pack(=|$)/.test(command);
-}
-function cloneTask(repo, directory, customArgs) {
-  const commands = ["clone", ...customArgs];
-  filterString(repo) && commands.push(repo);
-  filterString(directory) && commands.push(directory);
-  const banned = commands.find(disallowedCommand);
-  if (banned) {
-    return configurationErrorTask(`git.fetch: potential exploit argument blocked.`);
-  }
-  return straightThroughStringTask(commands);
-}
-function cloneMirrorTask(repo, directory, customArgs) {
-  append(customArgs, "--mirror");
-  return cloneTask(repo, directory, customArgs);
-}
-var init_clone = __esm({
-  "src/lib/tasks/clone.ts"() {
-    "use strict";
-    init_task();
-    init_utils();
-  }
-});
-
-// src/lib/parsers/parse-fetch.ts
-function parseFetchResult(stdOut, stdErr) {
-  const result = {
-    raw: stdOut,
-    remote: null,
-    branches: [],
-    tags: [],
-    updated: [],
-    deleted: []
-  };
-  return parseStringResponse(result, parsers10, [stdOut, stdErr]);
-}
-var parsers10;
-var init_parse_fetch = __esm({
-  "src/lib/parsers/parse-fetch.ts"() {
-    "use strict";
-    init_utils();
-    parsers10 = [
-      new LineParser(/From (.+)$/, (result, [remote]) => {
-        result.remote = remote;
-      }),
-      new LineParser(/\* \[new branch]\s+(\S+)\s*-> (.+)$/, (result, [name, tracking]) => {
-        result.branches.push({
-          name,
-          tracking
-        });
-      }),
-      new LineParser(/\* \[new tag]\s+(\S+)\s*-> (.+)$/, (result, [name, tracking]) => {
-        result.tags.push({
-          name,
-          tracking
-        });
-      }),
-      new LineParser(/- \[deleted]\s+\S+\s*-> (.+)$/, (result, [tracking]) => {
-        result.deleted.push({
-          tracking
-        });
-      }),
-      new LineParser(
-        /\s*([^.]+)\.\.(\S+)\s+(\S+)\s*-> (.+)$/,
-        (result, [from, to, name, tracking]) => {
-          result.updated.push({
-            name,
-            tracking,
-            to,
-            from
-          });
-        }
-      )
-    ];
-  }
-});
-
-// src/lib/tasks/fetch.ts
-var fetch_exports = {};
-__export(fetch_exports, {
-  fetchTask: () => fetchTask
-});
-function disallowedCommand2(command) {
-  return /^--upload-pack(=|$)/.test(command);
-}
-function fetchTask(remote, branch, customArgs) {
-  const commands = ["fetch", ...customArgs];
-  if (remote && branch) {
-    commands.push(remote, branch);
-  }
-  const banned = commands.find(disallowedCommand2);
-  if (banned) {
-    return configurationErrorTask(`git.fetch: potential exploit argument blocked.`);
-  }
-  return {
-    commands,
-    format: "utf-8",
-    parser: parseFetchResult
-  };
-}
-var init_fetch = __esm({
-  "src/lib/tasks/fetch.ts"() {
-    "use strict";
-    init_parse_fetch();
-    init_task();
-  }
-});
-
-// src/lib/parsers/parse-move.ts
-function parseMoveResult(stdOut) {
-  return parseStringResponse({ moves: [] }, parsers11, stdOut);
-}
-var parsers11;
-var init_parse_move = __esm({
-  "src/lib/parsers/parse-move.ts"() {
-    "use strict";
-    init_utils();
-    parsers11 = [
-      new LineParser(/^Renaming (.+) to (.+)$/, (result, [from, to]) => {
-        result.moves.push({ from, to });
-      })
-    ];
-  }
-});
-
-// src/lib/tasks/move.ts
-var move_exports = {};
-__export(move_exports, {
-  moveTask: () => moveTask
-});
-function moveTask(from, to) {
-  return {
-    commands: ["mv", "-v", ...asArray(from), to],
-    format: "utf-8",
-    parser: parseMoveResult
-  };
-}
-var init_move = __esm({
-  "src/lib/tasks/move.ts"() {
-    "use strict";
-    init_parse_move();
-    init_utils();
-  }
-});
-
-// src/lib/tasks/pull.ts
-var pull_exports = {};
-__export(pull_exports, {
-  pullTask: () => pullTask
-});
-function pullTask(remote, branch, customArgs) {
-  const commands = ["pull", ...customArgs];
-  if (remote && branch) {
-    commands.splice(1, 0, remote, branch);
-  }
-  return {
-    commands,
-    format: "utf-8",
-    parser(stdOut, stdErr) {
-      return parsePullResult(stdOut, stdErr);
-    },
-    onError(result, _error, _done, fail) {
-      const pullError = parsePullErrorResult(
-        bufferToString(result.stdOut),
-        bufferToString(result.stdErr)
-      );
-      if (pullError) {
-        return fail(new GitResponseError(pullError));
-      }
-      fail(_error);
-    }
-  };
-}
-var init_pull = __esm({
-  "src/lib/tasks/pull.ts"() {
-    "use strict";
-    init_git_response_error();
-    init_parse_pull();
-    init_utils();
-  }
-});
-
-// src/lib/responses/GetRemoteSummary.ts
-function parseGetRemotes(text) {
-  const remotes = {};
-  forEach(text, ([name]) => remotes[name] = { name });
-  return Object.values(remotes);
-}
-function parseGetRemotesVerbose(text) {
-  const remotes = {};
-  forEach(text, ([name, url, purpose]) => {
-    if (!remotes.hasOwnProperty(name)) {
-      remotes[name] = {
-        name,
-        refs: { fetch: "", push: "" }
-      };
-    }
-    if (purpose && url) {
-      remotes[name].refs[purpose.replace(/[^a-z]/g, "")] = url;
-    }
-  });
-  return Object.values(remotes);
-}
-function forEach(text, handler) {
-  forEachLineWithContent(text, (line) => handler(line.split(/\s+/)));
-}
-var init_GetRemoteSummary = __esm({
-  "src/lib/responses/GetRemoteSummary.ts"() {
-    "use strict";
-    init_utils();
-  }
-});
-
-// src/lib/tasks/remote.ts
-var remote_exports = {};
-__export(remote_exports, {
-  addRemoteTask: () => addRemoteTask,
-  getRemotesTask: () => getRemotesTask,
-  listRemotesTask: () => listRemotesTask,
-  remoteTask: () => remoteTask,
-  removeRemoteTask: () => removeRemoteTask
-});
-function addRemoteTask(remoteName, remoteRepo, customArgs) {
-  return straightThroughStringTask(["remote", "add", ...customArgs, remoteName, remoteRepo]);
-}
-function getRemotesTask(verbose) {
-  const commands = ["remote"];
-  if (verbose) {
-    commands.push("-v");
-  }
-  return {
-    commands,
-    format: "utf-8",
-    parser: verbose ? parseGetRemotesVerbose : parseGetRemotes
-  };
-}
-function listRemotesTask(customArgs) {
-  const commands = [...customArgs];
-  if (commands[0] !== "ls-remote") {
-    commands.unshift("ls-remote");
-  }
-  return straightThroughStringTask(commands);
-}
-function remoteTask(customArgs) {
-  const commands = [...customArgs];
-  if (commands[0] !== "remote") {
-    commands.unshift("remote");
-  }
-  return straightThroughStringTask(commands);
-}
-function removeRemoteTask(remoteName) {
-  return straightThroughStringTask(["remote", "remove", remoteName]);
-}
-var init_remote = __esm({
-  "src/lib/tasks/remote.ts"() {
-    "use strict";
-    init_GetRemoteSummary();
-    init_task();
-  }
-});
-
-// src/lib/tasks/stash-list.ts
-var stash_list_exports = {};
-__export(stash_list_exports, {
-  stashListTask: () => stashListTask
-});
-function stashListTask(opt = {}, customArgs) {
-  const options = parseLogOptions(opt);
-  const commands = ["stash", "list", ...options.commands, ...customArgs];
-  const parser4 = createListLogSummaryParser(
-    options.splitter,
-    options.fields,
-    logFormatFromCommand(commands)
-  );
-  return validateLogFormatConfig(commands) || {
-    commands,
-    format: "utf-8",
-    parser: parser4
-  };
-}
-var init_stash_list = __esm({
-  "src/lib/tasks/stash-list.ts"() {
-    "use strict";
-    init_log_format();
-    init_parse_list_log_summary();
-    init_diff();
-    init_log();
-  }
-});
-
-// src/lib/tasks/sub-module.ts
-var sub_module_exports = {};
-__export(sub_module_exports, {
-  addSubModuleTask: () => addSubModuleTask,
-  initSubModuleTask: () => initSubModuleTask,
-  subModuleTask: () => subModuleTask,
-  updateSubModuleTask: () => updateSubModuleTask
-});
-function addSubModuleTask(repo, path) {
-  return subModuleTask(["add", repo, path]);
-}
-function initSubModuleTask(customArgs) {
-  return subModuleTask(["init", ...customArgs]);
-}
-function subModuleTask(customArgs) {
-  const commands = [...customArgs];
-  if (commands[0] !== "submodule") {
-    commands.unshift("submodule");
-  }
-  return straightThroughStringTask(commands);
-}
-function updateSubModuleTask(customArgs) {
-  return subModuleTask(["update", ...customArgs]);
-}
-var init_sub_module = __esm({
-  "src/lib/tasks/sub-module.ts"() {
-    "use strict";
-    init_task();
-  }
-});
-
-// src/lib/responses/TagList.ts
-function singleSorted(a, b) {
-  const aIsNum = isNaN(a);
-  const bIsNum = isNaN(b);
-  if (aIsNum !== bIsNum) {
-    return aIsNum ? 1 : -1;
-  }
-  return aIsNum ? sorted(a, b) : 0;
-}
-function sorted(a, b) {
-  return a === b ? 0 : a > b ? 1 : -1;
-}
-function trimmed(input) {
-  return input.trim();
-}
-function toNumber(input) {
-  if (typeof input === "string") {
-    return parseInt(input.replace(/^\D+/g, ""), 10) || 0;
-  }
-  return 0;
-}
-var TagList, parseTagList;
-var init_TagList = __esm({
-  "src/lib/responses/TagList.ts"() {
-    "use strict";
-    TagList = class {
-      constructor(all, latest) {
-        this.all = all;
-        this.latest = latest;
-      }
-    };
-    parseTagList = function(data, customSort = false) {
-      const tags = data.split("\n").map(trimmed).filter(Boolean);
-      if (!customSort) {
-        tags.sort(function(tagA, tagB) {
-          const partsA = tagA.split(".");
-          const partsB = tagB.split(".");
-          if (partsA.length === 1 || partsB.length === 1) {
-            return singleSorted(toNumber(partsA[0]), toNumber(partsB[0]));
-          }
-          for (let i = 0, l = Math.max(partsA.length, partsB.length); i < l; i++) {
-            const diff = sorted(toNumber(partsA[i]), toNumber(partsB[i]));
-            if (diff) {
-              return diff;
-            }
-          }
-          return 0;
-        });
-      }
-      const latest = customSort ? tags[0] : [...tags].reverse().find((tag) => tag.indexOf(".") >= 0);
-      return new TagList(tags, latest);
-    };
-  }
-});
-
-// src/lib/tasks/tag.ts
-var tag_exports = {};
-__export(tag_exports, {
-  addAnnotatedTagTask: () => addAnnotatedTagTask,
-  addTagTask: () => addTagTask,
-  tagListTask: () => tagListTask
-});
-function tagListTask(customArgs = []) {
-  const hasCustomSort = customArgs.some((option) => /^--sort=/.test(option));
-  return {
-    format: "utf-8",
-    commands: ["tag", "-l", ...customArgs],
-    parser(text) {
-      return parseTagList(text, hasCustomSort);
-    }
-  };
-}
-function addTagTask(name) {
-  return {
-    format: "utf-8",
-    commands: ["tag", name],
-    parser() {
-      return { name };
-    }
-  };
-}
-function addAnnotatedTagTask(name, tagMessage) {
-  return {
-    format: "utf-8",
-    commands: ["tag", "-a", "-m", tagMessage, name],
-    parser() {
-      return { name };
-    }
-  };
-}
-var init_tag = __esm({
-  "src/lib/tasks/tag.ts"() {
-    "use strict";
-    init_TagList();
-  }
-});
-
-// src/git.js
-var require_git = __commonJS({
-  "src/git.js"(exports2, module2) {
-    "use strict";
-    var { GitExecutor: GitExecutor2 } = (init_git_executor(), __toCommonJS(git_executor_exports));
-    var { SimpleGitApi: SimpleGitApi2 } = (init_simple_git_api(), __toCommonJS(simple_git_api_exports));
-    var { Scheduler: Scheduler2 } = (init_scheduler(), __toCommonJS(scheduler_exports));
-    var { configurationErrorTask: configurationErrorTask2 } = (init_task(), __toCommonJS(task_exports));
-    var {
-      asArray: asArray2,
-      filterArray: filterArray2,
-      filterPrimitives: filterPrimitives2,
-      filterString: filterString2,
-      filterStringOrStringArray: filterStringOrStringArray2,
-      filterType: filterType2,
-      getTrailingOptions: getTrailingOptions2,
-      trailingFunctionArgument: trailingFunctionArgument2,
-      trailingOptionsArgument: trailingOptionsArgument2
-    } = (init_utils(), __toCommonJS(utils_exports));
-    var { applyPatchTask: applyPatchTask2 } = (init_apply_patch(), __toCommonJS(apply_patch_exports));
-    var {
-      branchTask: branchTask2,
-      branchLocalTask: branchLocalTask2,
-      deleteBranchesTask: deleteBranchesTask2,
-      deleteBranchTask: deleteBranchTask2
-    } = (init_branch(), __toCommonJS(branch_exports));
-    var { checkIgnoreTask: checkIgnoreTask2 } = (init_check_ignore(), __toCommonJS(check_ignore_exports));
-    var { checkIsRepoTask: checkIsRepoTask2 } = (init_check_is_repo(), __toCommonJS(check_is_repo_exports));
-    var { cloneTask: cloneTask2, cloneMirrorTask: cloneMirrorTask2 } = (init_clone(), __toCommonJS(clone_exports));
-    var { cleanWithOptionsTask: cleanWithOptionsTask2, isCleanOptionsArray: isCleanOptionsArray2 } = (init_clean(), __toCommonJS(clean_exports));
-    var { diffSummaryTask: diffSummaryTask2 } = (init_diff(), __toCommonJS(diff_exports));
-    var { fetchTask: fetchTask2 } = (init_fetch(), __toCommonJS(fetch_exports));
-    var { moveTask: moveTask2 } = (init_move(), __toCommonJS(move_exports));
-    var { pullTask: pullTask2 } = (init_pull(), __toCommonJS(pull_exports));
-    var { pushTagsTask: pushTagsTask2 } = (init_push(), __toCommonJS(push_exports));
-    var {
-      addRemoteTask: addRemoteTask2,
-      getRemotesTask: getRemotesTask2,
-      listRemotesTask: listRemotesTask2,
-      remoteTask: remoteTask2,
-      removeRemoteTask: removeRemoteTask2
-    } = (init_remote(), __toCommonJS(remote_exports));
-    var { getResetMode: getResetMode2, resetTask: resetTask2 } = (init_reset(), __toCommonJS(reset_exports));
-    var { stashListTask: stashListTask2 } = (init_stash_list(), __toCommonJS(stash_list_exports));
-    var {
-      addSubModuleTask: addSubModuleTask2,
-      initSubModuleTask: initSubModuleTask2,
-      subModuleTask: subModuleTask2,
-      updateSubModuleTask: updateSubModuleTask2
-    } = (init_sub_module(), __toCommonJS(sub_module_exports));
-    var { addAnnotatedTagTask: addAnnotatedTagTask2, addTagTask: addTagTask2, tagListTask: tagListTask2 } = (init_tag(), __toCommonJS(tag_exports));
-    var { straightThroughBufferTask: straightThroughBufferTask2, straightThroughStringTask: straightThroughStringTask2 } = (init_task(), __toCommonJS(task_exports));
-    function Git2(options, plugins) {
-      this._plugins = plugins;
-      this._executor = new GitExecutor2(
-        options.baseDir,
-        new Scheduler2(options.maxConcurrentProcesses),
-        plugins
-      );
-      this._trimmed = options.trimmed;
-    }
-    (Git2.prototype = Object.create(SimpleGitApi2.prototype)).constructor = Git2;
-    Git2.prototype.customBinary = function(command) {
-      this._plugins.reconfigure("binary", command);
-      return this;
-    };
-    Git2.prototype.env = function(name, value) {
-      if (arguments.length === 1 && typeof name === "object") {
-        this._executor.env = name;
-      } else {
-        (this._executor.env = this._executor.env || {})[name] = value;
-      }
-      return this;
-    };
-    Git2.prototype.stashList = function(options) {
-      return this._runTask(
-        stashListTask2(
-          trailingOptionsArgument2(arguments) || {},
-          filterArray2(options) && options || []
-        ),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    function createCloneTask(api, task, repoPath, localPath) {
-      if (typeof repoPath !== "string") {
-        return configurationErrorTask2(`git.${api}() requires a string 'repoPath'`);
-      }
-      return task(repoPath, filterType2(localPath, filterString2), getTrailingOptions2(arguments));
-    }
-    Git2.prototype.clone = function() {
-      return this._runTask(
-        createCloneTask("clone", cloneTask2, ...arguments),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.mirror = function() {
-      return this._runTask(
-        createCloneTask("mirror", cloneMirrorTask2, ...arguments),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.mv = function(from, to) {
-      return this._runTask(moveTask2(from, to), trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.checkoutLatestTag = function(then) {
-      var git = this;
-      return this.pull(function() {
-        git.tags(function(err, tags) {
-          git.checkout(tags.latest, then);
-        });
-      });
-    };
-    Git2.prototype.pull = function(remote, branch, options, then) {
-      return this._runTask(
-        pullTask2(
-          filterType2(remote, filterString2),
-          filterType2(branch, filterString2),
-          getTrailingOptions2(arguments)
-        ),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.fetch = function(remote, branch) {
-      return this._runTask(
-        fetchTask2(
-          filterType2(remote, filterString2),
-          filterType2(branch, filterString2),
-          getTrailingOptions2(arguments)
-        ),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.silent = function(silence) {
-      console.warn(
-        "simple-git deprecation notice: git.silent: logging should be configured using the `debug` library / `DEBUG` environment variable, this will be an error in version 3"
-      );
-      return this;
-    };
-    Git2.prototype.tags = function(options, then) {
-      return this._runTask(
-        tagListTask2(getTrailingOptions2(arguments)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.rebase = function() {
-      return this._runTask(
-        straightThroughStringTask2(["rebase", ...getTrailingOptions2(arguments)]),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.reset = function(mode) {
-      return this._runTask(
-        resetTask2(getResetMode2(mode), getTrailingOptions2(arguments)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.revert = function(commit) {
-      const next = trailingFunctionArgument2(arguments);
-      if (typeof commit !== "string") {
-        return this._runTask(configurationErrorTask2("Commit must be a string"), next);
-      }
-      return this._runTask(
-        straightThroughStringTask2(["revert", ...getTrailingOptions2(arguments, 0, true), commit]),
-        next
-      );
-    };
-    Git2.prototype.addTag = function(name) {
-      const task = typeof name === "string" ? addTagTask2(name) : configurationErrorTask2("Git.addTag requires a tag name");
-      return this._runTask(task, trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.addAnnotatedTag = function(tagName, tagMessage) {
-      return this._runTask(
-        addAnnotatedTagTask2(tagName, tagMessage),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.deleteLocalBranch = function(branchName, forceDelete, then) {
-      return this._runTask(
-        deleteBranchTask2(branchName, typeof forceDelete === "boolean" ? forceDelete : false),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.deleteLocalBranches = function(branchNames, forceDelete, then) {
-      return this._runTask(
-        deleteBranchesTask2(branchNames, typeof forceDelete === "boolean" ? forceDelete : false),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.branch = function(options, then) {
-      return this._runTask(
-        branchTask2(getTrailingOptions2(arguments)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.branchLocal = function(then) {
-      return this._runTask(branchLocalTask2(), trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.raw = function(commands) {
-      const createRestCommands = !Array.isArray(commands);
-      const command = [].slice.call(createRestCommands ? arguments : commands, 0);
-      for (let i = 0; i < command.length && createRestCommands; i++) {
-        if (!filterPrimitives2(command[i])) {
-          command.splice(i, command.length - i);
-          break;
-        }
-      }
-      command.push(...getTrailingOptions2(arguments, 0, true));
-      var next = trailingFunctionArgument2(arguments);
-      if (!command.length) {
-        return this._runTask(
-          configurationErrorTask2("Raw: must supply one or more command to execute"),
-          next
-        );
-      }
-      return this._runTask(straightThroughStringTask2(command, this._trimmed), next);
-    };
-    Git2.prototype.submoduleAdd = function(repo, path, then) {
-      return this._runTask(addSubModuleTask2(repo, path), trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.submoduleUpdate = function(args, then) {
-      return this._runTask(
-        updateSubModuleTask2(getTrailingOptions2(arguments, true)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.submoduleInit = function(args, then) {
-      return this._runTask(
-        initSubModuleTask2(getTrailingOptions2(arguments, true)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.subModule = function(options, then) {
-      return this._runTask(
-        subModuleTask2(getTrailingOptions2(arguments)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.listRemote = function() {
-      return this._runTask(
-        listRemotesTask2(getTrailingOptions2(arguments)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.addRemote = function(remoteName, remoteRepo, then) {
-      return this._runTask(
-        addRemoteTask2(remoteName, remoteRepo, getTrailingOptions2(arguments)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.removeRemote = function(remoteName, then) {
-      return this._runTask(removeRemoteTask2(remoteName), trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.getRemotes = function(verbose, then) {
-      return this._runTask(getRemotesTask2(verbose === true), trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.remote = function(options, then) {
-      return this._runTask(
-        remoteTask2(getTrailingOptions2(arguments)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.tag = function(options, then) {
-      const command = getTrailingOptions2(arguments);
-      if (command[0] !== "tag") {
-        command.unshift("tag");
-      }
-      return this._runTask(straightThroughStringTask2(command), trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.updateServerInfo = function(then) {
-      return this._runTask(
-        straightThroughStringTask2(["update-server-info"]),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.pushTags = function(remote, then) {
-      const task = pushTagsTask2(
-        { remote: filterType2(remote, filterString2) },
-        getTrailingOptions2(arguments)
-      );
-      return this._runTask(task, trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.rm = function(files) {
-      return this._runTask(
-        straightThroughStringTask2(["rm", "-f", ...asArray2(files)]),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.rmKeepLocal = function(files) {
-      return this._runTask(
-        straightThroughStringTask2(["rm", "--cached", ...asArray2(files)]),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.catFile = function(options, then) {
-      return this._catFile("utf-8", arguments);
-    };
-    Git2.prototype.binaryCatFile = function() {
-      return this._catFile("buffer", arguments);
-    };
-    Git2.prototype._catFile = function(format, args) {
-      var handler = trailingFunctionArgument2(args);
-      var command = ["cat-file"];
-      var options = args[0];
-      if (typeof options === "string") {
-        return this._runTask(
-          configurationErrorTask2("Git.catFile: options must be supplied as an array of strings"),
-          handler
-        );
-      }
-      if (Array.isArray(options)) {
-        command.push.apply(command, options);
-      }
-      const task = format === "buffer" ? straightThroughBufferTask2(command) : straightThroughStringTask2(command);
-      return this._runTask(task, handler);
-    };
-    Git2.prototype.diff = function(options, then) {
-      const task = filterString2(options) ? configurationErrorTask2(
-        "git.diff: supplying options as a single string is no longer supported, switch to an array of strings"
-      ) : straightThroughStringTask2(["diff", ...getTrailingOptions2(arguments)]);
-      return this._runTask(task, trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.diffSummary = function() {
-      return this._runTask(
-        diffSummaryTask2(getTrailingOptions2(arguments, 1)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.applyPatch = function(patches) {
-      const task = !filterStringOrStringArray2(patches) ? configurationErrorTask2(
-        `git.applyPatch requires one or more string patches as the first argument`
-      ) : applyPatchTask2(asArray2(patches), getTrailingOptions2([].slice.call(arguments, 1)));
-      return this._runTask(task, trailingFunctionArgument2(arguments));
-    };
-    Git2.prototype.revparse = function() {
-      const commands = ["rev-parse", ...getTrailingOptions2(arguments, true)];
-      return this._runTask(
-        straightThroughStringTask2(commands, true),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.clean = function(mode, options, then) {
-      const usingCleanOptionsArray = isCleanOptionsArray2(mode);
-      const cleanMode = usingCleanOptionsArray && mode.join("") || filterType2(mode, filterString2) || "";
-      const customArgs = getTrailingOptions2([].slice.call(arguments, usingCleanOptionsArray ? 1 : 0));
-      return this._runTask(
-        cleanWithOptionsTask2(cleanMode, customArgs),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.exec = function(then) {
-      const task = {
-        commands: [],
-        format: "utf-8",
-        parser() {
-          if (typeof then === "function") {
-            then();
-          }
-        }
-      };
-      return this._runTask(task);
-    };
-    Git2.prototype.clearQueue = function() {
-      return this;
-    };
-    Git2.prototype.checkIgnore = function(pathnames, then) {
-      return this._runTask(
-        checkIgnoreTask2(asArray2(filterType2(pathnames, filterStringOrStringArray2, []))),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    Git2.prototype.checkIsRepo = function(checkType, then) {
-      return this._runTask(
-        checkIsRepoTask2(filterType2(checkType, filterString2)),
-        trailingFunctionArgument2(arguments)
-      );
-    };
-    module2.exports = Git2;
-  }
-});
-
-// src/lib/git-factory.ts
-var git_factory_exports = {};
-__export(git_factory_exports, {
-  esModuleFactory: () => esModuleFactory,
-  gitExportFactory: () => gitExportFactory,
-  gitInstanceFactory: () => gitInstanceFactory
-});
-function esModuleFactory(defaultExport) {
-  return Object.defineProperties(defaultExport, {
-    __esModule: { value: true },
-    default: { value: defaultExport }
-  });
-}
-function gitExportFactory(factory) {
-  return Object.assign(factory.bind(null), api_exports);
-}
-function gitInstanceFactory(baseDir, options) {
-  var _a2;
-  const plugins = new PluginStore();
-  const config = createInstanceConfig(
-    baseDir && (typeof baseDir === "string" ? { baseDir } : baseDir) || {},
-    options
-  );
-  if (!folderExists(config.baseDir)) {
-    throw new GitConstructError(
-      config,
-      `Cannot use simple-git on a directory that does not exist`
-    );
-  }
-  if (Array.isArray(config.config)) {
-    plugins.add(commandConfigPrefixingPlugin(config.config));
-  }
-  plugins.add(blockUnsafeOperationsPlugin(config.unsafe));
-  plugins.add(suffixPathsPlugin());
-  plugins.add(completionDetectionPlugin(config.completion));
-  config.abort && plugins.add(abortPlugin(config.abort));
-  config.progress && plugins.add(progressMonitorPlugin(config.progress));
-  config.timeout && plugins.add(timeoutPlugin(config.timeout));
-  config.spawnOptions && plugins.add(spawnOptionsPlugin(config.spawnOptions));
-  plugins.add(errorDetectionPlugin(errorDetectionHandler(true)));
-  config.errors && plugins.add(errorDetectionPlugin(config.errors));
-  customBinaryPlugin(plugins, config.binary, (_a2 = config.unsafe) == null ? void 0 : _a2.allowUnsafeCustomBinary);
-  return new Git(config, plugins);
-}
-var Git;
-var init_git_factory = __esm({
-  "src/lib/git-factory.ts"() {
-    "use strict";
-    init_api();
-    init_plugins();
-    init_suffix_paths_plugin();
-    init_utils();
-    Git = require_git();
-  }
-});
-
-// src/lib/runners/promise-wrapped.ts
-var promise_wrapped_exports = {};
-__export(promise_wrapped_exports, {
-  gitP: () => gitP
-});
-function gitP(...args) {
-  let git;
-  let chain = Promise.resolve();
-  try {
-    git = gitInstanceFactory(...args);
-  } catch (e) {
-    chain = Promise.reject(e);
-  }
-  function builderReturn() {
-    return promiseApi;
-  }
-  function chainReturn() {
-    return chain;
-  }
-  const promiseApi = [...functionNamesBuilderApi, ...functionNamesPromiseApi].reduce(
-    (api, name) => {
-      const isAsync = functionNamesPromiseApi.includes(name);
-      const valid = isAsync ? asyncWrapper(name, git) : syncWrapper(name, git, api);
-      const alternative = isAsync ? chainReturn : builderReturn;
-      Object.defineProperty(api, name, {
-        enumerable: false,
-        configurable: false,
-        value: git ? valid : alternative
-      });
-      return api;
-    },
-    {}
-  );
-  return promiseApi;
-  function asyncWrapper(fn, git2) {
-    return function(...args2) {
-      if (typeof args2[args2.length] === "function") {
-        throw new TypeError(
-          "Promise interface requires that handlers are not supplied inline, trailing function not allowed in call to " + fn
-        );
-      }
-      return chain.then(function() {
-        return new Promise(function(resolve, reject) {
-          const callback = (err, result) => {
-            if (err) {
-              return reject(toError(err));
-            }
-            resolve(result);
-          };
-          args2.push(callback);
-          git2[fn].apply(git2, args2);
-        });
-      });
-    };
-  }
-  function syncWrapper(fn, git2, api) {
-    return (...args2) => {
-      git2[fn](...args2);
-      return api;
-    };
-  }
-}
-function toError(error) {
-  if (error instanceof Error) {
-    return error;
-  }
-  if (typeof error === "string") {
-    return new Error(error);
-  }
-  return new GitResponseError(error);
-}
-var functionNamesBuilderApi, functionNamesPromiseApi;
-var init_promise_wrapped = __esm({
-  "src/lib/runners/promise-wrapped.ts"() {
-    "use strict";
-    init_git_response_error();
-    init_git_factory();
-    functionNamesBuilderApi = ["customBinary", "env", "outputHandler", "silent"];
-    functionNamesPromiseApi = [
-      "add",
-      "addAnnotatedTag",
-      "addConfig",
-      "addRemote",
-      "addTag",
-      "applyPatch",
-      "binaryCatFile",
-      "branch",
-      "branchLocal",
-      "catFile",
-      "checkIgnore",
-      "checkIsRepo",
-      "checkout",
-      "checkoutBranch",
-      "checkoutLatestTag",
-      "checkoutLocalBranch",
-      "clean",
-      "clone",
-      "commit",
-      "cwd",
-      "deleteLocalBranch",
-      "deleteLocalBranches",
-      "diff",
-      "diffSummary",
-      "exec",
-      "fetch",
-      "getRemotes",
-      "init",
-      "listConfig",
-      "listRemote",
-      "log",
-      "merge",
-      "mergeFromTo",
-      "mirror",
-      "mv",
-      "pull",
-      "push",
-      "pushTags",
-      "raw",
-      "rebase",
-      "remote",
-      "removeRemote",
-      "reset",
-      "revert",
-      "revparse",
-      "rm",
-      "rmKeepLocal",
-      "show",
-      "stash",
-      "stashList",
-      "status",
-      "subModule",
-      "submoduleAdd",
-      "submoduleInit",
-      "submoduleUpdate",
-      "tag",
-      "tags",
-      "updateServerInfo"
-    ];
-  }
-});
-
-// src/index.js
-var { gitP: gitP2 } = (init_promise_wrapped(), __toCommonJS(promise_wrapped_exports));
-var { esModuleFactory: esModuleFactory2, gitInstanceFactory: gitInstanceFactory2, gitExportFactory: gitExportFactory2 } = (init_git_factory(), __toCommonJS(git_factory_exports));
-var simpleGit = esModuleFactory2(gitExportFactory2(gitInstanceFactory2));
-module.exports = Object.assign(simpleGit, { gitP: gitP2, simpleGit });
-//# sourceMappingURL=index.js.map
 
 
 /***/ }),
@@ -41199,14865 +36110,6 @@ module.exports = parseParams
 
 /***/ }),
 
-/***/ 2299:
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
-
-"use strict";
-// ESM COMPAT FLAG
-__nccwpck_require__.r(__webpack_exports__);
-
-// EXPORTS
-__nccwpck_require__.d(__webpack_exports__, {
-  "default": () => (/* reexport */ remarkParse)
-});
-
-// NAMESPACE OBJECT: ./node_modules/micromark/lib/constructs.js
-var constructs_namespaceObject = {};
-__nccwpck_require__.r(constructs_namespaceObject);
-__nccwpck_require__.d(constructs_namespaceObject, {
-  attentionMarkers: () => (attentionMarkers),
-  contentInitial: () => (contentInitial),
-  disable: () => (disable),
-  document: () => (constructs_document),
-  flow: () => (constructs_flow),
-  flowInitial: () => (flowInitial),
-  insideSpan: () => (insideSpan),
-  string: () => (constructs_string),
-  text: () => (constructs_text)
-});
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-string/lib/index.js
-/**
- * @typedef {import('mdast').Nodes} Nodes
- *
- * @typedef Options
- *   Configuration (optional).
- * @property {boolean | null | undefined} [includeImageAlt=true]
- *   Whether to use `alt` for `image`s (default: `true`).
- * @property {boolean | null | undefined} [includeHtml=true]
- *   Whether to use `value` of HTML (default: `true`).
- */
-
-/** @type {Options} */
-const emptyOptions = {}
-
-/**
- * Get the text content of a node or list of nodes.
- *
- * Prefers the node’s plain-text fields, otherwise serializes its children,
- * and if the given value is an array, serialize the nodes in it.
- *
- * @param {unknown} [value]
- *   Thing to serialize, typically `Node`.
- * @param {Options | null | undefined} [options]
- *   Configuration (optional).
- * @returns {string}
- *   Serialized `value`.
- */
-function lib_toString(value, options) {
-  const settings = options || emptyOptions
-  const includeImageAlt =
-    typeof settings.includeImageAlt === 'boolean'
-      ? settings.includeImageAlt
-      : true
-  const includeHtml =
-    typeof settings.includeHtml === 'boolean' ? settings.includeHtml : true
-
-  return one(value, includeImageAlt, includeHtml)
-}
-
-/**
- * One node or several nodes.
- *
- * @param {unknown} value
- *   Thing to serialize.
- * @param {boolean} includeImageAlt
- *   Include image `alt`s.
- * @param {boolean} includeHtml
- *   Include HTML.
- * @returns {string}
- *   Serialized node.
- */
-function one(value, includeImageAlt, includeHtml) {
-  if (node(value)) {
-    if ('value' in value) {
-      return value.type === 'html' && !includeHtml ? '' : value.value
-    }
-
-    if (includeImageAlt && 'alt' in value && value.alt) {
-      return value.alt
-    }
-
-    if ('children' in value) {
-      return lib_all(value.children, includeImageAlt, includeHtml)
-    }
-  }
-
-  if (Array.isArray(value)) {
-    return lib_all(value, includeImageAlt, includeHtml)
-  }
-
-  return ''
-}
-
-/**
- * Serialize a list of nodes.
- *
- * @param {Array<unknown>} values
- *   Thing to serialize.
- * @param {boolean} includeImageAlt
- *   Include image `alt`s.
- * @param {boolean} includeHtml
- *   Include HTML.
- * @returns {string}
- *   Serialized nodes.
- */
-function lib_all(values, includeImageAlt, includeHtml) {
-  /** @type {Array<string>} */
-  const result = []
-  let index = -1
-
-  while (++index < values.length) {
-    result[index] = one(values[index], includeImageAlt, includeHtml)
-  }
-
-  return result.join('')
-}
-
-/**
- * Check if `value` looks like a node.
- *
- * @param {unknown} value
- *   Thing.
- * @returns {value is Nodes}
- *   Whether `value` is a node.
- */
-function node(value) {
-  return Boolean(value && typeof value === 'object')
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-util-chunked/index.js
-/**
- * Like `Array#splice`, but smarter for giant arrays.
- *
- * `Array#splice` takes all items to be inserted as individual argument which
- * causes a stack overflow in V8 when trying to insert 100k items for instance.
- *
- * Otherwise, this does not return the removed items, and takes `items` as an
- * array instead of rest parameters.
- *
- * @template {unknown} T
- *   Item type.
- * @param {Array<T>} list
- *   List to operate on.
- * @param {number} start
- *   Index to remove/insert at (can be negative).
- * @param {number} remove
- *   Number of items to remove.
- * @param {Array<T>} items
- *   Items to inject into `list`.
- * @returns {undefined}
- *   Nothing.
- */
-function splice(list, start, remove, items) {
-  const end = list.length
-  let chunkStart = 0
-  /** @type {Array<unknown>} */
-  let parameters
-
-  // Make start between zero and `end` (included).
-  if (start < 0) {
-    start = -start > end ? 0 : end + start
-  } else {
-    start = start > end ? end : start
-  }
-  remove = remove > 0 ? remove : 0
-
-  // No need to chunk the items if there’s only a couple (10k) items.
-  if (items.length < 10000) {
-    parameters = Array.from(items)
-    parameters.unshift(start, remove)
-    // @ts-expect-error Hush, it’s fine.
-    list.splice(...parameters)
-  } else {
-    // Delete `remove` items starting from `start`
-    if (remove) list.splice(start, remove)
-
-    // Insert the items in chunks to not cause stack overflows.
-    while (chunkStart < items.length) {
-      parameters = items.slice(chunkStart, chunkStart + 10000)
-      parameters.unshift(start, 0)
-      // @ts-expect-error Hush, it’s fine.
-      list.splice(...parameters)
-      chunkStart += 10000
-      start += 10000
-    }
-  }
-}
-
-/**
- * Append `items` (an array) at the end of `list` (another array).
- * When `list` was empty, returns `items` instead.
- *
- * This prevents a potentially expensive operation when `list` is empty,
- * and adds items in batches to prevent V8 from hanging.
- *
- * @template {unknown} T
- *   Item type.
- * @param {Array<T>} list
- *   List to operate on.
- * @param {Array<T>} items
- *   Items to add to `list`.
- * @returns {Array<T>}
- *   Either `list` or `items`.
- */
-function push(list, items) {
-  if (list.length > 0) {
-    splice(list, list.length, 0, items)
-    return list
-  }
-  return items
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-util-subtokenize/lib/splice-buffer.js
-/**
- * Some of the internal operations of micromark do lots of editing
- * operations on very large arrays. This runs into problems with two
- * properties of most circa-2020 JavaScript interpreters:
- *
- *  - Array-length modifications at the high end of an array (push/pop) are
- *    expected to be common and are implemented in (amortized) time
- *    proportional to the number of elements added or removed, whereas
- *    other operations (shift/unshift and splice) are much less efficient.
- *  - Function arguments are passed on the stack, so adding tens of thousands
- *    of elements to an array with `arr.push[...newElements]` will frequently
- *    cause stack overflows. (see <https://stackoverflow.com/questions/22123769/rangeerror-maximum-call-stack-size-exceeded-why>)
- *
- * SpliceBuffers are an implementation of gap buffers, which are a
- * generalization of the "queue made of two stacks" idea. The splice buffer
- * maintains a cursor, and moving the cursor has cost proportional to the
- * distance the cursor moves, but inserting, deleting, or splicing in
- * new information at the cursor is as efficient as the push/pop operation.
- * This allows for an efficient sequence of splices (or pushes, pops, shifts,
- * or unshifts) as long such edits happen at the same part of the array or
- * generally sweep through the array from the beginning to the end.
- *
- * The interface for splice buffers also supports large numbers of inputs by
- * passing a single array argument rather passing multiple arguments on the
- * function call stack.
- *
- * @template T
- *   Item type.
- */
-class SpliceBuffer {
-  /**
-   * @param {ReadonlyArray<T> | null | undefined} [initial]
-   *   Initial items (optional).
-   * @returns
-   *   Splice buffer.
-   */
-  constructor(initial) {
-    /** @type {Array<T>} */
-    this.left = initial ? [...initial] : [];
-    /** @type {Array<T>} */
-    this.right = [];
-  }
-
-  /**
-   * Array access;
-   * does not move the cursor.
-   *
-   * @param {number} index
-   *   Index.
-   * @return {T}
-   *   Item.
-   */
-  get(index) {
-    if (index < 0 || index >= this.left.length + this.right.length) {
-      throw new RangeError('Cannot access index `' + index + '` in a splice buffer of size `' + (this.left.length + this.right.length) + '`');
-    }
-    if (index < this.left.length) return this.left[index];
-    return this.right[this.right.length - index + this.left.length - 1];
-  }
-
-  /**
-   * The length of the splice buffer, one greater than the largest index in the
-   * array.
-   */
-  get length() {
-    return this.left.length + this.right.length;
-  }
-
-  /**
-   * Remove and return `list[0]`;
-   * moves the cursor to `0`.
-   *
-   * @returns {T | undefined}
-   *   Item, optional.
-   */
-  shift() {
-    this.setCursor(0);
-    return this.right.pop();
-  }
-
-  /**
-   * Slice the buffer to get an array;
-   * does not move the cursor.
-   *
-   * @param {number} start
-   *   Start.
-   * @param {number | null | undefined} [end]
-   *   End (optional).
-   * @returns {Array<T>}
-   *   Array of items.
-   */
-  slice(start, end) {
-    /** @type {number} */
-    const stop = end === null || end === undefined ? Number.POSITIVE_INFINITY : end;
-    if (stop < this.left.length) {
-      return this.left.slice(start, stop);
-    }
-    if (start > this.left.length) {
-      return this.right.slice(this.right.length - stop + this.left.length, this.right.length - start + this.left.length).reverse();
-    }
-    return this.left.slice(start).concat(this.right.slice(this.right.length - stop + this.left.length).reverse());
-  }
-
-  /**
-   * Mimics the behavior of Array.prototype.splice() except for the change of
-   * interface necessary to avoid segfaults when patching in very large arrays.
-   *
-   * This operation moves cursor is moved to `start` and results in the cursor
-   * placed after any inserted items.
-   *
-   * @param {number} start
-   *   Start;
-   *   zero-based index at which to start changing the array;
-   *   negative numbers count backwards from the end of the array and values
-   *   that are out-of bounds are clamped to the appropriate end of the array.
-   * @param {number | null | undefined} [deleteCount=0]
-   *   Delete count (default: `0`);
-   *   maximum number of elements to delete, starting from start.
-   * @param {Array<T> | null | undefined} [items=[]]
-   *   Items to include in place of the deleted items (default: `[]`).
-   * @return {Array<T>}
-   *   Any removed items.
-   */
-  splice(start, deleteCount, items) {
-    /** @type {number} */
-    const count = deleteCount || 0;
-    this.setCursor(Math.trunc(start));
-    const removed = this.right.splice(this.right.length - count, Number.POSITIVE_INFINITY);
-    if (items) chunkedPush(this.left, items);
-    return removed.reverse();
-  }
-
-  /**
-   * Remove and return the highest-numbered item in the array, so
-   * `list[list.length - 1]`;
-   * Moves the cursor to `length`.
-   *
-   * @returns {T | undefined}
-   *   Item, optional.
-   */
-  pop() {
-    this.setCursor(Number.POSITIVE_INFINITY);
-    return this.left.pop();
-  }
-
-  /**
-   * Inserts a single item to the high-numbered side of the array;
-   * moves the cursor to `length`.
-   *
-   * @param {T} item
-   *   Item.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  push(item) {
-    this.setCursor(Number.POSITIVE_INFINITY);
-    this.left.push(item);
-  }
-
-  /**
-   * Inserts many items to the high-numbered side of the array.
-   * Moves the cursor to `length`.
-   *
-   * @param {Array<T>} items
-   *   Items.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  pushMany(items) {
-    this.setCursor(Number.POSITIVE_INFINITY);
-    chunkedPush(this.left, items);
-  }
-
-  /**
-   * Inserts a single item to the low-numbered side of the array;
-   * Moves the cursor to `0`.
-   *
-   * @param {T} item
-   *   Item.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  unshift(item) {
-    this.setCursor(0);
-    this.right.push(item);
-  }
-
-  /**
-   * Inserts many items to the low-numbered side of the array;
-   * moves the cursor to `0`.
-   *
-   * @param {Array<T>} items
-   *   Items.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  unshiftMany(items) {
-    this.setCursor(0);
-    chunkedPush(this.right, items.reverse());
-  }
-
-  /**
-   * Move the cursor to a specific position in the array. Requires
-   * time proportional to the distance moved.
-   *
-   * If `n < 0`, the cursor will end up at the beginning.
-   * If `n > length`, the cursor will end up at the end.
-   *
-   * @param {number} n
-   *   Position.
-   * @return {undefined}
-   *   Nothing.
-   */
-  setCursor(n) {
-    if (n === this.left.length || n > this.left.length && this.right.length === 0 || n < 0 && this.left.length === 0) return;
-    if (n < this.left.length) {
-      // Move cursor to the this.left
-      const removed = this.left.splice(n, Number.POSITIVE_INFINITY);
-      chunkedPush(this.right, removed.reverse());
-    } else {
-      // Move cursor to the this.right
-      const removed = this.right.splice(this.left.length + this.right.length - n, Number.POSITIVE_INFINITY);
-      chunkedPush(this.left, removed.reverse());
-    }
-  }
-}
-
-/**
- * Avoid stack overflow by pushing items onto the stack in segments
- *
- * @template T
- *   Item type.
- * @param {Array<T>} list
- *   List to inject into.
- * @param {ReadonlyArray<T>} right
- *   Items to inject.
- * @return {undefined}
- *   Nothing.
- */
-function chunkedPush(list, right) {
-  /** @type {number} */
-  let chunkStart = 0;
-  if (right.length < 10000) {
-    list.push(...right);
-  } else {
-    while (chunkStart < right.length) {
-      list.push(...right.slice(chunkStart, chunkStart + 10000));
-      chunkStart += 10000;
-    }
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-util-subtokenize/index.js
-/**
- * @typedef {import('micromark-util-types').Chunk} Chunk
- * @typedef {import('micromark-util-types').Event} Event
- * @typedef {import('micromark-util-types').Token} Token
- */
-
-
-
-
-// Hidden API exposed for testing.
-
-
-/**
- * Tokenize subcontent.
- *
- * @param {Array<Event>} eventsArray
- *   List of events.
- * @returns {boolean}
- *   Whether subtokens were found.
- */
-// eslint-disable-next-line complexity
-function subtokenize(eventsArray) {
-  /** @type {Record<string, number>} */
-  const jumps = {};
-  let index = -1;
-  /** @type {Event} */
-  let event;
-  /** @type {number | undefined} */
-  let lineIndex;
-  /** @type {number} */
-  let otherIndex;
-  /** @type {Event} */
-  let otherEvent;
-  /** @type {Array<Event>} */
-  let parameters;
-  /** @type {Array<Event>} */
-  let subevents;
-  /** @type {boolean | undefined} */
-  let more;
-  const events = new SpliceBuffer(eventsArray);
-  while (++index < events.length) {
-    while (index in jumps) {
-      index = jumps[index];
-    }
-    event = events.get(index);
-
-    // Add a hook for the GFM tasklist extension, which needs to know if text
-    // is in the first content of a list item.
-    if (index && event[1].type === "chunkFlow" && events.get(index - 1)[1].type === "listItemPrefix") {
-      subevents = event[1]._tokenizer.events;
-      otherIndex = 0;
-      if (otherIndex < subevents.length && subevents[otherIndex][1].type === "lineEndingBlank") {
-        otherIndex += 2;
-      }
-      if (otherIndex < subevents.length && subevents[otherIndex][1].type === "content") {
-        while (++otherIndex < subevents.length) {
-          if (subevents[otherIndex][1].type === "content") {
-            break;
-          }
-          if (subevents[otherIndex][1].type === "chunkText") {
-            subevents[otherIndex][1]._isInFirstContentOfListItem = true;
-            otherIndex++;
-          }
-        }
-      }
-    }
-
-    // Enter.
-    if (event[0] === 'enter') {
-      if (event[1].contentType) {
-        Object.assign(jumps, subcontent(events, index));
-        index = jumps[index];
-        more = true;
-      }
-    }
-    // Exit.
-    else if (event[1]._container) {
-      otherIndex = index;
-      lineIndex = undefined;
-      while (otherIndex--) {
-        otherEvent = events.get(otherIndex);
-        if (otherEvent[1].type === "lineEnding" || otherEvent[1].type === "lineEndingBlank") {
-          if (otherEvent[0] === 'enter') {
-            if (lineIndex) {
-              events.get(lineIndex)[1].type = "lineEndingBlank";
-            }
-            otherEvent[1].type = "lineEnding";
-            lineIndex = otherIndex;
-          }
-        } else {
-          break;
-        }
-      }
-      if (lineIndex) {
-        // Fix position.
-        event[1].end = Object.assign({}, events.get(lineIndex)[1].start);
-
-        // Switch container exit w/ line endings.
-        parameters = events.slice(lineIndex, index);
-        parameters.unshift(event);
-        events.splice(lineIndex, index - lineIndex + 1, parameters);
-      }
-    }
-  }
-
-  // The changes to the `events` buffer must be copied back into the eventsArray
-  splice(eventsArray, 0, Number.POSITIVE_INFINITY, events.slice(0));
-  return !more;
-}
-
-/**
- * Tokenize embedded tokens.
- *
- * @param {SpliceBuffer<Event>} events
- * @param {number} eventIndex
- * @returns {Record<string, number>}
- */
-function subcontent(events, eventIndex) {
-  const token = events.get(eventIndex)[1];
-  const context = events.get(eventIndex)[2];
-  let startPosition = eventIndex - 1;
-  /** @type {Array<number>} */
-  const startPositions = [];
-  const tokenizer = token._tokenizer || context.parser[token.contentType](token.start);
-  const childEvents = tokenizer.events;
-  /** @type {Array<[number, number]>} */
-  const jumps = [];
-  /** @type {Record<string, number>} */
-  const gaps = {};
-  /** @type {Array<Chunk>} */
-  let stream;
-  /** @type {Token | undefined} */
-  let previous;
-  let index = -1;
-  /** @type {Token | undefined} */
-  let current = token;
-  let adjust = 0;
-  let start = 0;
-  const breaks = [start];
-
-  // Loop forward through the linked tokens to pass them in order to the
-  // subtokenizer.
-  while (current) {
-    // Find the position of the event for this token.
-    while (events.get(++startPosition)[1] !== current) {
-      // Empty.
-    }
-    startPositions.push(startPosition);
-    if (!current._tokenizer) {
-      stream = context.sliceStream(current);
-      if (!current.next) {
-        stream.push(null);
-      }
-      if (previous) {
-        tokenizer.defineSkip(current.start);
-      }
-      if (current._isInFirstContentOfListItem) {
-        tokenizer._gfmTasklistFirstContentOfListItem = true;
-      }
-      tokenizer.write(stream);
-      if (current._isInFirstContentOfListItem) {
-        tokenizer._gfmTasklistFirstContentOfListItem = undefined;
-      }
-    }
-
-    // Unravel the next token.
-    previous = current;
-    current = current.next;
-  }
-
-  // Now, loop back through all events (and linked tokens), to figure out which
-  // parts belong where.
-  current = token;
-  while (++index < childEvents.length) {
-    if (
-    // Find a void token that includes a break.
-    childEvents[index][0] === 'exit' && childEvents[index - 1][0] === 'enter' && childEvents[index][1].type === childEvents[index - 1][1].type && childEvents[index][1].start.line !== childEvents[index][1].end.line) {
-      start = index + 1;
-      breaks.push(start);
-      // Help GC.
-      current._tokenizer = undefined;
-      current.previous = undefined;
-      current = current.next;
-    }
-  }
-
-  // Help GC.
-  tokenizer.events = [];
-
-  // If there’s one more token (which is the cases for lines that end in an
-  // EOF), that’s perfect: the last point we found starts it.
-  // If there isn’t then make sure any remaining content is added to it.
-  if (current) {
-    // Help GC.
-    current._tokenizer = undefined;
-    current.previous = undefined;
-  } else {
-    breaks.pop();
-  }
-
-  // Now splice the events from the subtokenizer into the current events,
-  // moving back to front so that splice indices aren’t affected.
-  index = breaks.length;
-  while (index--) {
-    const slice = childEvents.slice(breaks[index], breaks[index + 1]);
-    const start = startPositions.pop();
-    jumps.push([start, start + slice.length - 1]);
-    events.splice(start, 2, slice);
-  }
-  jumps.reverse();
-  index = -1;
-  while (++index < jumps.length) {
-    gaps[adjust + jumps[index][0]] = adjust + jumps[index][1];
-    adjust += jumps[index][1] - jumps[index][0] - 1;
-  }
-  return gaps;
-}
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/postprocess.js
-/**
- * @typedef {import('micromark-util-types').Event} Event
- */
-
-
-
-/**
- * @param {Array<Event>} events
- * @returns {Array<Event>}
- */
-function postprocess(events) {
-  while (!subtokenize(events)) {
-    // Empty
-  }
-  return events
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-util-combine-extensions/index.js
-/**
- * @typedef {import('micromark-util-types').Extension} Extension
- * @typedef {import('micromark-util-types').Handles} Handles
- * @typedef {import('micromark-util-types').HtmlExtension} HtmlExtension
- * @typedef {import('micromark-util-types').NormalizedExtension} NormalizedExtension
- */
-
-
-
-const micromark_util_combine_extensions_hasOwnProperty = {}.hasOwnProperty
-
-/**
- * Combine multiple syntax extensions into one.
- *
- * @param {Array<Extension>} extensions
- *   List of syntax extensions.
- * @returns {NormalizedExtension}
- *   A single combined extension.
- */
-function combineExtensions(extensions) {
-  /** @type {NormalizedExtension} */
-  const all = {}
-  let index = -1
-
-  while (++index < extensions.length) {
-    syntaxExtension(all, extensions[index])
-  }
-
-  return all
-}
-
-/**
- * Merge `extension` into `all`.
- *
- * @param {NormalizedExtension} all
- *   Extension to merge into.
- * @param {Extension} extension
- *   Extension to merge.
- * @returns {undefined}
- */
-function syntaxExtension(all, extension) {
-  /** @type {keyof Extension} */
-  let hook
-
-  for (hook in extension) {
-    const maybe = micromark_util_combine_extensions_hasOwnProperty.call(all, hook) ? all[hook] : undefined
-    /** @type {Record<string, unknown>} */
-    const left = maybe || (all[hook] = {})
-    /** @type {Record<string, unknown> | undefined} */
-    const right = extension[hook]
-    /** @type {string} */
-    let code
-
-    if (right) {
-      for (code in right) {
-        if (!micromark_util_combine_extensions_hasOwnProperty.call(left, code)) left[code] = []
-        const value = right[code]
-        constructs(
-          // @ts-expect-error Looks like a list.
-          left[code],
-          Array.isArray(value) ? value : value ? [value] : []
-        )
-      }
-    }
-  }
-}
-
-/**
- * Merge `list` into `existing` (both lists of constructs).
- * Mutates `existing`.
- *
- * @param {Array<unknown>} existing
- * @param {Array<unknown>} list
- * @returns {undefined}
- */
-function constructs(existing, list) {
-  let index = -1
-  /** @type {Array<unknown>} */
-  const before = []
-
-  while (++index < list.length) {
-    // @ts-expect-error Looks like an object.
-    ;(list[index].add === 'after' ? existing : before).push(list[index])
-  }
-
-  splice(existing, 0, 0, before)
-}
-
-/**
- * Combine multiple HTML extensions into one.
- *
- * @param {Array<HtmlExtension>} htmlExtensions
- *   List of HTML extensions.
- * @returns {HtmlExtension}
- *   A single combined HTML extension.
- */
-function combineHtmlExtensions(htmlExtensions) {
-  /** @type {HtmlExtension} */
-  const handlers = {}
-  let index = -1
-
-  while (++index < htmlExtensions.length) {
-    htmlExtension(handlers, htmlExtensions[index])
-  }
-
-  return handlers
-}
-
-/**
- * Merge `extension` into `all`.
- *
- * @param {HtmlExtension} all
- *   Extension to merge into.
- * @param {HtmlExtension} extension
- *   Extension to merge.
- * @returns {undefined}
- */
-function htmlExtension(all, extension) {
-  /** @type {keyof HtmlExtension} */
-  let hook
-
-  for (hook in extension) {
-    const maybe = micromark_util_combine_extensions_hasOwnProperty.call(all, hook) ? all[hook] : undefined
-    const left = maybe || (all[hook] = {})
-    const right = extension[hook]
-    /** @type {keyof Handles} */
-    let type
-
-    if (right) {
-      for (type in right) {
-        // @ts-expect-error assume document vs regular handler are managed correctly.
-        left[type] = right[type]
-      }
-    }
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-util-character/index.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- */
-
-/**
- * Check whether the character code represents an ASCII alpha (`a` through `z`,
- * case insensitive).
- *
- * An **ASCII alpha** is an ASCII upper alpha or ASCII lower alpha.
- *
- * An **ASCII upper alpha** is a character in the inclusive range U+0041 (`A`)
- * to U+005A (`Z`).
- *
- * An **ASCII lower alpha** is a character in the inclusive range U+0061 (`a`)
- * to U+007A (`z`).
- *
- * @param code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-const asciiAlpha = regexCheck(/[A-Za-z]/);
-
-/**
- * Check whether the character code represents an ASCII alphanumeric (`a`
- * through `z`, case insensitive, or `0` through `9`).
- *
- * An **ASCII alphanumeric** is an ASCII digit (see `asciiDigit`) or ASCII alpha
- * (see `asciiAlpha`).
- *
- * @param code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-const asciiAlphanumeric = regexCheck(/[\dA-Za-z]/);
-
-/**
- * Check whether the character code represents an ASCII atext.
- *
- * atext is an ASCII alphanumeric (see `asciiAlphanumeric`), or a character in
- * the inclusive ranges U+0023 NUMBER SIGN (`#`) to U+0027 APOSTROPHE (`'`),
- * U+002A ASTERISK (`*`), U+002B PLUS SIGN (`+`), U+002D DASH (`-`), U+002F
- * SLASH (`/`), U+003D EQUALS TO (`=`), U+003F QUESTION MARK (`?`), U+005E
- * CARET (`^`) to U+0060 GRAVE ACCENT (`` ` ``), or U+007B LEFT CURLY BRACE
- * (`{`) to U+007E TILDE (`~`).
- *
- * See:
- * **\[RFC5322]**:
- * [Internet Message Format](https://tools.ietf.org/html/rfc5322).
- * P. Resnick.
- * IETF.
- *
- * @param code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-const asciiAtext = regexCheck(/[#-'*+\--9=?A-Z^-~]/);
-
-/**
- * Check whether a character code is an ASCII control character.
- *
- * An **ASCII control** is a character in the inclusive range U+0000 NULL (NUL)
- * to U+001F (US), or U+007F (DEL).
- *
- * @param {Code} code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-function asciiControl(code) {
-  return (
-    // Special whitespace codes (which have negative values), C0 and Control
-    // character DEL
-    code !== null && (code < 32 || code === 127)
-  );
-}
-
-/**
- * Check whether the character code represents an ASCII digit (`0` through `9`).
- *
- * An **ASCII digit** is a character in the inclusive range U+0030 (`0`) to
- * U+0039 (`9`).
- *
- * @param code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-const asciiDigit = regexCheck(/\d/);
-
-/**
- * Check whether the character code represents an ASCII hex digit (`a` through
- * `f`, case insensitive, or `0` through `9`).
- *
- * An **ASCII hex digit** is an ASCII digit (see `asciiDigit`), ASCII upper hex
- * digit, or an ASCII lower hex digit.
- *
- * An **ASCII upper hex digit** is a character in the inclusive range U+0041
- * (`A`) to U+0046 (`F`).
- *
- * An **ASCII lower hex digit** is a character in the inclusive range U+0061
- * (`a`) to U+0066 (`f`).
- *
- * @param code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-const asciiHexDigit = regexCheck(/[\dA-Fa-f]/);
-
-/**
- * Check whether the character code represents ASCII punctuation.
- *
- * An **ASCII punctuation** is a character in the inclusive ranges U+0021
- * EXCLAMATION MARK (`!`) to U+002F SLASH (`/`), U+003A COLON (`:`) to U+0040 AT
- * SIGN (`@`), U+005B LEFT SQUARE BRACKET (`[`) to U+0060 GRAVE ACCENT
- * (`` ` ``), or U+007B LEFT CURLY BRACE (`{`) to U+007E TILDE (`~`).
- *
- * @param code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-const asciiPunctuation = regexCheck(/[!-/:-@[-`{-~]/);
-
-/**
- * Check whether a character code is a markdown line ending.
- *
- * A **markdown line ending** is the virtual characters M-0003 CARRIAGE RETURN
- * LINE FEED (CRLF), M-0004 LINE FEED (LF) and M-0005 CARRIAGE RETURN (CR).
- *
- * In micromark, the actual character U+000A LINE FEED (LF) and U+000D CARRIAGE
- * RETURN (CR) are replaced by these virtual characters depending on whether
- * they occurred together.
- *
- * @param {Code} code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-function markdownLineEnding(code) {
-  return code !== null && code < -2;
-}
-
-/**
- * Check whether a character code is a markdown line ending (see
- * `markdownLineEnding`) or markdown space (see `markdownSpace`).
- *
- * @param {Code} code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-function markdownLineEndingOrSpace(code) {
-  return code !== null && (code < 0 || code === 32);
-}
-
-/**
- * Check whether a character code is a markdown space.
- *
- * A **markdown space** is the concrete character U+0020 SPACE (SP) and the
- * virtual characters M-0001 VIRTUAL SPACE (VS) and M-0002 HORIZONTAL TAB (HT).
- *
- * In micromark, the actual character U+0009 CHARACTER TABULATION (HT) is
- * replaced by one M-0002 HORIZONTAL TAB (HT) and between 0 and 3 M-0001 VIRTUAL
- * SPACE (VS) characters, depending on the column at which the tab occurred.
- *
- * @param {Code} code
- *   Code.
- * @returns {boolean}
- *   Whether it matches.
- */
-function markdownSpace(code) {
-  return code === -2 || code === -1 || code === 32;
-}
-
-// Size note: removing ASCII from the regex and using `asciiPunctuation` here
-// In fact adds to the bundle size.
-/**
- * Check whether the character code represents Unicode punctuation.
- *
- * A **Unicode punctuation** is a character in the Unicode `Pc` (Punctuation,
- * Connector), `Pd` (Punctuation, Dash), `Pe` (Punctuation, Close), `Pf`
- * (Punctuation, Final quote), `Pi` (Punctuation, Initial quote), `Po`
- * (Punctuation, Other), or `Ps` (Punctuation, Open) categories, or an ASCII
- * punctuation (see `asciiPunctuation`).
- *
- * See:
- * **\[UNICODE]**:
- * [The Unicode Standard](https://www.unicode.org/versions/).
- * Unicode Consortium.
- *
- * @param code
- *   Code.
- * @returns
- *   Whether it matches.
- */
-const unicodePunctuation = regexCheck(/\p{P}|\p{S}/u);
-
-/**
- * Check whether the character code represents Unicode whitespace.
- *
- * Note that this does handle micromark specific markdown whitespace characters.
- * See `markdownLineEndingOrSpace` to check that.
- *
- * A **Unicode whitespace** is a character in the Unicode `Zs` (Separator,
- * Space) category, or U+0009 CHARACTER TABULATION (HT), U+000A LINE FEED (LF),
- * U+000C (FF), or U+000D CARRIAGE RETURN (CR) (**\[UNICODE]**).
- *
- * See:
- * **\[UNICODE]**:
- * [The Unicode Standard](https://www.unicode.org/versions/).
- * Unicode Consortium.
- *
- * @param code
- *   Code.
- * @returns
- *   Whether it matches.
- */
-const unicodeWhitespace = regexCheck(/\s/);
-
-/**
- * Create a code check from a regex.
- *
- * @param {RegExp} regex
- * @returns {(code: Code) => boolean}
- */
-function regexCheck(regex) {
-  return check;
-
-  /**
-   * Check whether a code matches the bound regex.
-   *
-   * @param {Code} code
-   *   Character code.
-   * @returns {boolean}
-   *   Whether the character code matches the bound regex.
-   */
-  function check(code) {
-    return code !== null && code > -1 && regex.test(String.fromCharCode(code));
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-factory-space/index.js
-/**
- * @typedef {import('micromark-util-types').Effects} Effects
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenType} TokenType
- */
-
-
-
-// To do: implement `spaceOrTab`, `spaceOrTabMinMax`, `spaceOrTabWithOptions`.
-
-/**
- * Parse spaces and tabs.
- *
- * There is no `nok` parameter:
- *
- * *   spaces in markdown are often optional, in which case this factory can be
- *     used and `ok` will be switched to whether spaces were found or not
- * *   one line ending or space can be detected with `markdownSpace(code)` right
- *     before using `factorySpace`
- *
- * ###### Examples
- *
- * Where `␉` represents a tab (plus how much it expands) and `␠` represents a
- * single space.
- *
- * ```markdown
- * ␉
- * ␠␠␠␠
- * ␉␠
- * ```
- *
- * @param {Effects} effects
- *   Context.
- * @param {State} ok
- *   State switched to when successful.
- * @param {TokenType} type
- *   Type (`' \t'`).
- * @param {number | undefined} [max=Infinity]
- *   Max (exclusive).
- * @returns {State}
- *   Start state.
- */
-function factorySpace(effects, ok, type, max) {
-  const limit = max ? max - 1 : Number.POSITIVE_INFINITY
-  let size = 0
-  return start
-
-  /** @type {State} */
-  function start(code) {
-    if (markdownSpace(code)) {
-      effects.enter(type)
-      return prefix(code)
-    }
-    return ok(code)
-  }
-
-  /** @type {State} */
-  function prefix(code) {
-    if (markdownSpace(code) && size++ < limit) {
-      effects.consume(code)
-      return prefix
-    }
-    effects.exit(type)
-    return ok(code)
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/initialize/content.js
-/**
- * @typedef {import('micromark-util-types').InitialConstruct} InitialConstruct
- * @typedef {import('micromark-util-types').Initializer} Initializer
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').Token} Token
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- */
-
-
-
-/** @type {InitialConstruct} */
-const content = {
-  tokenize: initializeContent
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Initializer}
- */
-function initializeContent(effects) {
-  const contentStart = effects.attempt(
-    this.parser.constructs.contentInitial,
-    afterContentStartConstruct,
-    paragraphInitial
-  )
-  /** @type {Token} */
-  let previous
-  return contentStart
-
-  /** @type {State} */
-  function afterContentStartConstruct(code) {
-    if (code === null) {
-      effects.consume(code)
-      return
-    }
-    effects.enter('lineEnding')
-    effects.consume(code)
-    effects.exit('lineEnding')
-    return factorySpace(effects, contentStart, 'linePrefix')
-  }
-
-  /** @type {State} */
-  function paragraphInitial(code) {
-    effects.enter('paragraph')
-    return lineStart(code)
-  }
-
-  /** @type {State} */
-  function lineStart(code) {
-    const token = effects.enter('chunkText', {
-      contentType: 'text',
-      previous
-    })
-    if (previous) {
-      previous.next = token
-    }
-    previous = token
-    return data(code)
-  }
-
-  /** @type {State} */
-  function data(code) {
-    if (code === null) {
-      effects.exit('chunkText')
-      effects.exit('paragraph')
-      effects.consume(code)
-      return
-    }
-    if (markdownLineEnding(code)) {
-      effects.consume(code)
-      effects.exit('chunkText')
-      return lineStart
-    }
-
-    // Data.
-    effects.consume(code)
-    return data
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/initialize/document.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').ContainerState} ContainerState
- * @typedef {import('micromark-util-types').InitialConstruct} InitialConstruct
- * @typedef {import('micromark-util-types').Initializer} Initializer
- * @typedef {import('micromark-util-types').Point} Point
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').Token} Token
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-/**
- * @typedef {[Construct, ContainerState]} StackItem
- */
-
-
-
-
-/** @type {InitialConstruct} */
-const document_document = {
-  tokenize: initializeDocument
-}
-
-/** @type {Construct} */
-const containerConstruct = {
-  tokenize: tokenizeContainer
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Initializer}
- */
-function initializeDocument(effects) {
-  const self = this
-  /** @type {Array<StackItem>} */
-  const stack = []
-  let continued = 0
-  /** @type {TokenizeContext | undefined} */
-  let childFlow
-  /** @type {Token | undefined} */
-  let childToken
-  /** @type {number} */
-  let lineStartOffset
-  return start
-
-  /** @type {State} */
-  function start(code) {
-    // First we iterate through the open blocks, starting with the root
-    // document, and descending through last children down to the last open
-    // block.
-    // Each block imposes a condition that the line must satisfy if the block is
-    // to remain open.
-    // For example, a block quote requires a `>` character.
-    // A paragraph requires a non-blank line.
-    // In this phase we may match all or just some of the open blocks.
-    // But we cannot close unmatched blocks yet, because we may have a lazy
-    // continuation line.
-    if (continued < stack.length) {
-      const item = stack[continued]
-      self.containerState = item[1]
-      return effects.attempt(
-        item[0].continuation,
-        documentContinue,
-        checkNewContainers
-      )(code)
-    }
-
-    // Done.
-    return checkNewContainers(code)
-  }
-
-  /** @type {State} */
-  function documentContinue(code) {
-    continued++
-
-    // Note: this field is called `_closeFlow` but it also closes containers.
-    // Perhaps a good idea to rename it but it’s already used in the wild by
-    // extensions.
-    if (self.containerState._closeFlow) {
-      self.containerState._closeFlow = undefined
-      if (childFlow) {
-        closeFlow()
-      }
-
-      // Note: this algorithm for moving events around is similar to the
-      // algorithm when dealing with lazy lines in `writeToChild`.
-      const indexBeforeExits = self.events.length
-      let indexBeforeFlow = indexBeforeExits
-      /** @type {Point | undefined} */
-      let point
-
-      // Find the flow chunk.
-      while (indexBeforeFlow--) {
-        if (
-          self.events[indexBeforeFlow][0] === 'exit' &&
-          self.events[indexBeforeFlow][1].type === 'chunkFlow'
-        ) {
-          point = self.events[indexBeforeFlow][1].end
-          break
-        }
-      }
-      exitContainers(continued)
-
-      // Fix positions.
-      let index = indexBeforeExits
-      while (index < self.events.length) {
-        self.events[index][1].end = Object.assign({}, point)
-        index++
-      }
-
-      // Inject the exits earlier (they’re still also at the end).
-      splice(
-        self.events,
-        indexBeforeFlow + 1,
-        0,
-        self.events.slice(indexBeforeExits)
-      )
-
-      // Discard the duplicate exits.
-      self.events.length = index
-      return checkNewContainers(code)
-    }
-    return start(code)
-  }
-
-  /** @type {State} */
-  function checkNewContainers(code) {
-    // Next, after consuming the continuation markers for existing blocks, we
-    // look for new block starts (e.g. `>` for a block quote).
-    // If we encounter a new block start, we close any blocks unmatched in
-    // step 1 before creating the new block as a child of the last matched
-    // block.
-    if (continued === stack.length) {
-      // No need to `check` whether there’s a container, of `exitContainers`
-      // would be moot.
-      // We can instead immediately `attempt` to parse one.
-      if (!childFlow) {
-        return documentContinued(code)
-      }
-
-      // If we have concrete content, such as block HTML or fenced code,
-      // we can’t have containers “pierce” into them, so we can immediately
-      // start.
-      if (childFlow.currentConstruct && childFlow.currentConstruct.concrete) {
-        return flowStart(code)
-      }
-
-      // If we do have flow, it could still be a blank line,
-      // but we’d be interrupting it w/ a new container if there’s a current
-      // construct.
-      // To do: next major: remove `_gfmTableDynamicInterruptHack` (no longer
-      // needed in micromark-extension-gfm-table@1.0.6).
-      self.interrupt = Boolean(
-        childFlow.currentConstruct && !childFlow._gfmTableDynamicInterruptHack
-      )
-    }
-
-    // Check if there is a new container.
-    self.containerState = {}
-    return effects.check(
-      containerConstruct,
-      thereIsANewContainer,
-      thereIsNoNewContainer
-    )(code)
-  }
-
-  /** @type {State} */
-  function thereIsANewContainer(code) {
-    if (childFlow) closeFlow()
-    exitContainers(continued)
-    return documentContinued(code)
-  }
-
-  /** @type {State} */
-  function thereIsNoNewContainer(code) {
-    self.parser.lazy[self.now().line] = continued !== stack.length
-    lineStartOffset = self.now().offset
-    return flowStart(code)
-  }
-
-  /** @type {State} */
-  function documentContinued(code) {
-    // Try new containers.
-    self.containerState = {}
-    return effects.attempt(
-      containerConstruct,
-      containerContinue,
-      flowStart
-    )(code)
-  }
-
-  /** @type {State} */
-  function containerContinue(code) {
-    continued++
-    stack.push([self.currentConstruct, self.containerState])
-    // Try another.
-    return documentContinued(code)
-  }
-
-  /** @type {State} */
-  function flowStart(code) {
-    if (code === null) {
-      if (childFlow) closeFlow()
-      exitContainers(0)
-      effects.consume(code)
-      return
-    }
-    childFlow = childFlow || self.parser.flow(self.now())
-    effects.enter('chunkFlow', {
-      contentType: 'flow',
-      previous: childToken,
-      _tokenizer: childFlow
-    })
-    return flowContinue(code)
-  }
-
-  /** @type {State} */
-  function flowContinue(code) {
-    if (code === null) {
-      writeToChild(effects.exit('chunkFlow'), true)
-      exitContainers(0)
-      effects.consume(code)
-      return
-    }
-    if (markdownLineEnding(code)) {
-      effects.consume(code)
-      writeToChild(effects.exit('chunkFlow'))
-      // Get ready for the next line.
-      continued = 0
-      self.interrupt = undefined
-      return start
-    }
-    effects.consume(code)
-    return flowContinue
-  }
-
-  /**
-   * @param {Token} token
-   * @param {boolean | undefined} [eof]
-   * @returns {undefined}
-   */
-  function writeToChild(token, eof) {
-    const stream = self.sliceStream(token)
-    if (eof) stream.push(null)
-    token.previous = childToken
-    if (childToken) childToken.next = token
-    childToken = token
-    childFlow.defineSkip(token.start)
-    childFlow.write(stream)
-
-    // Alright, so we just added a lazy line:
-    //
-    // ```markdown
-    // > a
-    // b.
-    //
-    // Or:
-    //
-    // > ~~~c
-    // d
-    //
-    // Or:
-    //
-    // > | e |
-    // f
-    // ```
-    //
-    // The construct in the second example (fenced code) does not accept lazy
-    // lines, so it marked itself as done at the end of its first line, and
-    // then the content construct parses `d`.
-    // Most constructs in markdown match on the first line: if the first line
-    // forms a construct, a non-lazy line can’t “unmake” it.
-    //
-    // The construct in the third example is potentially a GFM table, and
-    // those are *weird*.
-    // It *could* be a table, from the first line, if the following line
-    // matches a condition.
-    // In this case, that second line is lazy, which “unmakes” the first line
-    // and turns the whole into one content block.
-    //
-    // We’ve now parsed the non-lazy and the lazy line, and can figure out
-    // whether the lazy line started a new flow block.
-    // If it did, we exit the current containers between the two flow blocks.
-    if (self.parser.lazy[token.start.line]) {
-      let index = childFlow.events.length
-      while (index--) {
-        if (
-          // The token starts before the line ending…
-          childFlow.events[index][1].start.offset < lineStartOffset &&
-          // …and either is not ended yet…
-          (!childFlow.events[index][1].end ||
-            // …or ends after it.
-            childFlow.events[index][1].end.offset > lineStartOffset)
-        ) {
-          // Exit: there’s still something open, which means it’s a lazy line
-          // part of something.
-          return
-        }
-      }
-
-      // Note: this algorithm for moving events around is similar to the
-      // algorithm when closing flow in `documentContinue`.
-      const indexBeforeExits = self.events.length
-      let indexBeforeFlow = indexBeforeExits
-      /** @type {boolean | undefined} */
-      let seen
-      /** @type {Point | undefined} */
-      let point
-
-      // Find the previous chunk (the one before the lazy line).
-      while (indexBeforeFlow--) {
-        if (
-          self.events[indexBeforeFlow][0] === 'exit' &&
-          self.events[indexBeforeFlow][1].type === 'chunkFlow'
-        ) {
-          if (seen) {
-            point = self.events[indexBeforeFlow][1].end
-            break
-          }
-          seen = true
-        }
-      }
-      exitContainers(continued)
-
-      // Fix positions.
-      index = indexBeforeExits
-      while (index < self.events.length) {
-        self.events[index][1].end = Object.assign({}, point)
-        index++
-      }
-
-      // Inject the exits earlier (they’re still also at the end).
-      splice(
-        self.events,
-        indexBeforeFlow + 1,
-        0,
-        self.events.slice(indexBeforeExits)
-      )
-
-      // Discard the duplicate exits.
-      self.events.length = index
-    }
-  }
-
-  /**
-   * @param {number} size
-   * @returns {undefined}
-   */
-  function exitContainers(size) {
-    let index = stack.length
-
-    // Exit open containers.
-    while (index-- > size) {
-      const entry = stack[index]
-      self.containerState = entry[1]
-      entry[0].exit.call(self, effects)
-    }
-    stack.length = size
-  }
-  function closeFlow() {
-    childFlow.write([null])
-    childToken = undefined
-    childFlow = undefined
-    self.containerState._closeFlow = undefined
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeContainer(effects, ok, nok) {
-  // Always populated by defaults.
-
-  return factorySpace(
-    effects,
-    effects.attempt(this.parser.constructs.document, ok, nok),
-    'linePrefix',
-    this.parser.constructs.disable.null.includes('codeIndented') ? undefined : 4
-  )
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/blank-line.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const blankLine = {
-  tokenize: tokenizeBlankLine,
-  partial: true
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeBlankLine(effects, ok, nok) {
-  return start;
-
-  /**
-   * Start of blank line.
-   *
-   * > 👉 **Note**: `␠` represents a space character.
-   *
-   * ```markdown
-   * > | ␠␠␊
-   *     ^
-   * > | ␊
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    return markdownSpace(code) ? factorySpace(effects, after, "linePrefix")(code) : after(code);
-  }
-
-  /**
-   * At eof/eol, after optional whitespace.
-   *
-   * > 👉 **Note**: `␠` represents a space character.
-   *
-   * ```markdown
-   * > | ␠␠␊
-   *       ^
-   * > | ␊
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    return code === null || markdownLineEnding(code) ? ok(code) : nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/content.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').Token} Token
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-
-/**
- * No name because it must not be turned off.
- * @type {Construct}
- */
-const content_content = {
-  tokenize: tokenizeContent,
-  resolve: resolveContent
-};
-
-/** @type {Construct} */
-const continuationConstruct = {
-  tokenize: tokenizeContinuation,
-  partial: true
-};
-
-/**
- * Content is transparent: it’s parsed right now. That way, definitions are also
- * parsed right now: before text in paragraphs (specifically, media) are parsed.
- *
- * @type {Resolver}
- */
-function resolveContent(events) {
-  subtokenize(events);
-  return events;
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeContent(effects, ok) {
-  /** @type {Token | undefined} */
-  let previous;
-  return chunkStart;
-
-  /**
-   * Before a content chunk.
-   *
-   * ```markdown
-   * > | abc
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function chunkStart(code) {
-    effects.enter("content");
-    previous = effects.enter("chunkContent", {
-      contentType: "content"
-    });
-    return chunkInside(code);
-  }
-
-  /**
-   * In a content chunk.
-   *
-   * ```markdown
-   * > | abc
-   *     ^^^
-   * ```
-   *
-   * @type {State}
-   */
-  function chunkInside(code) {
-    if (code === null) {
-      return contentEnd(code);
-    }
-
-    // To do: in `markdown-rs`, each line is parsed on its own, and everything
-    // is stitched together resolving.
-    if (markdownLineEnding(code)) {
-      return effects.check(continuationConstruct, contentContinue, contentEnd)(code);
-    }
-
-    // Data.
-    effects.consume(code);
-    return chunkInside;
-  }
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function contentEnd(code) {
-    effects.exit("chunkContent");
-    effects.exit("content");
-    return ok(code);
-  }
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function contentContinue(code) {
-    effects.consume(code);
-    effects.exit("chunkContent");
-    previous.next = effects.enter("chunkContent", {
-      contentType: "content",
-      previous
-    });
-    previous = previous.next;
-    return chunkInside;
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeContinuation(effects, ok, nok) {
-  const self = this;
-  return startLookahead;
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function startLookahead(code) {
-    effects.exit("chunkContent");
-    effects.enter("lineEnding");
-    effects.consume(code);
-    effects.exit("lineEnding");
-    return factorySpace(effects, prefixed, "linePrefix");
-  }
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function prefixed(code) {
-    if (code === null || markdownLineEnding(code)) {
-      return nok(code);
-    }
-
-    // Always populated by defaults.
-
-    const tail = self.events[self.events.length - 1];
-    if (!self.parser.constructs.disable.null.includes('codeIndented') && tail && tail[1].type === "linePrefix" && tail[2].sliceSerialize(tail[1], true).length >= 4) {
-      return ok(code);
-    }
-    return effects.interrupt(self.parser.constructs.flow, nok, ok)(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/initialize/flow.js
-/**
- * @typedef {import('micromark-util-types').InitialConstruct} InitialConstruct
- * @typedef {import('micromark-util-types').Initializer} Initializer
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- */
-
-
-
-
-/** @type {InitialConstruct} */
-const flow = {
-  tokenize: initializeFlow
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Initializer}
- */
-function initializeFlow(effects) {
-  const self = this
-  const initial = effects.attempt(
-    // Try to parse a blank line.
-    blankLine,
-    atBlankEnding,
-    // Try to parse initial flow (essentially, only code).
-    effects.attempt(
-      this.parser.constructs.flowInitial,
-      afterConstruct,
-      factorySpace(
-        effects,
-        effects.attempt(
-          this.parser.constructs.flow,
-          afterConstruct,
-          effects.attempt(content_content, afterConstruct)
-        ),
-        'linePrefix'
-      )
-    )
-  )
-  return initial
-
-  /** @type {State} */
-  function atBlankEnding(code) {
-    if (code === null) {
-      effects.consume(code)
-      return
-    }
-    effects.enter('lineEndingBlank')
-    effects.consume(code)
-    effects.exit('lineEndingBlank')
-    self.currentConstruct = undefined
-    return initial
-  }
-
-  /** @type {State} */
-  function afterConstruct(code) {
-    if (code === null) {
-      effects.consume(code)
-      return
-    }
-    effects.enter('lineEnding')
-    effects.consume(code)
-    effects.exit('lineEnding')
-    self.currentConstruct = undefined
-    return initial
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/initialize/text.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').InitialConstruct} InitialConstruct
- * @typedef {import('micromark-util-types').Initializer} Initializer
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- */
-
-const resolver = {
-  resolveAll: createResolver()
-}
-const string = initializeFactory('string')
-const text_text = initializeFactory('text')
-
-/**
- * @param {'string' | 'text'} field
- * @returns {InitialConstruct}
- */
-function initializeFactory(field) {
-  return {
-    tokenize: initializeText,
-    resolveAll: createResolver(
-      field === 'text' ? resolveAllLineSuffixes : undefined
-    )
-  }
-
-  /**
-   * @this {TokenizeContext}
-   * @type {Initializer}
-   */
-  function initializeText(effects) {
-    const self = this
-    const constructs = this.parser.constructs[field]
-    const text = effects.attempt(constructs, start, notText)
-    return start
-
-    /** @type {State} */
-    function start(code) {
-      return atBreak(code) ? text(code) : notText(code)
-    }
-
-    /** @type {State} */
-    function notText(code) {
-      if (code === null) {
-        effects.consume(code)
-        return
-      }
-      effects.enter('data')
-      effects.consume(code)
-      return data
-    }
-
-    /** @type {State} */
-    function data(code) {
-      if (atBreak(code)) {
-        effects.exit('data')
-        return text(code)
-      }
-
-      // Data.
-      effects.consume(code)
-      return data
-    }
-
-    /**
-     * @param {Code} code
-     * @returns {boolean}
-     */
-    function atBreak(code) {
-      if (code === null) {
-        return true
-      }
-      const list = constructs[code]
-      let index = -1
-      if (list) {
-        // Always populated by defaults.
-
-        while (++index < list.length) {
-          const item = list[index]
-          if (!item.previous || item.previous.call(self, self.previous)) {
-            return true
-          }
-        }
-      }
-      return false
-    }
-  }
-}
-
-/**
- * @param {Resolver | undefined} [extraResolver]
- * @returns {Resolver}
- */
-function createResolver(extraResolver) {
-  return resolveAllText
-
-  /** @type {Resolver} */
-  function resolveAllText(events, context) {
-    let index = -1
-    /** @type {number | undefined} */
-    let enter
-
-    // A rather boring computation (to merge adjacent `data` events) which
-    // improves mm performance by 29%.
-    while (++index <= events.length) {
-      if (enter === undefined) {
-        if (events[index] && events[index][1].type === 'data') {
-          enter = index
-          index++
-        }
-      } else if (!events[index] || events[index][1].type !== 'data') {
-        // Don’t do anything if there is one data token.
-        if (index !== enter + 2) {
-          events[enter][1].end = events[index - 1][1].end
-          events.splice(enter + 2, index - enter - 2)
-          index = enter + 2
-        }
-        enter = undefined
-      }
-    }
-    return extraResolver ? extraResolver(events, context) : events
-  }
-}
-
-/**
- * A rather ugly set of instructions which again looks at chunks in the input
- * stream.
- * The reason to do this here is that it is *much* faster to parse in reverse.
- * And that we can’t hook into `null` to split the line suffix before an EOF.
- * To do: figure out if we can make this into a clean utility, or even in core.
- * As it will be useful for GFMs literal autolink extension (and maybe even
- * tables?)
- *
- * @type {Resolver}
- */
-function resolveAllLineSuffixes(events, context) {
-  let eventIndex = 0 // Skip first.
-
-  while (++eventIndex <= events.length) {
-    if (
-      (eventIndex === events.length ||
-        events[eventIndex][1].type === 'lineEnding') &&
-      events[eventIndex - 1][1].type === 'data'
-    ) {
-      const data = events[eventIndex - 1][1]
-      const chunks = context.sliceStream(data)
-      let index = chunks.length
-      let bufferIndex = -1
-      let size = 0
-      /** @type {boolean | undefined} */
-      let tabs
-      while (index--) {
-        const chunk = chunks[index]
-        if (typeof chunk === 'string') {
-          bufferIndex = chunk.length
-          while (chunk.charCodeAt(bufferIndex - 1) === 32) {
-            size++
-            bufferIndex--
-          }
-          if (bufferIndex) break
-          bufferIndex = -1
-        }
-        // Number
-        else if (chunk === -2) {
-          tabs = true
-          size++
-        } else if (chunk === -1) {
-          // Empty
-        } else {
-          // Replacement character, exit.
-          index++
-          break
-        }
-      }
-      if (size) {
-        const token = {
-          type:
-            eventIndex === events.length || tabs || size < 2
-              ? 'lineSuffix'
-              : 'hardBreakTrailing',
-          start: {
-            line: data.end.line,
-            column: data.end.column - size,
-            offset: data.end.offset - size,
-            _index: data.start._index + index,
-            _bufferIndex: index
-              ? bufferIndex
-              : data.start._bufferIndex + bufferIndex
-          },
-          end: Object.assign({}, data.end)
-        }
-        data.end = Object.assign({}, token.start)
-        if (data.start.offset === data.end.offset) {
-          Object.assign(data, token)
-        } else {
-          events.splice(
-            eventIndex,
-            0,
-            ['enter', token, context],
-            ['exit', token, context]
-          )
-          eventIndex += 2
-        }
-      }
-      eventIndex++
-    }
-  }
-  return events
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-util-resolve-all/index.js
-/**
- * @typedef {import('micromark-util-types').Event} Event
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- */
-
-/**
- * Call all `resolveAll`s.
- *
- * @param {Array<{resolveAll?: Resolver | undefined}>} constructs
- *   List of constructs, optionally with `resolveAll`s.
- * @param {Array<Event>} events
- *   List of events.
- * @param {TokenizeContext} context
- *   Context used by `tokenize`.
- * @returns {Array<Event>}
- *   Changed events.
- */
-function resolveAll(constructs, events, context) {
-  /** @type {Array<Resolver>} */
-  const called = []
-  let index = -1
-
-  while (++index < constructs.length) {
-    const resolve = constructs[index].resolveAll
-
-    if (resolve && !called.includes(resolve)) {
-      events = resolve(events, context)
-      called.push(resolve)
-    }
-  }
-
-  return events
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/create-tokenizer.js
-/**
- * @typedef {import('micromark-util-types').Chunk} Chunk
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').ConstructRecord} ConstructRecord
- * @typedef {import('micromark-util-types').Effects} Effects
- * @typedef {import('micromark-util-types').InitialConstruct} InitialConstruct
- * @typedef {import('micromark-util-types').ParseContext} ParseContext
- * @typedef {import('micromark-util-types').Point} Point
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').Token} Token
- * @typedef {import('micromark-util-types').TokenType} TokenType
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- */
-
-/**
- * @callback Restore
- * @returns {undefined}
- *
- * @typedef Info
- * @property {Restore} restore
- * @property {number} from
- *
- * @callback ReturnHandle
- *   Handle a successful run.
- * @param {Construct} construct
- * @param {Info} info
- * @returns {undefined}
- */
-
-
-
-
-/**
- * Create a tokenizer.
- * Tokenizers deal with one type of data (e.g., containers, flow, text).
- * The parser is the object dealing with it all.
- * `initialize` works like other constructs, except that only its `tokenize`
- * function is used, in which case it doesn’t receive an `ok` or `nok`.
- * `from` can be given to set the point before the first character, although
- * when further lines are indented, they must be set with `defineSkip`.
- *
- * @param {ParseContext} parser
- * @param {InitialConstruct} initialize
- * @param {Omit<Point, '_bufferIndex' | '_index'> | undefined} [from]
- * @returns {TokenizeContext}
- */
-function createTokenizer(parser, initialize, from) {
-  /** @type {Point} */
-  let point = Object.assign(
-    from
-      ? Object.assign({}, from)
-      : {
-          line: 1,
-          column: 1,
-          offset: 0
-        },
-    {
-      _index: 0,
-      _bufferIndex: -1
-    }
-  )
-  /** @type {Record<string, number>} */
-  const columnStart = {}
-  /** @type {Array<Construct>} */
-  const resolveAllConstructs = []
-  /** @type {Array<Chunk>} */
-  let chunks = []
-  /** @type {Array<Token>} */
-  let stack = []
-  /** @type {boolean | undefined} */
-  let consumed = true
-
-  /**
-   * Tools used for tokenizing.
-   *
-   * @type {Effects}
-   */
-  const effects = {
-    consume,
-    enter,
-    exit,
-    attempt: constructFactory(onsuccessfulconstruct),
-    check: constructFactory(onsuccessfulcheck),
-    interrupt: constructFactory(onsuccessfulcheck, {
-      interrupt: true
-    })
-  }
-
-  /**
-   * State and tools for resolving and serializing.
-   *
-   * @type {TokenizeContext}
-   */
-  const context = {
-    previous: null,
-    code: null,
-    containerState: {},
-    events: [],
-    parser,
-    sliceStream,
-    sliceSerialize,
-    now,
-    defineSkip,
-    write
-  }
-
-  /**
-   * The state function.
-   *
-   * @type {State | undefined}
-   */
-  let state = initialize.tokenize.call(context, effects)
-
-  /**
-   * Track which character we expect to be consumed, to catch bugs.
-   *
-   * @type {Code}
-   */
-  let expectedCode
-  if (initialize.resolveAll) {
-    resolveAllConstructs.push(initialize)
-  }
-  return context
-
-  /** @type {TokenizeContext['write']} */
-  function write(slice) {
-    chunks = push(chunks, slice)
-    main()
-
-    // Exit if we’re not done, resolve might change stuff.
-    if (chunks[chunks.length - 1] !== null) {
-      return []
-    }
-    addResult(initialize, 0)
-
-    // Otherwise, resolve, and exit.
-    context.events = resolveAll(resolveAllConstructs, context.events, context)
-    return context.events
-  }
-
-  //
-  // Tools.
-  //
-
-  /** @type {TokenizeContext['sliceSerialize']} */
-  function sliceSerialize(token, expandTabs) {
-    return serializeChunks(sliceStream(token), expandTabs)
-  }
-
-  /** @type {TokenizeContext['sliceStream']} */
-  function sliceStream(token) {
-    return sliceChunks(chunks, token)
-  }
-
-  /** @type {TokenizeContext['now']} */
-  function now() {
-    // This is a hot path, so we clone manually instead of `Object.assign({}, point)`
-    const {line, column, offset, _index, _bufferIndex} = point
-    return {
-      line,
-      column,
-      offset,
-      _index,
-      _bufferIndex
-    }
-  }
-
-  /** @type {TokenizeContext['defineSkip']} */
-  function defineSkip(value) {
-    columnStart[value.line] = value.column
-    accountForPotentialSkip()
-  }
-
-  //
-  // State management.
-  //
-
-  /**
-   * Main loop (note that `_index` and `_bufferIndex` in `point` are modified by
-   * `consume`).
-   * Here is where we walk through the chunks, which either include strings of
-   * several characters, or numerical character codes.
-   * The reason to do this in a loop instead of a call is so the stack can
-   * drain.
-   *
-   * @returns {undefined}
-   */
-  function main() {
-    /** @type {number} */
-    let chunkIndex
-    while (point._index < chunks.length) {
-      const chunk = chunks[point._index]
-
-      // If we’re in a buffer chunk, loop through it.
-      if (typeof chunk === 'string') {
-        chunkIndex = point._index
-        if (point._bufferIndex < 0) {
-          point._bufferIndex = 0
-        }
-        while (
-          point._index === chunkIndex &&
-          point._bufferIndex < chunk.length
-        ) {
-          go(chunk.charCodeAt(point._bufferIndex))
-        }
-      } else {
-        go(chunk)
-      }
-    }
-  }
-
-  /**
-   * Deal with one code.
-   *
-   * @param {Code} code
-   * @returns {undefined}
-   */
-  function go(code) {
-    consumed = undefined
-    expectedCode = code
-    state = state(code)
-  }
-
-  /** @type {Effects['consume']} */
-  function consume(code) {
-    if (markdownLineEnding(code)) {
-      point.line++
-      point.column = 1
-      point.offset += code === -3 ? 2 : 1
-      accountForPotentialSkip()
-    } else if (code !== -1) {
-      point.column++
-      point.offset++
-    }
-
-    // Not in a string chunk.
-    if (point._bufferIndex < 0) {
-      point._index++
-    } else {
-      point._bufferIndex++
-
-      // At end of string chunk.
-      // @ts-expect-error Points w/ non-negative `_bufferIndex` reference
-      // strings.
-      if (point._bufferIndex === chunks[point._index].length) {
-        point._bufferIndex = -1
-        point._index++
-      }
-    }
-
-    // Expose the previous character.
-    context.previous = code
-
-    // Mark as consumed.
-    consumed = true
-  }
-
-  /** @type {Effects['enter']} */
-  function enter(type, fields) {
-    /** @type {Token} */
-    // @ts-expect-error Patch instead of assign required fields to help GC.
-    const token = fields || {}
-    token.type = type
-    token.start = now()
-    context.events.push(['enter', token, context])
-    stack.push(token)
-    return token
-  }
-
-  /** @type {Effects['exit']} */
-  function exit(type) {
-    const token = stack.pop()
-    token.end = now()
-    context.events.push(['exit', token, context])
-    return token
-  }
-
-  /**
-   * Use results.
-   *
-   * @type {ReturnHandle}
-   */
-  function onsuccessfulconstruct(construct, info) {
-    addResult(construct, info.from)
-  }
-
-  /**
-   * Discard results.
-   *
-   * @type {ReturnHandle}
-   */
-  function onsuccessfulcheck(_, info) {
-    info.restore()
-  }
-
-  /**
-   * Factory to attempt/check/interrupt.
-   *
-   * @param {ReturnHandle} onreturn
-   * @param {{interrupt?: boolean | undefined} | undefined} [fields]
-   */
-  function constructFactory(onreturn, fields) {
-    return hook
-
-    /**
-     * Handle either an object mapping codes to constructs, a list of
-     * constructs, or a single construct.
-     *
-     * @param {Array<Construct> | Construct | ConstructRecord} constructs
-     * @param {State} returnState
-     * @param {State | undefined} [bogusState]
-     * @returns {State}
-     */
-    function hook(constructs, returnState, bogusState) {
-      /** @type {Array<Construct>} */
-      let listOfConstructs
-      /** @type {number} */
-      let constructIndex
-      /** @type {Construct} */
-      let currentConstruct
-      /** @type {Info} */
-      let info
-      return Array.isArray(constructs) /* c8 ignore next 1 */
-        ? handleListOfConstructs(constructs)
-        : 'tokenize' in constructs
-        ? // @ts-expect-error Looks like a construct.
-          handleListOfConstructs([constructs])
-        : handleMapOfConstructs(constructs)
-
-      /**
-       * Handle a list of construct.
-       *
-       * @param {ConstructRecord} map
-       * @returns {State}
-       */
-      function handleMapOfConstructs(map) {
-        return start
-
-        /** @type {State} */
-        function start(code) {
-          const def = code !== null && map[code]
-          const all = code !== null && map.null
-          const list = [
-            // To do: add more extension tests.
-            /* c8 ignore next 2 */
-            ...(Array.isArray(def) ? def : def ? [def] : []),
-            ...(Array.isArray(all) ? all : all ? [all] : [])
-          ]
-          return handleListOfConstructs(list)(code)
-        }
-      }
-
-      /**
-       * Handle a list of construct.
-       *
-       * @param {Array<Construct>} list
-       * @returns {State}
-       */
-      function handleListOfConstructs(list) {
-        listOfConstructs = list
-        constructIndex = 0
-        if (list.length === 0) {
-          return bogusState
-        }
-        return handleConstruct(list[constructIndex])
-      }
-
-      /**
-       * Handle a single construct.
-       *
-       * @param {Construct} construct
-       * @returns {State}
-       */
-      function handleConstruct(construct) {
-        return start
-
-        /** @type {State} */
-        function start(code) {
-          // To do: not needed to store if there is no bogus state, probably?
-          // Currently doesn’t work because `inspect` in document does a check
-          // w/o a bogus, which doesn’t make sense. But it does seem to help perf
-          // by not storing.
-          info = store()
-          currentConstruct = construct
-          if (!construct.partial) {
-            context.currentConstruct = construct
-          }
-
-          // Always populated by defaults.
-
-          if (
-            construct.name &&
-            context.parser.constructs.disable.null.includes(construct.name)
-          ) {
-            return nok(code)
-          }
-          return construct.tokenize.call(
-            // If we do have fields, create an object w/ `context` as its
-            // prototype.
-            // This allows a “live binding”, which is needed for `interrupt`.
-            fields ? Object.assign(Object.create(context), fields) : context,
-            effects,
-            ok,
-            nok
-          )(code)
-        }
-      }
-
-      /** @type {State} */
-      function ok(code) {
-        consumed = true
-        onreturn(currentConstruct, info)
-        return returnState
-      }
-
-      /** @type {State} */
-      function nok(code) {
-        consumed = true
-        info.restore()
-        if (++constructIndex < listOfConstructs.length) {
-          return handleConstruct(listOfConstructs[constructIndex])
-        }
-        return bogusState
-      }
-    }
-  }
-
-  /**
-   * @param {Construct} construct
-   * @param {number} from
-   * @returns {undefined}
-   */
-  function addResult(construct, from) {
-    if (construct.resolveAll && !resolveAllConstructs.includes(construct)) {
-      resolveAllConstructs.push(construct)
-    }
-    if (construct.resolve) {
-      splice(
-        context.events,
-        from,
-        context.events.length - from,
-        construct.resolve(context.events.slice(from), context)
-      )
-    }
-    if (construct.resolveTo) {
-      context.events = construct.resolveTo(context.events, context)
-    }
-  }
-
-  /**
-   * Store state.
-   *
-   * @returns {Info}
-   */
-  function store() {
-    const startPoint = now()
-    const startPrevious = context.previous
-    const startCurrentConstruct = context.currentConstruct
-    const startEventsIndex = context.events.length
-    const startStack = Array.from(stack)
-    return {
-      restore,
-      from: startEventsIndex
-    }
-
-    /**
-     * Restore state.
-     *
-     * @returns {undefined}
-     */
-    function restore() {
-      point = startPoint
-      context.previous = startPrevious
-      context.currentConstruct = startCurrentConstruct
-      context.events.length = startEventsIndex
-      stack = startStack
-      accountForPotentialSkip()
-    }
-  }
-
-  /**
-   * Move the current point a bit forward in the line when it’s on a column
-   * skip.
-   *
-   * @returns {undefined}
-   */
-  function accountForPotentialSkip() {
-    if (point.line in columnStart && point.column < 2) {
-      point.column = columnStart[point.line]
-      point.offset += columnStart[point.line] - 1
-    }
-  }
-}
-
-/**
- * Get the chunks from a slice of chunks in the range of a token.
- *
- * @param {Array<Chunk>} chunks
- * @param {Pick<Token, 'end' | 'start'>} token
- * @returns {Array<Chunk>}
- */
-function sliceChunks(chunks, token) {
-  const startIndex = token.start._index
-  const startBufferIndex = token.start._bufferIndex
-  const endIndex = token.end._index
-  const endBufferIndex = token.end._bufferIndex
-  /** @type {Array<Chunk>} */
-  let view
-  if (startIndex === endIndex) {
-    // @ts-expect-error `_bufferIndex` is used on string chunks.
-    view = [chunks[startIndex].slice(startBufferIndex, endBufferIndex)]
-  } else {
-    view = chunks.slice(startIndex, endIndex)
-    if (startBufferIndex > -1) {
-      const head = view[0]
-      if (typeof head === 'string') {
-        view[0] = head.slice(startBufferIndex)
-      } else {
-        view.shift()
-      }
-    }
-    if (endBufferIndex > 0) {
-      // @ts-expect-error `_bufferIndex` is used on string chunks.
-      view.push(chunks[endIndex].slice(0, endBufferIndex))
-    }
-  }
-  return view
-}
-
-/**
- * Get the string value of a slice of chunks.
- *
- * @param {Array<Chunk>} chunks
- * @param {boolean | undefined} [expandTabs=false]
- * @returns {string}
- */
-function serializeChunks(chunks, expandTabs) {
-  let index = -1
-  /** @type {Array<string>} */
-  const result = []
-  /** @type {boolean | undefined} */
-  let atTab
-  while (++index < chunks.length) {
-    const chunk = chunks[index]
-    /** @type {string} */
-    let value
-    if (typeof chunk === 'string') {
-      value = chunk
-    } else
-      switch (chunk) {
-        case -5: {
-          value = '\r'
-          break
-        }
-        case -4: {
-          value = '\n'
-          break
-        }
-        case -3: {
-          value = '\r' + '\n'
-          break
-        }
-        case -2: {
-          value = expandTabs ? ' ' : '\t'
-          break
-        }
-        case -1: {
-          if (!expandTabs && atTab) continue
-          value = ' '
-          break
-        }
-        default: {
-          // Currently only replacement character.
-          value = String.fromCharCode(chunk)
-        }
-      }
-    atTab = chunk === -2
-    result.push(value)
-  }
-  return result.join('')
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/thematic-break.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const thematicBreak = {
-  name: 'thematicBreak',
-  tokenize: tokenizeThematicBreak
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeThematicBreak(effects, ok, nok) {
-  let size = 0;
-  /** @type {NonNullable<Code>} */
-  let marker;
-  return start;
-
-  /**
-   * Start of thematic break.
-   *
-   * ```markdown
-   * > | ***
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("thematicBreak");
-    // To do: parse indent like `markdown-rs`.
-    return before(code);
-  }
-
-  /**
-   * After optional whitespace, at marker.
-   *
-   * ```markdown
-   * > | ***
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function before(code) {
-    marker = code;
-    return atBreak(code);
-  }
-
-  /**
-   * After something, before something else.
-   *
-   * ```markdown
-   * > | ***
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function atBreak(code) {
-    if (code === marker) {
-      effects.enter("thematicBreakSequence");
-      return sequence(code);
-    }
-    if (size >= 3 && (code === null || markdownLineEnding(code))) {
-      effects.exit("thematicBreak");
-      return ok(code);
-    }
-    return nok(code);
-  }
-
-  /**
-   * In sequence.
-   *
-   * ```markdown
-   * > | ***
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function sequence(code) {
-    if (code === marker) {
-      effects.consume(code);
-      size++;
-      return sequence;
-    }
-    effects.exit("thematicBreakSequence");
-    return markdownSpace(code) ? factorySpace(effects, atBreak, "whitespace")(code) : atBreak(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/list.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').ContainerState} ContainerState
- * @typedef {import('micromark-util-types').Exiter} Exiter
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-
-
-
-/** @type {Construct} */
-const list = {
-  name: 'list',
-  tokenize: tokenizeListStart,
-  continuation: {
-    tokenize: tokenizeListContinuation
-  },
-  exit: tokenizeListEnd
-};
-
-/** @type {Construct} */
-const listItemPrefixWhitespaceConstruct = {
-  tokenize: tokenizeListItemPrefixWhitespace,
-  partial: true
-};
-
-/** @type {Construct} */
-const indentConstruct = {
-  tokenize: tokenizeIndent,
-  partial: true
-};
-
-// To do: `markdown-rs` parses list items on their own and later stitches them
-// together.
-
-/**
- * @type {Tokenizer}
- * @this {TokenizeContext}
- */
-function tokenizeListStart(effects, ok, nok) {
-  const self = this;
-  const tail = self.events[self.events.length - 1];
-  let initialSize = tail && tail[1].type === "linePrefix" ? tail[2].sliceSerialize(tail[1], true).length : 0;
-  let size = 0;
-  return start;
-
-  /** @type {State} */
-  function start(code) {
-    const kind = self.containerState.type || (code === 42 || code === 43 || code === 45 ? "listUnordered" : "listOrdered");
-    if (kind === "listUnordered" ? !self.containerState.marker || code === self.containerState.marker : asciiDigit(code)) {
-      if (!self.containerState.type) {
-        self.containerState.type = kind;
-        effects.enter(kind, {
-          _container: true
-        });
-      }
-      if (kind === "listUnordered") {
-        effects.enter("listItemPrefix");
-        return code === 42 || code === 45 ? effects.check(thematicBreak, nok, atMarker)(code) : atMarker(code);
-      }
-      if (!self.interrupt || code === 49) {
-        effects.enter("listItemPrefix");
-        effects.enter("listItemValue");
-        return inside(code);
-      }
-    }
-    return nok(code);
-  }
-
-  /** @type {State} */
-  function inside(code) {
-    if (asciiDigit(code) && ++size < 10) {
-      effects.consume(code);
-      return inside;
-    }
-    if ((!self.interrupt || size < 2) && (self.containerState.marker ? code === self.containerState.marker : code === 41 || code === 46)) {
-      effects.exit("listItemValue");
-      return atMarker(code);
-    }
-    return nok(code);
-  }
-
-  /**
-   * @type {State}
-   **/
-  function atMarker(code) {
-    effects.enter("listItemMarker");
-    effects.consume(code);
-    effects.exit("listItemMarker");
-    self.containerState.marker = self.containerState.marker || code;
-    return effects.check(blankLine,
-    // Can’t be empty when interrupting.
-    self.interrupt ? nok : onBlank, effects.attempt(listItemPrefixWhitespaceConstruct, endOfPrefix, otherPrefix));
-  }
-
-  /** @type {State} */
-  function onBlank(code) {
-    self.containerState.initialBlankLine = true;
-    initialSize++;
-    return endOfPrefix(code);
-  }
-
-  /** @type {State} */
-  function otherPrefix(code) {
-    if (markdownSpace(code)) {
-      effects.enter("listItemPrefixWhitespace");
-      effects.consume(code);
-      effects.exit("listItemPrefixWhitespace");
-      return endOfPrefix;
-    }
-    return nok(code);
-  }
-
-  /** @type {State} */
-  function endOfPrefix(code) {
-    self.containerState.size = initialSize + self.sliceSerialize(effects.exit("listItemPrefix"), true).length;
-    return ok(code);
-  }
-}
-
-/**
- * @type {Tokenizer}
- * @this {TokenizeContext}
- */
-function tokenizeListContinuation(effects, ok, nok) {
-  const self = this;
-  self.containerState._closeFlow = undefined;
-  return effects.check(blankLine, onBlank, notBlank);
-
-  /** @type {State} */
-  function onBlank(code) {
-    self.containerState.furtherBlankLines = self.containerState.furtherBlankLines || self.containerState.initialBlankLine;
-
-    // We have a blank line.
-    // Still, try to consume at most the items size.
-    return factorySpace(effects, ok, "listItemIndent", self.containerState.size + 1)(code);
-  }
-
-  /** @type {State} */
-  function notBlank(code) {
-    if (self.containerState.furtherBlankLines || !markdownSpace(code)) {
-      self.containerState.furtherBlankLines = undefined;
-      self.containerState.initialBlankLine = undefined;
-      return notInCurrentItem(code);
-    }
-    self.containerState.furtherBlankLines = undefined;
-    self.containerState.initialBlankLine = undefined;
-    return effects.attempt(indentConstruct, ok, notInCurrentItem)(code);
-  }
-
-  /** @type {State} */
-  function notInCurrentItem(code) {
-    // While we do continue, we signal that the flow should be closed.
-    self.containerState._closeFlow = true;
-    // As we’re closing flow, we’re no longer interrupting.
-    self.interrupt = undefined;
-    // Always populated by defaults.
-
-    return factorySpace(effects, effects.attempt(list, ok, nok), "linePrefix", self.parser.constructs.disable.null.includes('codeIndented') ? undefined : 4)(code);
-  }
-}
-
-/**
- * @type {Tokenizer}
- * @this {TokenizeContext}
- */
-function tokenizeIndent(effects, ok, nok) {
-  const self = this;
-  return factorySpace(effects, afterPrefix, "listItemIndent", self.containerState.size + 1);
-
-  /** @type {State} */
-  function afterPrefix(code) {
-    const tail = self.events[self.events.length - 1];
-    return tail && tail[1].type === "listItemIndent" && tail[2].sliceSerialize(tail[1], true).length === self.containerState.size ? ok(code) : nok(code);
-  }
-}
-
-/**
- * @type {Exiter}
- * @this {TokenizeContext}
- */
-function tokenizeListEnd(effects) {
-  effects.exit(this.containerState.type);
-}
-
-/**
- * @type {Tokenizer}
- * @this {TokenizeContext}
- */
-function tokenizeListItemPrefixWhitespace(effects, ok, nok) {
-  const self = this;
-
-  // Always populated by defaults.
-
-  return factorySpace(effects, afterPrefix, "listItemPrefixWhitespace", self.parser.constructs.disable.null.includes('codeIndented') ? undefined : 4 + 1);
-
-  /** @type {State} */
-  function afterPrefix(code) {
-    const tail = self.events[self.events.length - 1];
-    return !markdownSpace(code) && tail && tail[1].type === "listItemPrefixWhitespace" ? ok(code) : nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/block-quote.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').Exiter} Exiter
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const blockQuote = {
-  name: 'blockQuote',
-  tokenize: tokenizeBlockQuoteStart,
-  continuation: {
-    tokenize: tokenizeBlockQuoteContinuation
-  },
-  exit
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeBlockQuoteStart(effects, ok, nok) {
-  const self = this;
-  return start;
-
-  /**
-   * Start of block quote.
-   *
-   * ```markdown
-   * > | > a
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    if (code === 62) {
-      const state = self.containerState;
-      if (!state.open) {
-        effects.enter("blockQuote", {
-          _container: true
-        });
-        state.open = true;
-      }
-      effects.enter("blockQuotePrefix");
-      effects.enter("blockQuoteMarker");
-      effects.consume(code);
-      effects.exit("blockQuoteMarker");
-      return after;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `>`, before optional whitespace.
-   *
-   * ```markdown
-   * > | > a
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    if (markdownSpace(code)) {
-      effects.enter("blockQuotePrefixWhitespace");
-      effects.consume(code);
-      effects.exit("blockQuotePrefixWhitespace");
-      effects.exit("blockQuotePrefix");
-      return ok;
-    }
-    effects.exit("blockQuotePrefix");
-    return ok(code);
-  }
-}
-
-/**
- * Start of block quote continuation.
- *
- * ```markdown
- *   | > a
- * > | > b
- *     ^
- * ```
- *
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeBlockQuoteContinuation(effects, ok, nok) {
-  const self = this;
-  return contStart;
-
-  /**
-   * Start of block quote continuation.
-   *
-   * Also used to parse the first block quote opening.
-   *
-   * ```markdown
-   *   | > a
-   * > | > b
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function contStart(code) {
-    if (markdownSpace(code)) {
-      // Always populated by defaults.
-
-      return factorySpace(effects, contBefore, "linePrefix", self.parser.constructs.disable.null.includes('codeIndented') ? undefined : 4)(code);
-    }
-    return contBefore(code);
-  }
-
-  /**
-   * At `>`, after optional whitespace.
-   *
-   * Also used to parse the first block quote opening.
-   *
-   * ```markdown
-   *   | > a
-   * > | > b
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function contBefore(code) {
-    return effects.attempt(blockQuote, ok, nok)(code);
-  }
-}
-
-/** @type {Exiter} */
-function exit(effects) {
-  effects.exit("blockQuote");
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-factory-destination/index.js
-/**
- * @typedef {import('micromark-util-types').Effects} Effects
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenType} TokenType
- */
-
-
-/**
- * Parse destinations.
- *
- * ###### Examples
- *
- * ```markdown
- * <a>
- * <a\>b>
- * <a b>
- * <a)>
- * a
- * a\)b
- * a(b)c
- * a(b)
- * ```
- *
- * @param {Effects} effects
- *   Context.
- * @param {State} ok
- *   State switched to when successful.
- * @param {State} nok
- *   State switched to when unsuccessful.
- * @param {TokenType} type
- *   Type for whole (`<a>` or `b`).
- * @param {TokenType} literalType
- *   Type when enclosed (`<a>`).
- * @param {TokenType} literalMarkerType
- *   Type for enclosing (`<` and `>`).
- * @param {TokenType} rawType
- *   Type when not enclosed (`b`).
- * @param {TokenType} stringType
- *   Type for the value (`a` or `b`).
- * @param {number | undefined} [max=Infinity]
- *   Depth of nested parens (inclusive).
- * @returns {State}
- *   Start state.
- */ // eslint-disable-next-line max-params
-function factoryDestination(
-  effects,
-  ok,
-  nok,
-  type,
-  literalType,
-  literalMarkerType,
-  rawType,
-  stringType,
-  max
-) {
-  const limit = max || Number.POSITIVE_INFINITY
-  let balance = 0
-  return start
-
-  /**
-   * Start of destination.
-   *
-   * ```markdown
-   * > | <aa>
-   *     ^
-   * > | aa
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    if (code === 60) {
-      effects.enter(type)
-      effects.enter(literalType)
-      effects.enter(literalMarkerType)
-      effects.consume(code)
-      effects.exit(literalMarkerType)
-      return enclosedBefore
-    }
-
-    // ASCII control, space, closing paren.
-    if (code === null || code === 32 || code === 41 || asciiControl(code)) {
-      return nok(code)
-    }
-    effects.enter(type)
-    effects.enter(rawType)
-    effects.enter(stringType)
-    effects.enter('chunkString', {
-      contentType: 'string'
-    })
-    return raw(code)
-  }
-
-  /**
-   * After `<`, at an enclosed destination.
-   *
-   * ```markdown
-   * > | <aa>
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function enclosedBefore(code) {
-    if (code === 62) {
-      effects.enter(literalMarkerType)
-      effects.consume(code)
-      effects.exit(literalMarkerType)
-      effects.exit(literalType)
-      effects.exit(type)
-      return ok
-    }
-    effects.enter(stringType)
-    effects.enter('chunkString', {
-      contentType: 'string'
-    })
-    return enclosed(code)
-  }
-
-  /**
-   * In enclosed destination.
-   *
-   * ```markdown
-   * > | <aa>
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function enclosed(code) {
-    if (code === 62) {
-      effects.exit('chunkString')
-      effects.exit(stringType)
-      return enclosedBefore(code)
-    }
-    if (code === null || code === 60 || markdownLineEnding(code)) {
-      return nok(code)
-    }
-    effects.consume(code)
-    return code === 92 ? enclosedEscape : enclosed
-  }
-
-  /**
-   * After `\`, at a special character.
-   *
-   * ```markdown
-   * > | <a\*a>
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function enclosedEscape(code) {
-    if (code === 60 || code === 62 || code === 92) {
-      effects.consume(code)
-      return enclosed
-    }
-    return enclosed(code)
-  }
-
-  /**
-   * In raw destination.
-   *
-   * ```markdown
-   * > | aa
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function raw(code) {
-    if (
-      !balance &&
-      (code === null || code === 41 || markdownLineEndingOrSpace(code))
-    ) {
-      effects.exit('chunkString')
-      effects.exit(stringType)
-      effects.exit(rawType)
-      effects.exit(type)
-      return ok(code)
-    }
-    if (balance < limit && code === 40) {
-      effects.consume(code)
-      balance++
-      return raw
-    }
-    if (code === 41) {
-      effects.consume(code)
-      balance--
-      return raw
-    }
-
-    // ASCII control (but *not* `\0`) and space and `(`.
-    // Note: in `markdown-rs`, `\0` exists in codes, in `micromark-js` it
-    // doesn’t.
-    if (code === null || code === 32 || code === 40 || asciiControl(code)) {
-      return nok(code)
-    }
-    effects.consume(code)
-    return code === 92 ? rawEscape : raw
-  }
-
-  /**
-   * After `\`, at special character.
-   *
-   * ```markdown
-   * > | a\*a
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function rawEscape(code) {
-    if (code === 40 || code === 41 || code === 92) {
-      effects.consume(code)
-      return raw
-    }
-    return raw(code)
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-factory-label/index.js
-/**
- * @typedef {import('micromark-util-types').Effects} Effects
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').TokenType} TokenType
- */
-
-
-/**
- * Parse labels.
- *
- * > 👉 **Note**: labels in markdown are capped at 999 characters in the string.
- *
- * ###### Examples
- *
- * ```markdown
- * [a]
- * [a
- * b]
- * [a\]b]
- * ```
- *
- * @this {TokenizeContext}
- *   Tokenize context.
- * @param {Effects} effects
- *   Context.
- * @param {State} ok
- *   State switched to when successful.
- * @param {State} nok
- *   State switched to when unsuccessful.
- * @param {TokenType} type
- *   Type of the whole label (`[a]`).
- * @param {TokenType} markerType
- *   Type for the markers (`[` and `]`).
- * @param {TokenType} stringType
- *   Type for the identifier (`a`).
- * @returns {State}
- *   Start state.
- */ // eslint-disable-next-line max-params
-function factoryLabel(effects, ok, nok, type, markerType, stringType) {
-  const self = this
-  let size = 0
-  /** @type {boolean} */
-  let seen
-  return start
-
-  /**
-   * Start of label.
-   *
-   * ```markdown
-   * > | [a]
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter(type)
-    effects.enter(markerType)
-    effects.consume(code)
-    effects.exit(markerType)
-    effects.enter(stringType)
-    return atBreak
-  }
-
-  /**
-   * In label, at something, before something else.
-   *
-   * ```markdown
-   * > | [a]
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function atBreak(code) {
-    if (
-      size > 999 ||
-      code === null ||
-      code === 91 ||
-      (code === 93 && !seen) ||
-      // To do: remove in the future once we’ve switched from
-      // `micromark-extension-footnote` to `micromark-extension-gfm-footnote`,
-      // which doesn’t need this.
-      // Hidden footnotes hook.
-      /* c8 ignore next 3 */
-      (code === 94 &&
-        !size &&
-        '_hiddenFootnoteSupport' in self.parser.constructs)
-    ) {
-      return nok(code)
-    }
-    if (code === 93) {
-      effects.exit(stringType)
-      effects.enter(markerType)
-      effects.consume(code)
-      effects.exit(markerType)
-      effects.exit(type)
-      return ok
-    }
-
-    // To do: indent? Link chunks and EOLs together?
-    if (markdownLineEnding(code)) {
-      effects.enter('lineEnding')
-      effects.consume(code)
-      effects.exit('lineEnding')
-      return atBreak
-    }
-    effects.enter('chunkString', {
-      contentType: 'string'
-    })
-    return labelInside(code)
-  }
-
-  /**
-   * In label, in text.
-   *
-   * ```markdown
-   * > | [a]
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function labelInside(code) {
-    if (
-      code === null ||
-      code === 91 ||
-      code === 93 ||
-      markdownLineEnding(code) ||
-      size++ > 999
-    ) {
-      effects.exit('chunkString')
-      return atBreak(code)
-    }
-    effects.consume(code)
-    if (!seen) seen = !markdownSpace(code)
-    return code === 92 ? labelEscape : labelInside
-  }
-
-  /**
-   * After `\`, at a special character.
-   *
-   * ```markdown
-   * > | [a\*a]
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function labelEscape(code) {
-    if (code === 91 || code === 92 || code === 93) {
-      effects.consume(code)
-      size++
-      return labelInside
-    }
-    return labelInside(code)
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-factory-title/index.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Effects} Effects
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenType} TokenType
- */
-
-
-
-/**
- * Parse titles.
- *
- * ###### Examples
- *
- * ```markdown
- * "a"
- * 'b'
- * (c)
- * "a
- * b"
- * 'a
- *     b'
- * (a\)b)
- * ```
- *
- * @param {Effects} effects
- *   Context.
- * @param {State} ok
- *   State switched to when successful.
- * @param {State} nok
- *   State switched to when unsuccessful.
- * @param {TokenType} type
- *   Type of the whole title (`"a"`, `'b'`, `(c)`).
- * @param {TokenType} markerType
- *   Type for the markers (`"`, `'`, `(`, and `)`).
- * @param {TokenType} stringType
- *   Type for the value (`a`).
- * @returns {State}
- *   Start state.
- */ // eslint-disable-next-line max-params
-function factoryTitle(effects, ok, nok, type, markerType, stringType) {
-  /** @type {NonNullable<Code>} */
-  let marker
-  return start
-
-  /**
-   * Start of title.
-   *
-   * ```markdown
-   * > | "a"
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    if (code === 34 || code === 39 || code === 40) {
-      effects.enter(type)
-      effects.enter(markerType)
-      effects.consume(code)
-      effects.exit(markerType)
-      marker = code === 40 ? 41 : code
-      return begin
-    }
-    return nok(code)
-  }
-
-  /**
-   * After opening marker.
-   *
-   * This is also used at the closing marker.
-   *
-   * ```markdown
-   * > | "a"
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function begin(code) {
-    if (code === marker) {
-      effects.enter(markerType)
-      effects.consume(code)
-      effects.exit(markerType)
-      effects.exit(type)
-      return ok
-    }
-    effects.enter(stringType)
-    return atBreak(code)
-  }
-
-  /**
-   * At something, before something else.
-   *
-   * ```markdown
-   * > | "a"
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function atBreak(code) {
-    if (code === marker) {
-      effects.exit(stringType)
-      return begin(marker)
-    }
-    if (code === null) {
-      return nok(code)
-    }
-
-    // Note: blank lines can’t exist in content.
-    if (markdownLineEnding(code)) {
-      // To do: use `space_or_tab_eol_with_options`, connect.
-      effects.enter('lineEnding')
-      effects.consume(code)
-      effects.exit('lineEnding')
-      return factorySpace(effects, atBreak, 'linePrefix')
-    }
-    effects.enter('chunkString', {
-      contentType: 'string'
-    })
-    return inside(code)
-  }
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function inside(code) {
-    if (code === marker || code === null || markdownLineEnding(code)) {
-      effects.exit('chunkString')
-      return atBreak(code)
-    }
-    effects.consume(code)
-    return code === 92 ? escape : inside
-  }
-
-  /**
-   * After `\`, at a special character.
-   *
-   * ```markdown
-   * > | "a\*b"
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function escape(code) {
-    if (code === marker || code === 92) {
-      effects.consume(code)
-      return inside
-    }
-    return inside(code)
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-factory-whitespace/index.js
-/**
- * @typedef {import('micromark-util-types').Effects} Effects
- * @typedef {import('micromark-util-types').State} State
- */
-
-
-
-/**
- * Parse spaces and tabs.
- *
- * There is no `nok` parameter:
- *
- * *   line endings or spaces in markdown are often optional, in which case this
- *     factory can be used and `ok` will be switched to whether spaces were found
- *     or not
- * *   one line ending or space can be detected with
- *     `markdownLineEndingOrSpace(code)` right before using `factoryWhitespace`
- *
- * @param {Effects} effects
- *   Context.
- * @param {State} ok
- *   State switched to when successful.
- * @returns {State}
- *   Start state.
- */
-function factoryWhitespace(effects, ok) {
-  /** @type {boolean} */
-  let seen
-  return start
-
-  /** @type {State} */
-  function start(code) {
-    if (markdownLineEnding(code)) {
-      effects.enter('lineEnding')
-      effects.consume(code)
-      effects.exit('lineEnding')
-      seen = true
-      return start
-    }
-    if (markdownSpace(code)) {
-      return factorySpace(
-        effects,
-        start,
-        seen ? 'linePrefix' : 'lineSuffix'
-      )(code)
-    }
-    return ok(code)
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-util-normalize-identifier/index.js
-/**
- * Normalize an identifier (as found in references, definitions).
- *
- * Collapses markdown whitespace, trim, and then lower- and uppercase.
- *
- * Some characters are considered “uppercase”, such as U+03F4 (`ϴ`), but if their
- * lowercase counterpart (U+03B8 (`θ`)) is uppercased will result in a different
- * uppercase character (U+0398 (`Θ`)).
- * So, to get a canonical form, we perform both lower- and uppercase.
- *
- * Using uppercase last makes sure keys will never interact with default
- * prototypal values (such as `constructor`): nothing in the prototype of
- * `Object` is uppercase.
- *
- * @param {string} value
- *   Identifier to normalize.
- * @returns {string}
- *   Normalized identifier.
- */
-function normalizeIdentifier(value) {
-  return (
-    value
-      // Collapse markdown whitespace.
-      .replace(/[\t\n\r ]+/g, ' ')
-      // Trim.
-      .replace(/^ | $/g, '')
-      // Some characters are considered “uppercase”, but if their lowercase
-      // counterpart is uppercased will result in a different uppercase
-      // character.
-      // Hence, to get that form, we perform both lower- and uppercase.
-      // Upper case makes sure keys will not interact with default prototypal
-      // methods: no method is uppercase.
-      .toLowerCase()
-      .toUpperCase()
-  )
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/definition.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-
-
-
-
-
-/** @type {Construct} */
-const definition = {
-  name: 'definition',
-  tokenize: tokenizeDefinition
-};
-
-/** @type {Construct} */
-const titleBefore = {
-  tokenize: tokenizeTitleBefore,
-  partial: true
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeDefinition(effects, ok, nok) {
-  const self = this;
-  /** @type {string} */
-  let identifier;
-  return start;
-
-  /**
-   * At start of a definition.
-   *
-   * ```markdown
-   * > | [a]: b "c"
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    // Do not interrupt paragraphs (but do follow definitions).
-    // To do: do `interrupt` the way `markdown-rs` does.
-    // To do: parse whitespace the way `markdown-rs` does.
-    effects.enter("definition");
-    return before(code);
-  }
-
-  /**
-   * After optional whitespace, at `[`.
-   *
-   * ```markdown
-   * > | [a]: b "c"
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function before(code) {
-    // To do: parse whitespace the way `markdown-rs` does.
-
-    return factoryLabel.call(self, effects, labelAfter,
-    // Note: we don’t need to reset the way `markdown-rs` does.
-    nok, "definitionLabel", "definitionLabelMarker", "definitionLabelString")(code);
-  }
-
-  /**
-   * After label.
-   *
-   * ```markdown
-   * > | [a]: b "c"
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function labelAfter(code) {
-    identifier = normalizeIdentifier(self.sliceSerialize(self.events[self.events.length - 1][1]).slice(1, -1));
-    if (code === 58) {
-      effects.enter("definitionMarker");
-      effects.consume(code);
-      effects.exit("definitionMarker");
-      return markerAfter;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After marker.
-   *
-   * ```markdown
-   * > | [a]: b "c"
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function markerAfter(code) {
-    // Note: whitespace is optional.
-    return markdownLineEndingOrSpace(code) ? factoryWhitespace(effects, destinationBefore)(code) : destinationBefore(code);
-  }
-
-  /**
-   * Before destination.
-   *
-   * ```markdown
-   * > | [a]: b "c"
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function destinationBefore(code) {
-    return factoryDestination(effects, destinationAfter,
-    // Note: we don’t need to reset the way `markdown-rs` does.
-    nok, "definitionDestination", "definitionDestinationLiteral", "definitionDestinationLiteralMarker", "definitionDestinationRaw", "definitionDestinationString")(code);
-  }
-
-  /**
-   * After destination.
-   *
-   * ```markdown
-   * > | [a]: b "c"
-   *           ^
-   * ```
-   *
-   * @type {State}
-   */
-  function destinationAfter(code) {
-    return effects.attempt(titleBefore, after, after)(code);
-  }
-
-  /**
-   * After definition.
-   *
-   * ```markdown
-   * > | [a]: b
-   *           ^
-   * > | [a]: b "c"
-   *               ^
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    return markdownSpace(code) ? factorySpace(effects, afterWhitespace, "whitespace")(code) : afterWhitespace(code);
-  }
-
-  /**
-   * After definition, after optional whitespace.
-   *
-   * ```markdown
-   * > | [a]: b
-   *           ^
-   * > | [a]: b "c"
-   *               ^
-   * ```
-   *
-   * @type {State}
-   */
-  function afterWhitespace(code) {
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("definition");
-
-      // Note: we don’t care about uniqueness.
-      // It’s likely that that doesn’t happen very frequently.
-      // It is more likely that it wastes precious time.
-      self.parser.defined.push(identifier);
-
-      // To do: `markdown-rs` interrupt.
-      // // You’d be interrupting.
-      // tokenizer.interrupt = true
-      return ok(code);
-    }
-    return nok(code);
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeTitleBefore(effects, ok, nok) {
-  return titleBefore;
-
-  /**
-   * After destination, at whitespace.
-   *
-   * ```markdown
-   * > | [a]: b
-   *           ^
-   * > | [a]: b "c"
-   *           ^
-   * ```
-   *
-   * @type {State}
-   */
-  function titleBefore(code) {
-    return markdownLineEndingOrSpace(code) ? factoryWhitespace(effects, beforeMarker)(code) : nok(code);
-  }
-
-  /**
-   * At title.
-   *
-   * ```markdown
-   *   | [a]: b
-   * > | "c"
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function beforeMarker(code) {
-    return factoryTitle(effects, titleAfter, nok, "definitionTitle", "definitionTitleMarker", "definitionTitleString")(code);
-  }
-
-  /**
-   * After title.
-   *
-   * ```markdown
-   * > | [a]: b "c"
-   *               ^
-   * ```
-   *
-   * @type {State}
-   */
-  function titleAfter(code) {
-    return markdownSpace(code) ? factorySpace(effects, titleAfterOptionalWhitespace, "whitespace")(code) : titleAfterOptionalWhitespace(code);
-  }
-
-  /**
-   * After title, after optional whitespace.
-   *
-   * ```markdown
-   * > | [a]: b "c"
-   *               ^
-   * ```
-   *
-   * @type {State}
-   */
-  function titleAfterOptionalWhitespace(code) {
-    return code === null || markdownLineEnding(code) ? ok(code) : nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/code-indented.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const codeIndented = {
-  name: 'codeIndented',
-  tokenize: tokenizeCodeIndented
-};
-
-/** @type {Construct} */
-const furtherStart = {
-  tokenize: tokenizeFurtherStart,
-  partial: true
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeCodeIndented(effects, ok, nok) {
-  const self = this;
-  return start;
-
-  /**
-   * Start of code (indented).
-   *
-   * > **Parsing note**: it is not needed to check if this first line is a
-   * > filled line (that it has a non-whitespace character), because blank lines
-   * > are parsed already, so we never run into that.
-   *
-   * ```markdown
-   * > |     aaa
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    // To do: manually check if interrupting like `markdown-rs`.
-
-    effects.enter("codeIndented");
-    // To do: use an improved `space_or_tab` function like `markdown-rs`,
-    // so that we can drop the next state.
-    return factorySpace(effects, afterPrefix, "linePrefix", 4 + 1)(code);
-  }
-
-  /**
-   * At start, after 1 or 4 spaces.
-   *
-   * ```markdown
-   * > |     aaa
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function afterPrefix(code) {
-    const tail = self.events[self.events.length - 1];
-    return tail && tail[1].type === "linePrefix" && tail[2].sliceSerialize(tail[1], true).length >= 4 ? atBreak(code) : nok(code);
-  }
-
-  /**
-   * At a break.
-   *
-   * ```markdown
-   * > |     aaa
-   *         ^  ^
-   * ```
-   *
-   * @type {State}
-   */
-  function atBreak(code) {
-    if (code === null) {
-      return after(code);
-    }
-    if (markdownLineEnding(code)) {
-      return effects.attempt(furtherStart, atBreak, after)(code);
-    }
-    effects.enter("codeFlowValue");
-    return inside(code);
-  }
-
-  /**
-   * In code content.
-   *
-   * ```markdown
-   * > |     aaa
-   *         ^^^^
-   * ```
-   *
-   * @type {State}
-   */
-  function inside(code) {
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("codeFlowValue");
-      return atBreak(code);
-    }
-    effects.consume(code);
-    return inside;
-  }
-
-  /** @type {State} */
-  function after(code) {
-    effects.exit("codeIndented");
-    // To do: allow interrupting like `markdown-rs`.
-    // Feel free to interrupt.
-    // tokenizer.interrupt = false
-    return ok(code);
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeFurtherStart(effects, ok, nok) {
-  const self = this;
-  return furtherStart;
-
-  /**
-   * At eol, trying to parse another indent.
-   *
-   * ```markdown
-   * > |     aaa
-   *            ^
-   *   |     bbb
-   * ```
-   *
-   * @type {State}
-   */
-  function furtherStart(code) {
-    // To do: improve `lazy` / `pierce` handling.
-    // If this is a lazy line, it can’t be code.
-    if (self.parser.lazy[self.now().line]) {
-      return nok(code);
-    }
-    if (markdownLineEnding(code)) {
-      effects.enter("lineEnding");
-      effects.consume(code);
-      effects.exit("lineEnding");
-      return furtherStart;
-    }
-
-    // To do: the code here in `micromark-js` is a bit different from
-    // `markdown-rs` because there it can attempt spaces.
-    // We can’t yet.
-    //
-    // To do: use an improved `space_or_tab` function like `markdown-rs`,
-    // so that we can drop the next state.
-    return factorySpace(effects, afterPrefix, "linePrefix", 4 + 1)(code);
-  }
-
-  /**
-   * At start, after 1 or 4 spaces.
-   *
-   * ```markdown
-   * > |     aaa
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function afterPrefix(code) {
-    const tail = self.events[self.events.length - 1];
-    return tail && tail[1].type === "linePrefix" && tail[2].sliceSerialize(tail[1], true).length >= 4 ? ok(code) : markdownLineEnding(code) ? furtherStart(code) : nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/heading-atx.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').Token} Token
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-
-/** @type {Construct} */
-const headingAtx = {
-  name: 'headingAtx',
-  tokenize: tokenizeHeadingAtx,
-  resolve: resolveHeadingAtx
-};
-
-/** @type {Resolver} */
-function resolveHeadingAtx(events, context) {
-  let contentEnd = events.length - 2;
-  let contentStart = 3;
-  /** @type {Token} */
-  let content;
-  /** @type {Token} */
-  let text;
-
-  // Prefix whitespace, part of the opening.
-  if (events[contentStart][1].type === "whitespace") {
-    contentStart += 2;
-  }
-
-  // Suffix whitespace, part of the closing.
-  if (contentEnd - 2 > contentStart && events[contentEnd][1].type === "whitespace") {
-    contentEnd -= 2;
-  }
-  if (events[contentEnd][1].type === "atxHeadingSequence" && (contentStart === contentEnd - 1 || contentEnd - 4 > contentStart && events[contentEnd - 2][1].type === "whitespace")) {
-    contentEnd -= contentStart + 1 === contentEnd ? 2 : 4;
-  }
-  if (contentEnd > contentStart) {
-    content = {
-      type: "atxHeadingText",
-      start: events[contentStart][1].start,
-      end: events[contentEnd][1].end
-    };
-    text = {
-      type: "chunkText",
-      start: events[contentStart][1].start,
-      end: events[contentEnd][1].end,
-      contentType: "text"
-    };
-    splice(events, contentStart, contentEnd - contentStart + 1, [['enter', content, context], ['enter', text, context], ['exit', text, context], ['exit', content, context]]);
-  }
-  return events;
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeHeadingAtx(effects, ok, nok) {
-  let size = 0;
-  return start;
-
-  /**
-   * Start of a heading (atx).
-   *
-   * ```markdown
-   * > | ## aa
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    // To do: parse indent like `markdown-rs`.
-    effects.enter("atxHeading");
-    return before(code);
-  }
-
-  /**
-   * After optional whitespace, at `#`.
-   *
-   * ```markdown
-   * > | ## aa
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function before(code) {
-    effects.enter("atxHeadingSequence");
-    return sequenceOpen(code);
-  }
-
-  /**
-   * In opening sequence.
-   *
-   * ```markdown
-   * > | ## aa
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function sequenceOpen(code) {
-    if (code === 35 && size++ < 6) {
-      effects.consume(code);
-      return sequenceOpen;
-    }
-
-    // Always at least one `#`.
-    if (code === null || markdownLineEndingOrSpace(code)) {
-      effects.exit("atxHeadingSequence");
-      return atBreak(code);
-    }
-    return nok(code);
-  }
-
-  /**
-   * After something, before something else.
-   *
-   * ```markdown
-   * > | ## aa
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function atBreak(code) {
-    if (code === 35) {
-      effects.enter("atxHeadingSequence");
-      return sequenceFurther(code);
-    }
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("atxHeading");
-      // To do: interrupt like `markdown-rs`.
-      // // Feel free to interrupt.
-      // tokenizer.interrupt = false
-      return ok(code);
-    }
-    if (markdownSpace(code)) {
-      return factorySpace(effects, atBreak, "whitespace")(code);
-    }
-
-    // To do: generate `data` tokens, add the `text` token later.
-    // Needs edit map, see: `markdown.rs`.
-    effects.enter("atxHeadingText");
-    return data(code);
-  }
-
-  /**
-   * In further sequence (after whitespace).
-   *
-   * Could be normal “visible” hashes in the heading or a final sequence.
-   *
-   * ```markdown
-   * > | ## aa ##
-   *           ^
-   * ```
-   *
-   * @type {State}
-   */
-  function sequenceFurther(code) {
-    if (code === 35) {
-      effects.consume(code);
-      return sequenceFurther;
-    }
-    effects.exit("atxHeadingSequence");
-    return atBreak(code);
-  }
-
-  /**
-   * In text.
-   *
-   * ```markdown
-   * > | ## aa
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function data(code) {
-    if (code === null || code === 35 || markdownLineEndingOrSpace(code)) {
-      effects.exit("atxHeadingText");
-      return atBreak(code);
-    }
-    effects.consume(code);
-    return data;
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/setext-underline.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const setextUnderline = {
-  name: 'setextUnderline',
-  tokenize: tokenizeSetextUnderline,
-  resolveTo: resolveToSetextUnderline
-};
-
-/** @type {Resolver} */
-function resolveToSetextUnderline(events, context) {
-  // To do: resolve like `markdown-rs`.
-  let index = events.length;
-  /** @type {number | undefined} */
-  let content;
-  /** @type {number | undefined} */
-  let text;
-  /** @type {number | undefined} */
-  let definition;
-
-  // Find the opening of the content.
-  // It’ll always exist: we don’t tokenize if it isn’t there.
-  while (index--) {
-    if (events[index][0] === 'enter') {
-      if (events[index][1].type === "content") {
-        content = index;
-        break;
-      }
-      if (events[index][1].type === "paragraph") {
-        text = index;
-      }
-    }
-    // Exit
-    else {
-      if (events[index][1].type === "content") {
-        // Remove the content end (if needed we’ll add it later)
-        events.splice(index, 1);
-      }
-      if (!definition && events[index][1].type === "definition") {
-        definition = index;
-      }
-    }
-  }
-  const heading = {
-    type: "setextHeading",
-    start: Object.assign({}, events[text][1].start),
-    end: Object.assign({}, events[events.length - 1][1].end)
-  };
-
-  // Change the paragraph to setext heading text.
-  events[text][1].type = "setextHeadingText";
-
-  // If we have definitions in the content, we’ll keep on having content,
-  // but we need move it.
-  if (definition) {
-    events.splice(text, 0, ['enter', heading, context]);
-    events.splice(definition + 1, 0, ['exit', events[content][1], context]);
-    events[content][1].end = Object.assign({}, events[definition][1].end);
-  } else {
-    events[content][1] = heading;
-  }
-
-  // Add the heading exit at the end.
-  events.push(['exit', heading, context]);
-  return events;
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeSetextUnderline(effects, ok, nok) {
-  const self = this;
-  /** @type {NonNullable<Code>} */
-  let marker;
-  return start;
-
-  /**
-   * At start of heading (setext) underline.
-   *
-   * ```markdown
-   *   | aa
-   * > | ==
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    let index = self.events.length;
-    /** @type {boolean | undefined} */
-    let paragraph;
-    // Find an opening.
-    while (index--) {
-      // Skip enter/exit of line ending, line prefix, and content.
-      // We can now either have a definition or a paragraph.
-      if (self.events[index][1].type !== "lineEnding" && self.events[index][1].type !== "linePrefix" && self.events[index][1].type !== "content") {
-        paragraph = self.events[index][1].type === "paragraph";
-        break;
-      }
-    }
-
-    // To do: handle lazy/pierce like `markdown-rs`.
-    // To do: parse indent like `markdown-rs`.
-    if (!self.parser.lazy[self.now().line] && (self.interrupt || paragraph)) {
-      effects.enter("setextHeadingLine");
-      marker = code;
-      return before(code);
-    }
-    return nok(code);
-  }
-
-  /**
-   * After optional whitespace, at `-` or `=`.
-   *
-   * ```markdown
-   *   | aa
-   * > | ==
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function before(code) {
-    effects.enter("setextHeadingLineSequence");
-    return inside(code);
-  }
-
-  /**
-   * In sequence.
-   *
-   * ```markdown
-   *   | aa
-   * > | ==
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function inside(code) {
-    if (code === marker) {
-      effects.consume(code);
-      return inside;
-    }
-    effects.exit("setextHeadingLineSequence");
-    return markdownSpace(code) ? factorySpace(effects, after, "lineSuffix")(code) : after(code);
-  }
-
-  /**
-   * After sequence, after optional whitespace.
-   *
-   * ```markdown
-   *   | aa
-   * > | ==
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("setextHeadingLine");
-      return ok(code);
-    }
-    return nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-util-html-tag-name/index.js
-/**
- * List of lowercase HTML “block” tag names.
- *
- * The list, when parsing HTML (flow), results in more relaxed rules (condition
- * 6).
- * Because they are known blocks, the HTML-like syntax doesn’t have to be
- * strictly parsed.
- * For tag names not in this list, a more strict algorithm (condition 7) is used
- * to detect whether the HTML-like syntax is seen as HTML (flow) or not.
- *
- * This is copied from:
- * <https://spec.commonmark.org/0.30/#html-blocks>.
- *
- * > 👉 **Note**: `search` was added in `CommonMark@0.31`.
- */
-const htmlBlockNames = [
-  'address',
-  'article',
-  'aside',
-  'base',
-  'basefont',
-  'blockquote',
-  'body',
-  'caption',
-  'center',
-  'col',
-  'colgroup',
-  'dd',
-  'details',
-  'dialog',
-  'dir',
-  'div',
-  'dl',
-  'dt',
-  'fieldset',
-  'figcaption',
-  'figure',
-  'footer',
-  'form',
-  'frame',
-  'frameset',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'head',
-  'header',
-  'hr',
-  'html',
-  'iframe',
-  'legend',
-  'li',
-  'link',
-  'main',
-  'menu',
-  'menuitem',
-  'nav',
-  'noframes',
-  'ol',
-  'optgroup',
-  'option',
-  'p',
-  'param',
-  'search',
-  'section',
-  'summary',
-  'table',
-  'tbody',
-  'td',
-  'tfoot',
-  'th',
-  'thead',
-  'title',
-  'tr',
-  'track',
-  'ul'
-]
-
-/**
- * List of lowercase HTML “raw” tag names.
- *
- * The list, when parsing HTML (flow), results in HTML that can include lines
- * without exiting, until a closing tag also in this list is found (condition
- * 1).
- *
- * This module is copied from:
- * <https://spec.commonmark.org/0.30/#html-blocks>.
- *
- * > 👉 **Note**: `textarea` was added in `CommonMark@0.30`.
- */
-const htmlRawNames = ['pre', 'script', 'style', 'textarea']
-
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/html-flow.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-
-
-/** @type {Construct} */
-const htmlFlow = {
-  name: 'htmlFlow',
-  tokenize: tokenizeHtmlFlow,
-  resolveTo: resolveToHtmlFlow,
-  concrete: true
-};
-
-/** @type {Construct} */
-const blankLineBefore = {
-  tokenize: tokenizeBlankLineBefore,
-  partial: true
-};
-const nonLazyContinuationStart = {
-  tokenize: tokenizeNonLazyContinuationStart,
-  partial: true
-};
-
-/** @type {Resolver} */
-function resolveToHtmlFlow(events) {
-  let index = events.length;
-  while (index--) {
-    if (events[index][0] === 'enter' && events[index][1].type === "htmlFlow") {
-      break;
-    }
-  }
-  if (index > 1 && events[index - 2][1].type === "linePrefix") {
-    // Add the prefix start to the HTML token.
-    events[index][1].start = events[index - 2][1].start;
-    // Add the prefix start to the HTML line token.
-    events[index + 1][1].start = events[index - 2][1].start;
-    // Remove the line prefix.
-    events.splice(index - 2, 2);
-  }
-  return events;
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeHtmlFlow(effects, ok, nok) {
-  const self = this;
-  /** @type {number} */
-  let marker;
-  /** @type {boolean} */
-  let closingTag;
-  /** @type {string} */
-  let buffer;
-  /** @type {number} */
-  let index;
-  /** @type {Code} */
-  let markerB;
-  return start;
-
-  /**
-   * Start of HTML (flow).
-   *
-   * ```markdown
-   * > | <x />
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    // To do: parse indent like `markdown-rs`.
-    return before(code);
-  }
-
-  /**
-   * At `<`, after optional whitespace.
-   *
-   * ```markdown
-   * > | <x />
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function before(code) {
-    effects.enter("htmlFlow");
-    effects.enter("htmlFlowData");
-    effects.consume(code);
-    return open;
-  }
-
-  /**
-   * After `<`, at tag name or other stuff.
-   *
-   * ```markdown
-   * > | <x />
-   *      ^
-   * > | <!doctype>
-   *      ^
-   * > | <!--xxx-->
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function open(code) {
-    if (code === 33) {
-      effects.consume(code);
-      return declarationOpen;
-    }
-    if (code === 47) {
-      effects.consume(code);
-      closingTag = true;
-      return tagCloseStart;
-    }
-    if (code === 63) {
-      effects.consume(code);
-      marker = 3;
-      // To do:
-      // tokenizer.concrete = true
-      // To do: use `markdown-rs` style interrupt.
-      // While we’re in an instruction instead of a declaration, we’re on a `?`
-      // right now, so we do need to search for `>`, similar to declarations.
-      return self.interrupt ? ok : continuationDeclarationInside;
-    }
-
-    // ASCII alphabetical.
-    if (asciiAlpha(code)) {
-      effects.consume(code);
-      // @ts-expect-error: not null.
-      buffer = String.fromCharCode(code);
-      return tagName;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `<!`, at declaration, comment, or CDATA.
-   *
-   * ```markdown
-   * > | <!doctype>
-   *       ^
-   * > | <!--xxx-->
-   *       ^
-   * > | <![CDATA[>&<]]>
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function declarationOpen(code) {
-    if (code === 45) {
-      effects.consume(code);
-      marker = 2;
-      return commentOpenInside;
-    }
-    if (code === 91) {
-      effects.consume(code);
-      marker = 5;
-      index = 0;
-      return cdataOpenInside;
-    }
-
-    // ASCII alphabetical.
-    if (asciiAlpha(code)) {
-      effects.consume(code);
-      marker = 4;
-      // // Do not form containers.
-      // tokenizer.concrete = true
-      return self.interrupt ? ok : continuationDeclarationInside;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `<!-`, inside a comment, at another `-`.
-   *
-   * ```markdown
-   * > | <!--xxx-->
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function commentOpenInside(code) {
-    if (code === 45) {
-      effects.consume(code);
-      // // Do not form containers.
-      // tokenizer.concrete = true
-      return self.interrupt ? ok : continuationDeclarationInside;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `<![`, inside CDATA, expecting `CDATA[`.
-   *
-   * ```markdown
-   * > | <![CDATA[>&<]]>
-   *        ^^^^^^
-   * ```
-   *
-   * @type {State}
-   */
-  function cdataOpenInside(code) {
-    const value = "CDATA[";
-    if (code === value.charCodeAt(index++)) {
-      effects.consume(code);
-      if (index === value.length) {
-        // // Do not form containers.
-        // tokenizer.concrete = true
-        return self.interrupt ? ok : continuation;
-      }
-      return cdataOpenInside;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `</`, in closing tag, at tag name.
-   *
-   * ```markdown
-   * > | </x>
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagCloseStart(code) {
-    if (asciiAlpha(code)) {
-      effects.consume(code);
-      // @ts-expect-error: not null.
-      buffer = String.fromCharCode(code);
-      return tagName;
-    }
-    return nok(code);
-  }
-
-  /**
-   * In tag name.
-   *
-   * ```markdown
-   * > | <ab>
-   *      ^^
-   * > | </ab>
-   *       ^^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagName(code) {
-    if (code === null || code === 47 || code === 62 || markdownLineEndingOrSpace(code)) {
-      const slash = code === 47;
-      const name = buffer.toLowerCase();
-      if (!slash && !closingTag && htmlRawNames.includes(name)) {
-        marker = 1;
-        // // Do not form containers.
-        // tokenizer.concrete = true
-        return self.interrupt ? ok(code) : continuation(code);
-      }
-      if (htmlBlockNames.includes(buffer.toLowerCase())) {
-        marker = 6;
-        if (slash) {
-          effects.consume(code);
-          return basicSelfClosing;
-        }
-
-        // // Do not form containers.
-        // tokenizer.concrete = true
-        return self.interrupt ? ok(code) : continuation(code);
-      }
-      marker = 7;
-      // Do not support complete HTML when interrupting.
-      return self.interrupt && !self.parser.lazy[self.now().line] ? nok(code) : closingTag ? completeClosingTagAfter(code) : completeAttributeNameBefore(code);
-    }
-
-    // ASCII alphanumerical and `-`.
-    if (code === 45 || asciiAlphanumeric(code)) {
-      effects.consume(code);
-      buffer += String.fromCharCode(code);
-      return tagName;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After closing slash of a basic tag name.
-   *
-   * ```markdown
-   * > | <div/>
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function basicSelfClosing(code) {
-    if (code === 62) {
-      effects.consume(code);
-      // // Do not form containers.
-      // tokenizer.concrete = true
-      return self.interrupt ? ok : continuation;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After closing slash of a complete tag name.
-   *
-   * ```markdown
-   * > | <x/>
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeClosingTagAfter(code) {
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return completeClosingTagAfter;
-    }
-    return completeEnd(code);
-  }
-
-  /**
-   * At an attribute name.
-   *
-   * At first, this state is used after a complete tag name, after whitespace,
-   * where it expects optional attributes or the end of the tag.
-   * It is also reused after attributes, when expecting more optional
-   * attributes.
-   *
-   * ```markdown
-   * > | <a />
-   *        ^
-   * > | <a :b>
-   *        ^
-   * > | <a _b>
-   *        ^
-   * > | <a b>
-   *        ^
-   * > | <a >
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeAttributeNameBefore(code) {
-    if (code === 47) {
-      effects.consume(code);
-      return completeEnd;
-    }
-
-    // ASCII alphanumerical and `:` and `_`.
-    if (code === 58 || code === 95 || asciiAlpha(code)) {
-      effects.consume(code);
-      return completeAttributeName;
-    }
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return completeAttributeNameBefore;
-    }
-    return completeEnd(code);
-  }
-
-  /**
-   * In attribute name.
-   *
-   * ```markdown
-   * > | <a :b>
-   *         ^
-   * > | <a _b>
-   *         ^
-   * > | <a b>
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeAttributeName(code) {
-    // ASCII alphanumerical and `-`, `.`, `:`, and `_`.
-    if (code === 45 || code === 46 || code === 58 || code === 95 || asciiAlphanumeric(code)) {
-      effects.consume(code);
-      return completeAttributeName;
-    }
-    return completeAttributeNameAfter(code);
-  }
-
-  /**
-   * After attribute name, at an optional initializer, the end of the tag, or
-   * whitespace.
-   *
-   * ```markdown
-   * > | <a b>
-   *         ^
-   * > | <a b=c>
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeAttributeNameAfter(code) {
-    if (code === 61) {
-      effects.consume(code);
-      return completeAttributeValueBefore;
-    }
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return completeAttributeNameAfter;
-    }
-    return completeAttributeNameBefore(code);
-  }
-
-  /**
-   * Before unquoted, double quoted, or single quoted attribute value, allowing
-   * whitespace.
-   *
-   * ```markdown
-   * > | <a b=c>
-   *          ^
-   * > | <a b="c">
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeAttributeValueBefore(code) {
-    if (code === null || code === 60 || code === 61 || code === 62 || code === 96) {
-      return nok(code);
-    }
-    if (code === 34 || code === 39) {
-      effects.consume(code);
-      markerB = code;
-      return completeAttributeValueQuoted;
-    }
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return completeAttributeValueBefore;
-    }
-    return completeAttributeValueUnquoted(code);
-  }
-
-  /**
-   * In double or single quoted attribute value.
-   *
-   * ```markdown
-   * > | <a b="c">
-   *           ^
-   * > | <a b='c'>
-   *           ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeAttributeValueQuoted(code) {
-    if (code === markerB) {
-      effects.consume(code);
-      markerB = null;
-      return completeAttributeValueQuotedAfter;
-    }
-    if (code === null || markdownLineEnding(code)) {
-      return nok(code);
-    }
-    effects.consume(code);
-    return completeAttributeValueQuoted;
-  }
-
-  /**
-   * In unquoted attribute value.
-   *
-   * ```markdown
-   * > | <a b=c>
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeAttributeValueUnquoted(code) {
-    if (code === null || code === 34 || code === 39 || code === 47 || code === 60 || code === 61 || code === 62 || code === 96 || markdownLineEndingOrSpace(code)) {
-      return completeAttributeNameAfter(code);
-    }
-    effects.consume(code);
-    return completeAttributeValueUnquoted;
-  }
-
-  /**
-   * After double or single quoted attribute value, before whitespace or the
-   * end of the tag.
-   *
-   * ```markdown
-   * > | <a b="c">
-   *            ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeAttributeValueQuotedAfter(code) {
-    if (code === 47 || code === 62 || markdownSpace(code)) {
-      return completeAttributeNameBefore(code);
-    }
-    return nok(code);
-  }
-
-  /**
-   * In certain circumstances of a complete tag where only an `>` is allowed.
-   *
-   * ```markdown
-   * > | <a b="c">
-   *             ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeEnd(code) {
-    if (code === 62) {
-      effects.consume(code);
-      return completeAfter;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `>` in a complete tag.
-   *
-   * ```markdown
-   * > | <x>
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function completeAfter(code) {
-    if (code === null || markdownLineEnding(code)) {
-      // // Do not form containers.
-      // tokenizer.concrete = true
-      return continuation(code);
-    }
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return completeAfter;
-    }
-    return nok(code);
-  }
-
-  /**
-   * In continuation of any HTML kind.
-   *
-   * ```markdown
-   * > | <!--xxx-->
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuation(code) {
-    if (code === 45 && marker === 2) {
-      effects.consume(code);
-      return continuationCommentInside;
-    }
-    if (code === 60 && marker === 1) {
-      effects.consume(code);
-      return continuationRawTagOpen;
-    }
-    if (code === 62 && marker === 4) {
-      effects.consume(code);
-      return continuationClose;
-    }
-    if (code === 63 && marker === 3) {
-      effects.consume(code);
-      return continuationDeclarationInside;
-    }
-    if (code === 93 && marker === 5) {
-      effects.consume(code);
-      return continuationCdataInside;
-    }
-    if (markdownLineEnding(code) && (marker === 6 || marker === 7)) {
-      effects.exit("htmlFlowData");
-      return effects.check(blankLineBefore, continuationAfter, continuationStart)(code);
-    }
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("htmlFlowData");
-      return continuationStart(code);
-    }
-    effects.consume(code);
-    return continuation;
-  }
-
-  /**
-   * In continuation, at eol.
-   *
-   * ```markdown
-   * > | <x>
-   *        ^
-   *   | asd
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationStart(code) {
-    return effects.check(nonLazyContinuationStart, continuationStartNonLazy, continuationAfter)(code);
-  }
-
-  /**
-   * In continuation, at eol, before non-lazy content.
-   *
-   * ```markdown
-   * > | <x>
-   *        ^
-   *   | asd
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationStartNonLazy(code) {
-    effects.enter("lineEnding");
-    effects.consume(code);
-    effects.exit("lineEnding");
-    return continuationBefore;
-  }
-
-  /**
-   * In continuation, before non-lazy content.
-   *
-   * ```markdown
-   *   | <x>
-   * > | asd
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationBefore(code) {
-    if (code === null || markdownLineEnding(code)) {
-      return continuationStart(code);
-    }
-    effects.enter("htmlFlowData");
-    return continuation(code);
-  }
-
-  /**
-   * In comment continuation, after one `-`, expecting another.
-   *
-   * ```markdown
-   * > | <!--xxx-->
-   *             ^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationCommentInside(code) {
-    if (code === 45) {
-      effects.consume(code);
-      return continuationDeclarationInside;
-    }
-    return continuation(code);
-  }
-
-  /**
-   * In raw continuation, after `<`, at `/`.
-   *
-   * ```markdown
-   * > | <script>console.log(1)</script>
-   *                            ^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationRawTagOpen(code) {
-    if (code === 47) {
-      effects.consume(code);
-      buffer = '';
-      return continuationRawEndTag;
-    }
-    return continuation(code);
-  }
-
-  /**
-   * In raw continuation, after `</`, in a raw tag name.
-   *
-   * ```markdown
-   * > | <script>console.log(1)</script>
-   *                             ^^^^^^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationRawEndTag(code) {
-    if (code === 62) {
-      const name = buffer.toLowerCase();
-      if (htmlRawNames.includes(name)) {
-        effects.consume(code);
-        return continuationClose;
-      }
-      return continuation(code);
-    }
-    if (asciiAlpha(code) && buffer.length < 8) {
-      effects.consume(code);
-      // @ts-expect-error: not null.
-      buffer += String.fromCharCode(code);
-      return continuationRawEndTag;
-    }
-    return continuation(code);
-  }
-
-  /**
-   * In cdata continuation, after `]`, expecting `]>`.
-   *
-   * ```markdown
-   * > | <![CDATA[>&<]]>
-   *                  ^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationCdataInside(code) {
-    if (code === 93) {
-      effects.consume(code);
-      return continuationDeclarationInside;
-    }
-    return continuation(code);
-  }
-
-  /**
-   * In declaration or instruction continuation, at `>`.
-   *
-   * ```markdown
-   * > | <!-->
-   *         ^
-   * > | <?>
-   *       ^
-   * > | <!q>
-   *        ^
-   * > | <!--ab-->
-   *             ^
-   * > | <![CDATA[>&<]]>
-   *                   ^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationDeclarationInside(code) {
-    if (code === 62) {
-      effects.consume(code);
-      return continuationClose;
-    }
-
-    // More dashes.
-    if (code === 45 && marker === 2) {
-      effects.consume(code);
-      return continuationDeclarationInside;
-    }
-    return continuation(code);
-  }
-
-  /**
-   * In closed continuation: everything we get until the eol/eof is part of it.
-   *
-   * ```markdown
-   * > | <!doctype>
-   *               ^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationClose(code) {
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("htmlFlowData");
-      return continuationAfter(code);
-    }
-    effects.consume(code);
-    return continuationClose;
-  }
-
-  /**
-   * Done.
-   *
-   * ```markdown
-   * > | <!doctype>
-   *               ^
-   * ```
-   *
-   * @type {State}
-   */
-  function continuationAfter(code) {
-    effects.exit("htmlFlow");
-    // // Feel free to interrupt.
-    // tokenizer.interrupt = false
-    // // No longer concrete.
-    // tokenizer.concrete = false
-    return ok(code);
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeNonLazyContinuationStart(effects, ok, nok) {
-  const self = this;
-  return start;
-
-  /**
-   * At eol, before continuation.
-   *
-   * ```markdown
-   * > | * ```js
-   *            ^
-   *   | b
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    if (markdownLineEnding(code)) {
-      effects.enter("lineEnding");
-      effects.consume(code);
-      effects.exit("lineEnding");
-      return after;
-    }
-    return nok(code);
-  }
-
-  /**
-   * A continuation.
-   *
-   * ```markdown
-   *   | * ```js
-   * > | b
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    return self.parser.lazy[self.now().line] ? nok(code) : ok(code);
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeBlankLineBefore(effects, ok, nok) {
-  return start;
-
-  /**
-   * Before eol, expecting blank line.
-   *
-   * ```markdown
-   * > | <div>
-   *          ^
-   *   |
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("lineEnding");
-    effects.consume(code);
-    effects.exit("lineEnding");
-    return effects.attempt(blankLine, ok, nok);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/code-fenced.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const nonLazyContinuation = {
-  tokenize: tokenizeNonLazyContinuation,
-  partial: true
-};
-
-/** @type {Construct} */
-const codeFenced = {
-  name: 'codeFenced',
-  tokenize: tokenizeCodeFenced,
-  concrete: true
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeCodeFenced(effects, ok, nok) {
-  const self = this;
-  /** @type {Construct} */
-  const closeStart = {
-    tokenize: tokenizeCloseStart,
-    partial: true
-  };
-  let initialPrefix = 0;
-  let sizeOpen = 0;
-  /** @type {NonNullable<Code>} */
-  let marker;
-  return start;
-
-  /**
-   * Start of code.
-   *
-   * ```markdown
-   * > | ~~~js
-   *     ^
-   *   | alert(1)
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    // To do: parse whitespace like `markdown-rs`.
-    return beforeSequenceOpen(code);
-  }
-
-  /**
-   * In opening fence, after prefix, at sequence.
-   *
-   * ```markdown
-   * > | ~~~js
-   *     ^
-   *   | alert(1)
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function beforeSequenceOpen(code) {
-    const tail = self.events[self.events.length - 1];
-    initialPrefix = tail && tail[1].type === "linePrefix" ? tail[2].sliceSerialize(tail[1], true).length : 0;
-    marker = code;
-    effects.enter("codeFenced");
-    effects.enter("codeFencedFence");
-    effects.enter("codeFencedFenceSequence");
-    return sequenceOpen(code);
-  }
-
-  /**
-   * In opening fence sequence.
-   *
-   * ```markdown
-   * > | ~~~js
-   *      ^
-   *   | alert(1)
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function sequenceOpen(code) {
-    if (code === marker) {
-      sizeOpen++;
-      effects.consume(code);
-      return sequenceOpen;
-    }
-    if (sizeOpen < 3) {
-      return nok(code);
-    }
-    effects.exit("codeFencedFenceSequence");
-    return markdownSpace(code) ? factorySpace(effects, infoBefore, "whitespace")(code) : infoBefore(code);
-  }
-
-  /**
-   * In opening fence, after the sequence (and optional whitespace), before info.
-   *
-   * ```markdown
-   * > | ~~~js
-   *        ^
-   *   | alert(1)
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function infoBefore(code) {
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("codeFencedFence");
-      return self.interrupt ? ok(code) : effects.check(nonLazyContinuation, atNonLazyBreak, after)(code);
-    }
-    effects.enter("codeFencedFenceInfo");
-    effects.enter("chunkString", {
-      contentType: "string"
-    });
-    return info(code);
-  }
-
-  /**
-   * In info.
-   *
-   * ```markdown
-   * > | ~~~js
-   *        ^
-   *   | alert(1)
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function info(code) {
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("chunkString");
-      effects.exit("codeFencedFenceInfo");
-      return infoBefore(code);
-    }
-    if (markdownSpace(code)) {
-      effects.exit("chunkString");
-      effects.exit("codeFencedFenceInfo");
-      return factorySpace(effects, metaBefore, "whitespace")(code);
-    }
-    if (code === 96 && code === marker) {
-      return nok(code);
-    }
-    effects.consume(code);
-    return info;
-  }
-
-  /**
-   * In opening fence, after info and whitespace, before meta.
-   *
-   * ```markdown
-   * > | ~~~js eval
-   *           ^
-   *   | alert(1)
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function metaBefore(code) {
-    if (code === null || markdownLineEnding(code)) {
-      return infoBefore(code);
-    }
-    effects.enter("codeFencedFenceMeta");
-    effects.enter("chunkString", {
-      contentType: "string"
-    });
-    return meta(code);
-  }
-
-  /**
-   * In meta.
-   *
-   * ```markdown
-   * > | ~~~js eval
-   *           ^
-   *   | alert(1)
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function meta(code) {
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("chunkString");
-      effects.exit("codeFencedFenceMeta");
-      return infoBefore(code);
-    }
-    if (code === 96 && code === marker) {
-      return nok(code);
-    }
-    effects.consume(code);
-    return meta;
-  }
-
-  /**
-   * At eol/eof in code, before a non-lazy closing fence or content.
-   *
-   * ```markdown
-   * > | ~~~js
-   *          ^
-   * > | alert(1)
-   *             ^
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function atNonLazyBreak(code) {
-    return effects.attempt(closeStart, after, contentBefore)(code);
-  }
-
-  /**
-   * Before code content, not a closing fence, at eol.
-   *
-   * ```markdown
-   *   | ~~~js
-   * > | alert(1)
-   *             ^
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function contentBefore(code) {
-    effects.enter("lineEnding");
-    effects.consume(code);
-    effects.exit("lineEnding");
-    return contentStart;
-  }
-
-  /**
-   * Before code content, not a closing fence.
-   *
-   * ```markdown
-   *   | ~~~js
-   * > | alert(1)
-   *     ^
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function contentStart(code) {
-    return initialPrefix > 0 && markdownSpace(code) ? factorySpace(effects, beforeContentChunk, "linePrefix", initialPrefix + 1)(code) : beforeContentChunk(code);
-  }
-
-  /**
-   * Before code content, after optional prefix.
-   *
-   * ```markdown
-   *   | ~~~js
-   * > | alert(1)
-   *     ^
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function beforeContentChunk(code) {
-    if (code === null || markdownLineEnding(code)) {
-      return effects.check(nonLazyContinuation, atNonLazyBreak, after)(code);
-    }
-    effects.enter("codeFlowValue");
-    return contentChunk(code);
-  }
-
-  /**
-   * In code content.
-   *
-   * ```markdown
-   *   | ~~~js
-   * > | alert(1)
-   *     ^^^^^^^^
-   *   | ~~~
-   * ```
-   *
-   * @type {State}
-   */
-  function contentChunk(code) {
-    if (code === null || markdownLineEnding(code)) {
-      effects.exit("codeFlowValue");
-      return beforeContentChunk(code);
-    }
-    effects.consume(code);
-    return contentChunk;
-  }
-
-  /**
-   * After code.
-   *
-   * ```markdown
-   *   | ~~~js
-   *   | alert(1)
-   * > | ~~~
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    effects.exit("codeFenced");
-    return ok(code);
-  }
-
-  /**
-   * @this {TokenizeContext}
-   * @type {Tokenizer}
-   */
-  function tokenizeCloseStart(effects, ok, nok) {
-    let size = 0;
-    return startBefore;
-
-    /**
-     *
-     *
-     * @type {State}
-     */
-    function startBefore(code) {
-      effects.enter("lineEnding");
-      effects.consume(code);
-      effects.exit("lineEnding");
-      return start;
-    }
-
-    /**
-     * Before closing fence, at optional whitespace.
-     *
-     * ```markdown
-     *   | ~~~js
-     *   | alert(1)
-     * > | ~~~
-     *     ^
-     * ```
-     *
-     * @type {State}
-     */
-    function start(code) {
-      // Always populated by defaults.
-
-      // To do: `enter` here or in next state?
-      effects.enter("codeFencedFence");
-      return markdownSpace(code) ? factorySpace(effects, beforeSequenceClose, "linePrefix", self.parser.constructs.disable.null.includes('codeIndented') ? undefined : 4)(code) : beforeSequenceClose(code);
-    }
-
-    /**
-     * In closing fence, after optional whitespace, at sequence.
-     *
-     * ```markdown
-     *   | ~~~js
-     *   | alert(1)
-     * > | ~~~
-     *     ^
-     * ```
-     *
-     * @type {State}
-     */
-    function beforeSequenceClose(code) {
-      if (code === marker) {
-        effects.enter("codeFencedFenceSequence");
-        return sequenceClose(code);
-      }
-      return nok(code);
-    }
-
-    /**
-     * In closing fence sequence.
-     *
-     * ```markdown
-     *   | ~~~js
-     *   | alert(1)
-     * > | ~~~
-     *     ^
-     * ```
-     *
-     * @type {State}
-     */
-    function sequenceClose(code) {
-      if (code === marker) {
-        size++;
-        effects.consume(code);
-        return sequenceClose;
-      }
-      if (size >= sizeOpen) {
-        effects.exit("codeFencedFenceSequence");
-        return markdownSpace(code) ? factorySpace(effects, sequenceCloseAfter, "whitespace")(code) : sequenceCloseAfter(code);
-      }
-      return nok(code);
-    }
-
-    /**
-     * After closing fence sequence, after optional whitespace.
-     *
-     * ```markdown
-     *   | ~~~js
-     *   | alert(1)
-     * > | ~~~
-     *        ^
-     * ```
-     *
-     * @type {State}
-     */
-    function sequenceCloseAfter(code) {
-      if (code === null || markdownLineEnding(code)) {
-        effects.exit("codeFencedFence");
-        return ok(code);
-      }
-      return nok(code);
-    }
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeNonLazyContinuation(effects, ok, nok) {
-  const self = this;
-  return start;
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function start(code) {
-    if (code === null) {
-      return nok(code);
-    }
-    effects.enter("lineEnding");
-    effects.consume(code);
-    effects.exit("lineEnding");
-    return lineStart;
-  }
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function lineStart(code) {
-    return self.parser.lazy[self.now().line] ? nok(code) : ok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/decode-named-character-reference/node_modules/character-entities/index.js
-/**
- * Map of named character references.
- *
- * @type {Record<string, string>}
- */
-const characterEntities = {
-  AElig: 'Æ',
-  AMP: '&',
-  Aacute: 'Á',
-  Abreve: 'Ă',
-  Acirc: 'Â',
-  Acy: 'А',
-  Afr: '𝔄',
-  Agrave: 'À',
-  Alpha: 'Α',
-  Amacr: 'Ā',
-  And: '⩓',
-  Aogon: 'Ą',
-  Aopf: '𝔸',
-  ApplyFunction: '⁡',
-  Aring: 'Å',
-  Ascr: '𝒜',
-  Assign: '≔',
-  Atilde: 'Ã',
-  Auml: 'Ä',
-  Backslash: '∖',
-  Barv: '⫧',
-  Barwed: '⌆',
-  Bcy: 'Б',
-  Because: '∵',
-  Bernoullis: 'ℬ',
-  Beta: 'Β',
-  Bfr: '𝔅',
-  Bopf: '𝔹',
-  Breve: '˘',
-  Bscr: 'ℬ',
-  Bumpeq: '≎',
-  CHcy: 'Ч',
-  COPY: '©',
-  Cacute: 'Ć',
-  Cap: '⋒',
-  CapitalDifferentialD: 'ⅅ',
-  Cayleys: 'ℭ',
-  Ccaron: 'Č',
-  Ccedil: 'Ç',
-  Ccirc: 'Ĉ',
-  Cconint: '∰',
-  Cdot: 'Ċ',
-  Cedilla: '¸',
-  CenterDot: '·',
-  Cfr: 'ℭ',
-  Chi: 'Χ',
-  CircleDot: '⊙',
-  CircleMinus: '⊖',
-  CirclePlus: '⊕',
-  CircleTimes: '⊗',
-  ClockwiseContourIntegral: '∲',
-  CloseCurlyDoubleQuote: '”',
-  CloseCurlyQuote: '’',
-  Colon: '∷',
-  Colone: '⩴',
-  Congruent: '≡',
-  Conint: '∯',
-  ContourIntegral: '∮',
-  Copf: 'ℂ',
-  Coproduct: '∐',
-  CounterClockwiseContourIntegral: '∳',
-  Cross: '⨯',
-  Cscr: '𝒞',
-  Cup: '⋓',
-  CupCap: '≍',
-  DD: 'ⅅ',
-  DDotrahd: '⤑',
-  DJcy: 'Ђ',
-  DScy: 'Ѕ',
-  DZcy: 'Џ',
-  Dagger: '‡',
-  Darr: '↡',
-  Dashv: '⫤',
-  Dcaron: 'Ď',
-  Dcy: 'Д',
-  Del: '∇',
-  Delta: 'Δ',
-  Dfr: '𝔇',
-  DiacriticalAcute: '´',
-  DiacriticalDot: '˙',
-  DiacriticalDoubleAcute: '˝',
-  DiacriticalGrave: '`',
-  DiacriticalTilde: '˜',
-  Diamond: '⋄',
-  DifferentialD: 'ⅆ',
-  Dopf: '𝔻',
-  Dot: '¨',
-  DotDot: '⃜',
-  DotEqual: '≐',
-  DoubleContourIntegral: '∯',
-  DoubleDot: '¨',
-  DoubleDownArrow: '⇓',
-  DoubleLeftArrow: '⇐',
-  DoubleLeftRightArrow: '⇔',
-  DoubleLeftTee: '⫤',
-  DoubleLongLeftArrow: '⟸',
-  DoubleLongLeftRightArrow: '⟺',
-  DoubleLongRightArrow: '⟹',
-  DoubleRightArrow: '⇒',
-  DoubleRightTee: '⊨',
-  DoubleUpArrow: '⇑',
-  DoubleUpDownArrow: '⇕',
-  DoubleVerticalBar: '∥',
-  DownArrow: '↓',
-  DownArrowBar: '⤓',
-  DownArrowUpArrow: '⇵',
-  DownBreve: '̑',
-  DownLeftRightVector: '⥐',
-  DownLeftTeeVector: '⥞',
-  DownLeftVector: '↽',
-  DownLeftVectorBar: '⥖',
-  DownRightTeeVector: '⥟',
-  DownRightVector: '⇁',
-  DownRightVectorBar: '⥗',
-  DownTee: '⊤',
-  DownTeeArrow: '↧',
-  Downarrow: '⇓',
-  Dscr: '𝒟',
-  Dstrok: 'Đ',
-  ENG: 'Ŋ',
-  ETH: 'Ð',
-  Eacute: 'É',
-  Ecaron: 'Ě',
-  Ecirc: 'Ê',
-  Ecy: 'Э',
-  Edot: 'Ė',
-  Efr: '𝔈',
-  Egrave: 'È',
-  Element: '∈',
-  Emacr: 'Ē',
-  EmptySmallSquare: '◻',
-  EmptyVerySmallSquare: '▫',
-  Eogon: 'Ę',
-  Eopf: '𝔼',
-  Epsilon: 'Ε',
-  Equal: '⩵',
-  EqualTilde: '≂',
-  Equilibrium: '⇌',
-  Escr: 'ℰ',
-  Esim: '⩳',
-  Eta: 'Η',
-  Euml: 'Ë',
-  Exists: '∃',
-  ExponentialE: 'ⅇ',
-  Fcy: 'Ф',
-  Ffr: '𝔉',
-  FilledSmallSquare: '◼',
-  FilledVerySmallSquare: '▪',
-  Fopf: '𝔽',
-  ForAll: '∀',
-  Fouriertrf: 'ℱ',
-  Fscr: 'ℱ',
-  GJcy: 'Ѓ',
-  GT: '>',
-  Gamma: 'Γ',
-  Gammad: 'Ϝ',
-  Gbreve: 'Ğ',
-  Gcedil: 'Ģ',
-  Gcirc: 'Ĝ',
-  Gcy: 'Г',
-  Gdot: 'Ġ',
-  Gfr: '𝔊',
-  Gg: '⋙',
-  Gopf: '𝔾',
-  GreaterEqual: '≥',
-  GreaterEqualLess: '⋛',
-  GreaterFullEqual: '≧',
-  GreaterGreater: '⪢',
-  GreaterLess: '≷',
-  GreaterSlantEqual: '⩾',
-  GreaterTilde: '≳',
-  Gscr: '𝒢',
-  Gt: '≫',
-  HARDcy: 'Ъ',
-  Hacek: 'ˇ',
-  Hat: '^',
-  Hcirc: 'Ĥ',
-  Hfr: 'ℌ',
-  HilbertSpace: 'ℋ',
-  Hopf: 'ℍ',
-  HorizontalLine: '─',
-  Hscr: 'ℋ',
-  Hstrok: 'Ħ',
-  HumpDownHump: '≎',
-  HumpEqual: '≏',
-  IEcy: 'Е',
-  IJlig: 'Ĳ',
-  IOcy: 'Ё',
-  Iacute: 'Í',
-  Icirc: 'Î',
-  Icy: 'И',
-  Idot: 'İ',
-  Ifr: 'ℑ',
-  Igrave: 'Ì',
-  Im: 'ℑ',
-  Imacr: 'Ī',
-  ImaginaryI: 'ⅈ',
-  Implies: '⇒',
-  Int: '∬',
-  Integral: '∫',
-  Intersection: '⋂',
-  InvisibleComma: '⁣',
-  InvisibleTimes: '⁢',
-  Iogon: 'Į',
-  Iopf: '𝕀',
-  Iota: 'Ι',
-  Iscr: 'ℐ',
-  Itilde: 'Ĩ',
-  Iukcy: 'І',
-  Iuml: 'Ï',
-  Jcirc: 'Ĵ',
-  Jcy: 'Й',
-  Jfr: '𝔍',
-  Jopf: '𝕁',
-  Jscr: '𝒥',
-  Jsercy: 'Ј',
-  Jukcy: 'Є',
-  KHcy: 'Х',
-  KJcy: 'Ќ',
-  Kappa: 'Κ',
-  Kcedil: 'Ķ',
-  Kcy: 'К',
-  Kfr: '𝔎',
-  Kopf: '𝕂',
-  Kscr: '𝒦',
-  LJcy: 'Љ',
-  LT: '<',
-  Lacute: 'Ĺ',
-  Lambda: 'Λ',
-  Lang: '⟪',
-  Laplacetrf: 'ℒ',
-  Larr: '↞',
-  Lcaron: 'Ľ',
-  Lcedil: 'Ļ',
-  Lcy: 'Л',
-  LeftAngleBracket: '⟨',
-  LeftArrow: '←',
-  LeftArrowBar: '⇤',
-  LeftArrowRightArrow: '⇆',
-  LeftCeiling: '⌈',
-  LeftDoubleBracket: '⟦',
-  LeftDownTeeVector: '⥡',
-  LeftDownVector: '⇃',
-  LeftDownVectorBar: '⥙',
-  LeftFloor: '⌊',
-  LeftRightArrow: '↔',
-  LeftRightVector: '⥎',
-  LeftTee: '⊣',
-  LeftTeeArrow: '↤',
-  LeftTeeVector: '⥚',
-  LeftTriangle: '⊲',
-  LeftTriangleBar: '⧏',
-  LeftTriangleEqual: '⊴',
-  LeftUpDownVector: '⥑',
-  LeftUpTeeVector: '⥠',
-  LeftUpVector: '↿',
-  LeftUpVectorBar: '⥘',
-  LeftVector: '↼',
-  LeftVectorBar: '⥒',
-  Leftarrow: '⇐',
-  Leftrightarrow: '⇔',
-  LessEqualGreater: '⋚',
-  LessFullEqual: '≦',
-  LessGreater: '≶',
-  LessLess: '⪡',
-  LessSlantEqual: '⩽',
-  LessTilde: '≲',
-  Lfr: '𝔏',
-  Ll: '⋘',
-  Lleftarrow: '⇚',
-  Lmidot: 'Ŀ',
-  LongLeftArrow: '⟵',
-  LongLeftRightArrow: '⟷',
-  LongRightArrow: '⟶',
-  Longleftarrow: '⟸',
-  Longleftrightarrow: '⟺',
-  Longrightarrow: '⟹',
-  Lopf: '𝕃',
-  LowerLeftArrow: '↙',
-  LowerRightArrow: '↘',
-  Lscr: 'ℒ',
-  Lsh: '↰',
-  Lstrok: 'Ł',
-  Lt: '≪',
-  Map: '⤅',
-  Mcy: 'М',
-  MediumSpace: ' ',
-  Mellintrf: 'ℳ',
-  Mfr: '𝔐',
-  MinusPlus: '∓',
-  Mopf: '𝕄',
-  Mscr: 'ℳ',
-  Mu: 'Μ',
-  NJcy: 'Њ',
-  Nacute: 'Ń',
-  Ncaron: 'Ň',
-  Ncedil: 'Ņ',
-  Ncy: 'Н',
-  NegativeMediumSpace: '​',
-  NegativeThickSpace: '​',
-  NegativeThinSpace: '​',
-  NegativeVeryThinSpace: '​',
-  NestedGreaterGreater: '≫',
-  NestedLessLess: '≪',
-  NewLine: '\n',
-  Nfr: '𝔑',
-  NoBreak: '⁠',
-  NonBreakingSpace: ' ',
-  Nopf: 'ℕ',
-  Not: '⫬',
-  NotCongruent: '≢',
-  NotCupCap: '≭',
-  NotDoubleVerticalBar: '∦',
-  NotElement: '∉',
-  NotEqual: '≠',
-  NotEqualTilde: '≂̸',
-  NotExists: '∄',
-  NotGreater: '≯',
-  NotGreaterEqual: '≱',
-  NotGreaterFullEqual: '≧̸',
-  NotGreaterGreater: '≫̸',
-  NotGreaterLess: '≹',
-  NotGreaterSlantEqual: '⩾̸',
-  NotGreaterTilde: '≵',
-  NotHumpDownHump: '≎̸',
-  NotHumpEqual: '≏̸',
-  NotLeftTriangle: '⋪',
-  NotLeftTriangleBar: '⧏̸',
-  NotLeftTriangleEqual: '⋬',
-  NotLess: '≮',
-  NotLessEqual: '≰',
-  NotLessGreater: '≸',
-  NotLessLess: '≪̸',
-  NotLessSlantEqual: '⩽̸',
-  NotLessTilde: '≴',
-  NotNestedGreaterGreater: '⪢̸',
-  NotNestedLessLess: '⪡̸',
-  NotPrecedes: '⊀',
-  NotPrecedesEqual: '⪯̸',
-  NotPrecedesSlantEqual: '⋠',
-  NotReverseElement: '∌',
-  NotRightTriangle: '⋫',
-  NotRightTriangleBar: '⧐̸',
-  NotRightTriangleEqual: '⋭',
-  NotSquareSubset: '⊏̸',
-  NotSquareSubsetEqual: '⋢',
-  NotSquareSuperset: '⊐̸',
-  NotSquareSupersetEqual: '⋣',
-  NotSubset: '⊂⃒',
-  NotSubsetEqual: '⊈',
-  NotSucceeds: '⊁',
-  NotSucceedsEqual: '⪰̸',
-  NotSucceedsSlantEqual: '⋡',
-  NotSucceedsTilde: '≿̸',
-  NotSuperset: '⊃⃒',
-  NotSupersetEqual: '⊉',
-  NotTilde: '≁',
-  NotTildeEqual: '≄',
-  NotTildeFullEqual: '≇',
-  NotTildeTilde: '≉',
-  NotVerticalBar: '∤',
-  Nscr: '𝒩',
-  Ntilde: 'Ñ',
-  Nu: 'Ν',
-  OElig: 'Œ',
-  Oacute: 'Ó',
-  Ocirc: 'Ô',
-  Ocy: 'О',
-  Odblac: 'Ő',
-  Ofr: '𝔒',
-  Ograve: 'Ò',
-  Omacr: 'Ō',
-  Omega: 'Ω',
-  Omicron: 'Ο',
-  Oopf: '𝕆',
-  OpenCurlyDoubleQuote: '“',
-  OpenCurlyQuote: '‘',
-  Or: '⩔',
-  Oscr: '𝒪',
-  Oslash: 'Ø',
-  Otilde: 'Õ',
-  Otimes: '⨷',
-  Ouml: 'Ö',
-  OverBar: '‾',
-  OverBrace: '⏞',
-  OverBracket: '⎴',
-  OverParenthesis: '⏜',
-  PartialD: '∂',
-  Pcy: 'П',
-  Pfr: '𝔓',
-  Phi: 'Φ',
-  Pi: 'Π',
-  PlusMinus: '±',
-  Poincareplane: 'ℌ',
-  Popf: 'ℙ',
-  Pr: '⪻',
-  Precedes: '≺',
-  PrecedesEqual: '⪯',
-  PrecedesSlantEqual: '≼',
-  PrecedesTilde: '≾',
-  Prime: '″',
-  Product: '∏',
-  Proportion: '∷',
-  Proportional: '∝',
-  Pscr: '𝒫',
-  Psi: 'Ψ',
-  QUOT: '"',
-  Qfr: '𝔔',
-  Qopf: 'ℚ',
-  Qscr: '𝒬',
-  RBarr: '⤐',
-  REG: '®',
-  Racute: 'Ŕ',
-  Rang: '⟫',
-  Rarr: '↠',
-  Rarrtl: '⤖',
-  Rcaron: 'Ř',
-  Rcedil: 'Ŗ',
-  Rcy: 'Р',
-  Re: 'ℜ',
-  ReverseElement: '∋',
-  ReverseEquilibrium: '⇋',
-  ReverseUpEquilibrium: '⥯',
-  Rfr: 'ℜ',
-  Rho: 'Ρ',
-  RightAngleBracket: '⟩',
-  RightArrow: '→',
-  RightArrowBar: '⇥',
-  RightArrowLeftArrow: '⇄',
-  RightCeiling: '⌉',
-  RightDoubleBracket: '⟧',
-  RightDownTeeVector: '⥝',
-  RightDownVector: '⇂',
-  RightDownVectorBar: '⥕',
-  RightFloor: '⌋',
-  RightTee: '⊢',
-  RightTeeArrow: '↦',
-  RightTeeVector: '⥛',
-  RightTriangle: '⊳',
-  RightTriangleBar: '⧐',
-  RightTriangleEqual: '⊵',
-  RightUpDownVector: '⥏',
-  RightUpTeeVector: '⥜',
-  RightUpVector: '↾',
-  RightUpVectorBar: '⥔',
-  RightVector: '⇀',
-  RightVectorBar: '⥓',
-  Rightarrow: '⇒',
-  Ropf: 'ℝ',
-  RoundImplies: '⥰',
-  Rrightarrow: '⇛',
-  Rscr: 'ℛ',
-  Rsh: '↱',
-  RuleDelayed: '⧴',
-  SHCHcy: 'Щ',
-  SHcy: 'Ш',
-  SOFTcy: 'Ь',
-  Sacute: 'Ś',
-  Sc: '⪼',
-  Scaron: 'Š',
-  Scedil: 'Ş',
-  Scirc: 'Ŝ',
-  Scy: 'С',
-  Sfr: '𝔖',
-  ShortDownArrow: '↓',
-  ShortLeftArrow: '←',
-  ShortRightArrow: '→',
-  ShortUpArrow: '↑',
-  Sigma: 'Σ',
-  SmallCircle: '∘',
-  Sopf: '𝕊',
-  Sqrt: '√',
-  Square: '□',
-  SquareIntersection: '⊓',
-  SquareSubset: '⊏',
-  SquareSubsetEqual: '⊑',
-  SquareSuperset: '⊐',
-  SquareSupersetEqual: '⊒',
-  SquareUnion: '⊔',
-  Sscr: '𝒮',
-  Star: '⋆',
-  Sub: '⋐',
-  Subset: '⋐',
-  SubsetEqual: '⊆',
-  Succeeds: '≻',
-  SucceedsEqual: '⪰',
-  SucceedsSlantEqual: '≽',
-  SucceedsTilde: '≿',
-  SuchThat: '∋',
-  Sum: '∑',
-  Sup: '⋑',
-  Superset: '⊃',
-  SupersetEqual: '⊇',
-  Supset: '⋑',
-  THORN: 'Þ',
-  TRADE: '™',
-  TSHcy: 'Ћ',
-  TScy: 'Ц',
-  Tab: '\t',
-  Tau: 'Τ',
-  Tcaron: 'Ť',
-  Tcedil: 'Ţ',
-  Tcy: 'Т',
-  Tfr: '𝔗',
-  Therefore: '∴',
-  Theta: 'Θ',
-  ThickSpace: '  ',
-  ThinSpace: ' ',
-  Tilde: '∼',
-  TildeEqual: '≃',
-  TildeFullEqual: '≅',
-  TildeTilde: '≈',
-  Topf: '𝕋',
-  TripleDot: '⃛',
-  Tscr: '𝒯',
-  Tstrok: 'Ŧ',
-  Uacute: 'Ú',
-  Uarr: '↟',
-  Uarrocir: '⥉',
-  Ubrcy: 'Ў',
-  Ubreve: 'Ŭ',
-  Ucirc: 'Û',
-  Ucy: 'У',
-  Udblac: 'Ű',
-  Ufr: '𝔘',
-  Ugrave: 'Ù',
-  Umacr: 'Ū',
-  UnderBar: '_',
-  UnderBrace: '⏟',
-  UnderBracket: '⎵',
-  UnderParenthesis: '⏝',
-  Union: '⋃',
-  UnionPlus: '⊎',
-  Uogon: 'Ų',
-  Uopf: '𝕌',
-  UpArrow: '↑',
-  UpArrowBar: '⤒',
-  UpArrowDownArrow: '⇅',
-  UpDownArrow: '↕',
-  UpEquilibrium: '⥮',
-  UpTee: '⊥',
-  UpTeeArrow: '↥',
-  Uparrow: '⇑',
-  Updownarrow: '⇕',
-  UpperLeftArrow: '↖',
-  UpperRightArrow: '↗',
-  Upsi: 'ϒ',
-  Upsilon: 'Υ',
-  Uring: 'Ů',
-  Uscr: '𝒰',
-  Utilde: 'Ũ',
-  Uuml: 'Ü',
-  VDash: '⊫',
-  Vbar: '⫫',
-  Vcy: 'В',
-  Vdash: '⊩',
-  Vdashl: '⫦',
-  Vee: '⋁',
-  Verbar: '‖',
-  Vert: '‖',
-  VerticalBar: '∣',
-  VerticalLine: '|',
-  VerticalSeparator: '❘',
-  VerticalTilde: '≀',
-  VeryThinSpace: ' ',
-  Vfr: '𝔙',
-  Vopf: '𝕍',
-  Vscr: '𝒱',
-  Vvdash: '⊪',
-  Wcirc: 'Ŵ',
-  Wedge: '⋀',
-  Wfr: '𝔚',
-  Wopf: '𝕎',
-  Wscr: '𝒲',
-  Xfr: '𝔛',
-  Xi: 'Ξ',
-  Xopf: '𝕏',
-  Xscr: '𝒳',
-  YAcy: 'Я',
-  YIcy: 'Ї',
-  YUcy: 'Ю',
-  Yacute: 'Ý',
-  Ycirc: 'Ŷ',
-  Ycy: 'Ы',
-  Yfr: '𝔜',
-  Yopf: '𝕐',
-  Yscr: '𝒴',
-  Yuml: 'Ÿ',
-  ZHcy: 'Ж',
-  Zacute: 'Ź',
-  Zcaron: 'Ž',
-  Zcy: 'З',
-  Zdot: 'Ż',
-  ZeroWidthSpace: '​',
-  Zeta: 'Ζ',
-  Zfr: 'ℨ',
-  Zopf: 'ℤ',
-  Zscr: '𝒵',
-  aacute: 'á',
-  abreve: 'ă',
-  ac: '∾',
-  acE: '∾̳',
-  acd: '∿',
-  acirc: 'â',
-  acute: '´',
-  acy: 'а',
-  aelig: 'æ',
-  af: '⁡',
-  afr: '𝔞',
-  agrave: 'à',
-  alefsym: 'ℵ',
-  aleph: 'ℵ',
-  alpha: 'α',
-  amacr: 'ā',
-  amalg: '⨿',
-  amp: '&',
-  and: '∧',
-  andand: '⩕',
-  andd: '⩜',
-  andslope: '⩘',
-  andv: '⩚',
-  ang: '∠',
-  ange: '⦤',
-  angle: '∠',
-  angmsd: '∡',
-  angmsdaa: '⦨',
-  angmsdab: '⦩',
-  angmsdac: '⦪',
-  angmsdad: '⦫',
-  angmsdae: '⦬',
-  angmsdaf: '⦭',
-  angmsdag: '⦮',
-  angmsdah: '⦯',
-  angrt: '∟',
-  angrtvb: '⊾',
-  angrtvbd: '⦝',
-  angsph: '∢',
-  angst: 'Å',
-  angzarr: '⍼',
-  aogon: 'ą',
-  aopf: '𝕒',
-  ap: '≈',
-  apE: '⩰',
-  apacir: '⩯',
-  ape: '≊',
-  apid: '≋',
-  apos: "'",
-  approx: '≈',
-  approxeq: '≊',
-  aring: 'å',
-  ascr: '𝒶',
-  ast: '*',
-  asymp: '≈',
-  asympeq: '≍',
-  atilde: 'ã',
-  auml: 'ä',
-  awconint: '∳',
-  awint: '⨑',
-  bNot: '⫭',
-  backcong: '≌',
-  backepsilon: '϶',
-  backprime: '‵',
-  backsim: '∽',
-  backsimeq: '⋍',
-  barvee: '⊽',
-  barwed: '⌅',
-  barwedge: '⌅',
-  bbrk: '⎵',
-  bbrktbrk: '⎶',
-  bcong: '≌',
-  bcy: 'б',
-  bdquo: '„',
-  becaus: '∵',
-  because: '∵',
-  bemptyv: '⦰',
-  bepsi: '϶',
-  bernou: 'ℬ',
-  beta: 'β',
-  beth: 'ℶ',
-  between: '≬',
-  bfr: '𝔟',
-  bigcap: '⋂',
-  bigcirc: '◯',
-  bigcup: '⋃',
-  bigodot: '⨀',
-  bigoplus: '⨁',
-  bigotimes: '⨂',
-  bigsqcup: '⨆',
-  bigstar: '★',
-  bigtriangledown: '▽',
-  bigtriangleup: '△',
-  biguplus: '⨄',
-  bigvee: '⋁',
-  bigwedge: '⋀',
-  bkarow: '⤍',
-  blacklozenge: '⧫',
-  blacksquare: '▪',
-  blacktriangle: '▴',
-  blacktriangledown: '▾',
-  blacktriangleleft: '◂',
-  blacktriangleright: '▸',
-  blank: '␣',
-  blk12: '▒',
-  blk14: '░',
-  blk34: '▓',
-  block: '█',
-  bne: '=⃥',
-  bnequiv: '≡⃥',
-  bnot: '⌐',
-  bopf: '𝕓',
-  bot: '⊥',
-  bottom: '⊥',
-  bowtie: '⋈',
-  boxDL: '╗',
-  boxDR: '╔',
-  boxDl: '╖',
-  boxDr: '╓',
-  boxH: '═',
-  boxHD: '╦',
-  boxHU: '╩',
-  boxHd: '╤',
-  boxHu: '╧',
-  boxUL: '╝',
-  boxUR: '╚',
-  boxUl: '╜',
-  boxUr: '╙',
-  boxV: '║',
-  boxVH: '╬',
-  boxVL: '╣',
-  boxVR: '╠',
-  boxVh: '╫',
-  boxVl: '╢',
-  boxVr: '╟',
-  boxbox: '⧉',
-  boxdL: '╕',
-  boxdR: '╒',
-  boxdl: '┐',
-  boxdr: '┌',
-  boxh: '─',
-  boxhD: '╥',
-  boxhU: '╨',
-  boxhd: '┬',
-  boxhu: '┴',
-  boxminus: '⊟',
-  boxplus: '⊞',
-  boxtimes: '⊠',
-  boxuL: '╛',
-  boxuR: '╘',
-  boxul: '┘',
-  boxur: '└',
-  boxv: '│',
-  boxvH: '╪',
-  boxvL: '╡',
-  boxvR: '╞',
-  boxvh: '┼',
-  boxvl: '┤',
-  boxvr: '├',
-  bprime: '‵',
-  breve: '˘',
-  brvbar: '¦',
-  bscr: '𝒷',
-  bsemi: '⁏',
-  bsim: '∽',
-  bsime: '⋍',
-  bsol: '\\',
-  bsolb: '⧅',
-  bsolhsub: '⟈',
-  bull: '•',
-  bullet: '•',
-  bump: '≎',
-  bumpE: '⪮',
-  bumpe: '≏',
-  bumpeq: '≏',
-  cacute: 'ć',
-  cap: '∩',
-  capand: '⩄',
-  capbrcup: '⩉',
-  capcap: '⩋',
-  capcup: '⩇',
-  capdot: '⩀',
-  caps: '∩︀',
-  caret: '⁁',
-  caron: 'ˇ',
-  ccaps: '⩍',
-  ccaron: 'č',
-  ccedil: 'ç',
-  ccirc: 'ĉ',
-  ccups: '⩌',
-  ccupssm: '⩐',
-  cdot: 'ċ',
-  cedil: '¸',
-  cemptyv: '⦲',
-  cent: '¢',
-  centerdot: '·',
-  cfr: '𝔠',
-  chcy: 'ч',
-  check: '✓',
-  checkmark: '✓',
-  chi: 'χ',
-  cir: '○',
-  cirE: '⧃',
-  circ: 'ˆ',
-  circeq: '≗',
-  circlearrowleft: '↺',
-  circlearrowright: '↻',
-  circledR: '®',
-  circledS: 'Ⓢ',
-  circledast: '⊛',
-  circledcirc: '⊚',
-  circleddash: '⊝',
-  cire: '≗',
-  cirfnint: '⨐',
-  cirmid: '⫯',
-  cirscir: '⧂',
-  clubs: '♣',
-  clubsuit: '♣',
-  colon: ':',
-  colone: '≔',
-  coloneq: '≔',
-  comma: ',',
-  commat: '@',
-  comp: '∁',
-  compfn: '∘',
-  complement: '∁',
-  complexes: 'ℂ',
-  cong: '≅',
-  congdot: '⩭',
-  conint: '∮',
-  copf: '𝕔',
-  coprod: '∐',
-  copy: '©',
-  copysr: '℗',
-  crarr: '↵',
-  cross: '✗',
-  cscr: '𝒸',
-  csub: '⫏',
-  csube: '⫑',
-  csup: '⫐',
-  csupe: '⫒',
-  ctdot: '⋯',
-  cudarrl: '⤸',
-  cudarrr: '⤵',
-  cuepr: '⋞',
-  cuesc: '⋟',
-  cularr: '↶',
-  cularrp: '⤽',
-  cup: '∪',
-  cupbrcap: '⩈',
-  cupcap: '⩆',
-  cupcup: '⩊',
-  cupdot: '⊍',
-  cupor: '⩅',
-  cups: '∪︀',
-  curarr: '↷',
-  curarrm: '⤼',
-  curlyeqprec: '⋞',
-  curlyeqsucc: '⋟',
-  curlyvee: '⋎',
-  curlywedge: '⋏',
-  curren: '¤',
-  curvearrowleft: '↶',
-  curvearrowright: '↷',
-  cuvee: '⋎',
-  cuwed: '⋏',
-  cwconint: '∲',
-  cwint: '∱',
-  cylcty: '⌭',
-  dArr: '⇓',
-  dHar: '⥥',
-  dagger: '†',
-  daleth: 'ℸ',
-  darr: '↓',
-  dash: '‐',
-  dashv: '⊣',
-  dbkarow: '⤏',
-  dblac: '˝',
-  dcaron: 'ď',
-  dcy: 'д',
-  dd: 'ⅆ',
-  ddagger: '‡',
-  ddarr: '⇊',
-  ddotseq: '⩷',
-  deg: '°',
-  delta: 'δ',
-  demptyv: '⦱',
-  dfisht: '⥿',
-  dfr: '𝔡',
-  dharl: '⇃',
-  dharr: '⇂',
-  diam: '⋄',
-  diamond: '⋄',
-  diamondsuit: '♦',
-  diams: '♦',
-  die: '¨',
-  digamma: 'ϝ',
-  disin: '⋲',
-  div: '÷',
-  divide: '÷',
-  divideontimes: '⋇',
-  divonx: '⋇',
-  djcy: 'ђ',
-  dlcorn: '⌞',
-  dlcrop: '⌍',
-  dollar: '$',
-  dopf: '𝕕',
-  dot: '˙',
-  doteq: '≐',
-  doteqdot: '≑',
-  dotminus: '∸',
-  dotplus: '∔',
-  dotsquare: '⊡',
-  doublebarwedge: '⌆',
-  downarrow: '↓',
-  downdownarrows: '⇊',
-  downharpoonleft: '⇃',
-  downharpoonright: '⇂',
-  drbkarow: '⤐',
-  drcorn: '⌟',
-  drcrop: '⌌',
-  dscr: '𝒹',
-  dscy: 'ѕ',
-  dsol: '⧶',
-  dstrok: 'đ',
-  dtdot: '⋱',
-  dtri: '▿',
-  dtrif: '▾',
-  duarr: '⇵',
-  duhar: '⥯',
-  dwangle: '⦦',
-  dzcy: 'џ',
-  dzigrarr: '⟿',
-  eDDot: '⩷',
-  eDot: '≑',
-  eacute: 'é',
-  easter: '⩮',
-  ecaron: 'ě',
-  ecir: '≖',
-  ecirc: 'ê',
-  ecolon: '≕',
-  ecy: 'э',
-  edot: 'ė',
-  ee: 'ⅇ',
-  efDot: '≒',
-  efr: '𝔢',
-  eg: '⪚',
-  egrave: 'è',
-  egs: '⪖',
-  egsdot: '⪘',
-  el: '⪙',
-  elinters: '⏧',
-  ell: 'ℓ',
-  els: '⪕',
-  elsdot: '⪗',
-  emacr: 'ē',
-  empty: '∅',
-  emptyset: '∅',
-  emptyv: '∅',
-  emsp13: ' ',
-  emsp14: ' ',
-  emsp: ' ',
-  eng: 'ŋ',
-  ensp: ' ',
-  eogon: 'ę',
-  eopf: '𝕖',
-  epar: '⋕',
-  eparsl: '⧣',
-  eplus: '⩱',
-  epsi: 'ε',
-  epsilon: 'ε',
-  epsiv: 'ϵ',
-  eqcirc: '≖',
-  eqcolon: '≕',
-  eqsim: '≂',
-  eqslantgtr: '⪖',
-  eqslantless: '⪕',
-  equals: '=',
-  equest: '≟',
-  equiv: '≡',
-  equivDD: '⩸',
-  eqvparsl: '⧥',
-  erDot: '≓',
-  erarr: '⥱',
-  escr: 'ℯ',
-  esdot: '≐',
-  esim: '≂',
-  eta: 'η',
-  eth: 'ð',
-  euml: 'ë',
-  euro: '€',
-  excl: '!',
-  exist: '∃',
-  expectation: 'ℰ',
-  exponentiale: 'ⅇ',
-  fallingdotseq: '≒',
-  fcy: 'ф',
-  female: '♀',
-  ffilig: 'ﬃ',
-  fflig: 'ﬀ',
-  ffllig: 'ﬄ',
-  ffr: '𝔣',
-  filig: 'ﬁ',
-  fjlig: 'fj',
-  flat: '♭',
-  fllig: 'ﬂ',
-  fltns: '▱',
-  fnof: 'ƒ',
-  fopf: '𝕗',
-  forall: '∀',
-  fork: '⋔',
-  forkv: '⫙',
-  fpartint: '⨍',
-  frac12: '½',
-  frac13: '⅓',
-  frac14: '¼',
-  frac15: '⅕',
-  frac16: '⅙',
-  frac18: '⅛',
-  frac23: '⅔',
-  frac25: '⅖',
-  frac34: '¾',
-  frac35: '⅗',
-  frac38: '⅜',
-  frac45: '⅘',
-  frac56: '⅚',
-  frac58: '⅝',
-  frac78: '⅞',
-  frasl: '⁄',
-  frown: '⌢',
-  fscr: '𝒻',
-  gE: '≧',
-  gEl: '⪌',
-  gacute: 'ǵ',
-  gamma: 'γ',
-  gammad: 'ϝ',
-  gap: '⪆',
-  gbreve: 'ğ',
-  gcirc: 'ĝ',
-  gcy: 'г',
-  gdot: 'ġ',
-  ge: '≥',
-  gel: '⋛',
-  geq: '≥',
-  geqq: '≧',
-  geqslant: '⩾',
-  ges: '⩾',
-  gescc: '⪩',
-  gesdot: '⪀',
-  gesdoto: '⪂',
-  gesdotol: '⪄',
-  gesl: '⋛︀',
-  gesles: '⪔',
-  gfr: '𝔤',
-  gg: '≫',
-  ggg: '⋙',
-  gimel: 'ℷ',
-  gjcy: 'ѓ',
-  gl: '≷',
-  glE: '⪒',
-  gla: '⪥',
-  glj: '⪤',
-  gnE: '≩',
-  gnap: '⪊',
-  gnapprox: '⪊',
-  gne: '⪈',
-  gneq: '⪈',
-  gneqq: '≩',
-  gnsim: '⋧',
-  gopf: '𝕘',
-  grave: '`',
-  gscr: 'ℊ',
-  gsim: '≳',
-  gsime: '⪎',
-  gsiml: '⪐',
-  gt: '>',
-  gtcc: '⪧',
-  gtcir: '⩺',
-  gtdot: '⋗',
-  gtlPar: '⦕',
-  gtquest: '⩼',
-  gtrapprox: '⪆',
-  gtrarr: '⥸',
-  gtrdot: '⋗',
-  gtreqless: '⋛',
-  gtreqqless: '⪌',
-  gtrless: '≷',
-  gtrsim: '≳',
-  gvertneqq: '≩︀',
-  gvnE: '≩︀',
-  hArr: '⇔',
-  hairsp: ' ',
-  half: '½',
-  hamilt: 'ℋ',
-  hardcy: 'ъ',
-  harr: '↔',
-  harrcir: '⥈',
-  harrw: '↭',
-  hbar: 'ℏ',
-  hcirc: 'ĥ',
-  hearts: '♥',
-  heartsuit: '♥',
-  hellip: '…',
-  hercon: '⊹',
-  hfr: '𝔥',
-  hksearow: '⤥',
-  hkswarow: '⤦',
-  hoarr: '⇿',
-  homtht: '∻',
-  hookleftarrow: '↩',
-  hookrightarrow: '↪',
-  hopf: '𝕙',
-  horbar: '―',
-  hscr: '𝒽',
-  hslash: 'ℏ',
-  hstrok: 'ħ',
-  hybull: '⁃',
-  hyphen: '‐',
-  iacute: 'í',
-  ic: '⁣',
-  icirc: 'î',
-  icy: 'и',
-  iecy: 'е',
-  iexcl: '¡',
-  iff: '⇔',
-  ifr: '𝔦',
-  igrave: 'ì',
-  ii: 'ⅈ',
-  iiiint: '⨌',
-  iiint: '∭',
-  iinfin: '⧜',
-  iiota: '℩',
-  ijlig: 'ĳ',
-  imacr: 'ī',
-  image: 'ℑ',
-  imagline: 'ℐ',
-  imagpart: 'ℑ',
-  imath: 'ı',
-  imof: '⊷',
-  imped: 'Ƶ',
-  in: '∈',
-  incare: '℅',
-  infin: '∞',
-  infintie: '⧝',
-  inodot: 'ı',
-  int: '∫',
-  intcal: '⊺',
-  integers: 'ℤ',
-  intercal: '⊺',
-  intlarhk: '⨗',
-  intprod: '⨼',
-  iocy: 'ё',
-  iogon: 'į',
-  iopf: '𝕚',
-  iota: 'ι',
-  iprod: '⨼',
-  iquest: '¿',
-  iscr: '𝒾',
-  isin: '∈',
-  isinE: '⋹',
-  isindot: '⋵',
-  isins: '⋴',
-  isinsv: '⋳',
-  isinv: '∈',
-  it: '⁢',
-  itilde: 'ĩ',
-  iukcy: 'і',
-  iuml: 'ï',
-  jcirc: 'ĵ',
-  jcy: 'й',
-  jfr: '𝔧',
-  jmath: 'ȷ',
-  jopf: '𝕛',
-  jscr: '𝒿',
-  jsercy: 'ј',
-  jukcy: 'є',
-  kappa: 'κ',
-  kappav: 'ϰ',
-  kcedil: 'ķ',
-  kcy: 'к',
-  kfr: '𝔨',
-  kgreen: 'ĸ',
-  khcy: 'х',
-  kjcy: 'ќ',
-  kopf: '𝕜',
-  kscr: '𝓀',
-  lAarr: '⇚',
-  lArr: '⇐',
-  lAtail: '⤛',
-  lBarr: '⤎',
-  lE: '≦',
-  lEg: '⪋',
-  lHar: '⥢',
-  lacute: 'ĺ',
-  laemptyv: '⦴',
-  lagran: 'ℒ',
-  lambda: 'λ',
-  lang: '⟨',
-  langd: '⦑',
-  langle: '⟨',
-  lap: '⪅',
-  laquo: '«',
-  larr: '←',
-  larrb: '⇤',
-  larrbfs: '⤟',
-  larrfs: '⤝',
-  larrhk: '↩',
-  larrlp: '↫',
-  larrpl: '⤹',
-  larrsim: '⥳',
-  larrtl: '↢',
-  lat: '⪫',
-  latail: '⤙',
-  late: '⪭',
-  lates: '⪭︀',
-  lbarr: '⤌',
-  lbbrk: '❲',
-  lbrace: '{',
-  lbrack: '[',
-  lbrke: '⦋',
-  lbrksld: '⦏',
-  lbrkslu: '⦍',
-  lcaron: 'ľ',
-  lcedil: 'ļ',
-  lceil: '⌈',
-  lcub: '{',
-  lcy: 'л',
-  ldca: '⤶',
-  ldquo: '“',
-  ldquor: '„',
-  ldrdhar: '⥧',
-  ldrushar: '⥋',
-  ldsh: '↲',
-  le: '≤',
-  leftarrow: '←',
-  leftarrowtail: '↢',
-  leftharpoondown: '↽',
-  leftharpoonup: '↼',
-  leftleftarrows: '⇇',
-  leftrightarrow: '↔',
-  leftrightarrows: '⇆',
-  leftrightharpoons: '⇋',
-  leftrightsquigarrow: '↭',
-  leftthreetimes: '⋋',
-  leg: '⋚',
-  leq: '≤',
-  leqq: '≦',
-  leqslant: '⩽',
-  les: '⩽',
-  lescc: '⪨',
-  lesdot: '⩿',
-  lesdoto: '⪁',
-  lesdotor: '⪃',
-  lesg: '⋚︀',
-  lesges: '⪓',
-  lessapprox: '⪅',
-  lessdot: '⋖',
-  lesseqgtr: '⋚',
-  lesseqqgtr: '⪋',
-  lessgtr: '≶',
-  lesssim: '≲',
-  lfisht: '⥼',
-  lfloor: '⌊',
-  lfr: '𝔩',
-  lg: '≶',
-  lgE: '⪑',
-  lhard: '↽',
-  lharu: '↼',
-  lharul: '⥪',
-  lhblk: '▄',
-  ljcy: 'љ',
-  ll: '≪',
-  llarr: '⇇',
-  llcorner: '⌞',
-  llhard: '⥫',
-  lltri: '◺',
-  lmidot: 'ŀ',
-  lmoust: '⎰',
-  lmoustache: '⎰',
-  lnE: '≨',
-  lnap: '⪉',
-  lnapprox: '⪉',
-  lne: '⪇',
-  lneq: '⪇',
-  lneqq: '≨',
-  lnsim: '⋦',
-  loang: '⟬',
-  loarr: '⇽',
-  lobrk: '⟦',
-  longleftarrow: '⟵',
-  longleftrightarrow: '⟷',
-  longmapsto: '⟼',
-  longrightarrow: '⟶',
-  looparrowleft: '↫',
-  looparrowright: '↬',
-  lopar: '⦅',
-  lopf: '𝕝',
-  loplus: '⨭',
-  lotimes: '⨴',
-  lowast: '∗',
-  lowbar: '_',
-  loz: '◊',
-  lozenge: '◊',
-  lozf: '⧫',
-  lpar: '(',
-  lparlt: '⦓',
-  lrarr: '⇆',
-  lrcorner: '⌟',
-  lrhar: '⇋',
-  lrhard: '⥭',
-  lrm: '‎',
-  lrtri: '⊿',
-  lsaquo: '‹',
-  lscr: '𝓁',
-  lsh: '↰',
-  lsim: '≲',
-  lsime: '⪍',
-  lsimg: '⪏',
-  lsqb: '[',
-  lsquo: '‘',
-  lsquor: '‚',
-  lstrok: 'ł',
-  lt: '<',
-  ltcc: '⪦',
-  ltcir: '⩹',
-  ltdot: '⋖',
-  lthree: '⋋',
-  ltimes: '⋉',
-  ltlarr: '⥶',
-  ltquest: '⩻',
-  ltrPar: '⦖',
-  ltri: '◃',
-  ltrie: '⊴',
-  ltrif: '◂',
-  lurdshar: '⥊',
-  luruhar: '⥦',
-  lvertneqq: '≨︀',
-  lvnE: '≨︀',
-  mDDot: '∺',
-  macr: '¯',
-  male: '♂',
-  malt: '✠',
-  maltese: '✠',
-  map: '↦',
-  mapsto: '↦',
-  mapstodown: '↧',
-  mapstoleft: '↤',
-  mapstoup: '↥',
-  marker: '▮',
-  mcomma: '⨩',
-  mcy: 'м',
-  mdash: '—',
-  measuredangle: '∡',
-  mfr: '𝔪',
-  mho: '℧',
-  micro: 'µ',
-  mid: '∣',
-  midast: '*',
-  midcir: '⫰',
-  middot: '·',
-  minus: '−',
-  minusb: '⊟',
-  minusd: '∸',
-  minusdu: '⨪',
-  mlcp: '⫛',
-  mldr: '…',
-  mnplus: '∓',
-  models: '⊧',
-  mopf: '𝕞',
-  mp: '∓',
-  mscr: '𝓂',
-  mstpos: '∾',
-  mu: 'μ',
-  multimap: '⊸',
-  mumap: '⊸',
-  nGg: '⋙̸',
-  nGt: '≫⃒',
-  nGtv: '≫̸',
-  nLeftarrow: '⇍',
-  nLeftrightarrow: '⇎',
-  nLl: '⋘̸',
-  nLt: '≪⃒',
-  nLtv: '≪̸',
-  nRightarrow: '⇏',
-  nVDash: '⊯',
-  nVdash: '⊮',
-  nabla: '∇',
-  nacute: 'ń',
-  nang: '∠⃒',
-  nap: '≉',
-  napE: '⩰̸',
-  napid: '≋̸',
-  napos: 'ŉ',
-  napprox: '≉',
-  natur: '♮',
-  natural: '♮',
-  naturals: 'ℕ',
-  nbsp: ' ',
-  nbump: '≎̸',
-  nbumpe: '≏̸',
-  ncap: '⩃',
-  ncaron: 'ň',
-  ncedil: 'ņ',
-  ncong: '≇',
-  ncongdot: '⩭̸',
-  ncup: '⩂',
-  ncy: 'н',
-  ndash: '–',
-  ne: '≠',
-  neArr: '⇗',
-  nearhk: '⤤',
-  nearr: '↗',
-  nearrow: '↗',
-  nedot: '≐̸',
-  nequiv: '≢',
-  nesear: '⤨',
-  nesim: '≂̸',
-  nexist: '∄',
-  nexists: '∄',
-  nfr: '𝔫',
-  ngE: '≧̸',
-  nge: '≱',
-  ngeq: '≱',
-  ngeqq: '≧̸',
-  ngeqslant: '⩾̸',
-  nges: '⩾̸',
-  ngsim: '≵',
-  ngt: '≯',
-  ngtr: '≯',
-  nhArr: '⇎',
-  nharr: '↮',
-  nhpar: '⫲',
-  ni: '∋',
-  nis: '⋼',
-  nisd: '⋺',
-  niv: '∋',
-  njcy: 'њ',
-  nlArr: '⇍',
-  nlE: '≦̸',
-  nlarr: '↚',
-  nldr: '‥',
-  nle: '≰',
-  nleftarrow: '↚',
-  nleftrightarrow: '↮',
-  nleq: '≰',
-  nleqq: '≦̸',
-  nleqslant: '⩽̸',
-  nles: '⩽̸',
-  nless: '≮',
-  nlsim: '≴',
-  nlt: '≮',
-  nltri: '⋪',
-  nltrie: '⋬',
-  nmid: '∤',
-  nopf: '𝕟',
-  not: '¬',
-  notin: '∉',
-  notinE: '⋹̸',
-  notindot: '⋵̸',
-  notinva: '∉',
-  notinvb: '⋷',
-  notinvc: '⋶',
-  notni: '∌',
-  notniva: '∌',
-  notnivb: '⋾',
-  notnivc: '⋽',
-  npar: '∦',
-  nparallel: '∦',
-  nparsl: '⫽⃥',
-  npart: '∂̸',
-  npolint: '⨔',
-  npr: '⊀',
-  nprcue: '⋠',
-  npre: '⪯̸',
-  nprec: '⊀',
-  npreceq: '⪯̸',
-  nrArr: '⇏',
-  nrarr: '↛',
-  nrarrc: '⤳̸',
-  nrarrw: '↝̸',
-  nrightarrow: '↛',
-  nrtri: '⋫',
-  nrtrie: '⋭',
-  nsc: '⊁',
-  nsccue: '⋡',
-  nsce: '⪰̸',
-  nscr: '𝓃',
-  nshortmid: '∤',
-  nshortparallel: '∦',
-  nsim: '≁',
-  nsime: '≄',
-  nsimeq: '≄',
-  nsmid: '∤',
-  nspar: '∦',
-  nsqsube: '⋢',
-  nsqsupe: '⋣',
-  nsub: '⊄',
-  nsubE: '⫅̸',
-  nsube: '⊈',
-  nsubset: '⊂⃒',
-  nsubseteq: '⊈',
-  nsubseteqq: '⫅̸',
-  nsucc: '⊁',
-  nsucceq: '⪰̸',
-  nsup: '⊅',
-  nsupE: '⫆̸',
-  nsupe: '⊉',
-  nsupset: '⊃⃒',
-  nsupseteq: '⊉',
-  nsupseteqq: '⫆̸',
-  ntgl: '≹',
-  ntilde: 'ñ',
-  ntlg: '≸',
-  ntriangleleft: '⋪',
-  ntrianglelefteq: '⋬',
-  ntriangleright: '⋫',
-  ntrianglerighteq: '⋭',
-  nu: 'ν',
-  num: '#',
-  numero: '№',
-  numsp: ' ',
-  nvDash: '⊭',
-  nvHarr: '⤄',
-  nvap: '≍⃒',
-  nvdash: '⊬',
-  nvge: '≥⃒',
-  nvgt: '>⃒',
-  nvinfin: '⧞',
-  nvlArr: '⤂',
-  nvle: '≤⃒',
-  nvlt: '<⃒',
-  nvltrie: '⊴⃒',
-  nvrArr: '⤃',
-  nvrtrie: '⊵⃒',
-  nvsim: '∼⃒',
-  nwArr: '⇖',
-  nwarhk: '⤣',
-  nwarr: '↖',
-  nwarrow: '↖',
-  nwnear: '⤧',
-  oS: 'Ⓢ',
-  oacute: 'ó',
-  oast: '⊛',
-  ocir: '⊚',
-  ocirc: 'ô',
-  ocy: 'о',
-  odash: '⊝',
-  odblac: 'ő',
-  odiv: '⨸',
-  odot: '⊙',
-  odsold: '⦼',
-  oelig: 'œ',
-  ofcir: '⦿',
-  ofr: '𝔬',
-  ogon: '˛',
-  ograve: 'ò',
-  ogt: '⧁',
-  ohbar: '⦵',
-  ohm: 'Ω',
-  oint: '∮',
-  olarr: '↺',
-  olcir: '⦾',
-  olcross: '⦻',
-  oline: '‾',
-  olt: '⧀',
-  omacr: 'ō',
-  omega: 'ω',
-  omicron: 'ο',
-  omid: '⦶',
-  ominus: '⊖',
-  oopf: '𝕠',
-  opar: '⦷',
-  operp: '⦹',
-  oplus: '⊕',
-  or: '∨',
-  orarr: '↻',
-  ord: '⩝',
-  order: 'ℴ',
-  orderof: 'ℴ',
-  ordf: 'ª',
-  ordm: 'º',
-  origof: '⊶',
-  oror: '⩖',
-  orslope: '⩗',
-  orv: '⩛',
-  oscr: 'ℴ',
-  oslash: 'ø',
-  osol: '⊘',
-  otilde: 'õ',
-  otimes: '⊗',
-  otimesas: '⨶',
-  ouml: 'ö',
-  ovbar: '⌽',
-  par: '∥',
-  para: '¶',
-  parallel: '∥',
-  parsim: '⫳',
-  parsl: '⫽',
-  part: '∂',
-  pcy: 'п',
-  percnt: '%',
-  period: '.',
-  permil: '‰',
-  perp: '⊥',
-  pertenk: '‱',
-  pfr: '𝔭',
-  phi: 'φ',
-  phiv: 'ϕ',
-  phmmat: 'ℳ',
-  phone: '☎',
-  pi: 'π',
-  pitchfork: '⋔',
-  piv: 'ϖ',
-  planck: 'ℏ',
-  planckh: 'ℎ',
-  plankv: 'ℏ',
-  plus: '+',
-  plusacir: '⨣',
-  plusb: '⊞',
-  pluscir: '⨢',
-  plusdo: '∔',
-  plusdu: '⨥',
-  pluse: '⩲',
-  plusmn: '±',
-  plussim: '⨦',
-  plustwo: '⨧',
-  pm: '±',
-  pointint: '⨕',
-  popf: '𝕡',
-  pound: '£',
-  pr: '≺',
-  prE: '⪳',
-  prap: '⪷',
-  prcue: '≼',
-  pre: '⪯',
-  prec: '≺',
-  precapprox: '⪷',
-  preccurlyeq: '≼',
-  preceq: '⪯',
-  precnapprox: '⪹',
-  precneqq: '⪵',
-  precnsim: '⋨',
-  precsim: '≾',
-  prime: '′',
-  primes: 'ℙ',
-  prnE: '⪵',
-  prnap: '⪹',
-  prnsim: '⋨',
-  prod: '∏',
-  profalar: '⌮',
-  profline: '⌒',
-  profsurf: '⌓',
-  prop: '∝',
-  propto: '∝',
-  prsim: '≾',
-  prurel: '⊰',
-  pscr: '𝓅',
-  psi: 'ψ',
-  puncsp: ' ',
-  qfr: '𝔮',
-  qint: '⨌',
-  qopf: '𝕢',
-  qprime: '⁗',
-  qscr: '𝓆',
-  quaternions: 'ℍ',
-  quatint: '⨖',
-  quest: '?',
-  questeq: '≟',
-  quot: '"',
-  rAarr: '⇛',
-  rArr: '⇒',
-  rAtail: '⤜',
-  rBarr: '⤏',
-  rHar: '⥤',
-  race: '∽̱',
-  racute: 'ŕ',
-  radic: '√',
-  raemptyv: '⦳',
-  rang: '⟩',
-  rangd: '⦒',
-  range: '⦥',
-  rangle: '⟩',
-  raquo: '»',
-  rarr: '→',
-  rarrap: '⥵',
-  rarrb: '⇥',
-  rarrbfs: '⤠',
-  rarrc: '⤳',
-  rarrfs: '⤞',
-  rarrhk: '↪',
-  rarrlp: '↬',
-  rarrpl: '⥅',
-  rarrsim: '⥴',
-  rarrtl: '↣',
-  rarrw: '↝',
-  ratail: '⤚',
-  ratio: '∶',
-  rationals: 'ℚ',
-  rbarr: '⤍',
-  rbbrk: '❳',
-  rbrace: '}',
-  rbrack: ']',
-  rbrke: '⦌',
-  rbrksld: '⦎',
-  rbrkslu: '⦐',
-  rcaron: 'ř',
-  rcedil: 'ŗ',
-  rceil: '⌉',
-  rcub: '}',
-  rcy: 'р',
-  rdca: '⤷',
-  rdldhar: '⥩',
-  rdquo: '”',
-  rdquor: '”',
-  rdsh: '↳',
-  real: 'ℜ',
-  realine: 'ℛ',
-  realpart: 'ℜ',
-  reals: 'ℝ',
-  rect: '▭',
-  reg: '®',
-  rfisht: '⥽',
-  rfloor: '⌋',
-  rfr: '𝔯',
-  rhard: '⇁',
-  rharu: '⇀',
-  rharul: '⥬',
-  rho: 'ρ',
-  rhov: 'ϱ',
-  rightarrow: '→',
-  rightarrowtail: '↣',
-  rightharpoondown: '⇁',
-  rightharpoonup: '⇀',
-  rightleftarrows: '⇄',
-  rightleftharpoons: '⇌',
-  rightrightarrows: '⇉',
-  rightsquigarrow: '↝',
-  rightthreetimes: '⋌',
-  ring: '˚',
-  risingdotseq: '≓',
-  rlarr: '⇄',
-  rlhar: '⇌',
-  rlm: '‏',
-  rmoust: '⎱',
-  rmoustache: '⎱',
-  rnmid: '⫮',
-  roang: '⟭',
-  roarr: '⇾',
-  robrk: '⟧',
-  ropar: '⦆',
-  ropf: '𝕣',
-  roplus: '⨮',
-  rotimes: '⨵',
-  rpar: ')',
-  rpargt: '⦔',
-  rppolint: '⨒',
-  rrarr: '⇉',
-  rsaquo: '›',
-  rscr: '𝓇',
-  rsh: '↱',
-  rsqb: ']',
-  rsquo: '’',
-  rsquor: '’',
-  rthree: '⋌',
-  rtimes: '⋊',
-  rtri: '▹',
-  rtrie: '⊵',
-  rtrif: '▸',
-  rtriltri: '⧎',
-  ruluhar: '⥨',
-  rx: '℞',
-  sacute: 'ś',
-  sbquo: '‚',
-  sc: '≻',
-  scE: '⪴',
-  scap: '⪸',
-  scaron: 'š',
-  sccue: '≽',
-  sce: '⪰',
-  scedil: 'ş',
-  scirc: 'ŝ',
-  scnE: '⪶',
-  scnap: '⪺',
-  scnsim: '⋩',
-  scpolint: '⨓',
-  scsim: '≿',
-  scy: 'с',
-  sdot: '⋅',
-  sdotb: '⊡',
-  sdote: '⩦',
-  seArr: '⇘',
-  searhk: '⤥',
-  searr: '↘',
-  searrow: '↘',
-  sect: '§',
-  semi: ';',
-  seswar: '⤩',
-  setminus: '∖',
-  setmn: '∖',
-  sext: '✶',
-  sfr: '𝔰',
-  sfrown: '⌢',
-  sharp: '♯',
-  shchcy: 'щ',
-  shcy: 'ш',
-  shortmid: '∣',
-  shortparallel: '∥',
-  shy: '­',
-  sigma: 'σ',
-  sigmaf: 'ς',
-  sigmav: 'ς',
-  sim: '∼',
-  simdot: '⩪',
-  sime: '≃',
-  simeq: '≃',
-  simg: '⪞',
-  simgE: '⪠',
-  siml: '⪝',
-  simlE: '⪟',
-  simne: '≆',
-  simplus: '⨤',
-  simrarr: '⥲',
-  slarr: '←',
-  smallsetminus: '∖',
-  smashp: '⨳',
-  smeparsl: '⧤',
-  smid: '∣',
-  smile: '⌣',
-  smt: '⪪',
-  smte: '⪬',
-  smtes: '⪬︀',
-  softcy: 'ь',
-  sol: '/',
-  solb: '⧄',
-  solbar: '⌿',
-  sopf: '𝕤',
-  spades: '♠',
-  spadesuit: '♠',
-  spar: '∥',
-  sqcap: '⊓',
-  sqcaps: '⊓︀',
-  sqcup: '⊔',
-  sqcups: '⊔︀',
-  sqsub: '⊏',
-  sqsube: '⊑',
-  sqsubset: '⊏',
-  sqsubseteq: '⊑',
-  sqsup: '⊐',
-  sqsupe: '⊒',
-  sqsupset: '⊐',
-  sqsupseteq: '⊒',
-  squ: '□',
-  square: '□',
-  squarf: '▪',
-  squf: '▪',
-  srarr: '→',
-  sscr: '𝓈',
-  ssetmn: '∖',
-  ssmile: '⌣',
-  sstarf: '⋆',
-  star: '☆',
-  starf: '★',
-  straightepsilon: 'ϵ',
-  straightphi: 'ϕ',
-  strns: '¯',
-  sub: '⊂',
-  subE: '⫅',
-  subdot: '⪽',
-  sube: '⊆',
-  subedot: '⫃',
-  submult: '⫁',
-  subnE: '⫋',
-  subne: '⊊',
-  subplus: '⪿',
-  subrarr: '⥹',
-  subset: '⊂',
-  subseteq: '⊆',
-  subseteqq: '⫅',
-  subsetneq: '⊊',
-  subsetneqq: '⫋',
-  subsim: '⫇',
-  subsub: '⫕',
-  subsup: '⫓',
-  succ: '≻',
-  succapprox: '⪸',
-  succcurlyeq: '≽',
-  succeq: '⪰',
-  succnapprox: '⪺',
-  succneqq: '⪶',
-  succnsim: '⋩',
-  succsim: '≿',
-  sum: '∑',
-  sung: '♪',
-  sup1: '¹',
-  sup2: '²',
-  sup3: '³',
-  sup: '⊃',
-  supE: '⫆',
-  supdot: '⪾',
-  supdsub: '⫘',
-  supe: '⊇',
-  supedot: '⫄',
-  suphsol: '⟉',
-  suphsub: '⫗',
-  suplarr: '⥻',
-  supmult: '⫂',
-  supnE: '⫌',
-  supne: '⊋',
-  supplus: '⫀',
-  supset: '⊃',
-  supseteq: '⊇',
-  supseteqq: '⫆',
-  supsetneq: '⊋',
-  supsetneqq: '⫌',
-  supsim: '⫈',
-  supsub: '⫔',
-  supsup: '⫖',
-  swArr: '⇙',
-  swarhk: '⤦',
-  swarr: '↙',
-  swarrow: '↙',
-  swnwar: '⤪',
-  szlig: 'ß',
-  target: '⌖',
-  tau: 'τ',
-  tbrk: '⎴',
-  tcaron: 'ť',
-  tcedil: 'ţ',
-  tcy: 'т',
-  tdot: '⃛',
-  telrec: '⌕',
-  tfr: '𝔱',
-  there4: '∴',
-  therefore: '∴',
-  theta: 'θ',
-  thetasym: 'ϑ',
-  thetav: 'ϑ',
-  thickapprox: '≈',
-  thicksim: '∼',
-  thinsp: ' ',
-  thkap: '≈',
-  thksim: '∼',
-  thorn: 'þ',
-  tilde: '˜',
-  times: '×',
-  timesb: '⊠',
-  timesbar: '⨱',
-  timesd: '⨰',
-  tint: '∭',
-  toea: '⤨',
-  top: '⊤',
-  topbot: '⌶',
-  topcir: '⫱',
-  topf: '𝕥',
-  topfork: '⫚',
-  tosa: '⤩',
-  tprime: '‴',
-  trade: '™',
-  triangle: '▵',
-  triangledown: '▿',
-  triangleleft: '◃',
-  trianglelefteq: '⊴',
-  triangleq: '≜',
-  triangleright: '▹',
-  trianglerighteq: '⊵',
-  tridot: '◬',
-  trie: '≜',
-  triminus: '⨺',
-  triplus: '⨹',
-  trisb: '⧍',
-  tritime: '⨻',
-  trpezium: '⏢',
-  tscr: '𝓉',
-  tscy: 'ц',
-  tshcy: 'ћ',
-  tstrok: 'ŧ',
-  twixt: '≬',
-  twoheadleftarrow: '↞',
-  twoheadrightarrow: '↠',
-  uArr: '⇑',
-  uHar: '⥣',
-  uacute: 'ú',
-  uarr: '↑',
-  ubrcy: 'ў',
-  ubreve: 'ŭ',
-  ucirc: 'û',
-  ucy: 'у',
-  udarr: '⇅',
-  udblac: 'ű',
-  udhar: '⥮',
-  ufisht: '⥾',
-  ufr: '𝔲',
-  ugrave: 'ù',
-  uharl: '↿',
-  uharr: '↾',
-  uhblk: '▀',
-  ulcorn: '⌜',
-  ulcorner: '⌜',
-  ulcrop: '⌏',
-  ultri: '◸',
-  umacr: 'ū',
-  uml: '¨',
-  uogon: 'ų',
-  uopf: '𝕦',
-  uparrow: '↑',
-  updownarrow: '↕',
-  upharpoonleft: '↿',
-  upharpoonright: '↾',
-  uplus: '⊎',
-  upsi: 'υ',
-  upsih: 'ϒ',
-  upsilon: 'υ',
-  upuparrows: '⇈',
-  urcorn: '⌝',
-  urcorner: '⌝',
-  urcrop: '⌎',
-  uring: 'ů',
-  urtri: '◹',
-  uscr: '𝓊',
-  utdot: '⋰',
-  utilde: 'ũ',
-  utri: '▵',
-  utrif: '▴',
-  uuarr: '⇈',
-  uuml: 'ü',
-  uwangle: '⦧',
-  vArr: '⇕',
-  vBar: '⫨',
-  vBarv: '⫩',
-  vDash: '⊨',
-  vangrt: '⦜',
-  varepsilon: 'ϵ',
-  varkappa: 'ϰ',
-  varnothing: '∅',
-  varphi: 'ϕ',
-  varpi: 'ϖ',
-  varpropto: '∝',
-  varr: '↕',
-  varrho: 'ϱ',
-  varsigma: 'ς',
-  varsubsetneq: '⊊︀',
-  varsubsetneqq: '⫋︀',
-  varsupsetneq: '⊋︀',
-  varsupsetneqq: '⫌︀',
-  vartheta: 'ϑ',
-  vartriangleleft: '⊲',
-  vartriangleright: '⊳',
-  vcy: 'в',
-  vdash: '⊢',
-  vee: '∨',
-  veebar: '⊻',
-  veeeq: '≚',
-  vellip: '⋮',
-  verbar: '|',
-  vert: '|',
-  vfr: '𝔳',
-  vltri: '⊲',
-  vnsub: '⊂⃒',
-  vnsup: '⊃⃒',
-  vopf: '𝕧',
-  vprop: '∝',
-  vrtri: '⊳',
-  vscr: '𝓋',
-  vsubnE: '⫋︀',
-  vsubne: '⊊︀',
-  vsupnE: '⫌︀',
-  vsupne: '⊋︀',
-  vzigzag: '⦚',
-  wcirc: 'ŵ',
-  wedbar: '⩟',
-  wedge: '∧',
-  wedgeq: '≙',
-  weierp: '℘',
-  wfr: '𝔴',
-  wopf: '𝕨',
-  wp: '℘',
-  wr: '≀',
-  wreath: '≀',
-  wscr: '𝓌',
-  xcap: '⋂',
-  xcirc: '◯',
-  xcup: '⋃',
-  xdtri: '▽',
-  xfr: '𝔵',
-  xhArr: '⟺',
-  xharr: '⟷',
-  xi: 'ξ',
-  xlArr: '⟸',
-  xlarr: '⟵',
-  xmap: '⟼',
-  xnis: '⋻',
-  xodot: '⨀',
-  xopf: '𝕩',
-  xoplus: '⨁',
-  xotime: '⨂',
-  xrArr: '⟹',
-  xrarr: '⟶',
-  xscr: '𝓍',
-  xsqcup: '⨆',
-  xuplus: '⨄',
-  xutri: '△',
-  xvee: '⋁',
-  xwedge: '⋀',
-  yacute: 'ý',
-  yacy: 'я',
-  ycirc: 'ŷ',
-  ycy: 'ы',
-  yen: '¥',
-  yfr: '𝔶',
-  yicy: 'ї',
-  yopf: '𝕪',
-  yscr: '𝓎',
-  yucy: 'ю',
-  yuml: 'ÿ',
-  zacute: 'ź',
-  zcaron: 'ž',
-  zcy: 'з',
-  zdot: 'ż',
-  zeetrf: 'ℨ',
-  zeta: 'ζ',
-  zfr: '𝔷',
-  zhcy: 'ж',
-  zigrarr: '⇝',
-  zopf: '𝕫',
-  zscr: '𝓏',
-  zwj: '‍',
-  zwnj: '‌'
-}
-
-;// CONCATENATED MODULE: ./node_modules/decode-named-character-reference/index.js
-
-
-const own = {}.hasOwnProperty
-
-/**
- * Decode a single character reference (without the `&` or `;`).
- * You probably only need this when you’re building parsers yourself that follow
- * different rules compared to HTML.
- * This is optimized to be tiny in browsers.
- *
- * @param {string} value
- *   `notin` (named), `#123` (deci), `#x123` (hexa).
- * @returns {string|false}
- *   Decoded reference.
- */
-function decodeNamedCharacterReference(value) {
-  return own.call(characterEntities, value) ? characterEntities[value] : false
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/character-reference.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const characterReference = {
-  name: 'characterReference',
-  tokenize: tokenizeCharacterReference
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeCharacterReference(effects, ok, nok) {
-  const self = this;
-  let size = 0;
-  /** @type {number} */
-  let max;
-  /** @type {(code: Code) => boolean} */
-  let test;
-  return start;
-
-  /**
-   * Start of character reference.
-   *
-   * ```markdown
-   * > | a&amp;b
-   *      ^
-   * > | a&#123;b
-   *      ^
-   * > | a&#x9;b
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("characterReference");
-    effects.enter("characterReferenceMarker");
-    effects.consume(code);
-    effects.exit("characterReferenceMarker");
-    return open;
-  }
-
-  /**
-   * After `&`, at `#` for numeric references or alphanumeric for named
-   * references.
-   *
-   * ```markdown
-   * > | a&amp;b
-   *       ^
-   * > | a&#123;b
-   *       ^
-   * > | a&#x9;b
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function open(code) {
-    if (code === 35) {
-      effects.enter("characterReferenceMarkerNumeric");
-      effects.consume(code);
-      effects.exit("characterReferenceMarkerNumeric");
-      return numeric;
-    }
-    effects.enter("characterReferenceValue");
-    max = 31;
-    test = asciiAlphanumeric;
-    return value(code);
-  }
-
-  /**
-   * After `#`, at `x` for hexadecimals or digit for decimals.
-   *
-   * ```markdown
-   * > | a&#123;b
-   *        ^
-   * > | a&#x9;b
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function numeric(code) {
-    if (code === 88 || code === 120) {
-      effects.enter("characterReferenceMarkerHexadecimal");
-      effects.consume(code);
-      effects.exit("characterReferenceMarkerHexadecimal");
-      effects.enter("characterReferenceValue");
-      max = 6;
-      test = asciiHexDigit;
-      return value;
-    }
-    effects.enter("characterReferenceValue");
-    max = 7;
-    test = asciiDigit;
-    return value(code);
-  }
-
-  /**
-   * After markers (`&#x`, `&#`, or `&`), in value, before `;`.
-   *
-   * The character reference kind defines what and how many characters are
-   * allowed.
-   *
-   * ```markdown
-   * > | a&amp;b
-   *       ^^^
-   * > | a&#123;b
-   *        ^^^
-   * > | a&#x9;b
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function value(code) {
-    if (code === 59 && size) {
-      const token = effects.exit("characterReferenceValue");
-      if (test === asciiAlphanumeric && !decodeNamedCharacterReference(self.sliceSerialize(token))) {
-        return nok(code);
-      }
-
-      // To do: `markdown-rs` uses a different name:
-      // `CharacterReferenceMarkerSemi`.
-      effects.enter("characterReferenceMarker");
-      effects.consume(code);
-      effects.exit("characterReferenceMarker");
-      effects.exit("characterReference");
-      return ok;
-    }
-    if (test(code) && size++ < max) {
-      effects.consume(code);
-      return value;
-    }
-    return nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/character-escape.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-/** @type {Construct} */
-const characterEscape = {
-  name: 'characterEscape',
-  tokenize: tokenizeCharacterEscape
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeCharacterEscape(effects, ok, nok) {
-  return start;
-
-  /**
-   * Start of character escape.
-   *
-   * ```markdown
-   * > | a\*b
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("characterEscape");
-    effects.enter("escapeMarker");
-    effects.consume(code);
-    effects.exit("escapeMarker");
-    return inside;
-  }
-
-  /**
-   * After `\`, at punctuation.
-   *
-   * ```markdown
-   * > | a\*b
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function inside(code) {
-    // ASCII punctuation.
-    if (asciiPunctuation(code)) {
-      effects.enter("characterEscapeValue");
-      effects.consume(code);
-      effects.exit("characterEscapeValue");
-      effects.exit("characterEscape");
-      return ok;
-    }
-    return nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/line-ending.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const lineEnding = {
-  name: 'lineEnding',
-  tokenize: tokenizeLineEnding
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeLineEnding(effects, ok) {
-  return start;
-
-  /** @type {State} */
-  function start(code) {
-    effects.enter("lineEnding");
-    effects.consume(code);
-    effects.exit("lineEnding");
-    return factorySpace(effects, ok, "linePrefix");
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/label-end.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').Event} Event
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').Token} Token
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-
-
-
-
-
-
-/** @type {Construct} */
-const labelEnd = {
-  name: 'labelEnd',
-  tokenize: tokenizeLabelEnd,
-  resolveTo: resolveToLabelEnd,
-  resolveAll: resolveAllLabelEnd
-};
-
-/** @type {Construct} */
-const resourceConstruct = {
-  tokenize: tokenizeResource
-};
-/** @type {Construct} */
-const referenceFullConstruct = {
-  tokenize: tokenizeReferenceFull
-};
-/** @type {Construct} */
-const referenceCollapsedConstruct = {
-  tokenize: tokenizeReferenceCollapsed
-};
-
-/** @type {Resolver} */
-function resolveAllLabelEnd(events) {
-  let index = -1;
-  while (++index < events.length) {
-    const token = events[index][1];
-    if (token.type === "labelImage" || token.type === "labelLink" || token.type === "labelEnd") {
-      // Remove the marker.
-      events.splice(index + 1, token.type === "labelImage" ? 4 : 2);
-      token.type = "data";
-      index++;
-    }
-  }
-  return events;
-}
-
-/** @type {Resolver} */
-function resolveToLabelEnd(events, context) {
-  let index = events.length;
-  let offset = 0;
-  /** @type {Token} */
-  let token;
-  /** @type {number | undefined} */
-  let open;
-  /** @type {number | undefined} */
-  let close;
-  /** @type {Array<Event>} */
-  let media;
-
-  // Find an opening.
-  while (index--) {
-    token = events[index][1];
-    if (open) {
-      // If we see another link, or inactive link label, we’ve been here before.
-      if (token.type === "link" || token.type === "labelLink" && token._inactive) {
-        break;
-      }
-
-      // Mark other link openings as inactive, as we can’t have links in
-      // links.
-      if (events[index][0] === 'enter' && token.type === "labelLink") {
-        token._inactive = true;
-      }
-    } else if (close) {
-      if (events[index][0] === 'enter' && (token.type === "labelImage" || token.type === "labelLink") && !token._balanced) {
-        open = index;
-        if (token.type !== "labelLink") {
-          offset = 2;
-          break;
-        }
-      }
-    } else if (token.type === "labelEnd") {
-      close = index;
-    }
-  }
-  const group = {
-    type: events[open][1].type === "labelLink" ? "link" : "image",
-    start: Object.assign({}, events[open][1].start),
-    end: Object.assign({}, events[events.length - 1][1].end)
-  };
-  const label = {
-    type: "label",
-    start: Object.assign({}, events[open][1].start),
-    end: Object.assign({}, events[close][1].end)
-  };
-  const text = {
-    type: "labelText",
-    start: Object.assign({}, events[open + offset + 2][1].end),
-    end: Object.assign({}, events[close - 2][1].start)
-  };
-  media = [['enter', group, context], ['enter', label, context]];
-
-  // Opening marker.
-  media = push(media, events.slice(open + 1, open + offset + 3));
-
-  // Text open.
-  media = push(media, [['enter', text, context]]);
-
-  // Always populated by defaults.
-
-  // Between.
-  media = push(media, resolveAll(context.parser.constructs.insideSpan.null, events.slice(open + offset + 4, close - 3), context));
-
-  // Text close, marker close, label close.
-  media = push(media, [['exit', text, context], events[close - 2], events[close - 1], ['exit', label, context]]);
-
-  // Reference, resource, or so.
-  media = push(media, events.slice(close + 1));
-
-  // Media close.
-  media = push(media, [['exit', group, context]]);
-  splice(events, open, events.length, media);
-  return events;
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeLabelEnd(effects, ok, nok) {
-  const self = this;
-  let index = self.events.length;
-  /** @type {Token} */
-  let labelStart;
-  /** @type {boolean} */
-  let defined;
-
-  // Find an opening.
-  while (index--) {
-    if ((self.events[index][1].type === "labelImage" || self.events[index][1].type === "labelLink") && !self.events[index][1]._balanced) {
-      labelStart = self.events[index][1];
-      break;
-    }
-  }
-  return start;
-
-  /**
-   * Start of label end.
-   *
-   * ```markdown
-   * > | [a](b) c
-   *       ^
-   * > | [a][b] c
-   *       ^
-   * > | [a][] b
-   *       ^
-   * > | [a] b
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    // If there is not an okay opening.
-    if (!labelStart) {
-      return nok(code);
-    }
-
-    // If the corresponding label (link) start is marked as inactive,
-    // it means we’d be wrapping a link, like this:
-    //
-    // ```markdown
-    // > | a [b [c](d) e](f) g.
-    //                  ^
-    // ```
-    //
-    // We can’t have that, so it’s just balanced brackets.
-    if (labelStart._inactive) {
-      return labelEndNok(code);
-    }
-    defined = self.parser.defined.includes(normalizeIdentifier(self.sliceSerialize({
-      start: labelStart.end,
-      end: self.now()
-    })));
-    effects.enter("labelEnd");
-    effects.enter("labelMarker");
-    effects.consume(code);
-    effects.exit("labelMarker");
-    effects.exit("labelEnd");
-    return after;
-  }
-
-  /**
-   * After `]`.
-   *
-   * ```markdown
-   * > | [a](b) c
-   *       ^
-   * > | [a][b] c
-   *       ^
-   * > | [a][] b
-   *       ^
-   * > | [a] b
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    // Note: `markdown-rs` also parses GFM footnotes here, which for us is in
-    // an extension.
-
-    // Resource (`[asd](fgh)`)?
-    if (code === 40) {
-      return effects.attempt(resourceConstruct, labelEndOk, defined ? labelEndOk : labelEndNok)(code);
-    }
-
-    // Full (`[asd][fgh]`) or collapsed (`[asd][]`) reference?
-    if (code === 91) {
-      return effects.attempt(referenceFullConstruct, labelEndOk, defined ? referenceNotFull : labelEndNok)(code);
-    }
-
-    // Shortcut (`[asd]`) reference?
-    return defined ? labelEndOk(code) : labelEndNok(code);
-  }
-
-  /**
-   * After `]`, at `[`, but not at a full reference.
-   *
-   * > 👉 **Note**: we only get here if the label is defined.
-   *
-   * ```markdown
-   * > | [a][] b
-   *        ^
-   * > | [a] b
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function referenceNotFull(code) {
-    return effects.attempt(referenceCollapsedConstruct, labelEndOk, labelEndNok)(code);
-  }
-
-  /**
-   * Done, we found something.
-   *
-   * ```markdown
-   * > | [a](b) c
-   *           ^
-   * > | [a][b] c
-   *           ^
-   * > | [a][] b
-   *          ^
-   * > | [a] b
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function labelEndOk(code) {
-    // Note: `markdown-rs` does a bunch of stuff here.
-    return ok(code);
-  }
-
-  /**
-   * Done, it’s nothing.
-   *
-   * There was an okay opening, but we didn’t match anything.
-   *
-   * ```markdown
-   * > | [a](b c
-   *        ^
-   * > | [a][b c
-   *        ^
-   * > | [a] b
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function labelEndNok(code) {
-    labelStart._balanced = true;
-    return nok(code);
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeResource(effects, ok, nok) {
-  return resourceStart;
-
-  /**
-   * At a resource.
-   *
-   * ```markdown
-   * > | [a](b) c
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function resourceStart(code) {
-    effects.enter("resource");
-    effects.enter("resourceMarker");
-    effects.consume(code);
-    effects.exit("resourceMarker");
-    return resourceBefore;
-  }
-
-  /**
-   * In resource, after `(`, at optional whitespace.
-   *
-   * ```markdown
-   * > | [a](b) c
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function resourceBefore(code) {
-    return markdownLineEndingOrSpace(code) ? factoryWhitespace(effects, resourceOpen)(code) : resourceOpen(code);
-  }
-
-  /**
-   * In resource, after optional whitespace, at `)` or a destination.
-   *
-   * ```markdown
-   * > | [a](b) c
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function resourceOpen(code) {
-    if (code === 41) {
-      return resourceEnd(code);
-    }
-    return factoryDestination(effects, resourceDestinationAfter, resourceDestinationMissing, "resourceDestination", "resourceDestinationLiteral", "resourceDestinationLiteralMarker", "resourceDestinationRaw", "resourceDestinationString", 32)(code);
-  }
-
-  /**
-   * In resource, after destination, at optional whitespace.
-   *
-   * ```markdown
-   * > | [a](b) c
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function resourceDestinationAfter(code) {
-    return markdownLineEndingOrSpace(code) ? factoryWhitespace(effects, resourceBetween)(code) : resourceEnd(code);
-  }
-
-  /**
-   * At invalid destination.
-   *
-   * ```markdown
-   * > | [a](<<) b
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function resourceDestinationMissing(code) {
-    return nok(code);
-  }
-
-  /**
-   * In resource, after destination and whitespace, at `(` or title.
-   *
-   * ```markdown
-   * > | [a](b ) c
-   *           ^
-   * ```
-   *
-   * @type {State}
-   */
-  function resourceBetween(code) {
-    if (code === 34 || code === 39 || code === 40) {
-      return factoryTitle(effects, resourceTitleAfter, nok, "resourceTitle", "resourceTitleMarker", "resourceTitleString")(code);
-    }
-    return resourceEnd(code);
-  }
-
-  /**
-   * In resource, after title, at optional whitespace.
-   *
-   * ```markdown
-   * > | [a](b "c") d
-   *              ^
-   * ```
-   *
-   * @type {State}
-   */
-  function resourceTitleAfter(code) {
-    return markdownLineEndingOrSpace(code) ? factoryWhitespace(effects, resourceEnd)(code) : resourceEnd(code);
-  }
-
-  /**
-   * In resource, at `)`.
-   *
-   * ```markdown
-   * > | [a](b) d
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function resourceEnd(code) {
-    if (code === 41) {
-      effects.enter("resourceMarker");
-      effects.consume(code);
-      effects.exit("resourceMarker");
-      effects.exit("resource");
-      return ok;
-    }
-    return nok(code);
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeReferenceFull(effects, ok, nok) {
-  const self = this;
-  return referenceFull;
-
-  /**
-   * In a reference (full), at the `[`.
-   *
-   * ```markdown
-   * > | [a][b] d
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function referenceFull(code) {
-    return factoryLabel.call(self, effects, referenceFullAfter, referenceFullMissing, "reference", "referenceMarker", "referenceString")(code);
-  }
-
-  /**
-   * In a reference (full), after `]`.
-   *
-   * ```markdown
-   * > | [a][b] d
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function referenceFullAfter(code) {
-    return self.parser.defined.includes(normalizeIdentifier(self.sliceSerialize(self.events[self.events.length - 1][1]).slice(1, -1))) ? ok(code) : nok(code);
-  }
-
-  /**
-   * In reference (full) that was missing.
-   *
-   * ```markdown
-   * > | [a][b d
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function referenceFullMissing(code) {
-    return nok(code);
-  }
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeReferenceCollapsed(effects, ok, nok) {
-  return referenceCollapsedStart;
-
-  /**
-   * In reference (collapsed), at `[`.
-   *
-   * > 👉 **Note**: we only get here if the label is defined.
-   *
-   * ```markdown
-   * > | [a][] d
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function referenceCollapsedStart(code) {
-    // We only attempt a collapsed label if there’s a `[`.
-
-    effects.enter("reference");
-    effects.enter("referenceMarker");
-    effects.consume(code);
-    effects.exit("referenceMarker");
-    return referenceCollapsedOpen;
-  }
-
-  /**
-   * In reference (collapsed), at `]`.
-   *
-   * > 👉 **Note**: we only get here if the label is defined.
-   *
-   * ```markdown
-   * > | [a][] d
-   *         ^
-   * ```
-   *
-   *  @type {State}
-   */
-  function referenceCollapsedOpen(code) {
-    if (code === 93) {
-      effects.enter("referenceMarker");
-      effects.consume(code);
-      effects.exit("referenceMarker");
-      effects.exit("reference");
-      return ok;
-    }
-    return nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/label-start-image.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const labelStartImage = {
-  name: 'labelStartImage',
-  tokenize: tokenizeLabelStartImage,
-  resolveAll: labelEnd.resolveAll
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeLabelStartImage(effects, ok, nok) {
-  const self = this;
-  return start;
-
-  /**
-   * Start of label (image) start.
-   *
-   * ```markdown
-   * > | a ![b] c
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("labelImage");
-    effects.enter("labelImageMarker");
-    effects.consume(code);
-    effects.exit("labelImageMarker");
-    return open;
-  }
-
-  /**
-   * After `!`, at `[`.
-   *
-   * ```markdown
-   * > | a ![b] c
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function open(code) {
-    if (code === 91) {
-      effects.enter("labelMarker");
-      effects.consume(code);
-      effects.exit("labelMarker");
-      effects.exit("labelImage");
-      return after;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `![`.
-   *
-   * ```markdown
-   * > | a ![b] c
-   *         ^
-   * ```
-   *
-   * This is needed in because, when GFM footnotes are enabled, images never
-   * form when started with a `^`.
-   * Instead, links form:
-   *
-   * ```markdown
-   * ![^a](b)
-   *
-   * ![^a][b]
-   *
-   * [b]: c
-   * ```
-   *
-   * ```html
-   * <p>!<a href=\"b\">^a</a></p>
-   * <p>!<a href=\"c\">^a</a></p>
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    // To do: use a new field to do this, this is still needed for
-    // `micromark-extension-gfm-footnote`, but the `label-start-link`
-    // behavior isn’t.
-    // Hidden footnotes hook.
-    /* c8 ignore next 3 */
-    return code === 94 && '_hiddenFootnoteSupport' in self.parser.constructs ? nok(code) : ok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-util-classify-character/index.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- */
-
-
-/**
- * Classify whether a code represents whitespace, punctuation, or something
- * else.
- *
- * Used for attention (emphasis, strong), whose sequences can open or close
- * based on the class of surrounding characters.
- *
- * > 👉 **Note**: eof (`null`) is seen as whitespace.
- *
- * @param {Code} code
- *   Code.
- * @returns {typeof constants.characterGroupWhitespace | typeof constants.characterGroupPunctuation | undefined}
- *   Group.
- */
-function classifyCharacter(code) {
-  if (
-    code === null ||
-    markdownLineEndingOrSpace(code) ||
-    unicodeWhitespace(code)
-  ) {
-    return 1
-  }
-  if (unicodePunctuation(code)) {
-    return 2
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/attention.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').Event} Event
- * @typedef {import('micromark-util-types').Point} Point
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').Token} Token
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-
-/** @type {Construct} */
-const attention = {
-  name: 'attention',
-  tokenize: tokenizeAttention,
-  resolveAll: resolveAllAttention
-};
-
-/**
- * Take all events and resolve attention to emphasis or strong.
- *
- * @type {Resolver}
- */
-// eslint-disable-next-line complexity
-function resolveAllAttention(events, context) {
-  let index = -1;
-  /** @type {number} */
-  let open;
-  /** @type {Token} */
-  let group;
-  /** @type {Token} */
-  let text;
-  /** @type {Token} */
-  let openingSequence;
-  /** @type {Token} */
-  let closingSequence;
-  /** @type {number} */
-  let use;
-  /** @type {Array<Event>} */
-  let nextEvents;
-  /** @type {number} */
-  let offset;
-
-  // Walk through all events.
-  //
-  // Note: performance of this is fine on an mb of normal markdown, but it’s
-  // a bottleneck for malicious stuff.
-  while (++index < events.length) {
-    // Find a token that can close.
-    if (events[index][0] === 'enter' && events[index][1].type === 'attentionSequence' && events[index][1]._close) {
-      open = index;
-
-      // Now walk back to find an opener.
-      while (open--) {
-        // Find a token that can open the closer.
-        if (events[open][0] === 'exit' && events[open][1].type === 'attentionSequence' && events[open][1]._open &&
-        // If the markers are the same:
-        context.sliceSerialize(events[open][1]).charCodeAt(0) === context.sliceSerialize(events[index][1]).charCodeAt(0)) {
-          // If the opening can close or the closing can open,
-          // and the close size *is not* a multiple of three,
-          // but the sum of the opening and closing size *is* multiple of three,
-          // then don’t match.
-          if ((events[open][1]._close || events[index][1]._open) && (events[index][1].end.offset - events[index][1].start.offset) % 3 && !((events[open][1].end.offset - events[open][1].start.offset + events[index][1].end.offset - events[index][1].start.offset) % 3)) {
-            continue;
-          }
-
-          // Number of markers to use from the sequence.
-          use = events[open][1].end.offset - events[open][1].start.offset > 1 && events[index][1].end.offset - events[index][1].start.offset > 1 ? 2 : 1;
-          const start = Object.assign({}, events[open][1].end);
-          const end = Object.assign({}, events[index][1].start);
-          movePoint(start, -use);
-          movePoint(end, use);
-          openingSequence = {
-            type: use > 1 ? "strongSequence" : "emphasisSequence",
-            start,
-            end: Object.assign({}, events[open][1].end)
-          };
-          closingSequence = {
-            type: use > 1 ? "strongSequence" : "emphasisSequence",
-            start: Object.assign({}, events[index][1].start),
-            end
-          };
-          text = {
-            type: use > 1 ? "strongText" : "emphasisText",
-            start: Object.assign({}, events[open][1].end),
-            end: Object.assign({}, events[index][1].start)
-          };
-          group = {
-            type: use > 1 ? "strong" : "emphasis",
-            start: Object.assign({}, openingSequence.start),
-            end: Object.assign({}, closingSequence.end)
-          };
-          events[open][1].end = Object.assign({}, openingSequence.start);
-          events[index][1].start = Object.assign({}, closingSequence.end);
-          nextEvents = [];
-
-          // If there are more markers in the opening, add them before.
-          if (events[open][1].end.offset - events[open][1].start.offset) {
-            nextEvents = push(nextEvents, [['enter', events[open][1], context], ['exit', events[open][1], context]]);
-          }
-
-          // Opening.
-          nextEvents = push(nextEvents, [['enter', group, context], ['enter', openingSequence, context], ['exit', openingSequence, context], ['enter', text, context]]);
-
-          // Always populated by defaults.
-
-          // Between.
-          nextEvents = push(nextEvents, resolveAll(context.parser.constructs.insideSpan.null, events.slice(open + 1, index), context));
-
-          // Closing.
-          nextEvents = push(nextEvents, [['exit', text, context], ['enter', closingSequence, context], ['exit', closingSequence, context], ['exit', group, context]]);
-
-          // If there are more markers in the closing, add them after.
-          if (events[index][1].end.offset - events[index][1].start.offset) {
-            offset = 2;
-            nextEvents = push(nextEvents, [['enter', events[index][1], context], ['exit', events[index][1], context]]);
-          } else {
-            offset = 0;
-          }
-          splice(events, open - 1, index - open + 3, nextEvents);
-          index = open + nextEvents.length - offset - 2;
-          break;
-        }
-      }
-    }
-  }
-
-  // Remove remaining sequences.
-  index = -1;
-  while (++index < events.length) {
-    if (events[index][1].type === 'attentionSequence') {
-      events[index][1].type = 'data';
-    }
-  }
-  return events;
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeAttention(effects, ok) {
-  const attentionMarkers = this.parser.constructs.attentionMarkers.null;
-  const previous = this.previous;
-  const before = classifyCharacter(previous);
-
-  /** @type {NonNullable<Code>} */
-  let marker;
-  return start;
-
-  /**
-   * Before a sequence.
-   *
-   * ```markdown
-   * > | **
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    marker = code;
-    effects.enter('attentionSequence');
-    return inside(code);
-  }
-
-  /**
-   * In a sequence.
-   *
-   * ```markdown
-   * > | **
-   *     ^^
-   * ```
-   *
-   * @type {State}
-   */
-  function inside(code) {
-    if (code === marker) {
-      effects.consume(code);
-      return inside;
-    }
-    const token = effects.exit('attentionSequence');
-
-    // To do: next major: move this to resolver, just like `markdown-rs`.
-    const after = classifyCharacter(code);
-
-    // Always populated by defaults.
-
-    const open = !after || after === 2 && before || attentionMarkers.includes(code);
-    const close = !before || before === 2 && after || attentionMarkers.includes(previous);
-    token._open = Boolean(marker === 42 ? open : open && (before || !close));
-    token._close = Boolean(marker === 42 ? close : close && (after || !open));
-    return ok(code);
-  }
-}
-
-/**
- * Move a point a bit.
- *
- * Note: `move` only works inside lines! It’s not possible to move past other
- * chunks (replacement characters, tabs, or line endings).
- *
- * @param {Point} point
- * @param {number} offset
- * @returns {undefined}
- */
-function movePoint(point, offset) {
-  point.column += offset;
-  point.offset += offset;
-  point._bufferIndex += offset;
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/autolink.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-/** @type {Construct} */
-const autolink = {
-  name: 'autolink',
-  tokenize: tokenizeAutolink
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeAutolink(effects, ok, nok) {
-  let size = 0;
-  return start;
-
-  /**
-   * Start of an autolink.
-   *
-   * ```markdown
-   * > | a<https://example.com>b
-   *      ^
-   * > | a<user@example.com>b
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("autolink");
-    effects.enter("autolinkMarker");
-    effects.consume(code);
-    effects.exit("autolinkMarker");
-    effects.enter("autolinkProtocol");
-    return open;
-  }
-
-  /**
-   * After `<`, at protocol or atext.
-   *
-   * ```markdown
-   * > | a<https://example.com>b
-   *       ^
-   * > | a<user@example.com>b
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function open(code) {
-    if (asciiAlpha(code)) {
-      effects.consume(code);
-      return schemeOrEmailAtext;
-    }
-    if (code === 64) {
-      return nok(code);
-    }
-    return emailAtext(code);
-  }
-
-  /**
-   * At second byte of protocol or atext.
-   *
-   * ```markdown
-   * > | a<https://example.com>b
-   *        ^
-   * > | a<user@example.com>b
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function schemeOrEmailAtext(code) {
-    // ASCII alphanumeric and `+`, `-`, and `.`.
-    if (code === 43 || code === 45 || code === 46 || asciiAlphanumeric(code)) {
-      // Count the previous alphabetical from `open` too.
-      size = 1;
-      return schemeInsideOrEmailAtext(code);
-    }
-    return emailAtext(code);
-  }
-
-  /**
-   * In ambiguous protocol or atext.
-   *
-   * ```markdown
-   * > | a<https://example.com>b
-   *        ^
-   * > | a<user@example.com>b
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function schemeInsideOrEmailAtext(code) {
-    if (code === 58) {
-      effects.consume(code);
-      size = 0;
-      return urlInside;
-    }
-
-    // ASCII alphanumeric and `+`, `-`, and `.`.
-    if ((code === 43 || code === 45 || code === 46 || asciiAlphanumeric(code)) && size++ < 32) {
-      effects.consume(code);
-      return schemeInsideOrEmailAtext;
-    }
-    size = 0;
-    return emailAtext(code);
-  }
-
-  /**
-   * After protocol, in URL.
-   *
-   * ```markdown
-   * > | a<https://example.com>b
-   *             ^
-   * ```
-   *
-   * @type {State}
-   */
-  function urlInside(code) {
-    if (code === 62) {
-      effects.exit("autolinkProtocol");
-      effects.enter("autolinkMarker");
-      effects.consume(code);
-      effects.exit("autolinkMarker");
-      effects.exit("autolink");
-      return ok;
-    }
-
-    // ASCII control, space, or `<`.
-    if (code === null || code === 32 || code === 60 || asciiControl(code)) {
-      return nok(code);
-    }
-    effects.consume(code);
-    return urlInside;
-  }
-
-  /**
-   * In email atext.
-   *
-   * ```markdown
-   * > | a<user.name@example.com>b
-   *              ^
-   * ```
-   *
-   * @type {State}
-   */
-  function emailAtext(code) {
-    if (code === 64) {
-      effects.consume(code);
-      return emailAtSignOrDot;
-    }
-    if (asciiAtext(code)) {
-      effects.consume(code);
-      return emailAtext;
-    }
-    return nok(code);
-  }
-
-  /**
-   * In label, after at-sign or dot.
-   *
-   * ```markdown
-   * > | a<user.name@example.com>b
-   *                 ^       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function emailAtSignOrDot(code) {
-    return asciiAlphanumeric(code) ? emailLabel(code) : nok(code);
-  }
-
-  /**
-   * In label, where `.` and `>` are allowed.
-   *
-   * ```markdown
-   * > | a<user.name@example.com>b
-   *                   ^
-   * ```
-   *
-   * @type {State}
-   */
-  function emailLabel(code) {
-    if (code === 46) {
-      effects.consume(code);
-      size = 0;
-      return emailAtSignOrDot;
-    }
-    if (code === 62) {
-      // Exit, then change the token type.
-      effects.exit("autolinkProtocol").type = "autolinkEmail";
-      effects.enter("autolinkMarker");
-      effects.consume(code);
-      effects.exit("autolinkMarker");
-      effects.exit("autolink");
-      return ok;
-    }
-    return emailValue(code);
-  }
-
-  /**
-   * In label, where `.` and `>` are *not* allowed.
-   *
-   * Though, this is also used in `emailLabel` to parse other values.
-   *
-   * ```markdown
-   * > | a<user.name@ex-ample.com>b
-   *                    ^
-   * ```
-   *
-   * @type {State}
-   */
-  function emailValue(code) {
-    // ASCII alphanumeric or `-`.
-    if ((code === 45 || asciiAlphanumeric(code)) && size++ < 63) {
-      const next = code === 45 ? emailValue : emailLabel;
-      effects.consume(code);
-      return next;
-    }
-    return nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/html-text.js
-/**
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const htmlText = {
-  name: 'htmlText',
-  tokenize: tokenizeHtmlText
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeHtmlText(effects, ok, nok) {
-  const self = this;
-  /** @type {NonNullable<Code> | undefined} */
-  let marker;
-  /** @type {number} */
-  let index;
-  /** @type {State} */
-  let returnState;
-  return start;
-
-  /**
-   * Start of HTML (text).
-   *
-   * ```markdown
-   * > | a <b> c
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("htmlText");
-    effects.enter("htmlTextData");
-    effects.consume(code);
-    return open;
-  }
-
-  /**
-   * After `<`, at tag name or other stuff.
-   *
-   * ```markdown
-   * > | a <b> c
-   *        ^
-   * > | a <!doctype> c
-   *        ^
-   * > | a <!--b--> c
-   *        ^
-   * ```
-   *
-   * @type {State}
-   */
-  function open(code) {
-    if (code === 33) {
-      effects.consume(code);
-      return declarationOpen;
-    }
-    if (code === 47) {
-      effects.consume(code);
-      return tagCloseStart;
-    }
-    if (code === 63) {
-      effects.consume(code);
-      return instruction;
-    }
-
-    // ASCII alphabetical.
-    if (asciiAlpha(code)) {
-      effects.consume(code);
-      return tagOpen;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `<!`, at declaration, comment, or CDATA.
-   *
-   * ```markdown
-   * > | a <!doctype> c
-   *         ^
-   * > | a <!--b--> c
-   *         ^
-   * > | a <![CDATA[>&<]]> c
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function declarationOpen(code) {
-    if (code === 45) {
-      effects.consume(code);
-      return commentOpenInside;
-    }
-    if (code === 91) {
-      effects.consume(code);
-      index = 0;
-      return cdataOpenInside;
-    }
-    if (asciiAlpha(code)) {
-      effects.consume(code);
-      return declaration;
-    }
-    return nok(code);
-  }
-
-  /**
-   * In a comment, after `<!-`, at another `-`.
-   *
-   * ```markdown
-   * > | a <!--b--> c
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function commentOpenInside(code) {
-    if (code === 45) {
-      effects.consume(code);
-      return commentEnd;
-    }
-    return nok(code);
-  }
-
-  /**
-   * In comment.
-   *
-   * ```markdown
-   * > | a <!--b--> c
-   *           ^
-   * ```
-   *
-   * @type {State}
-   */
-  function comment(code) {
-    if (code === null) {
-      return nok(code);
-    }
-    if (code === 45) {
-      effects.consume(code);
-      return commentClose;
-    }
-    if (markdownLineEnding(code)) {
-      returnState = comment;
-      return lineEndingBefore(code);
-    }
-    effects.consume(code);
-    return comment;
-  }
-
-  /**
-   * In comment, after `-`.
-   *
-   * ```markdown
-   * > | a <!--b--> c
-   *             ^
-   * ```
-   *
-   * @type {State}
-   */
-  function commentClose(code) {
-    if (code === 45) {
-      effects.consume(code);
-      return commentEnd;
-    }
-    return comment(code);
-  }
-
-  /**
-   * In comment, after `--`.
-   *
-   * ```markdown
-   * > | a <!--b--> c
-   *              ^
-   * ```
-   *
-   * @type {State}
-   */
-  function commentEnd(code) {
-    return code === 62 ? end(code) : code === 45 ? commentClose(code) : comment(code);
-  }
-
-  /**
-   * After `<![`, in CDATA, expecting `CDATA[`.
-   *
-   * ```markdown
-   * > | a <![CDATA[>&<]]> b
-   *          ^^^^^^
-   * ```
-   *
-   * @type {State}
-   */
-  function cdataOpenInside(code) {
-    const value = "CDATA[";
-    if (code === value.charCodeAt(index++)) {
-      effects.consume(code);
-      return index === value.length ? cdata : cdataOpenInside;
-    }
-    return nok(code);
-  }
-
-  /**
-   * In CDATA.
-   *
-   * ```markdown
-   * > | a <![CDATA[>&<]]> b
-   *                ^^^
-   * ```
-   *
-   * @type {State}
-   */
-  function cdata(code) {
-    if (code === null) {
-      return nok(code);
-    }
-    if (code === 93) {
-      effects.consume(code);
-      return cdataClose;
-    }
-    if (markdownLineEnding(code)) {
-      returnState = cdata;
-      return lineEndingBefore(code);
-    }
-    effects.consume(code);
-    return cdata;
-  }
-
-  /**
-   * In CDATA, after `]`, at another `]`.
-   *
-   * ```markdown
-   * > | a <![CDATA[>&<]]> b
-   *                    ^
-   * ```
-   *
-   * @type {State}
-   */
-  function cdataClose(code) {
-    if (code === 93) {
-      effects.consume(code);
-      return cdataEnd;
-    }
-    return cdata(code);
-  }
-
-  /**
-   * In CDATA, after `]]`, at `>`.
-   *
-   * ```markdown
-   * > | a <![CDATA[>&<]]> b
-   *                     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function cdataEnd(code) {
-    if (code === 62) {
-      return end(code);
-    }
-    if (code === 93) {
-      effects.consume(code);
-      return cdataEnd;
-    }
-    return cdata(code);
-  }
-
-  /**
-   * In declaration.
-   *
-   * ```markdown
-   * > | a <!b> c
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function declaration(code) {
-    if (code === null || code === 62) {
-      return end(code);
-    }
-    if (markdownLineEnding(code)) {
-      returnState = declaration;
-      return lineEndingBefore(code);
-    }
-    effects.consume(code);
-    return declaration;
-  }
-
-  /**
-   * In instruction.
-   *
-   * ```markdown
-   * > | a <?b?> c
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function instruction(code) {
-    if (code === null) {
-      return nok(code);
-    }
-    if (code === 63) {
-      effects.consume(code);
-      return instructionClose;
-    }
-    if (markdownLineEnding(code)) {
-      returnState = instruction;
-      return lineEndingBefore(code);
-    }
-    effects.consume(code);
-    return instruction;
-  }
-
-  /**
-   * In instruction, after `?`, at `>`.
-   *
-   * ```markdown
-   * > | a <?b?> c
-   *           ^
-   * ```
-   *
-   * @type {State}
-   */
-  function instructionClose(code) {
-    return code === 62 ? end(code) : instruction(code);
-  }
-
-  /**
-   * After `</`, in closing tag, at tag name.
-   *
-   * ```markdown
-   * > | a </b> c
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagCloseStart(code) {
-    // ASCII alphabetical.
-    if (asciiAlpha(code)) {
-      effects.consume(code);
-      return tagClose;
-    }
-    return nok(code);
-  }
-
-  /**
-   * After `</x`, in a tag name.
-   *
-   * ```markdown
-   * > | a </b> c
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagClose(code) {
-    // ASCII alphanumerical and `-`.
-    if (code === 45 || asciiAlphanumeric(code)) {
-      effects.consume(code);
-      return tagClose;
-    }
-    return tagCloseBetween(code);
-  }
-
-  /**
-   * In closing tag, after tag name.
-   *
-   * ```markdown
-   * > | a </b> c
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagCloseBetween(code) {
-    if (markdownLineEnding(code)) {
-      returnState = tagCloseBetween;
-      return lineEndingBefore(code);
-    }
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return tagCloseBetween;
-    }
-    return end(code);
-  }
-
-  /**
-   * After `<x`, in opening tag name.
-   *
-   * ```markdown
-   * > | a <b> c
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagOpen(code) {
-    // ASCII alphanumerical and `-`.
-    if (code === 45 || asciiAlphanumeric(code)) {
-      effects.consume(code);
-      return tagOpen;
-    }
-    if (code === 47 || code === 62 || markdownLineEndingOrSpace(code)) {
-      return tagOpenBetween(code);
-    }
-    return nok(code);
-  }
-
-  /**
-   * In opening tag, after tag name.
-   *
-   * ```markdown
-   * > | a <b> c
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagOpenBetween(code) {
-    if (code === 47) {
-      effects.consume(code);
-      return end;
-    }
-
-    // ASCII alphabetical and `:` and `_`.
-    if (code === 58 || code === 95 || asciiAlpha(code)) {
-      effects.consume(code);
-      return tagOpenAttributeName;
-    }
-    if (markdownLineEnding(code)) {
-      returnState = tagOpenBetween;
-      return lineEndingBefore(code);
-    }
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return tagOpenBetween;
-    }
-    return end(code);
-  }
-
-  /**
-   * In attribute name.
-   *
-   * ```markdown
-   * > | a <b c> d
-   *          ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagOpenAttributeName(code) {
-    // ASCII alphabetical and `-`, `.`, `:`, and `_`.
-    if (code === 45 || code === 46 || code === 58 || code === 95 || asciiAlphanumeric(code)) {
-      effects.consume(code);
-      return tagOpenAttributeName;
-    }
-    return tagOpenAttributeNameAfter(code);
-  }
-
-  /**
-   * After attribute name, before initializer, the end of the tag, or
-   * whitespace.
-   *
-   * ```markdown
-   * > | a <b c> d
-   *           ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagOpenAttributeNameAfter(code) {
-    if (code === 61) {
-      effects.consume(code);
-      return tagOpenAttributeValueBefore;
-    }
-    if (markdownLineEnding(code)) {
-      returnState = tagOpenAttributeNameAfter;
-      return lineEndingBefore(code);
-    }
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return tagOpenAttributeNameAfter;
-    }
-    return tagOpenBetween(code);
-  }
-
-  /**
-   * Before unquoted, double quoted, or single quoted attribute value, allowing
-   * whitespace.
-   *
-   * ```markdown
-   * > | a <b c=d> e
-   *            ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagOpenAttributeValueBefore(code) {
-    if (code === null || code === 60 || code === 61 || code === 62 || code === 96) {
-      return nok(code);
-    }
-    if (code === 34 || code === 39) {
-      effects.consume(code);
-      marker = code;
-      return tagOpenAttributeValueQuoted;
-    }
-    if (markdownLineEnding(code)) {
-      returnState = tagOpenAttributeValueBefore;
-      return lineEndingBefore(code);
-    }
-    if (markdownSpace(code)) {
-      effects.consume(code);
-      return tagOpenAttributeValueBefore;
-    }
-    effects.consume(code);
-    return tagOpenAttributeValueUnquoted;
-  }
-
-  /**
-   * In double or single quoted attribute value.
-   *
-   * ```markdown
-   * > | a <b c="d"> e
-   *             ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagOpenAttributeValueQuoted(code) {
-    if (code === marker) {
-      effects.consume(code);
-      marker = undefined;
-      return tagOpenAttributeValueQuotedAfter;
-    }
-    if (code === null) {
-      return nok(code);
-    }
-    if (markdownLineEnding(code)) {
-      returnState = tagOpenAttributeValueQuoted;
-      return lineEndingBefore(code);
-    }
-    effects.consume(code);
-    return tagOpenAttributeValueQuoted;
-  }
-
-  /**
-   * In unquoted attribute value.
-   *
-   * ```markdown
-   * > | a <b c=d> e
-   *            ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagOpenAttributeValueUnquoted(code) {
-    if (code === null || code === 34 || code === 39 || code === 60 || code === 61 || code === 96) {
-      return nok(code);
-    }
-    if (code === 47 || code === 62 || markdownLineEndingOrSpace(code)) {
-      return tagOpenBetween(code);
-    }
-    effects.consume(code);
-    return tagOpenAttributeValueUnquoted;
-  }
-
-  /**
-   * After double or single quoted attribute value, before whitespace or the end
-   * of the tag.
-   *
-   * ```markdown
-   * > | a <b c="d"> e
-   *               ^
-   * ```
-   *
-   * @type {State}
-   */
-  function tagOpenAttributeValueQuotedAfter(code) {
-    if (code === 47 || code === 62 || markdownLineEndingOrSpace(code)) {
-      return tagOpenBetween(code);
-    }
-    return nok(code);
-  }
-
-  /**
-   * In certain circumstances of a tag where only an `>` is allowed.
-   *
-   * ```markdown
-   * > | a <b c="d"> e
-   *               ^
-   * ```
-   *
-   * @type {State}
-   */
-  function end(code) {
-    if (code === 62) {
-      effects.consume(code);
-      effects.exit("htmlTextData");
-      effects.exit("htmlText");
-      return ok;
-    }
-    return nok(code);
-  }
-
-  /**
-   * At eol.
-   *
-   * > 👉 **Note**: we can’t have blank lines in text, so no need to worry about
-   * > empty tokens.
-   *
-   * ```markdown
-   * > | a <!--a
-   *            ^
-   *   | b-->
-   * ```
-   *
-   * @type {State}
-   */
-  function lineEndingBefore(code) {
-    effects.exit("htmlTextData");
-    effects.enter("lineEnding");
-    effects.consume(code);
-    effects.exit("lineEnding");
-    return lineEndingAfter;
-  }
-
-  /**
-   * After eol, at optional whitespace.
-   *
-   * > 👉 **Note**: we can’t have blank lines in text, so no need to worry about
-   * > empty tokens.
-   *
-   * ```markdown
-   *   | a <!--a
-   * > | b-->
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function lineEndingAfter(code) {
-    // Always populated by defaults.
-
-    return markdownSpace(code) ? factorySpace(effects, lineEndingAfterPrefix, "linePrefix", self.parser.constructs.disable.null.includes('codeIndented') ? undefined : 4)(code) : lineEndingAfterPrefix(code);
-  }
-
-  /**
-   * After eol, after optional whitespace.
-   *
-   * > 👉 **Note**: we can’t have blank lines in text, so no need to worry about
-   * > empty tokens.
-   *
-   * ```markdown
-   *   | a <!--a
-   * > | b-->
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function lineEndingAfterPrefix(code) {
-    effects.enter("htmlTextData");
-    return returnState(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/label-start-link.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-
-/** @type {Construct} */
-const labelStartLink = {
-  name: 'labelStartLink',
-  tokenize: tokenizeLabelStartLink,
-  resolveAll: labelEnd.resolveAll
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeLabelStartLink(effects, ok, nok) {
-  const self = this;
-  return start;
-
-  /**
-   * Start of label (link) start.
-   *
-   * ```markdown
-   * > | a [b] c
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("labelLink");
-    effects.enter("labelMarker");
-    effects.consume(code);
-    effects.exit("labelMarker");
-    effects.exit("labelLink");
-    return after;
-  }
-
-  /** @type {State} */
-  function after(code) {
-    // To do: this isn’t needed in `micromark-extension-gfm-footnote`,
-    // remove.
-    // Hidden footnotes hook.
-    /* c8 ignore next 3 */
-    return code === 94 && '_hiddenFootnoteSupport' in self.parser.constructs ? nok(code) : ok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/hard-break-escape.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-/** @type {Construct} */
-const hardBreakEscape = {
-  name: 'hardBreakEscape',
-  tokenize: tokenizeHardBreakEscape
-};
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeHardBreakEscape(effects, ok, nok) {
-  return start;
-
-  /**
-   * Start of a hard break (escape).
-   *
-   * ```markdown
-   * > | a\
-   *      ^
-   *   | b
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("hardBreakEscape");
-    effects.consume(code);
-    return after;
-  }
-
-  /**
-   * After `\`, at eol.
-   *
-   * ```markdown
-   * > | a\
-   *       ^
-   *   | b
-   * ```
-   *
-   *  @type {State}
-   */
-  function after(code) {
-    if (markdownLineEnding(code)) {
-      effects.exit("hardBreakEscape");
-      return ok(code);
-    }
-    return nok(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/code-text.js
-/**
- * @typedef {import('micromark-util-types').Construct} Construct
- * @typedef {import('micromark-util-types').Previous} Previous
- * @typedef {import('micromark-util-types').Resolver} Resolver
- * @typedef {import('micromark-util-types').State} State
- * @typedef {import('micromark-util-types').Token} Token
- * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
- * @typedef {import('micromark-util-types').Tokenizer} Tokenizer
- */
-
-
-/** @type {Construct} */
-const codeText = {
-  name: 'codeText',
-  tokenize: tokenizeCodeText,
-  resolve: resolveCodeText,
-  previous
-};
-
-// To do: next major: don’t resolve, like `markdown-rs`.
-/** @type {Resolver} */
-function resolveCodeText(events) {
-  let tailExitIndex = events.length - 4;
-  let headEnterIndex = 3;
-  /** @type {number} */
-  let index;
-  /** @type {number | undefined} */
-  let enter;
-
-  // If we start and end with an EOL or a space.
-  if ((events[headEnterIndex][1].type === "lineEnding" || events[headEnterIndex][1].type === 'space') && (events[tailExitIndex][1].type === "lineEnding" || events[tailExitIndex][1].type === 'space')) {
-    index = headEnterIndex;
-
-    // And we have data.
-    while (++index < tailExitIndex) {
-      if (events[index][1].type === "codeTextData") {
-        // Then we have padding.
-        events[headEnterIndex][1].type = "codeTextPadding";
-        events[tailExitIndex][1].type = "codeTextPadding";
-        headEnterIndex += 2;
-        tailExitIndex -= 2;
-        break;
-      }
-    }
-  }
-
-  // Merge adjacent spaces and data.
-  index = headEnterIndex - 1;
-  tailExitIndex++;
-  while (++index <= tailExitIndex) {
-    if (enter === undefined) {
-      if (index !== tailExitIndex && events[index][1].type !== "lineEnding") {
-        enter = index;
-      }
-    } else if (index === tailExitIndex || events[index][1].type === "lineEnding") {
-      events[enter][1].type = "codeTextData";
-      if (index !== enter + 2) {
-        events[enter][1].end = events[index - 1][1].end;
-        events.splice(enter + 2, index - enter - 2);
-        tailExitIndex -= index - enter - 2;
-        index = enter + 2;
-      }
-      enter = undefined;
-    }
-  }
-  return events;
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Previous}
- */
-function previous(code) {
-  // If there is a previous code, there will always be a tail.
-  return code !== 96 || this.events[this.events.length - 1][1].type === "characterEscape";
-}
-
-/**
- * @this {TokenizeContext}
- * @type {Tokenizer}
- */
-function tokenizeCodeText(effects, ok, nok) {
-  const self = this;
-  let sizeOpen = 0;
-  /** @type {number} */
-  let size;
-  /** @type {Token} */
-  let token;
-  return start;
-
-  /**
-   * Start of code (text).
-   *
-   * ```markdown
-   * > | `a`
-   *     ^
-   * > | \`a`
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    effects.enter("codeText");
-    effects.enter("codeTextSequence");
-    return sequenceOpen(code);
-  }
-
-  /**
-   * In opening sequence.
-   *
-   * ```markdown
-   * > | `a`
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function sequenceOpen(code) {
-    if (code === 96) {
-      effects.consume(code);
-      sizeOpen++;
-      return sequenceOpen;
-    }
-    effects.exit("codeTextSequence");
-    return between(code);
-  }
-
-  /**
-   * Between something and something else.
-   *
-   * ```markdown
-   * > | `a`
-   *      ^^
-   * ```
-   *
-   * @type {State}
-   */
-  function between(code) {
-    // EOF.
-    if (code === null) {
-      return nok(code);
-    }
-
-    // To do: next major: don’t do spaces in resolve, but when compiling,
-    // like `markdown-rs`.
-    // Tabs don’t work, and virtual spaces don’t make sense.
-    if (code === 32) {
-      effects.enter('space');
-      effects.consume(code);
-      effects.exit('space');
-      return between;
-    }
-
-    // Closing fence? Could also be data.
-    if (code === 96) {
-      token = effects.enter("codeTextSequence");
-      size = 0;
-      return sequenceClose(code);
-    }
-    if (markdownLineEnding(code)) {
-      effects.enter("lineEnding");
-      effects.consume(code);
-      effects.exit("lineEnding");
-      return between;
-    }
-
-    // Data.
-    effects.enter("codeTextData");
-    return data(code);
-  }
-
-  /**
-   * In data.
-   *
-   * ```markdown
-   * > | `a`
-   *      ^
-   * ```
-   *
-   * @type {State}
-   */
-  function data(code) {
-    if (code === null || code === 32 || code === 96 || markdownLineEnding(code)) {
-      effects.exit("codeTextData");
-      return between(code);
-    }
-    effects.consume(code);
-    return data;
-  }
-
-  /**
-   * In closing sequence.
-   *
-   * ```markdown
-   * > | `a`
-   *       ^
-   * ```
-   *
-   * @type {State}
-   */
-  function sequenceClose(code) {
-    // More.
-    if (code === 96) {
-      effects.consume(code);
-      size++;
-      return sequenceClose;
-    }
-
-    // Done!
-    if (size === sizeOpen) {
-      effects.exit("codeTextSequence");
-      effects.exit("codeText");
-      return ok(code);
-    }
-
-    // More or less accents: mark as data.
-    token.type = "codeTextData";
-    return data(code);
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/constructs.js
-/**
- * @typedef {import('micromark-util-types').Extension} Extension
- */
-
-
-
-
-/** @satisfies {Extension['document']} */
-const constructs_document = {
-  [42]: list,
-  [43]: list,
-  [45]: list,
-  [48]: list,
-  [49]: list,
-  [50]: list,
-  [51]: list,
-  [52]: list,
-  [53]: list,
-  [54]: list,
-  [55]: list,
-  [56]: list,
-  [57]: list,
-  [62]: blockQuote
-}
-
-/** @satisfies {Extension['contentInitial']} */
-const contentInitial = {
-  [91]: definition
-}
-
-/** @satisfies {Extension['flowInitial']} */
-const flowInitial = {
-  [-2]: codeIndented,
-  [-1]: codeIndented,
-  [32]: codeIndented
-}
-
-/** @satisfies {Extension['flow']} */
-const constructs_flow = {
-  [35]: headingAtx,
-  [42]: thematicBreak,
-  [45]: [setextUnderline, thematicBreak],
-  [60]: htmlFlow,
-  [61]: setextUnderline,
-  [95]: thematicBreak,
-  [96]: codeFenced,
-  [126]: codeFenced
-}
-
-/** @satisfies {Extension['string']} */
-const constructs_string = {
-  [38]: characterReference,
-  [92]: characterEscape
-}
-
-/** @satisfies {Extension['text']} */
-const constructs_text = {
-  [-5]: lineEnding,
-  [-4]: lineEnding,
-  [-3]: lineEnding,
-  [33]: labelStartImage,
-  [38]: characterReference,
-  [42]: attention,
-  [60]: [autolink, htmlText],
-  [91]: labelStartLink,
-  [92]: [hardBreakEscape, characterEscape],
-  [93]: labelEnd,
-  [95]: attention,
-  [96]: codeText
-}
-
-/** @satisfies {Extension['insideSpan']} */
-const insideSpan = {
-  null: [attention, resolver]
-}
-
-/** @satisfies {Extension['attentionMarkers']} */
-const attentionMarkers = {
-  null: [42, 95]
-}
-
-/** @satisfies {Extension['disable']} */
-const disable = {
-  null: []
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/parse.js
-/**
- * @typedef {import('micromark-util-types').Create} Create
- * @typedef {import('micromark-util-types').FullNormalizedExtension} FullNormalizedExtension
- * @typedef {import('micromark-util-types').InitialConstruct} InitialConstruct
- * @typedef {import('micromark-util-types').ParseContext} ParseContext
- * @typedef {import('micromark-util-types').ParseOptions} ParseOptions
- */
-
-
-
-
-
-
-
-
-
-/**
- * @param {ParseOptions | null | undefined} [options]
- * @returns {ParseContext}
- */
-function parse(options) {
-  const settings = options || {}
-  const constructs =
-    /** @type {FullNormalizedExtension} */
-    combineExtensions([constructs_namespaceObject, ...(settings.extensions || [])])
-
-  /** @type {ParseContext} */
-  const parser = {
-    defined: [],
-    lazy: {},
-    constructs,
-    content: create(content),
-    document: create(document_document),
-    flow: create(flow),
-    string: create(string),
-    text: create(text_text)
-  }
-  return parser
-
-  /**
-   * @param {InitialConstruct} initial
-   */
-  function create(initial) {
-    return creator
-    /** @type {Create} */
-    function creator(from) {
-      return createTokenizer(parser, initial, from)
-    }
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark/lib/preprocess.js
-/**
- * @typedef {import('micromark-util-types').Chunk} Chunk
- * @typedef {import('micromark-util-types').Code} Code
- * @typedef {import('micromark-util-types').Encoding} Encoding
- * @typedef {import('micromark-util-types').Value} Value
- */
-
-/**
- * @callback Preprocessor
- * @param {Value} value
- * @param {Encoding | null | undefined} [encoding]
- * @param {boolean | null | undefined} [end=false]
- * @returns {Array<Chunk>}
- */
-
-const search = /[\0\t\n\r]/g
-
-/**
- * @returns {Preprocessor}
- */
-function preprocess() {
-  let column = 1
-  let buffer = ''
-  /** @type {boolean | undefined} */
-  let start = true
-  /** @type {boolean | undefined} */
-  let atCarriageReturn
-  return preprocessor
-
-  /** @type {Preprocessor} */
-  // eslint-disable-next-line complexity
-  function preprocessor(value, encoding, end) {
-    /** @type {Array<Chunk>} */
-    const chunks = []
-    /** @type {RegExpMatchArray | null} */
-    let match
-    /** @type {number} */
-    let next
-    /** @type {number} */
-    let startPosition
-    /** @type {number} */
-    let endPosition
-    /** @type {Code} */
-    let code
-    value =
-      buffer +
-      (typeof value === 'string'
-        ? value.toString()
-        : new TextDecoder(encoding || undefined).decode(value))
-    startPosition = 0
-    buffer = ''
-    if (start) {
-      // To do: `markdown-rs` actually parses BOMs (byte order mark).
-      if (value.charCodeAt(0) === 65279) {
-        startPosition++
-      }
-      start = undefined
-    }
-    while (startPosition < value.length) {
-      search.lastIndex = startPosition
-      match = search.exec(value)
-      endPosition =
-        match && match.index !== undefined ? match.index : value.length
-      code = value.charCodeAt(endPosition)
-      if (!match) {
-        buffer = value.slice(startPosition)
-        break
-      }
-      if (code === 10 && startPosition === endPosition && atCarriageReturn) {
-        chunks.push(-3)
-        atCarriageReturn = undefined
-      } else {
-        if (atCarriageReturn) {
-          chunks.push(-5)
-          atCarriageReturn = undefined
-        }
-        if (startPosition < endPosition) {
-          chunks.push(value.slice(startPosition, endPosition))
-          column += endPosition - startPosition
-        }
-        switch (code) {
-          case 0: {
-            chunks.push(65533)
-            column++
-            break
-          }
-          case 9: {
-            next = Math.ceil(column / 4) * 4
-            chunks.push(-2)
-            while (column++ < next) chunks.push(-1)
-            break
-          }
-          case 10: {
-            chunks.push(-4)
-            column = 1
-            break
-          }
-          default: {
-            atCarriageReturn = true
-            column = 1
-          }
-        }
-      }
-      startPosition = endPosition + 1
-    }
-    if (end) {
-      if (atCarriageReturn) chunks.push(-5)
-      if (buffer) chunks.push(buffer)
-      chunks.push(null)
-    }
-    return chunks
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/micromark-util-decode-numeric-character-reference/index.js
-/**
- * Turn the number (in string form as either hexa- or plain decimal) coming from
- * a numeric character reference into a character.
- *
- * Sort of like `String.fromCodePoint(Number.parseInt(value, base))`, but makes
- * non-characters and control characters safe.
- *
- * @param {string} value
- *   Value to decode.
- * @param {number} base
- *   Numeric base.
- * @returns {string}
- *   Character.
- */
-function decodeNumericCharacterReference(value, base) {
-  const code = Number.parseInt(value, base);
-  if (
-  // C0 except for HT, LF, FF, CR, space.
-  code < 9 || code === 11 || code > 13 && code < 32 ||
-  // Control character (DEL) of C0, and C1 controls.
-  code > 126 && code < 160 ||
-  // Lone high surrogates and low surrogates.
-  code > 55_295 && code < 57_344 ||
-  // Noncharacters.
-  code > 64_975 && code < 65_008 || /* eslint-disable no-bitwise */
-  (code & 65_535) === 65_535 || (code & 65_535) === 65_534 || /* eslint-enable no-bitwise */
-  // Out of range
-  code > 1_114_111) {
-    return "\uFFFD";
-  }
-  return String.fromCodePoint(code);
-}
-;// CONCATENATED MODULE: ./node_modules/micromark-util-decode-string/index.js
-
-
-const characterEscapeOrReference =
-  /\\([!-/:-@[-`{-~])|&(#(?:\d{1,7}|x[\da-f]{1,6})|[\da-z]{1,31});/gi
-
-/**
- * Decode markdown strings (which occur in places such as fenced code info
- * strings, destinations, labels, and titles).
- *
- * The “string” content type allows character escapes and -references.
- * This decodes those.
- *
- * @param {string} value
- *   Value to decode.
- * @returns {string}
- *   Decoded value.
- */
-function decodeString(value) {
-  return value.replace(characterEscapeOrReference, decode)
-}
-
-/**
- * @param {string} $0
- * @param {string} $1
- * @param {string} $2
- * @returns {string}
- */
-function decode($0, $1, $2) {
-  if ($1) {
-    // Escape.
-    return $1
-  }
-
-  // Reference.
-  const head = $2.charCodeAt(0)
-  if (head === 35) {
-    const head = $2.charCodeAt(1)
-    const hex = head === 120 || head === 88
-    return decodeNumericCharacterReference($2.slice(hex ? 2 : 1), hex ? 16 : 10)
-  }
-  return decodeNamedCharacterReference($2) || $0
-}
-
-// EXTERNAL MODULE: ./node_modules/unist-util-stringify-position/lib/index.js
-var lib = __nccwpck_require__(669);
-;// CONCATENATED MODULE: ./node_modules/mdast-util-from-markdown/lib/index.js
-/**
- * @import {
- *   Break,
- *   Blockquote,
- *   Code,
- *   Definition,
- *   Emphasis,
- *   Heading,
- *   Html,
- *   Image,
- *   InlineCode,
- *   Link,
- *   ListItem,
- *   List,
- *   Nodes,
- *   Paragraph,
- *   PhrasingContent,
- *   ReferenceType,
- *   Root,
- *   Strong,
- *   Text,
- *   ThematicBreak
- * } from 'mdast'
- * @import {
- *   Encoding,
- *   Event,
- *   Token,
- *   Value
- * } from 'micromark-util-types'
- * @import {Point} from 'unist'
- * @import {
- *   CompileContext,
- *   CompileData,
- *   Config,
- *   Extension,
- *   Handle,
- *   OnEnterError,
- *   Options
- * } from './types.js'
- */
-
-
-
-
-
-
-
-
-const lib_own = {}.hasOwnProperty;
-
-/**
- * Turn markdown into a syntax tree.
- *
- * @overload
- * @param {Value} value
- * @param {Encoding | null | undefined} [encoding]
- * @param {Options | null | undefined} [options]
- * @returns {Root}
- *
- * @overload
- * @param {Value} value
- * @param {Options | null | undefined} [options]
- * @returns {Root}
- *
- * @param {Value} value
- *   Markdown to parse.
- * @param {Encoding | Options | null | undefined} [encoding]
- *   Character encoding for when `value` is `Buffer`.
- * @param {Options | null | undefined} [options]
- *   Configuration.
- * @returns {Root}
- *   mdast tree.
- */
-function fromMarkdown(value, encoding, options) {
-  if (typeof encoding !== 'string') {
-    options = encoding;
-    encoding = undefined;
-  }
-  return compiler(options)(postprocess(parse(options).document().write(preprocess()(value, encoding, true))));
-}
-
-/**
- * Note this compiler only understand complete buffering, not streaming.
- *
- * @param {Options | null | undefined} [options]
- */
-function compiler(options) {
-  /** @type {Config} */
-  const config = {
-    transforms: [],
-    canContainEols: ['emphasis', 'fragment', 'heading', 'paragraph', 'strong'],
-    enter: {
-      autolink: opener(link),
-      autolinkProtocol: onenterdata,
-      autolinkEmail: onenterdata,
-      atxHeading: opener(heading),
-      blockQuote: opener(blockQuote),
-      characterEscape: onenterdata,
-      characterReference: onenterdata,
-      codeFenced: opener(codeFlow),
-      codeFencedFenceInfo: buffer,
-      codeFencedFenceMeta: buffer,
-      codeIndented: opener(codeFlow, buffer),
-      codeText: opener(codeText, buffer),
-      codeTextData: onenterdata,
-      data: onenterdata,
-      codeFlowValue: onenterdata,
-      definition: opener(definition),
-      definitionDestinationString: buffer,
-      definitionLabelString: buffer,
-      definitionTitleString: buffer,
-      emphasis: opener(emphasis),
-      hardBreakEscape: opener(hardBreak),
-      hardBreakTrailing: opener(hardBreak),
-      htmlFlow: opener(html, buffer),
-      htmlFlowData: onenterdata,
-      htmlText: opener(html, buffer),
-      htmlTextData: onenterdata,
-      image: opener(image),
-      label: buffer,
-      link: opener(link),
-      listItem: opener(listItem),
-      listItemValue: onenterlistitemvalue,
-      listOrdered: opener(list, onenterlistordered),
-      listUnordered: opener(list),
-      paragraph: opener(paragraph),
-      reference: onenterreference,
-      referenceString: buffer,
-      resourceDestinationString: buffer,
-      resourceTitleString: buffer,
-      setextHeading: opener(heading),
-      strong: opener(strong),
-      thematicBreak: opener(thematicBreak)
-    },
-    exit: {
-      atxHeading: closer(),
-      atxHeadingSequence: onexitatxheadingsequence,
-      autolink: closer(),
-      autolinkEmail: onexitautolinkemail,
-      autolinkProtocol: onexitautolinkprotocol,
-      blockQuote: closer(),
-      characterEscapeValue: onexitdata,
-      characterReferenceMarkerHexadecimal: onexitcharacterreferencemarker,
-      characterReferenceMarkerNumeric: onexitcharacterreferencemarker,
-      characterReferenceValue: onexitcharacterreferencevalue,
-      characterReference: onexitcharacterreference,
-      codeFenced: closer(onexitcodefenced),
-      codeFencedFence: onexitcodefencedfence,
-      codeFencedFenceInfo: onexitcodefencedfenceinfo,
-      codeFencedFenceMeta: onexitcodefencedfencemeta,
-      codeFlowValue: onexitdata,
-      codeIndented: closer(onexitcodeindented),
-      codeText: closer(onexitcodetext),
-      codeTextData: onexitdata,
-      data: onexitdata,
-      definition: closer(),
-      definitionDestinationString: onexitdefinitiondestinationstring,
-      definitionLabelString: onexitdefinitionlabelstring,
-      definitionTitleString: onexitdefinitiontitlestring,
-      emphasis: closer(),
-      hardBreakEscape: closer(onexithardbreak),
-      hardBreakTrailing: closer(onexithardbreak),
-      htmlFlow: closer(onexithtmlflow),
-      htmlFlowData: onexitdata,
-      htmlText: closer(onexithtmltext),
-      htmlTextData: onexitdata,
-      image: closer(onexitimage),
-      label: onexitlabel,
-      labelText: onexitlabeltext,
-      lineEnding: onexitlineending,
-      link: closer(onexitlink),
-      listItem: closer(),
-      listOrdered: closer(),
-      listUnordered: closer(),
-      paragraph: closer(),
-      referenceString: onexitreferencestring,
-      resourceDestinationString: onexitresourcedestinationstring,
-      resourceTitleString: onexitresourcetitlestring,
-      resource: onexitresource,
-      setextHeading: closer(onexitsetextheading),
-      setextHeadingLineSequence: onexitsetextheadinglinesequence,
-      setextHeadingText: onexitsetextheadingtext,
-      strong: closer(),
-      thematicBreak: closer()
-    }
-  };
-  configure(config, (options || {}).mdastExtensions || []);
-
-  /** @type {CompileData} */
-  const data = {};
-  return compile;
-
-  /**
-   * Turn micromark events into an mdast tree.
-   *
-   * @param {Array<Event>} events
-   *   Events.
-   * @returns {Root}
-   *   mdast tree.
-   */
-  function compile(events) {
-    /** @type {Root} */
-    let tree = {
-      type: 'root',
-      children: []
-    };
-    /** @type {Omit<CompileContext, 'sliceSerialize'>} */
-    const context = {
-      stack: [tree],
-      tokenStack: [],
-      config,
-      enter,
-      exit,
-      buffer,
-      resume,
-      data
-    };
-    /** @type {Array<number>} */
-    const listStack = [];
-    let index = -1;
-    while (++index < events.length) {
-      // We preprocess lists to add `listItem` tokens, and to infer whether
-      // items the list itself are spread out.
-      if (events[index][1].type === "listOrdered" || events[index][1].type === "listUnordered") {
-        if (events[index][0] === 'enter') {
-          listStack.push(index);
-        } else {
-          const tail = listStack.pop();
-          index = prepareList(events, tail, index);
-        }
-      }
-    }
-    index = -1;
-    while (++index < events.length) {
-      const handler = config[events[index][0]];
-      if (lib_own.call(handler, events[index][1].type)) {
-        handler[events[index][1].type].call(Object.assign({
-          sliceSerialize: events[index][2].sliceSerialize
-        }, context), events[index][1]);
-      }
-    }
-
-    // Handle tokens still being open.
-    if (context.tokenStack.length > 0) {
-      const tail = context.tokenStack[context.tokenStack.length - 1];
-      const handler = tail[1] || defaultOnError;
-      handler.call(context, undefined, tail[0]);
-    }
-
-    // Figure out `root` position.
-    tree.position = {
-      start: point(events.length > 0 ? events[0][1].start : {
-        line: 1,
-        column: 1,
-        offset: 0
-      }),
-      end: point(events.length > 0 ? events[events.length - 2][1].end : {
-        line: 1,
-        column: 1,
-        offset: 0
-      })
-    };
-
-    // Call transforms.
-    index = -1;
-    while (++index < config.transforms.length) {
-      tree = config.transforms[index](tree) || tree;
-    }
-    return tree;
-  }
-
-  /**
-   * @param {Array<Event>} events
-   * @param {number} start
-   * @param {number} length
-   * @returns {number}
-   */
-  function prepareList(events, start, length) {
-    let index = start - 1;
-    let containerBalance = -1;
-    let listSpread = false;
-    /** @type {Token | undefined} */
-    let listItem;
-    /** @type {number | undefined} */
-    let lineIndex;
-    /** @type {number | undefined} */
-    let firstBlankLineIndex;
-    /** @type {boolean | undefined} */
-    let atMarker;
-    while (++index <= length) {
-      const event = events[index];
-      switch (event[1].type) {
-        case "listUnordered":
-        case "listOrdered":
-        case "blockQuote":
-          {
-            if (event[0] === 'enter') {
-              containerBalance++;
-            } else {
-              containerBalance--;
-            }
-            atMarker = undefined;
-            break;
-          }
-        case "lineEndingBlank":
-          {
-            if (event[0] === 'enter') {
-              if (listItem && !atMarker && !containerBalance && !firstBlankLineIndex) {
-                firstBlankLineIndex = index;
-              }
-              atMarker = undefined;
-            }
-            break;
-          }
-        case "linePrefix":
-        case "listItemValue":
-        case "listItemMarker":
-        case "listItemPrefix":
-        case "listItemPrefixWhitespace":
-          {
-            // Empty.
-
-            break;
-          }
-        default:
-          {
-            atMarker = undefined;
-          }
-      }
-      if (!containerBalance && event[0] === 'enter' && event[1].type === "listItemPrefix" || containerBalance === -1 && event[0] === 'exit' && (event[1].type === "listUnordered" || event[1].type === "listOrdered")) {
-        if (listItem) {
-          let tailIndex = index;
-          lineIndex = undefined;
-          while (tailIndex--) {
-            const tailEvent = events[tailIndex];
-            if (tailEvent[1].type === "lineEnding" || tailEvent[1].type === "lineEndingBlank") {
-              if (tailEvent[0] === 'exit') continue;
-              if (lineIndex) {
-                events[lineIndex][1].type = "lineEndingBlank";
-                listSpread = true;
-              }
-              tailEvent[1].type = "lineEnding";
-              lineIndex = tailIndex;
-            } else if (tailEvent[1].type === "linePrefix" || tailEvent[1].type === "blockQuotePrefix" || tailEvent[1].type === "blockQuotePrefixWhitespace" || tailEvent[1].type === "blockQuoteMarker" || tailEvent[1].type === "listItemIndent") {
-              // Empty
-            } else {
-              break;
-            }
-          }
-          if (firstBlankLineIndex && (!lineIndex || firstBlankLineIndex < lineIndex)) {
-            listItem._spread = true;
-          }
-
-          // Fix position.
-          listItem.end = Object.assign({}, lineIndex ? events[lineIndex][1].start : event[1].end);
-          events.splice(lineIndex || index, 0, ['exit', listItem, event[2]]);
-          index++;
-          length++;
-        }
-
-        // Create a new list item.
-        if (event[1].type === "listItemPrefix") {
-          /** @type {Token} */
-          const item = {
-            type: 'listItem',
-            _spread: false,
-            start: Object.assign({}, event[1].start),
-            // @ts-expect-error: we’ll add `end` in a second.
-            end: undefined
-          };
-          listItem = item;
-          events.splice(index, 0, ['enter', item, event[2]]);
-          index++;
-          length++;
-          firstBlankLineIndex = undefined;
-          atMarker = true;
-        }
-      }
-    }
-    events[start][1]._spread = listSpread;
-    return length;
-  }
-
-  /**
-   * Create an opener handle.
-   *
-   * @param {(token: Token) => Nodes} create
-   *   Create a node.
-   * @param {Handle | undefined} [and]
-   *   Optional function to also run.
-   * @returns {Handle}
-   *   Handle.
-   */
-  function opener(create, and) {
-    return open;
-
-    /**
-     * @this {CompileContext}
-     * @param {Token} token
-     * @returns {undefined}
-     */
-    function open(token) {
-      enter.call(this, create(token), token);
-      if (and) and.call(this, token);
-    }
-  }
-
-  /**
-   * @type {CompileContext['buffer']}
-   */
-  function buffer() {
-    this.stack.push({
-      type: 'fragment',
-      children: []
-    });
-  }
-
-  /**
-   * @type {CompileContext['enter']}
-   */
-  function enter(node, token, errorHandler) {
-    const parent = this.stack[this.stack.length - 1];
-    /** @type {Array<Nodes>} */
-    const siblings = parent.children;
-    siblings.push(node);
-    this.stack.push(node);
-    this.tokenStack.push([token, errorHandler || undefined]);
-    node.position = {
-      start: point(token.start),
-      // @ts-expect-error: `end` will be patched later.
-      end: undefined
-    };
-  }
-
-  /**
-   * Create a closer handle.
-   *
-   * @param {Handle | undefined} [and]
-   *   Optional function to also run.
-   * @returns {Handle}
-   *   Handle.
-   */
-  function closer(and) {
-    return close;
-
-    /**
-     * @this {CompileContext}
-     * @param {Token} token
-     * @returns {undefined}
-     */
-    function close(token) {
-      if (and) and.call(this, token);
-      exit.call(this, token);
-    }
-  }
-
-  /**
-   * @type {CompileContext['exit']}
-   */
-  function exit(token, onExitError) {
-    const node = this.stack.pop();
-    const open = this.tokenStack.pop();
-    if (!open) {
-      throw new Error('Cannot close `' + token.type + '` (' + (0,lib/* stringifyPosition */.L)({
-        start: token.start,
-        end: token.end
-      }) + '): it’s not open');
-    } else if (open[0].type !== token.type) {
-      if (onExitError) {
-        onExitError.call(this, token, open[0]);
-      } else {
-        const handler = open[1] || defaultOnError;
-        handler.call(this, token, open[0]);
-      }
-    }
-    node.position.end = point(token.end);
-  }
-
-  /**
-   * @type {CompileContext['resume']}
-   */
-  function resume() {
-    return lib_toString(this.stack.pop());
-  }
-
-  //
-  // Handlers.
-  //
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onenterlistordered() {
-    this.data.expectingFirstListItemValue = true;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onenterlistitemvalue(token) {
-    if (this.data.expectingFirstListItemValue) {
-      const ancestor = this.stack[this.stack.length - 2];
-      ancestor.start = Number.parseInt(this.sliceSerialize(token), 10);
-      this.data.expectingFirstListItemValue = undefined;
-    }
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitcodefencedfenceinfo() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.lang = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitcodefencedfencemeta() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.meta = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitcodefencedfence() {
-    // Exit if this is the closing fence.
-    if (this.data.flowCodeInside) return;
-    this.buffer();
-    this.data.flowCodeInside = true;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitcodefenced() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.value = data.replace(/^(\r?\n|\r)|(\r?\n|\r)$/g, '');
-    this.data.flowCodeInside = undefined;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitcodeindented() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.value = data.replace(/(\r?\n|\r)$/g, '');
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitdefinitionlabelstring(token) {
-    const label = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.label = label;
-    node.identifier = normalizeIdentifier(this.sliceSerialize(token)).toLowerCase();
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitdefinitiontitlestring() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.title = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitdefinitiondestinationstring() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.url = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitatxheadingsequence(token) {
-    const node = this.stack[this.stack.length - 1];
-    if (!node.depth) {
-      const depth = this.sliceSerialize(token).length;
-      node.depth = depth;
-    }
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitsetextheadingtext() {
-    this.data.setextHeadingSlurpLineEnding = true;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitsetextheadinglinesequence(token) {
-    const node = this.stack[this.stack.length - 1];
-    node.depth = this.sliceSerialize(token).codePointAt(0) === 61 ? 1 : 2;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitsetextheading() {
-    this.data.setextHeadingSlurpLineEnding = undefined;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onenterdata(token) {
-    const node = this.stack[this.stack.length - 1];
-    /** @type {Array<Nodes>} */
-    const siblings = node.children;
-    let tail = siblings[siblings.length - 1];
-    if (!tail || tail.type !== 'text') {
-      // Add a new text node.
-      tail = text();
-      tail.position = {
-        start: point(token.start),
-        // @ts-expect-error: we’ll add `end` later.
-        end: undefined
-      };
-      siblings.push(tail);
-    }
-    this.stack.push(tail);
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitdata(token) {
-    const tail = this.stack.pop();
-    tail.value += this.sliceSerialize(token);
-    tail.position.end = point(token.end);
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitlineending(token) {
-    const context = this.stack[this.stack.length - 1];
-    // If we’re at a hard break, include the line ending in there.
-    if (this.data.atHardBreak) {
-      const tail = context.children[context.children.length - 1];
-      tail.position.end = point(token.end);
-      this.data.atHardBreak = undefined;
-      return;
-    }
-    if (!this.data.setextHeadingSlurpLineEnding && config.canContainEols.includes(context.type)) {
-      onenterdata.call(this, token);
-      onexitdata.call(this, token);
-    }
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexithardbreak() {
-    this.data.atHardBreak = true;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexithtmlflow() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.value = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexithtmltext() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.value = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitcodetext() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.value = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitlink() {
-    const node = this.stack[this.stack.length - 1];
-    // Note: there are also `identifier` and `label` fields on this link node!
-    // These are used / cleaned here.
-
-    // To do: clean.
-    if (this.data.inReference) {
-      /** @type {ReferenceType} */
-      const referenceType = this.data.referenceType || 'shortcut';
-      node.type += 'Reference';
-      // @ts-expect-error: mutate.
-      node.referenceType = referenceType;
-      // @ts-expect-error: mutate.
-      delete node.url;
-      delete node.title;
-    } else {
-      // @ts-expect-error: mutate.
-      delete node.identifier;
-      // @ts-expect-error: mutate.
-      delete node.label;
-    }
-    this.data.referenceType = undefined;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitimage() {
-    const node = this.stack[this.stack.length - 1];
-    // Note: there are also `identifier` and `label` fields on this link node!
-    // These are used / cleaned here.
-
-    // To do: clean.
-    if (this.data.inReference) {
-      /** @type {ReferenceType} */
-      const referenceType = this.data.referenceType || 'shortcut';
-      node.type += 'Reference';
-      // @ts-expect-error: mutate.
-      node.referenceType = referenceType;
-      // @ts-expect-error: mutate.
-      delete node.url;
-      delete node.title;
-    } else {
-      // @ts-expect-error: mutate.
-      delete node.identifier;
-      // @ts-expect-error: mutate.
-      delete node.label;
-    }
-    this.data.referenceType = undefined;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitlabeltext(token) {
-    const string = this.sliceSerialize(token);
-    const ancestor = this.stack[this.stack.length - 2];
-    // @ts-expect-error: stash this on the node, as it might become a reference
-    // later.
-    ancestor.label = decodeString(string);
-    // @ts-expect-error: same as above.
-    ancestor.identifier = normalizeIdentifier(string).toLowerCase();
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitlabel() {
-    const fragment = this.stack[this.stack.length - 1];
-    const value = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    // Assume a reference.
-    this.data.inReference = true;
-    if (node.type === 'link') {
-      /** @type {Array<PhrasingContent>} */
-      const children = fragment.children;
-      node.children = children;
-    } else {
-      node.alt = value;
-    }
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitresourcedestinationstring() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.url = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitresourcetitlestring() {
-    const data = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    node.title = data;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitresource() {
-    this.data.inReference = undefined;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onenterreference() {
-    this.data.referenceType = 'collapsed';
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitreferencestring(token) {
-    const label = this.resume();
-    const node = this.stack[this.stack.length - 1];
-    // @ts-expect-error: stash this on the node, as it might become a reference
-    // later.
-    node.label = label;
-    // @ts-expect-error: same as above.
-    node.identifier = normalizeIdentifier(this.sliceSerialize(token)).toLowerCase();
-    this.data.referenceType = 'full';
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-
-  function onexitcharacterreferencemarker(token) {
-    this.data.characterReferenceType = token.type;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitcharacterreferencevalue(token) {
-    const data = this.sliceSerialize(token);
-    const type = this.data.characterReferenceType;
-    /** @type {string} */
-    let value;
-    if (type) {
-      value = decodeNumericCharacterReference(data, type === "characterReferenceMarkerNumeric" ? 10 : 16);
-      this.data.characterReferenceType = undefined;
-    } else {
-      const result = decodeNamedCharacterReference(data);
-      value = result;
-    }
-    const tail = this.stack[this.stack.length - 1];
-    tail.value += value;
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitcharacterreference(token) {
-    const tail = this.stack.pop();
-    tail.position.end = point(token.end);
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitautolinkprotocol(token) {
-    onexitdata.call(this, token);
-    const node = this.stack[this.stack.length - 1];
-    node.url = this.sliceSerialize(token);
-  }
-
-  /**
-   * @this {CompileContext}
-   * @type {Handle}
-   */
-  function onexitautolinkemail(token) {
-    onexitdata.call(this, token);
-    const node = this.stack[this.stack.length - 1];
-    node.url = 'mailto:' + this.sliceSerialize(token);
-  }
-
-  //
-  // Creaters.
-  //
-
-  /** @returns {Blockquote} */
-  function blockQuote() {
-    return {
-      type: 'blockquote',
-      children: []
-    };
-  }
-
-  /** @returns {Code} */
-  function codeFlow() {
-    return {
-      type: 'code',
-      lang: null,
-      meta: null,
-      value: ''
-    };
-  }
-
-  /** @returns {InlineCode} */
-  function codeText() {
-    return {
-      type: 'inlineCode',
-      value: ''
-    };
-  }
-
-  /** @returns {Definition} */
-  function definition() {
-    return {
-      type: 'definition',
-      identifier: '',
-      label: null,
-      title: null,
-      url: ''
-    };
-  }
-
-  /** @returns {Emphasis} */
-  function emphasis() {
-    return {
-      type: 'emphasis',
-      children: []
-    };
-  }
-
-  /** @returns {Heading} */
-  function heading() {
-    return {
-      type: 'heading',
-      // @ts-expect-error `depth` will be set later.
-      depth: 0,
-      children: []
-    };
-  }
-
-  /** @returns {Break} */
-  function hardBreak() {
-    return {
-      type: 'break'
-    };
-  }
-
-  /** @returns {Html} */
-  function html() {
-    return {
-      type: 'html',
-      value: ''
-    };
-  }
-
-  /** @returns {Image} */
-  function image() {
-    return {
-      type: 'image',
-      title: null,
-      url: '',
-      alt: null
-    };
-  }
-
-  /** @returns {Link} */
-  function link() {
-    return {
-      type: 'link',
-      title: null,
-      url: '',
-      children: []
-    };
-  }
-
-  /**
-   * @param {Token} token
-   * @returns {List}
-   */
-  function list(token) {
-    return {
-      type: 'list',
-      ordered: token.type === 'listOrdered',
-      start: null,
-      spread: token._spread,
-      children: []
-    };
-  }
-
-  /**
-   * @param {Token} token
-   * @returns {ListItem}
-   */
-  function listItem(token) {
-    return {
-      type: 'listItem',
-      spread: token._spread,
-      checked: null,
-      children: []
-    };
-  }
-
-  /** @returns {Paragraph} */
-  function paragraph() {
-    return {
-      type: 'paragraph',
-      children: []
-    };
-  }
-
-  /** @returns {Strong} */
-  function strong() {
-    return {
-      type: 'strong',
-      children: []
-    };
-  }
-
-  /** @returns {Text} */
-  function text() {
-    return {
-      type: 'text',
-      value: ''
-    };
-  }
-
-  /** @returns {ThematicBreak} */
-  function thematicBreak() {
-    return {
-      type: 'thematicBreak'
-    };
-  }
-}
-
-/**
- * Copy a point-like value.
- *
- * @param {Point} d
- *   Point-like value.
- * @returns {Point}
- *   unist point.
- */
-function point(d) {
-  return {
-    line: d.line,
-    column: d.column,
-    offset: d.offset
-  };
-}
-
-/**
- * @param {Config} combined
- * @param {Array<Array<Extension> | Extension>} extensions
- * @returns {undefined}
- */
-function configure(combined, extensions) {
-  let index = -1;
-  while (++index < extensions.length) {
-    const value = extensions[index];
-    if (Array.isArray(value)) {
-      configure(combined, value);
-    } else {
-      extension(combined, value);
-    }
-  }
-}
-
-/**
- * @param {Config} combined
- * @param {Extension} extension
- * @returns {undefined}
- */
-function extension(combined, extension) {
-  /** @type {keyof Extension} */
-  let key;
-  for (key in extension) {
-    if (lib_own.call(extension, key)) {
-      switch (key) {
-        case 'canContainEols':
-          {
-            const right = extension[key];
-            if (right) {
-              combined[key].push(...right);
-            }
-            break;
-          }
-        case 'transforms':
-          {
-            const right = extension[key];
-            if (right) {
-              combined[key].push(...right);
-            }
-            break;
-          }
-        case 'enter':
-        case 'exit':
-          {
-            const right = extension[key];
-            if (right) {
-              Object.assign(combined[key], right);
-            }
-            break;
-          }
-        // No default
-      }
-    }
-  }
-}
-
-/** @type {OnEnterError} */
-function defaultOnError(left, right) {
-  if (left) {
-    throw new Error('Cannot close `' + left.type + '` (' + (0,lib/* stringifyPosition */.L)({
-      start: left.start,
-      end: left.end
-    }) + '): a different token (`' + right.type + '`, ' + (0,lib/* stringifyPosition */.L)({
-      start: right.start,
-      end: right.end
-    }) + ') is open');
-  } else {
-    throw new Error('Cannot close document, a token (`' + right.type + '`, ' + (0,lib/* stringifyPosition */.L)({
-      start: right.start,
-      end: right.end
-    }) + ') is still open');
-  }
-}
-;// CONCATENATED MODULE: ./node_modules/remark-parse/lib/index.js
-/**
- * @typedef {import('mdast').Root} Root
- * @typedef {import('mdast-util-from-markdown').Options} FromMarkdownOptions
- * @typedef {import('unified').Parser<Root>} Parser
- * @typedef {import('unified').Processor<Root>} Processor
- */
-
-/**
- * @typedef {Omit<FromMarkdownOptions, 'extensions' | 'mdastExtensions'>} Options
- */
-
-
-
-/**
- * Aadd support for parsing from markdown.
- *
- * @param {Readonly<Options> | null | undefined} [options]
- *   Configuration (optional).
- * @returns {undefined}
- *   Nothing.
- */
-function remarkParse(options) {
-  /** @type {Processor} */
-  // @ts-expect-error: TS in JSDoc generates wrong types if `this` is typed regularly.
-  const self = this
-
-  self.parser = parser
-
-  /**
-   * @type {Parser}
-   */
-  function parser(doc) {
-    return fromMarkdown(doc, {
-      ...self.data('settings'),
-      ...options,
-      // Note: these options are not in the readme.
-      // The goal is for them to be set by plugins on `data` instead of being
-      // passed by users.
-      extensions: self.data('micromarkExtensions') || [],
-      mdastExtensions: self.data('fromMarkdownExtensions') || []
-    })
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/remark-parse/index.js
-// Note: types exposed from `index.d.ts`.
-
-
-
-/***/ }),
-
-/***/ 9793:
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
-
-"use strict";
-// ESM COMPAT FLAG
-__nccwpck_require__.r(__webpack_exports__);
-
-// EXPORTS
-__nccwpck_require__.d(__webpack_exports__, {
-  unified: () => (/* reexport */ unified)
-});
-
-;// CONCATENATED MODULE: ./node_modules/bail/index.js
-/**
- * Throw a given error.
- *
- * @param {Error|null|undefined} [error]
- *   Maybe error.
- * @returns {asserts error is null|undefined}
- */
-function bail(error) {
-  if (error) {
-    throw error
-  }
-}
-
-// EXTERNAL MODULE: ./node_modules/extend/index.js
-var extend = __nccwpck_require__(3860);
-;// CONCATENATED MODULE: ./node_modules/devlop/lib/default.js
-function deprecate(fn) {
-  return fn
-}
-
-function equal() {}
-
-function ok() {}
-
-function unreachable() {}
-
-;// CONCATENATED MODULE: ./node_modules/is-plain-obj/index.js
-function isPlainObject(value) {
-	if (typeof value !== 'object' || value === null) {
-		return false;
-	}
-
-	const prototype = Object.getPrototypeOf(value);
-	return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
-}
-
-;// CONCATENATED MODULE: ./node_modules/trough/lib/index.js
-// To do: remove `void`s
-// To do: remove `null` from output of our APIs, allow it as user APIs.
-
-/**
- * @typedef {(error?: Error | null | undefined, ...output: Array<any>) => void} Callback
- *   Callback.
- *
- * @typedef {(...input: Array<any>) => any} Middleware
- *   Ware.
- *
- * @typedef Pipeline
- *   Pipeline.
- * @property {Run} run
- *   Run the pipeline.
- * @property {Use} use
- *   Add middleware.
- *
- * @typedef {(...input: Array<any>) => void} Run
- *   Call all middleware.
- *
- *   Calls `done` on completion with either an error or the output of the
- *   last middleware.
- *
- *   > 👉 **Note**: as the length of input defines whether async functions get a
- *   > `next` function,
- *   > it’s recommended to keep `input` at one value normally.
-
- *
- * @typedef {(fn: Middleware) => Pipeline} Use
- *   Add middleware.
- */
-
-/**
- * Create new middleware.
- *
- * @returns {Pipeline}
- *   Pipeline.
- */
-function trough() {
-  /** @type {Array<Middleware>} */
-  const fns = []
-  /** @type {Pipeline} */
-  const pipeline = {run, use}
-
-  return pipeline
-
-  /** @type {Run} */
-  function run(...values) {
-    let middlewareIndex = -1
-    /** @type {Callback} */
-    const callback = values.pop()
-
-    if (typeof callback !== 'function') {
-      throw new TypeError('Expected function as last argument, not ' + callback)
-    }
-
-    next(null, ...values)
-
-    /**
-     * Run the next `fn`, or we’re done.
-     *
-     * @param {Error | null | undefined} error
-     * @param {Array<any>} output
-     */
-    function next(error, ...output) {
-      const fn = fns[++middlewareIndex]
-      let index = -1
-
-      if (error) {
-        callback(error)
-        return
-      }
-
-      // Copy non-nullish input into values.
-      while (++index < values.length) {
-        if (output[index] === null || output[index] === undefined) {
-          output[index] = values[index]
-        }
-      }
-
-      // Save the newly created `output` for the next call.
-      values = output
-
-      // Next or done.
-      if (fn) {
-        wrap(fn, next)(...output)
-      } else {
-        callback(null, ...output)
-      }
-    }
-  }
-
-  /** @type {Use} */
-  function use(middelware) {
-    if (typeof middelware !== 'function') {
-      throw new TypeError(
-        'Expected `middelware` to be a function, not ' + middelware
-      )
-    }
-
-    fns.push(middelware)
-    return pipeline
-  }
-}
-
-/**
- * Wrap `middleware` into a uniform interface.
- *
- * You can pass all input to the resulting function.
- * `callback` is then called with the output of `middleware`.
- *
- * If `middleware` accepts more arguments than the later given in input,
- * an extra `done` function is passed to it after that input,
- * which must be called by `middleware`.
- *
- * The first value in `input` is the main input value.
- * All other input values are the rest input values.
- * The values given to `callback` are the input values,
- * merged with every non-nullish output value.
- *
- * * if `middleware` throws an error,
- *   returns a promise that is rejected,
- *   or calls the given `done` function with an error,
- *   `callback` is called with that error
- * * if `middleware` returns a value or returns a promise that is resolved,
- *   that value is the main output value
- * * if `middleware` calls `done`,
- *   all non-nullish values except for the first one (the error) overwrite the
- *   output values
- *
- * @param {Middleware} middleware
- *   Function to wrap.
- * @param {Callback} callback
- *   Callback called with the output of `middleware`.
- * @returns {Run}
- *   Wrapped middleware.
- */
-function wrap(middleware, callback) {
-  /** @type {boolean} */
-  let called
-
-  return wrapped
-
-  /**
-   * Call `middleware`.
-   * @this {any}
-   * @param {Array<any>} parameters
-   * @returns {void}
-   */
-  function wrapped(...parameters) {
-    const fnExpectsCallback = middleware.length > parameters.length
-    /** @type {any} */
-    let result
-
-    if (fnExpectsCallback) {
-      parameters.push(done)
-    }
-
-    try {
-      result = middleware.apply(this, parameters)
-    } catch (error) {
-      const exception = /** @type {Error} */ (error)
-
-      // Well, this is quite the pickle.
-      // `middleware` received a callback and called it synchronously, but that
-      // threw an error.
-      // The only thing left to do is to throw the thing instead.
-      if (fnExpectsCallback && called) {
-        throw exception
-      }
-
-      return done(exception)
-    }
-
-    if (!fnExpectsCallback) {
-      if (result && result.then && typeof result.then === 'function') {
-        result.then(then, done)
-      } else if (result instanceof Error) {
-        done(result)
-      } else {
-        then(result)
-      }
-    }
-  }
-
-  /**
-   * Call `callback`, only once.
-   *
-   * @type {Callback}
-   */
-  function done(error, ...output) {
-    if (!called) {
-      called = true
-      callback(error, ...output)
-    }
-  }
-
-  /**
-   * Call `done` with one value.
-   *
-   * @param {any} [value]
-   */
-  function then(value) {
-    done(null, value)
-  }
-}
-
-// EXTERNAL MODULE: ./node_modules/unist-util-stringify-position/lib/index.js
-var lib = __nccwpck_require__(669);
-;// CONCATENATED MODULE: ./node_modules/vfile-message/lib/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Point} Point
- * @typedef {import('unist').Position} Position
- */
-
-/**
- * @typedef {object & {type: string, position?: Position | undefined}} NodeLike
- *
- * @typedef Options
- *   Configuration.
- * @property {Array<Node> | null | undefined} [ancestors]
- *   Stack of (inclusive) ancestor nodes surrounding the message (optional).
- * @property {Error | null | undefined} [cause]
- *   Original error cause of the message (optional).
- * @property {Point | Position | null | undefined} [place]
- *   Place of message (optional).
- * @property {string | null | undefined} [ruleId]
- *   Category of message (optional, example: `'my-rule'`).
- * @property {string | null | undefined} [source]
- *   Namespace of who sent the message (optional, example: `'my-package'`).
- */
-
-
-
-/**
- * Message.
- */
-class VFileMessage extends Error {
-  /**
-   * Create a message for `reason`.
-   *
-   * > 🪦 **Note**: also has obsolete signatures.
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Options | null | undefined} [options]
-   * @returns
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {string} reason
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @param {Error | VFileMessage | string} causeOrReason
-   *   Reason for message, should use markdown.
-   * @param {Node | NodeLike | Options | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
-   *   Configuration (optional).
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns
-   *   Instance of `VFileMessage`.
-   */
-  // eslint-disable-next-line complexity
-  constructor(causeOrReason, optionsOrParentOrPlace, origin) {
-    super()
-
-    if (typeof optionsOrParentOrPlace === 'string') {
-      origin = optionsOrParentOrPlace
-      optionsOrParentOrPlace = undefined
-    }
-
-    /** @type {string} */
-    let reason = ''
-    /** @type {Options} */
-    let options = {}
-    let legacyCause = false
-
-    if (optionsOrParentOrPlace) {
-      // Point.
-      if (
-        'line' in optionsOrParentOrPlace &&
-        'column' in optionsOrParentOrPlace
-      ) {
-        options = {place: optionsOrParentOrPlace}
-      }
-      // Position.
-      else if (
-        'start' in optionsOrParentOrPlace &&
-        'end' in optionsOrParentOrPlace
-      ) {
-        options = {place: optionsOrParentOrPlace}
-      }
-      // Node.
-      else if ('type' in optionsOrParentOrPlace) {
-        options = {
-          ancestors: [optionsOrParentOrPlace],
-          place: optionsOrParentOrPlace.position
-        }
-      }
-      // Options.
-      else {
-        options = {...optionsOrParentOrPlace}
-      }
-    }
-
-    if (typeof causeOrReason === 'string') {
-      reason = causeOrReason
-    }
-    // Error.
-    else if (!options.cause && causeOrReason) {
-      legacyCause = true
-      reason = causeOrReason.message
-      options.cause = causeOrReason
-    }
-
-    if (!options.ruleId && !options.source && typeof origin === 'string') {
-      const index = origin.indexOf(':')
-
-      if (index === -1) {
-        options.ruleId = origin
-      } else {
-        options.source = origin.slice(0, index)
-        options.ruleId = origin.slice(index + 1)
-      }
-    }
-
-    if (!options.place && options.ancestors && options.ancestors) {
-      const parent = options.ancestors[options.ancestors.length - 1]
-
-      if (parent) {
-        options.place = parent.position
-      }
-    }
-
-    const start =
-      options.place && 'start' in options.place
-        ? options.place.start
-        : options.place
-
-    /* eslint-disable no-unused-expressions */
-    /**
-     * Stack of ancestor nodes surrounding the message.
-     *
-     * @type {Array<Node> | undefined}
-     */
-    this.ancestors = options.ancestors || undefined
-
-    /**
-     * Original error cause of the message.
-     *
-     * @type {Error | undefined}
-     */
-    this.cause = options.cause || undefined
-
-    /**
-     * Starting column of message.
-     *
-     * @type {number | undefined}
-     */
-    this.column = start ? start.column : undefined
-
-    /**
-     * State of problem.
-     *
-     * * `true` — error, file not usable
-     * * `false` — warning, change may be needed
-     * * `undefined` — change likely not needed
-     *
-     * @type {boolean | null | undefined}
-     */
-    this.fatal = undefined
-
-    /**
-     * Path of a file (used throughout the `VFile` ecosystem).
-     *
-     * @type {string | undefined}
-     */
-    this.file
-
-    // Field from `Error`.
-    /**
-     * Reason for message.
-     *
-     * @type {string}
-     */
-    this.message = reason
-
-    /**
-     * Starting line of error.
-     *
-     * @type {number | undefined}
-     */
-    this.line = start ? start.line : undefined
-
-    // Field from `Error`.
-    /**
-     * Serialized positional info of message.
-     *
-     * On normal errors, this would be something like `ParseError`, buit in
-     * `VFile` messages we use this space to show where an error happened.
-     */
-    this.name = (0,lib/* stringifyPosition */.L)(options.place) || '1:1'
-
-    /**
-     * Place of message.
-     *
-     * @type {Point | Position | undefined}
-     */
-    this.place = options.place || undefined
-
-    /**
-     * Reason for message, should use markdown.
-     *
-     * @type {string}
-     */
-    this.reason = this.message
-
-    /**
-     * Category of message (example: `'my-rule'`).
-     *
-     * @type {string | undefined}
-     */
-    this.ruleId = options.ruleId || undefined
-
-    /**
-     * Namespace of message (example: `'my-package'`).
-     *
-     * @type {string | undefined}
-     */
-    this.source = options.source || undefined
-
-    // Field from `Error`.
-    /**
-     * Stack of message.
-     *
-     * This is used by normal errors to show where something happened in
-     * programming code, irrelevant for `VFile` messages,
-     *
-     * @type {string}
-     */
-    this.stack =
-      legacyCause && options.cause && typeof options.cause.stack === 'string'
-        ? options.cause.stack
-        : ''
-
-    // The following fields are “well known”.
-    // Not standard.
-    // Feel free to add other non-standard fields to your messages.
-
-    /**
-     * Specify the source value that’s being reported, which is deemed
-     * incorrect.
-     *
-     * @type {string | undefined}
-     */
-    this.actual
-
-    /**
-     * Suggest acceptable values that can be used instead of `actual`.
-     *
-     * @type {Array<string> | undefined}
-     */
-    this.expected
-
-    /**
-     * Long form description of the message (you should use markdown).
-     *
-     * @type {string | undefined}
-     */
-    this.note
-
-    /**
-     * Link to docs for the message.
-     *
-     * > 👉 **Note**: this must be an absolute URL that can be passed as `x`
-     * > to `new URL(x)`.
-     *
-     * @type {string | undefined}
-     */
-    this.url
-    /* eslint-enable no-unused-expressions */
-  }
-}
-
-VFileMessage.prototype.file = ''
-VFileMessage.prototype.name = ''
-VFileMessage.prototype.reason = ''
-VFileMessage.prototype.message = ''
-VFileMessage.prototype.stack = ''
-VFileMessage.prototype.column = undefined
-VFileMessage.prototype.line = undefined
-VFileMessage.prototype.ancestors = undefined
-VFileMessage.prototype.cause = undefined
-VFileMessage.prototype.fatal = undefined
-VFileMessage.prototype.place = undefined
-VFileMessage.prototype.ruleId = undefined
-VFileMessage.prototype.source = undefined
-
-;// CONCATENATED MODULE: external "node:path"
-const external_node_path_namespaceObject = require("node:path");
-;// CONCATENATED MODULE: external "node:process"
-const external_node_process_namespaceObject = require("node:process");
-;// CONCATENATED MODULE: ./node_modules/vfile/lib/minurl.shared.js
-/**
- * Checks if a value has the shape of a WHATWG URL object.
- *
- * Using a symbol or instanceof would not be able to recognize URL objects
- * coming from other implementations (e.g. in Electron), so instead we are
- * checking some well known properties for a lack of a better test.
- *
- * We use `href` and `protocol` as they are the only properties that are
- * easy to retrieve and calculate due to the lazy nature of the getters.
- *
- * We check for auth attribute to distinguish legacy url instance with
- * WHATWG URL instance.
- *
- * @param {unknown} fileUrlOrPath
- *   File path or URL.
- * @returns {fileUrlOrPath is URL}
- *   Whether it’s a URL.
- */
-// From: <https://github.com/nodejs/node/blob/6a3403c/lib/internal/url.js#L720>
-function isUrl(fileUrlOrPath) {
-  return Boolean(
-    fileUrlOrPath !== null &&
-      typeof fileUrlOrPath === 'object' &&
-      'href' in fileUrlOrPath &&
-      fileUrlOrPath.href &&
-      'protocol' in fileUrlOrPath &&
-      fileUrlOrPath.protocol &&
-      // @ts-expect-error: indexing is fine.
-      fileUrlOrPath.auth === undefined
-  )
-}
-
-;// CONCATENATED MODULE: external "node:url"
-const external_node_url_namespaceObject = require("node:url");
-;// CONCATENATED MODULE: ./node_modules/vfile/lib/index.js
-/**
- * @import {Node, Point, Position} from 'unist'
- * @import {Options as MessageOptions} from 'vfile-message'
- * @import {Compatible, Data, Map, Options, Value} from 'vfile'
- */
-
-/**
- * @typedef {object & {type: string, position?: Position | undefined}} NodeLike
- */
-
-
-
-
-
-
-/**
- * Order of setting (least specific to most), we need this because otherwise
- * `{stem: 'a', path: '~/b.js'}` would throw, as a path is needed before a
- * stem can be set.
- */
-const order = /** @type {const} */ ([
-  'history',
-  'path',
-  'basename',
-  'stem',
-  'extname',
-  'dirname'
-])
-
-class VFile {
-  /**
-   * Create a new virtual file.
-   *
-   * `options` is treated as:
-   *
-   * *   `string` or `Uint8Array` — `{value: options}`
-   * *   `URL` — `{path: options}`
-   * *   `VFile` — shallow copies its data over to the new file
-   * *   `object` — all fields are shallow copied over to the new file
-   *
-   * Path related fields are set in the following order (least specific to
-   * most specific): `history`, `path`, `basename`, `stem`, `extname`,
-   * `dirname`.
-   *
-   * You cannot set `dirname` or `extname` without setting either `history`,
-   * `path`, `basename`, or `stem` too.
-   *
-   * @param {Compatible | null | undefined} [value]
-   *   File value.
-   * @returns
-   *   New instance.
-   */
-  constructor(value) {
-    /** @type {Options | VFile} */
-    let options
-
-    if (!value) {
-      options = {}
-    } else if (isUrl(value)) {
-      options = {path: value}
-    } else if (typeof value === 'string' || isUint8Array(value)) {
-      options = {value}
-    } else {
-      options = value
-    }
-
-    /* eslint-disable no-unused-expressions */
-
-    /**
-     * Base of `path` (default: `process.cwd()` or `'/'` in browsers).
-     *
-     * @type {string}
-     */
-    // Prevent calling `cwd` (which could be expensive) if it’s not needed;
-    // the empty string will be overridden in the next block.
-    this.cwd = 'cwd' in options ? '' : external_node_process_namespaceObject.cwd()
-
-    /**
-     * Place to store custom info (default: `{}`).
-     *
-     * It’s OK to store custom data directly on the file but moving it to
-     * `data` is recommended.
-     *
-     * @type {Data}
-     */
-    this.data = {}
-
-    /**
-     * List of file paths the file moved between.
-     *
-     * The first is the original path and the last is the current path.
-     *
-     * @type {Array<string>}
-     */
-    this.history = []
-
-    /**
-     * List of messages associated with the file.
-     *
-     * @type {Array<VFileMessage>}
-     */
-    this.messages = []
-
-    /**
-     * Raw value.
-     *
-     * @type {Value}
-     */
-    this.value
-
-    // The below are non-standard, they are “well-known”.
-    // As in, used in several tools.
-    /**
-     * Source map.
-     *
-     * This type is equivalent to the `RawSourceMap` type from the `source-map`
-     * module.
-     *
-     * @type {Map | null | undefined}
-     */
-    this.map
-
-    /**
-     * Custom, non-string, compiled, representation.
-     *
-     * This is used by unified to store non-string results.
-     * One example is when turning markdown into React nodes.
-     *
-     * @type {unknown}
-     */
-    this.result
-
-    /**
-     * Whether a file was saved to disk.
-     *
-     * This is used by vfile reporters.
-     *
-     * @type {boolean}
-     */
-    this.stored
-    /* eslint-enable no-unused-expressions */
-
-    // Set path related properties in the correct order.
-    let index = -1
-
-    while (++index < order.length) {
-      const field = order[index]
-
-      // Note: we specifically use `in` instead of `hasOwnProperty` to accept
-      // `vfile`s too.
-      if (
-        field in options &&
-        options[field] !== undefined &&
-        options[field] !== null
-      ) {
-        // @ts-expect-error: TS doesn’t understand basic reality.
-        this[field] = field === 'history' ? [...options[field]] : options[field]
-      }
-    }
-
-    /** @type {string} */
-    let field
-
-    // Set non-path related properties.
-    for (field in options) {
-      // @ts-expect-error: fine to set other things.
-      if (!order.includes(field)) {
-        // @ts-expect-error: fine to set other things.
-        this[field] = options[field]
-      }
-    }
-  }
-
-  /**
-   * Get the basename (including extname) (example: `'index.min.js'`).
-   *
-   * @returns {string | undefined}
-   *   Basename.
-   */
-  get basename() {
-    return typeof this.path === 'string'
-      ? external_node_path_namespaceObject.basename(this.path)
-      : undefined
-  }
-
-  /**
-   * Set basename (including extname) (`'index.min.js'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be nullified (use `file.path = file.dirname` instead).
-   *
-   * @param {string} basename
-   *   Basename.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set basename(basename) {
-    assertNonEmpty(basename, 'basename')
-    assertPart(basename, 'basename')
-    this.path = external_node_path_namespaceObject.join(this.dirname || '', basename)
-  }
-
-  /**
-   * Get the parent path (example: `'~'`).
-   *
-   * @returns {string | undefined}
-   *   Dirname.
-   */
-  get dirname() {
-    return typeof this.path === 'string'
-      ? external_node_path_namespaceObject.dirname(this.path)
-      : undefined
-  }
-
-  /**
-   * Set the parent path (example: `'~'`).
-   *
-   * Cannot be set if there’s no `path` yet.
-   *
-   * @param {string | undefined} dirname
-   *   Dirname.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set dirname(dirname) {
-    assertPath(this.basename, 'dirname')
-    this.path = external_node_path_namespaceObject.join(dirname || '', this.basename)
-  }
-
-  /**
-   * Get the extname (including dot) (example: `'.js'`).
-   *
-   * @returns {string | undefined}
-   *   Extname.
-   */
-  get extname() {
-    return typeof this.path === 'string'
-      ? external_node_path_namespaceObject.extname(this.path)
-      : undefined
-  }
-
-  /**
-   * Set the extname (including dot) (example: `'.js'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be set if there’s no `path` yet.
-   *
-   * @param {string | undefined} extname
-   *   Extname.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set extname(extname) {
-    assertPart(extname, 'extname')
-    assertPath(this.dirname, 'extname')
-
-    if (extname) {
-      if (extname.codePointAt(0) !== 46 /* `.` */) {
-        throw new Error('`extname` must start with `.`')
-      }
-
-      if (extname.includes('.', 1)) {
-        throw new Error('`extname` cannot contain multiple dots')
-      }
-    }
-
-    this.path = external_node_path_namespaceObject.join(this.dirname, this.stem + (extname || ''))
-  }
-
-  /**
-   * Get the full path (example: `'~/index.min.js'`).
-   *
-   * @returns {string}
-   *   Path.
-   */
-  get path() {
-    return this.history[this.history.length - 1]
-  }
-
-  /**
-   * Set the full path (example: `'~/index.min.js'`).
-   *
-   * Cannot be nullified.
-   * You can set a file URL (a `URL` object with a `file:` protocol) which will
-   * be turned into a path with `url.fileURLToPath`.
-   *
-   * @param {URL | string} path
-   *   Path.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set path(path) {
-    if (isUrl(path)) {
-      path = (0,external_node_url_namespaceObject.fileURLToPath)(path)
-    }
-
-    assertNonEmpty(path, 'path')
-
-    if (this.path !== path) {
-      this.history.push(path)
-    }
-  }
-
-  /**
-   * Get the stem (basename w/o extname) (example: `'index.min'`).
-   *
-   * @returns {string | undefined}
-   *   Stem.
-   */
-  get stem() {
-    return typeof this.path === 'string'
-      ? external_node_path_namespaceObject.basename(this.path, this.extname)
-      : undefined
-  }
-
-  /**
-   * Set the stem (basename w/o extname) (example: `'index.min'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be nullified (use `file.path = file.dirname` instead).
-   *
-   * @param {string} stem
-   *   Stem.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set stem(stem) {
-    assertNonEmpty(stem, 'stem')
-    assertPart(stem, 'stem')
-    this.path = external_node_path_namespaceObject.join(this.dirname || '', stem + (this.extname || ''))
-  }
-
-  // Normal prototypal methods.
-  /**
-   * Create a fatal message for `reason` associated with the file.
-   *
-   * The `fatal` field of the message is set to `true` (error; file not usable)
-   * and the `file` field is set to the current file path.
-   * The message is added to the `messages` field on `file`.
-   *
-   * > 🪦 **Note**: also has obsolete signatures.
-   *
-   * @overload
-   * @param {string} reason
-   * @param {MessageOptions | null | undefined} [options]
-   * @returns {never}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @param {Error | VFileMessage | string} causeOrReason
-   *   Reason for message, should use markdown.
-   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
-   *   Configuration (optional).
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {never}
-   *   Never.
-   * @throws {VFileMessage}
-   *   Message.
-   */
-  fail(causeOrReason, optionsOrParentOrPlace, origin) {
-    // @ts-expect-error: the overloads are fine.
-    const message = this.message(causeOrReason, optionsOrParentOrPlace, origin)
-
-    message.fatal = true
-
-    throw message
-  }
-
-  /**
-   * Create an info message for `reason` associated with the file.
-   *
-   * The `fatal` field of the message is set to `undefined` (info; change
-   * likely not needed) and the `file` field is set to the current file path.
-   * The message is added to the `messages` field on `file`.
-   *
-   * > 🪦 **Note**: also has obsolete signatures.
-   *
-   * @overload
-   * @param {string} reason
-   * @param {MessageOptions | null | undefined} [options]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @param {Error | VFileMessage | string} causeOrReason
-   *   Reason for message, should use markdown.
-   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
-   *   Configuration (optional).
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {VFileMessage}
-   *   Message.
-   */
-  info(causeOrReason, optionsOrParentOrPlace, origin) {
-    // @ts-expect-error: the overloads are fine.
-    const message = this.message(causeOrReason, optionsOrParentOrPlace, origin)
-
-    message.fatal = undefined
-
-    return message
-  }
-
-  /**
-   * Create a message for `reason` associated with the file.
-   *
-   * The `fatal` field of the message is set to `false` (warning; change may be
-   * needed) and the `file` field is set to the current file path.
-   * The message is added to the `messages` field on `file`.
-   *
-   * > 🪦 **Note**: also has obsolete signatures.
-   *
-   * @overload
-   * @param {string} reason
-   * @param {MessageOptions | null | undefined} [options]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @param {Error | VFileMessage | string} causeOrReason
-   *   Reason for message, should use markdown.
-   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
-   *   Configuration (optional).
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {VFileMessage}
-   *   Message.
-   */
-  message(causeOrReason, optionsOrParentOrPlace, origin) {
-    const message = new VFileMessage(
-      // @ts-expect-error: the overloads are fine.
-      causeOrReason,
-      optionsOrParentOrPlace,
-      origin
-    )
-
-    if (this.path) {
-      message.name = this.path + ':' + message.name
-      message.file = this.path
-    }
-
-    message.fatal = false
-
-    this.messages.push(message)
-
-    return message
-  }
-
-  /**
-   * Serialize the file.
-   *
-   * > **Note**: which encodings are supported depends on the engine.
-   * > For info on Node.js, see:
-   * > <https://nodejs.org/api/util.html#whatwg-supported-encodings>.
-   *
-   * @param {string | null | undefined} [encoding='utf8']
-   *   Character encoding to understand `value` as when it’s a `Uint8Array`
-   *   (default: `'utf-8'`).
-   * @returns {string}
-   *   Serialized file.
-   */
-  toString(encoding) {
-    if (this.value === undefined) {
-      return ''
-    }
-
-    if (typeof this.value === 'string') {
-      return this.value
-    }
-
-    const decoder = new TextDecoder(encoding || undefined)
-    return decoder.decode(this.value)
-  }
-}
-
-/**
- * Assert that `part` is not a path (as in, does not contain `path.sep`).
- *
- * @param {string | null | undefined} part
- *   File path part.
- * @param {string} name
- *   Part name.
- * @returns {undefined}
- *   Nothing.
- */
-function assertPart(part, name) {
-  if (part && part.includes(external_node_path_namespaceObject.sep)) {
-    throw new Error(
-      '`' + name + '` cannot be a path: did not expect `' + external_node_path_namespaceObject.sep + '`'
-    )
-  }
-}
-
-/**
- * Assert that `part` is not empty.
- *
- * @param {string | undefined} part
- *   Thing.
- * @param {string} name
- *   Part name.
- * @returns {asserts part is string}
- *   Nothing.
- */
-function assertNonEmpty(part, name) {
-  if (!part) {
-    throw new Error('`' + name + '` cannot be empty')
-  }
-}
-
-/**
- * Assert `path` exists.
- *
- * @param {string | undefined} path
- *   Path.
- * @param {string} name
- *   Dependency name.
- * @returns {asserts path is string}
- *   Nothing.
- */
-function assertPath(path, name) {
-  if (!path) {
-    throw new Error('Setting `' + name + '` requires `path` to be set too')
-  }
-}
-
-/**
- * Assert `value` is an `Uint8Array`.
- *
- * @param {unknown} value
- *   thing.
- * @returns {value is Uint8Array}
- *   Whether `value` is an `Uint8Array`.
- */
-function isUint8Array(value) {
-  return Boolean(
-    value &&
-      typeof value === 'object' &&
-      'byteLength' in value &&
-      'byteOffset' in value
-  )
-}
-
-;// CONCATENATED MODULE: ./node_modules/unified/lib/callable-instance.js
-const CallableInstance =
-  /**
-   * @type {new <Parameters extends Array<unknown>, Result>(property: string | symbol) => (...parameters: Parameters) => Result}
-   */
-  (
-    /** @type {unknown} */
-    (
-      /**
-       * @this {Function}
-       * @param {string | symbol} property
-       * @returns {(...parameters: Array<unknown>) => unknown}
-       */
-      function (property) {
-        const self = this
-        const constr = self.constructor
-        const proto = /** @type {Record<string | symbol, Function>} */ (
-          // Prototypes do exist.
-          // type-coverage:ignore-next-line
-          constr.prototype
-        )
-        const value = proto[property]
-        /** @type {(...parameters: Array<unknown>) => unknown} */
-        const apply = function () {
-          return value.apply(apply, arguments)
-        }
-
-        Object.setPrototypeOf(apply, proto)
-
-        // Not needed for us in `unified`: we only call this on the `copy`
-        // function,
-        // and we don't need to add its fields (`length`, `name`)
-        // over.
-        // See also: GH-246.
-        // const names = Object.getOwnPropertyNames(value)
-        //
-        // for (const p of names) {
-        //   const descriptor = Object.getOwnPropertyDescriptor(value, p)
-        //   if (descriptor) Object.defineProperty(apply, p, descriptor)
-        // }
-
-        return apply
-      }
-    )
-  )
-
-;// CONCATENATED MODULE: ./node_modules/unified/lib/index.js
-/**
- * @typedef {import('trough').Pipeline} Pipeline
- *
- * @typedef {import('unist').Node} Node
- *
- * @typedef {import('vfile').Compatible} Compatible
- * @typedef {import('vfile').Value} Value
- *
- * @typedef {import('../index.js').CompileResultMap} CompileResultMap
- * @typedef {import('../index.js').Data} Data
- * @typedef {import('../index.js').Settings} Settings
- */
-
-/**
- * @typedef {CompileResultMap[keyof CompileResultMap]} CompileResults
- *   Acceptable results from compilers.
- *
- *   To register custom results, add them to
- *   {@linkcode CompileResultMap}.
- */
-
-/**
- * @template {Node} [Tree=Node]
- *   The node that the compiler receives (default: `Node`).
- * @template {CompileResults} [Result=CompileResults]
- *   The thing that the compiler yields (default: `CompileResults`).
- * @callback Compiler
- *   A **compiler** handles the compiling of a syntax tree to something else
- *   (in most cases, text) (TypeScript type).
- *
- *   It is used in the stringify phase and called with a {@linkcode Node}
- *   and {@linkcode VFile} representation of the document to compile.
- *   It should return the textual representation of the given tree (typically
- *   `string`).
- *
- *   > **Note**: unified typically compiles by serializing: most compilers
- *   > return `string` (or `Uint8Array`).
- *   > Some compilers, such as the one configured with
- *   > [`rehype-react`][rehype-react], return other values (in this case, a
- *   > React tree).
- *   > If you’re using a compiler that doesn’t serialize, expect different
- *   > result values.
- *   >
- *   > To register custom results in TypeScript, add them to
- *   > {@linkcode CompileResultMap}.
- *
- *   [rehype-react]: https://github.com/rehypejs/rehype-react
- * @param {Tree} tree
- *   Tree to compile.
- * @param {VFile} file
- *   File associated with `tree`.
- * @returns {Result}
- *   New content: compiled text (`string` or `Uint8Array`, for `file.value`) or
- *   something else (for `file.result`).
- */
-
-/**
- * @template {Node} [Tree=Node]
- *   The node that the parser yields (default: `Node`)
- * @callback Parser
- *   A **parser** handles the parsing of text to a syntax tree.
- *
- *   It is used in the parse phase and is called with a `string` and
- *   {@linkcode VFile} of the document to parse.
- *   It must return the syntax tree representation of the given file
- *   ({@linkcode Node}).
- * @param {string} document
- *   Document to parse.
- * @param {VFile} file
- *   File associated with `document`.
- * @returns {Tree}
- *   Node representing the given file.
- */
-
-/**
- * @typedef {(
- *   Plugin<Array<any>, any, any> |
- *   PluginTuple<Array<any>, any, any> |
- *   Preset
- * )} Pluggable
- *   Union of the different ways to add plugins and settings.
- */
-
-/**
- * @typedef {Array<Pluggable>} PluggableList
- *   List of plugins and presets.
- */
-
-// Note: we can’t use `callback` yet as it messes up `this`:
-//  <https://github.com/microsoft/TypeScript/issues/55197>.
-/**
- * @template {Array<unknown>} [PluginParameters=[]]
- *   Arguments passed to the plugin (default: `[]`, the empty tuple).
- * @template {Node | string | undefined} [Input=Node]
- *   Value that is expected as input (default: `Node`).
- *
- *   *   If the plugin returns a {@linkcode Transformer}, this
- *       should be the node it expects.
- *   *   If the plugin sets a {@linkcode Parser}, this should be
- *       `string`.
- *   *   If the plugin sets a {@linkcode Compiler}, this should be the
- *       node it expects.
- * @template [Output=Input]
- *   Value that is yielded as output (default: `Input`).
- *
- *   *   If the plugin returns a {@linkcode Transformer}, this
- *       should be the node that that yields.
- *   *   If the plugin sets a {@linkcode Parser}, this should be the
- *       node that it yields.
- *   *   If the plugin sets a {@linkcode Compiler}, this should be
- *       result it yields.
- * @typedef {(
- *   (this: Processor, ...parameters: PluginParameters) =>
- *     Input extends string ? // Parser.
- *        Output extends Node | undefined ? undefined | void : never :
- *     Output extends CompileResults ? // Compiler.
- *        Input extends Node | undefined ? undefined | void : never :
- *     Transformer<
- *       Input extends Node ? Input : Node,
- *       Output extends Node ? Output : Node
- *     > | undefined | void
- * )} Plugin
- *   Single plugin.
- *
- *   Plugins configure the processors they are applied on in the following
- *   ways:
- *
- *   *   they change the processor, such as the parser, the compiler, or by
- *       configuring data
- *   *   they specify how to handle trees and files
- *
- *   In practice, they are functions that can receive options and configure the
- *   processor (`this`).
- *
- *   > **Note**: plugins are called when the processor is *frozen*, not when
- *   > they are applied.
- */
-
-/**
- * Tuple of a plugin and its configuration.
- *
- * The first item is a plugin, the rest are its parameters.
- *
- * @template {Array<unknown>} [TupleParameters=[]]
- *   Arguments passed to the plugin (default: `[]`, the empty tuple).
- * @template {Node | string | undefined} [Input=undefined]
- *   Value that is expected as input (optional).
- *
- *   *   If the plugin returns a {@linkcode Transformer}, this
- *       should be the node it expects.
- *   *   If the plugin sets a {@linkcode Parser}, this should be
- *       `string`.
- *   *   If the plugin sets a {@linkcode Compiler}, this should be the
- *       node it expects.
- * @template [Output=undefined] (optional).
- *   Value that is yielded as output.
- *
- *   *   If the plugin returns a {@linkcode Transformer}, this
- *       should be the node that that yields.
- *   *   If the plugin sets a {@linkcode Parser}, this should be the
- *       node that it yields.
- *   *   If the plugin sets a {@linkcode Compiler}, this should be
- *       result it yields.
- * @typedef {(
- *   [
- *     plugin: Plugin<TupleParameters, Input, Output>,
- *     ...parameters: TupleParameters
- *   ]
- * )} PluginTuple
- */
-
-/**
- * @typedef Preset
- *   Sharable configuration.
- *
- *   They can contain plugins and settings.
- * @property {PluggableList | undefined} [plugins]
- *   List of plugins and presets (optional).
- * @property {Settings | undefined} [settings]
- *   Shared settings for parsers and compilers (optional).
- */
-
-/**
- * @template {VFile} [File=VFile]
- *   The file that the callback receives (default: `VFile`).
- * @callback ProcessCallback
- *   Callback called when the process is done.
- *
- *   Called with either an error or a result.
- * @param {Error | undefined} [error]
- *   Fatal error (optional).
- * @param {File | undefined} [file]
- *   Processed file (optional).
- * @returns {undefined}
- *   Nothing.
- */
-
-/**
- * @template {Node} [Tree=Node]
- *   The tree that the callback receives (default: `Node`).
- * @callback RunCallback
- *   Callback called when transformers are done.
- *
- *   Called with either an error or results.
- * @param {Error | undefined} [error]
- *   Fatal error (optional).
- * @param {Tree | undefined} [tree]
- *   Transformed tree (optional).
- * @param {VFile | undefined} [file]
- *   File (optional).
- * @returns {undefined}
- *   Nothing.
- */
-
-/**
- * @template {Node} [Output=Node]
- *   Node type that the transformer yields (default: `Node`).
- * @callback TransformCallback
- *   Callback passed to transforms.
- *
- *   If the signature of a `transformer` accepts a third argument, the
- *   transformer may perform asynchronous operations, and must call it.
- * @param {Error | undefined} [error]
- *   Fatal error to stop the process (optional).
- * @param {Output | undefined} [tree]
- *   New, changed, tree (optional).
- * @param {VFile | undefined} [file]
- *   New, changed, file (optional).
- * @returns {undefined}
- *   Nothing.
- */
-
-/**
- * @template {Node} [Input=Node]
- *   Node type that the transformer expects (default: `Node`).
- * @template {Node} [Output=Input]
- *   Node type that the transformer yields (default: `Input`).
- * @callback Transformer
- *   Transformers handle syntax trees and files.
- *
- *   They are functions that are called each time a syntax tree and file are
- *   passed through the run phase.
- *   When an error occurs in them (either because it’s thrown, returned,
- *   rejected, or passed to `next`), the process stops.
- *
- *   The run phase is handled by [`trough`][trough], see its documentation for
- *   the exact semantics of these functions.
- *
- *   > **Note**: you should likely ignore `next`: don’t accept it.
- *   > it supports callback-style async work.
- *   > But promises are likely easier to reason about.
- *
- *   [trough]: https://github.com/wooorm/trough#function-fninput-next
- * @param {Input} tree
- *   Tree to handle.
- * @param {VFile} file
- *   File to handle.
- * @param {TransformCallback<Output>} next
- *   Callback.
- * @returns {(
- *   Promise<Output | undefined | void> |
- *   Promise<never> | // For some reason this is needed separately.
- *   Output |
- *   Error |
- *   undefined |
- *   void
- * )}
- *   If you accept `next`, nothing.
- *   Otherwise:
- *
- *   *   `Error` — fatal error to stop the process
- *   *   `Promise<undefined>` or `undefined` — the next transformer keeps using
- *       same tree
- *   *   `Promise<Node>` or `Node` — new, changed, tree
- */
-
-/**
- * @template {Node | undefined} ParseTree
- *   Output of `parse`.
- * @template {Node | undefined} HeadTree
- *   Input for `run`.
- * @template {Node | undefined} TailTree
- *   Output for `run`.
- * @template {Node | undefined} CompileTree
- *   Input of `stringify`.
- * @template {CompileResults | undefined} CompileResult
- *   Output of `stringify`.
- * @template {Node | string | undefined} Input
- *   Input of plugin.
- * @template Output
- *   Output of plugin (optional).
- * @typedef {(
- *   Input extends string
- *     ? Output extends Node | undefined
- *       ? // Parser.
- *         Processor<
- *           Output extends undefined ? ParseTree : Output,
- *           HeadTree,
- *           TailTree,
- *           CompileTree,
- *           CompileResult
- *         >
- *       : // Unknown.
- *         Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>
- *     : Output extends CompileResults
- *     ? Input extends Node | undefined
- *       ? // Compiler.
- *         Processor<
- *           ParseTree,
- *           HeadTree,
- *           TailTree,
- *           Input extends undefined ? CompileTree : Input,
- *           Output extends undefined ? CompileResult : Output
- *         >
- *       : // Unknown.
- *         Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>
- *     : Input extends Node | undefined
- *     ? Output extends Node | undefined
- *       ? // Transform.
- *         Processor<
- *           ParseTree,
- *           HeadTree extends undefined ? Input : HeadTree,
- *           Output extends undefined ? TailTree : Output,
- *           CompileTree,
- *           CompileResult
- *         >
- *       : // Unknown.
- *         Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>
- *     : // Unknown.
- *       Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>
- * )} UsePlugin
- *   Create a processor based on the input/output of a {@link Plugin plugin}.
- */
-
-/**
- * @template {CompileResults | undefined} Result
- *   Node type that the transformer yields.
- * @typedef {(
- *   Result extends Value | undefined ?
- *     VFile :
- *     VFile & {result: Result}
- *   )} VFileWithOutput
- *   Type to generate a {@linkcode VFile} corresponding to a compiler result.
- *
- *   If a result that is not acceptable on a `VFile` is used, that will
- *   be stored on the `result` field of {@linkcode VFile}.
- */
-
-
-
-
-
-
-
-
-
-// To do: next major: drop `Compiler`, `Parser`: prefer lowercase.
-
-// To do: we could start yielding `never` in TS when a parser is missing and
-// `parse` is called.
-// Currently, we allow directly setting `processor.parser`, which is untyped.
-
-const own = {}.hasOwnProperty
-
-/**
- * @template {Node | undefined} [ParseTree=undefined]
- *   Output of `parse` (optional).
- * @template {Node | undefined} [HeadTree=undefined]
- *   Input for `run` (optional).
- * @template {Node | undefined} [TailTree=undefined]
- *   Output for `run` (optional).
- * @template {Node | undefined} [CompileTree=undefined]
- *   Input of `stringify` (optional).
- * @template {CompileResults | undefined} [CompileResult=undefined]
- *   Output of `stringify` (optional).
- * @extends {CallableInstance<[], Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>>}
- */
-class Processor extends CallableInstance {
-  /**
-   * Create a processor.
-   */
-  constructor() {
-    // If `Processor()` is called (w/o new), `copy` is called instead.
-    super('copy')
-
-    /**
-     * Compiler to use (deprecated).
-     *
-     * @deprecated
-     *   Use `compiler` instead.
-     * @type {(
-     *   Compiler<
-     *     CompileTree extends undefined ? Node : CompileTree,
-     *     CompileResult extends undefined ? CompileResults : CompileResult
-     *   > |
-     *   undefined
-     * )}
-     */
-    this.Compiler = undefined
-
-    /**
-     * Parser to use (deprecated).
-     *
-     * @deprecated
-     *   Use `parser` instead.
-     * @type {(
-     *   Parser<ParseTree extends undefined ? Node : ParseTree> |
-     *   undefined
-     * )}
-     */
-    this.Parser = undefined
-
-    // Note: the following fields are considered private.
-    // However, they are needed for tests, and TSC generates an untyped
-    // `private freezeIndex` field for, which trips `type-coverage` up.
-    // Instead, we use `@deprecated` to visualize that they shouldn’t be used.
-    /**
-     * Internal list of configured plugins.
-     *
-     * @deprecated
-     *   This is a private internal property and should not be used.
-     * @type {Array<PluginTuple<Array<unknown>>>}
-     */
-    this.attachers = []
-
-    /**
-     * Compiler to use.
-     *
-     * @type {(
-     *   Compiler<
-     *     CompileTree extends undefined ? Node : CompileTree,
-     *     CompileResult extends undefined ? CompileResults : CompileResult
-     *   > |
-     *   undefined
-     * )}
-     */
-    this.compiler = undefined
-
-    /**
-     * Internal state to track where we are while freezing.
-     *
-     * @deprecated
-     *   This is a private internal property and should not be used.
-     * @type {number}
-     */
-    this.freezeIndex = -1
-
-    /**
-     * Internal state to track whether we’re frozen.
-     *
-     * @deprecated
-     *   This is a private internal property and should not be used.
-     * @type {boolean | undefined}
-     */
-    this.frozen = undefined
-
-    /**
-     * Internal state.
-     *
-     * @deprecated
-     *   This is a private internal property and should not be used.
-     * @type {Data}
-     */
-    this.namespace = {}
-
-    /**
-     * Parser to use.
-     *
-     * @type {(
-     *   Parser<ParseTree extends undefined ? Node : ParseTree> |
-     *   undefined
-     * )}
-     */
-    this.parser = undefined
-
-    /**
-     * Internal list of configured transformers.
-     *
-     * @deprecated
-     *   This is a private internal property and should not be used.
-     * @type {Pipeline}
-     */
-    this.transformers = trough()
-  }
-
-  /**
-   * Copy a processor.
-   *
-   * @deprecated
-   *   This is a private internal method and should not be used.
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *   New *unfrozen* processor ({@linkcode Processor}) that is
-   *   configured to work the same as its ancestor.
-   *   When the descendant processor is configured in the future it does not
-   *   affect the ancestral processor.
-   */
-  copy() {
-    // Cast as the type parameters will be the same after attaching.
-    const destination =
-      /** @type {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>} */ (
-        new Processor()
-      )
-    let index = -1
-
-    while (++index < this.attachers.length) {
-      const attacher = this.attachers[index]
-      destination.use(...attacher)
-    }
-
-    destination.data(extend(true, {}, this.namespace))
-
-    return destination
-  }
-
-  /**
-   * Configure the processor with info available to all plugins.
-   * Information is stored in an object.
-   *
-   * Typically, options can be given to a specific plugin, but sometimes it
-   * makes sense to have information shared with several plugins.
-   * For example, a list of HTML elements that are self-closing, which is
-   * needed during all phases.
-   *
-   * > **Note**: setting information cannot occur on *frozen* processors.
-   * > Call the processor first to create a new unfrozen processor.
-   *
-   * > **Note**: to register custom data in TypeScript, augment the
-   * > {@linkcode Data} interface.
-   *
-   * @example
-   *   This example show how to get and set info:
-   *
-   *   ```js
-   *   import {unified} from 'unified'
-   *
-   *   const processor = unified().data('alpha', 'bravo')
-   *
-   *   processor.data('alpha') // => 'bravo'
-   *
-   *   processor.data() // => {alpha: 'bravo'}
-   *
-   *   processor.data({charlie: 'delta'})
-   *
-   *   processor.data() // => {charlie: 'delta'}
-   *   ```
-   *
-   * @template {keyof Data} Key
-   *
-   * @overload
-   * @returns {Data}
-   *
-   * @overload
-   * @param {Data} dataset
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *
-   * @overload
-   * @param {Key} key
-   * @returns {Data[Key]}
-   *
-   * @overload
-   * @param {Key} key
-   * @param {Data[Key]} value
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *
-   * @param {Data | Key} [key]
-   *   Key to get or set, or entire dataset to set, or nothing to get the
-   *   entire dataset (optional).
-   * @param {Data[Key]} [value]
-   *   Value to set (optional).
-   * @returns {unknown}
-   *   The current processor when setting, the value at `key` when getting, or
-   *   the entire dataset when getting without key.
-   */
-  data(key, value) {
-    if (typeof key === 'string') {
-      // Set `key`.
-      if (arguments.length === 2) {
-        assertUnfrozen('data', this.frozen)
-        this.namespace[key] = value
-        return this
-      }
-
-      // Get `key`.
-      return (own.call(this.namespace, key) && this.namespace[key]) || undefined
-    }
-
-    // Set space.
-    if (key) {
-      assertUnfrozen('data', this.frozen)
-      this.namespace = key
-      return this
-    }
-
-    // Get space.
-    return this.namespace
-  }
-
-  /**
-   * Freeze a processor.
-   *
-   * Frozen processors are meant to be extended and not to be configured
-   * directly.
-   *
-   * When a processor is frozen it cannot be unfrozen.
-   * New processors working the same way can be created by calling the
-   * processor.
-   *
-   * It’s possible to freeze processors explicitly by calling `.freeze()`.
-   * Processors freeze automatically when `.parse()`, `.run()`, `.runSync()`,
-   * `.stringify()`, `.process()`, or `.processSync()` are called.
-   *
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *   The current processor.
-   */
-  freeze() {
-    if (this.frozen) {
-      return this
-    }
-
-    // Cast so that we can type plugins easier.
-    // Plugins are supposed to be usable on different processors, not just on
-    // this exact processor.
-    const self = /** @type {Processor} */ (/** @type {unknown} */ (this))
-
-    while (++this.freezeIndex < this.attachers.length) {
-      const [attacher, ...options] = this.attachers[this.freezeIndex]
-
-      if (options[0] === false) {
-        continue
-      }
-
-      if (options[0] === true) {
-        options[0] = undefined
-      }
-
-      const transformer = attacher.call(self, ...options)
-
-      if (typeof transformer === 'function') {
-        this.transformers.use(transformer)
-      }
-    }
-
-    this.frozen = true
-    this.freezeIndex = Number.POSITIVE_INFINITY
-
-    return this
-  }
-
-  /**
-   * Parse text to a syntax tree.
-   *
-   * > **Note**: `parse` freezes the processor if not already *frozen*.
-   *
-   * > **Note**: `parse` performs the parse phase, not the run phase or other
-   * > phases.
-   *
-   * @param {Compatible | undefined} [file]
-   *   file to parse (optional); typically `string` or `VFile`; any value
-   *   accepted as `x` in `new VFile(x)`.
-   * @returns {ParseTree extends undefined ? Node : ParseTree}
-   *   Syntax tree representing `file`.
-   */
-  parse(file) {
-    this.freeze()
-    const realFile = vfile(file)
-    const parser = this.parser || this.Parser
-    assertParser('parse', parser)
-    return parser(String(realFile), realFile)
-  }
-
-  /**
-   * Process the given file as configured on the processor.
-   *
-   * > **Note**: `process` freezes the processor if not already *frozen*.
-   *
-   * > **Note**: `process` performs the parse, run, and stringify phases.
-   *
-   * @overload
-   * @param {Compatible | undefined} file
-   * @param {ProcessCallback<VFileWithOutput<CompileResult>>} done
-   * @returns {undefined}
-   *
-   * @overload
-   * @param {Compatible | undefined} [file]
-   * @returns {Promise<VFileWithOutput<CompileResult>>}
-   *
-   * @param {Compatible | undefined} [file]
-   *   File (optional); typically `string` or `VFile`]; any value accepted as
-   *   `x` in `new VFile(x)`.
-   * @param {ProcessCallback<VFileWithOutput<CompileResult>> | undefined} [done]
-   *   Callback (optional).
-   * @returns {Promise<VFile> | undefined}
-   *   Nothing if `done` is given.
-   *   Otherwise a promise, rejected with a fatal error or resolved with the
-   *   processed file.
-   *
-   *   The parsed, transformed, and compiled value is available at
-   *   `file.value` (see note).
-   *
-   *   > **Note**: unified typically compiles by serializing: most
-   *   > compilers return `string` (or `Uint8Array`).
-   *   > Some compilers, such as the one configured with
-   *   > [`rehype-react`][rehype-react], return other values (in this case, a
-   *   > React tree).
-   *   > If you’re using a compiler that doesn’t serialize, expect different
-   *   > result values.
-   *   >
-   *   > To register custom results in TypeScript, add them to
-   *   > {@linkcode CompileResultMap}.
-   *
-   *   [rehype-react]: https://github.com/rehypejs/rehype-react
-   */
-  process(file, done) {
-    const self = this
-
-    this.freeze()
-    assertParser('process', this.parser || this.Parser)
-    assertCompiler('process', this.compiler || this.Compiler)
-
-    return done ? executor(undefined, done) : new Promise(executor)
-
-    // Note: `void`s needed for TS.
-    /**
-     * @param {((file: VFileWithOutput<CompileResult>) => undefined | void) | undefined} resolve
-     * @param {(error: Error | undefined) => undefined | void} reject
-     * @returns {undefined}
-     */
-    function executor(resolve, reject) {
-      const realFile = vfile(file)
-      // Assume `ParseTree` (the result of the parser) matches `HeadTree` (the
-      // input of the first transform).
-      const parseTree =
-        /** @type {HeadTree extends undefined ? Node : HeadTree} */ (
-          /** @type {unknown} */ (self.parse(realFile))
-        )
-
-      self.run(parseTree, realFile, function (error, tree, file) {
-        if (error || !tree || !file) {
-          return realDone(error)
-        }
-
-        // Assume `TailTree` (the output of the last transform) matches
-        // `CompileTree` (the input of the compiler).
-        const compileTree =
-          /** @type {CompileTree extends undefined ? Node : CompileTree} */ (
-            /** @type {unknown} */ (tree)
-          )
-
-        const compileResult = self.stringify(compileTree, file)
-
-        if (looksLikeAValue(compileResult)) {
-          file.value = compileResult
-        } else {
-          file.result = compileResult
-        }
-
-        realDone(error, /** @type {VFileWithOutput<CompileResult>} */ (file))
-      })
-
-      /**
-       * @param {Error | undefined} error
-       * @param {VFileWithOutput<CompileResult> | undefined} [file]
-       * @returns {undefined}
-       */
-      function realDone(error, file) {
-        if (error || !file) {
-          reject(error)
-        } else if (resolve) {
-          resolve(file)
-        } else {
-          ok(done, '`done` is defined if `resolve` is not')
-          done(undefined, file)
-        }
-      }
-    }
-  }
-
-  /**
-   * Process the given file as configured on the processor.
-   *
-   * An error is thrown if asynchronous transforms are configured.
-   *
-   * > **Note**: `processSync` freezes the processor if not already *frozen*.
-   *
-   * > **Note**: `processSync` performs the parse, run, and stringify phases.
-   *
-   * @param {Compatible | undefined} [file]
-   *   File (optional); typically `string` or `VFile`; any value accepted as
-   *   `x` in `new VFile(x)`.
-   * @returns {VFileWithOutput<CompileResult>}
-   *   The processed file.
-   *
-   *   The parsed, transformed, and compiled value is available at
-   *   `file.value` (see note).
-   *
-   *   > **Note**: unified typically compiles by serializing: most
-   *   > compilers return `string` (or `Uint8Array`).
-   *   > Some compilers, such as the one configured with
-   *   > [`rehype-react`][rehype-react], return other values (in this case, a
-   *   > React tree).
-   *   > If you’re using a compiler that doesn’t serialize, expect different
-   *   > result values.
-   *   >
-   *   > To register custom results in TypeScript, add them to
-   *   > {@linkcode CompileResultMap}.
-   *
-   *   [rehype-react]: https://github.com/rehypejs/rehype-react
-   */
-  processSync(file) {
-    /** @type {boolean} */
-    let complete = false
-    /** @type {VFileWithOutput<CompileResult> | undefined} */
-    let result
-
-    this.freeze()
-    assertParser('processSync', this.parser || this.Parser)
-    assertCompiler('processSync', this.compiler || this.Compiler)
-
-    this.process(file, realDone)
-    assertDone('processSync', 'process', complete)
-    ok(result, 'we either bailed on an error or have a tree')
-
-    return result
-
-    /**
-     * @type {ProcessCallback<VFileWithOutput<CompileResult>>}
-     */
-    function realDone(error, file) {
-      complete = true
-      bail(error)
-      result = file
-    }
-  }
-
-  /**
-   * Run *transformers* on a syntax tree.
-   *
-   * > **Note**: `run` freezes the processor if not already *frozen*.
-   *
-   * > **Note**: `run` performs the run phase, not other phases.
-   *
-   * @overload
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} done
-   * @returns {undefined}
-   *
-   * @overload
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   * @param {Compatible | undefined} file
-   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} done
-   * @returns {undefined}
-   *
-   * @overload
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   * @param {Compatible | undefined} [file]
-   * @returns {Promise<TailTree extends undefined ? Node : TailTree>}
-   *
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   *   Tree to transform and inspect.
-   * @param {(
-   *   RunCallback<TailTree extends undefined ? Node : TailTree> |
-   *   Compatible
-   * )} [file]
-   *   File associated with `node` (optional); any value accepted as `x` in
-   *   `new VFile(x)`.
-   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} [done]
-   *   Callback (optional).
-   * @returns {Promise<TailTree extends undefined ? Node : TailTree> | undefined}
-   *   Nothing if `done` is given.
-   *   Otherwise, a promise rejected with a fatal error or resolved with the
-   *   transformed tree.
-   */
-  run(tree, file, done) {
-    assertNode(tree)
-    this.freeze()
-
-    const transformers = this.transformers
-
-    if (!done && typeof file === 'function') {
-      done = file
-      file = undefined
-    }
-
-    return done ? executor(undefined, done) : new Promise(executor)
-
-    // Note: `void`s needed for TS.
-    /**
-     * @param {(
-     *   ((tree: TailTree extends undefined ? Node : TailTree) => undefined | void) |
-     *   undefined
-     * )} resolve
-     * @param {(error: Error) => undefined | void} reject
-     * @returns {undefined}
-     */
-    function executor(resolve, reject) {
-      ok(
-        typeof file !== 'function',
-        '`file` can’t be a `done` anymore, we checked'
-      )
-      const realFile = vfile(file)
-      transformers.run(tree, realFile, realDone)
-
-      /**
-       * @param {Error | undefined} error
-       * @param {Node} outputTree
-       * @param {VFile} file
-       * @returns {undefined}
-       */
-      function realDone(error, outputTree, file) {
-        const resultingTree =
-          /** @type {TailTree extends undefined ? Node : TailTree} */ (
-            outputTree || tree
-          )
-
-        if (error) {
-          reject(error)
-        } else if (resolve) {
-          resolve(resultingTree)
-        } else {
-          ok(done, '`done` is defined if `resolve` is not')
-          done(undefined, resultingTree, file)
-        }
-      }
-    }
-  }
-
-  /**
-   * Run *transformers* on a syntax tree.
-   *
-   * An error is thrown if asynchronous transforms are configured.
-   *
-   * > **Note**: `runSync` freezes the processor if not already *frozen*.
-   *
-   * > **Note**: `runSync` performs the run phase, not other phases.
-   *
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   *   Tree to transform and inspect.
-   * @param {Compatible | undefined} [file]
-   *   File associated with `node` (optional); any value accepted as `x` in
-   *   `new VFile(x)`.
-   * @returns {TailTree extends undefined ? Node : TailTree}
-   *   Transformed tree.
-   */
-  runSync(tree, file) {
-    /** @type {boolean} */
-    let complete = false
-    /** @type {(TailTree extends undefined ? Node : TailTree) | undefined} */
-    let result
-
-    this.run(tree, file, realDone)
-
-    assertDone('runSync', 'run', complete)
-    ok(result, 'we either bailed on an error or have a tree')
-    return result
-
-    /**
-     * @type {RunCallback<TailTree extends undefined ? Node : TailTree>}
-     */
-    function realDone(error, tree) {
-      bail(error)
-      result = tree
-      complete = true
-    }
-  }
-
-  /**
-   * Compile a syntax tree.
-   *
-   * > **Note**: `stringify` freezes the processor if not already *frozen*.
-   *
-   * > **Note**: `stringify` performs the stringify phase, not the run phase
-   * > or other phases.
-   *
-   * @param {CompileTree extends undefined ? Node : CompileTree} tree
-   *   Tree to compile.
-   * @param {Compatible | undefined} [file]
-   *   File associated with `node` (optional); any value accepted as `x` in
-   *   `new VFile(x)`.
-   * @returns {CompileResult extends undefined ? Value : CompileResult}
-   *   Textual representation of the tree (see note).
-   *
-   *   > **Note**: unified typically compiles by serializing: most compilers
-   *   > return `string` (or `Uint8Array`).
-   *   > Some compilers, such as the one configured with
-   *   > [`rehype-react`][rehype-react], return other values (in this case, a
-   *   > React tree).
-   *   > If you’re using a compiler that doesn’t serialize, expect different
-   *   > result values.
-   *   >
-   *   > To register custom results in TypeScript, add them to
-   *   > {@linkcode CompileResultMap}.
-   *
-   *   [rehype-react]: https://github.com/rehypejs/rehype-react
-   */
-  stringify(tree, file) {
-    this.freeze()
-    const realFile = vfile(file)
-    const compiler = this.compiler || this.Compiler
-    assertCompiler('stringify', compiler)
-    assertNode(tree)
-
-    return compiler(tree, realFile)
-  }
-
-  /**
-   * Configure the processor to use a plugin, a list of usable values, or a
-   * preset.
-   *
-   * If the processor is already using a plugin, the previous plugin
-   * configuration is changed based on the options that are passed in.
-   * In other words, the plugin is not added a second time.
-   *
-   * > **Note**: `use` cannot be called on *frozen* processors.
-   * > Call the processor first to create a new unfrozen processor.
-   *
-   * @example
-   *   There are many ways to pass plugins to `.use()`.
-   *   This example gives an overview:
-   *
-   *   ```js
-   *   import {unified} from 'unified'
-   *
-   *   unified()
-   *     // Plugin with options:
-   *     .use(pluginA, {x: true, y: true})
-   *     // Passing the same plugin again merges configuration (to `{x: true, y: false, z: true}`):
-   *     .use(pluginA, {y: false, z: true})
-   *     // Plugins:
-   *     .use([pluginB, pluginC])
-   *     // Two plugins, the second with options:
-   *     .use([pluginD, [pluginE, {}]])
-   *     // Preset with plugins and settings:
-   *     .use({plugins: [pluginF, [pluginG, {}]], settings: {position: false}})
-   *     // Settings only:
-   *     .use({settings: {position: false}})
-   *   ```
-   *
-   * @template {Array<unknown>} [Parameters=[]]
-   * @template {Node | string | undefined} [Input=undefined]
-   * @template [Output=Input]
-   *
-   * @overload
-   * @param {Preset | null | undefined} [preset]
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *
-   * @overload
-   * @param {PluggableList} list
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *
-   * @overload
-   * @param {Plugin<Parameters, Input, Output>} plugin
-   * @param {...(Parameters | [boolean])} parameters
-   * @returns {UsePlugin<ParseTree, HeadTree, TailTree, CompileTree, CompileResult, Input, Output>}
-   *
-   * @param {PluggableList | Plugin | Preset | null | undefined} value
-   *   Usable value.
-   * @param {...unknown} parameters
-   *   Parameters, when a plugin is given as a usable value.
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *   Current processor.
-   */
-  use(value, ...parameters) {
-    const attachers = this.attachers
-    const namespace = this.namespace
-
-    assertUnfrozen('use', this.frozen)
-
-    if (value === null || value === undefined) {
-      // Empty.
-    } else if (typeof value === 'function') {
-      addPlugin(value, parameters)
-    } else if (typeof value === 'object') {
-      if (Array.isArray(value)) {
-        addList(value)
-      } else {
-        addPreset(value)
-      }
-    } else {
-      throw new TypeError('Expected usable value, not `' + value + '`')
-    }
-
-    return this
-
-    /**
-     * @param {Pluggable} value
-     * @returns {undefined}
-     */
-    function add(value) {
-      if (typeof value === 'function') {
-        addPlugin(value, [])
-      } else if (typeof value === 'object') {
-        if (Array.isArray(value)) {
-          const [plugin, ...parameters] =
-            /** @type {PluginTuple<Array<unknown>>} */ (value)
-          addPlugin(plugin, parameters)
-        } else {
-          addPreset(value)
-        }
-      } else {
-        throw new TypeError('Expected usable value, not `' + value + '`')
-      }
-    }
-
-    /**
-     * @param {Preset} result
-     * @returns {undefined}
-     */
-    function addPreset(result) {
-      if (!('plugins' in result) && !('settings' in result)) {
-        throw new Error(
-          'Expected usable value but received an empty preset, which is probably a mistake: presets typically come with `plugins` and sometimes with `settings`, but this has neither'
-        )
-      }
-
-      addList(result.plugins)
-
-      if (result.settings) {
-        namespace.settings = extend(true, namespace.settings, result.settings)
-      }
-    }
-
-    /**
-     * @param {PluggableList | null | undefined} plugins
-     * @returns {undefined}
-     */
-    function addList(plugins) {
-      let index = -1
-
-      if (plugins === null || plugins === undefined) {
-        // Empty.
-      } else if (Array.isArray(plugins)) {
-        while (++index < plugins.length) {
-          const thing = plugins[index]
-          add(thing)
-        }
-      } else {
-        throw new TypeError('Expected a list of plugins, not `' + plugins + '`')
-      }
-    }
-
-    /**
-     * @param {Plugin} plugin
-     * @param {Array<unknown>} parameters
-     * @returns {undefined}
-     */
-    function addPlugin(plugin, parameters) {
-      let index = -1
-      let entryIndex = -1
-
-      while (++index < attachers.length) {
-        if (attachers[index][0] === plugin) {
-          entryIndex = index
-          break
-        }
-      }
-
-      if (entryIndex === -1) {
-        attachers.push([plugin, ...parameters])
-      }
-      // Only set if there was at least a `primary` value, otherwise we’d change
-      // `arguments.length`.
-      else if (parameters.length > 0) {
-        let [primary, ...rest] = parameters
-        const currentPrimary = attachers[entryIndex][1]
-        if (isPlainObject(currentPrimary) && isPlainObject(primary)) {
-          primary = extend(true, currentPrimary, primary)
-        }
-
-        attachers[entryIndex] = [plugin, primary, ...rest]
-      }
-    }
-  }
-}
-
-// Note: this returns a *callable* instance.
-// That’s why it’s documented as a function.
-/**
- * Create a new processor.
- *
- * @example
- *   This example shows how a new processor can be created (from `remark`) and linked
- *   to **stdin**(4) and **stdout**(4).
- *
- *   ```js
- *   import process from 'node:process'
- *   import concatStream from 'concat-stream'
- *   import {remark} from 'remark'
- *
- *   process.stdin.pipe(
- *     concatStream(function (buf) {
- *       process.stdout.write(String(remark().processSync(buf)))
- *     })
- *   )
- *   ```
- *
- * @returns
- *   New *unfrozen* processor (`processor`).
- *
- *   This processor is configured to work the same as its ancestor.
- *   When the descendant processor is configured in the future it does not
- *   affect the ancestral processor.
- */
-const unified = new Processor().freeze()
-
-/**
- * Assert a parser is available.
- *
- * @param {string} name
- * @param {unknown} value
- * @returns {asserts value is Parser}
- */
-function assertParser(name, value) {
-  if (typeof value !== 'function') {
-    throw new TypeError('Cannot `' + name + '` without `parser`')
-  }
-}
-
-/**
- * Assert a compiler is available.
- *
- * @param {string} name
- * @param {unknown} value
- * @returns {asserts value is Compiler}
- */
-function assertCompiler(name, value) {
-  if (typeof value !== 'function') {
-    throw new TypeError('Cannot `' + name + '` without `compiler`')
-  }
-}
-
-/**
- * Assert the processor is not frozen.
- *
- * @param {string} name
- * @param {unknown} frozen
- * @returns {asserts frozen is false}
- */
-function assertUnfrozen(name, frozen) {
-  if (frozen) {
-    throw new Error(
-      'Cannot call `' +
-        name +
-        '` on a frozen processor.\nCreate a new processor first, by calling it: use `processor()` instead of `processor`.'
-    )
-  }
-}
-
-/**
- * Assert `node` is a unist node.
- *
- * @param {unknown} node
- * @returns {asserts node is Node}
- */
-function assertNode(node) {
-  // `isPlainObj` unfortunately uses `any` instead of `unknown`.
-  // type-coverage:ignore-next-line
-  if (!isPlainObject(node) || typeof node.type !== 'string') {
-    throw new TypeError('Expected node, got `' + node + '`')
-    // Fine.
-  }
-}
-
-/**
- * Assert that `complete` is `true`.
- *
- * @param {string} name
- * @param {string} asyncName
- * @param {unknown} complete
- * @returns {asserts complete is true}
- */
-function assertDone(name, asyncName, complete) {
-  if (!complete) {
-    throw new Error(
-      '`' + name + '` finished async. Use `' + asyncName + '` instead'
-    )
-  }
-}
-
-/**
- * @param {Compatible | undefined} [value]
- * @returns {VFile}
- */
-function vfile(value) {
-  return looksLikeAVFile(value) ? value : new VFile(value)
-}
-
-/**
- * @param {Compatible | undefined} [value]
- * @returns {value is VFile}
- */
-function looksLikeAVFile(value) {
-  return Boolean(
-    value &&
-      typeof value === 'object' &&
-      'message' in value &&
-      'messages' in value
-  )
-}
-
-/**
- * @param {unknown} [value]
- * @returns {value is Value}
- */
-function looksLikeAValue(value) {
-  return typeof value === 'string' || lib_isUint8Array(value)
-}
-
-/**
- * Assert `value` is an `Uint8Array`.
- *
- * @param {unknown} value
- *   thing.
- * @returns {value is Uint8Array}
- *   Whether `value` is an `Uint8Array`.
- */
-function lib_isUint8Array(value) {
-  return Boolean(
-    value &&
-      typeof value === 'object' &&
-      'byteLength' in value &&
-      'byteOffset' in value
-  )
-}
-
-;// CONCATENATED MODULE: ./node_modules/unified/index.js
-// Note: types exposed from `index.d.ts`.
-
-
-
-/***/ }),
-
-/***/ 669:
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
-
-"use strict";
-/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   L: () => (/* binding */ stringifyPosition)
-/* harmony export */ });
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Point} Point
- * @typedef {import('unist').Position} Position
- */
-
-/**
- * @typedef NodeLike
- * @property {string} type
- * @property {PositionLike | null | undefined} [position]
- *
- * @typedef PointLike
- * @property {number | null | undefined} [line]
- * @property {number | null | undefined} [column]
- * @property {number | null | undefined} [offset]
- *
- * @typedef PositionLike
- * @property {PointLike | null | undefined} [start]
- * @property {PointLike | null | undefined} [end]
- */
-
-/**
- * Serialize the positional info of a point, position (start and end points),
- * or node.
- *
- * @param {Node | NodeLike | Point | PointLike | Position | PositionLike | null | undefined} [value]
- *   Node, position, or point.
- * @returns {string}
- *   Pretty printed positional info of a node (`string`).
- *
- *   In the format of a range `ls:cs-le:ce` (when given `node` or `position`)
- *   or a point `l:c` (when given `point`), where `l` stands for line, `c` for
- *   column, `s` for `start`, and `e` for end.
- *   An empty string (`''`) is returned if the given value is neither `node`,
- *   `position`, nor `point`.
- */
-function stringifyPosition(value) {
-  // Nothing.
-  if (!value || typeof value !== 'object') {
-    return ''
-  }
-
-  // Node.
-  if ('position' in value || 'type' in value) {
-    return position(value.position)
-  }
-
-  // Position.
-  if ('start' in value || 'end' in value) {
-    return position(value)
-  }
-
-  // Point.
-  if ('line' in value || 'column' in value) {
-    return point(value)
-  }
-
-  // ?
-  return ''
-}
-
-/**
- * @param {Point | PointLike | null | undefined} point
- * @returns {string}
- */
-function point(point) {
-  return index(point && point.line) + ':' + index(point && point.column)
-}
-
-/**
- * @param {Position | PositionLike | null | undefined} pos
- * @returns {string}
- */
-function position(pos) {
-  return point(pos && pos.start) + '-' + point(pos && pos.end)
-}
-
-/**
- * @param {number | null | undefined} value
- * @returns {number}
- */
-function index(value) {
-  return value && typeof value === 'number' ? value : 1
-}
-
-
-/***/ }),
-
 /***/ 3757:
 /***/ ((module) => {
 
@@ -56139,6 +36191,18 @@ module.exports = /*#__PURE__*/JSON.parse('["cent","copy","divide","gt","lt","not
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__nccwpck_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__nccwpck_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -56173,55 +36237,4891 @@ module.exports = /*#__PURE__*/JSON.parse('["cent","copy","divide","gt","lt","not
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-const { readFileSync, writeFileSync, readdirSync } = __nccwpck_require__(9896);
-const { join } = __nccwpck_require__(6928);
-const core = __nccwpck_require__(7484);
-const $ = __nccwpck_require__(1597);
-const unified = __nccwpck_require__(9793);
-const parse = __nccwpck_require__(2299);
-const stringify = __nccwpck_require__(2780);
-const visit = __nccwpck_require__(802);
-const simpleGit = __nccwpck_require__(9065);
-const git = simpleGit();
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+
+// NAMESPACE OBJECT: ./node_modules/unified/index.js
+var unified_namespaceObject = {};
+__nccwpck_require__.r(unified_namespaceObject);
+
+;// CONCATENATED MODULE: ./node_modules/unified/index.js
+// Note: types exposed from `index.d.ts`.
+
+
+// EXTERNAL MODULE: external "fs"
+var external_fs_ = __nccwpck_require__(9896);
+// EXTERNAL MODULE: external "path"
+var external_path_ = __nccwpck_require__(6928);
+// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(7484);
+// EXTERNAL MODULE: ./node_modules/google-translate-api/index.js
+var google_translate_api = __nccwpck_require__(1597);
+var google_translate_api_default = /*#__PURE__*/__nccwpck_require__.n(google_translate_api);
+// EXTERNAL MODULE: ./node_modules/remark-stringify/index.js
+var remark_stringify = __nccwpck_require__(2780);
+var remark_stringify_default = /*#__PURE__*/__nccwpck_require__.n(remark_stringify);
+// EXTERNAL MODULE: ./node_modules/unist-util-visit/index.js
+var unist_util_visit = __nccwpck_require__(802);
+var unist_util_visit_default = /*#__PURE__*/__nccwpck_require__.n(unist_util_visit);
+// EXTERNAL MODULE: ./node_modules/@kwsites/file-exists/dist/index.js
+var dist = __nccwpck_require__(7117);
+// EXTERNAL MODULE: ./node_modules/debug/src/index.js
+var src = __nccwpck_require__(2830);
+// EXTERNAL MODULE: external "child_process"
+var external_child_process_ = __nccwpck_require__(5317);
+// EXTERNAL MODULE: ./node_modules/@kwsites/promise-deferred/dist/index.js
+var promise_deferred_dist = __nccwpck_require__(9997);
+// EXTERNAL MODULE: external "node:events"
+var external_node_events_ = __nccwpck_require__(8474);
+;// CONCATENATED MODULE: ./node_modules/simple-git/dist/esm/index.js
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __esm = (fn, res) => function __init() {
+  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
+var __commonJS = (cb, mod) => function __require() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+// src/lib/args/pathspec.ts
+function pathspec(...paths) {
+  const key = new String(paths);
+  cache.set(key, paths);
+  return key;
+}
+function isPathSpec(path) {
+  return path instanceof String && cache.has(path);
+}
+function toPaths(pathSpec) {
+  return cache.get(pathSpec) || [];
+}
+var cache;
+var init_pathspec = __esm({
+  "src/lib/args/pathspec.ts"() {
+    "use strict";
+    cache = /* @__PURE__ */ new WeakMap();
+  }
+});
+
+// src/lib/errors/git-error.ts
+var GitError;
+var init_git_error = __esm({
+  "src/lib/errors/git-error.ts"() {
+    "use strict";
+    GitError = class extends Error {
+      constructor(task, message) {
+        super(message);
+        this.task = task;
+        Object.setPrototypeOf(this, new.target.prototype);
+      }
+    };
+  }
+});
+
+// src/lib/errors/git-response-error.ts
+var GitResponseError;
+var init_git_response_error = __esm({
+  "src/lib/errors/git-response-error.ts"() {
+    "use strict";
+    init_git_error();
+    GitResponseError = class extends GitError {
+      constructor(git, message) {
+        super(void 0, message || String(git));
+        this.git = git;
+      }
+    };
+  }
+});
+
+// src/lib/errors/task-configuration-error.ts
+var TaskConfigurationError;
+var init_task_configuration_error = __esm({
+  "src/lib/errors/task-configuration-error.ts"() {
+    "use strict";
+    init_git_error();
+    TaskConfigurationError = class extends GitError {
+      constructor(message) {
+        super(void 0, message);
+      }
+    };
+  }
+});
+
+// src/lib/utils/util.ts
+
+function asFunction(source) {
+  return typeof source === "function" ? source : NOOP;
+}
+function isUserFunction(source) {
+  return typeof source === "function" && source !== NOOP;
+}
+function splitOn(input, char) {
+  const index = input.indexOf(char);
+  if (index <= 0) {
+    return [input, ""];
+  }
+  return [input.substr(0, index), input.substr(index + 1)];
+}
+function first(input, offset = 0) {
+  return isArrayLike(input) && input.length > offset ? input[offset] : void 0;
+}
+function last(input, offset = 0) {
+  if (isArrayLike(input) && input.length > offset) {
+    return input[input.length - 1 - offset];
+  }
+}
+function isArrayLike(input) {
+  return !!(input && typeof input.length === "number");
+}
+function toLinesWithContent(input = "", trimmed2 = true, separator = "\n") {
+  return input.split(separator).reduce((output, line) => {
+    const lineContent = trimmed2 ? line.trim() : line;
+    if (lineContent) {
+      output.push(lineContent);
+    }
+    return output;
+  }, []);
+}
+function forEachLineWithContent(input, callback) {
+  return toLinesWithContent(input, true).map((line) => callback(line));
+}
+function folderExists(path) {
+  return (0,dist.exists)(path, dist.FOLDER);
+}
+function append(target, item) {
+  if (Array.isArray(target)) {
+    if (!target.includes(item)) {
+      target.push(item);
+    }
+  } else {
+    target.add(item);
+  }
+  return item;
+}
+function including(target, item) {
+  if (Array.isArray(target) && !target.includes(item)) {
+    target.push(item);
+  }
+  return target;
+}
+function remove(target, item) {
+  if (Array.isArray(target)) {
+    const index = target.indexOf(item);
+    if (index >= 0) {
+      target.splice(index, 1);
+    }
+  } else {
+    target.delete(item);
+  }
+  return item;
+}
+function asArray(source) {
+  return Array.isArray(source) ? source : [source];
+}
+function asCamelCase(str) {
+  return str.replace(/[\s-]+(.)/g, (_all, chr) => {
+    return chr.toUpperCase();
+  });
+}
+function asStringArray(source) {
+  return asArray(source).map(String);
+}
+function asNumber(source, onNaN = 0) {
+  if (source == null) {
+    return onNaN;
+  }
+  const num = parseInt(source, 10);
+  return isNaN(num) ? onNaN : num;
+}
+function prefixedArray(input, prefix) {
+  const output = [];
+  for (let i = 0, max = input.length; i < max; i++) {
+    output.push(prefix, input[i]);
+  }
+  return output;
+}
+function bufferToString(input) {
+  return (Array.isArray(input) ? Buffer.concat(input) : input).toString("utf-8");
+}
+function pick(source, properties) {
+  return Object.assign(
+    {},
+    ...properties.map((property) => property in source ? { [property]: source[property] } : {})
+  );
+}
+function delay(duration = 0) {
+  return new Promise((done) => setTimeout(done, duration));
+}
+function orVoid(input) {
+  if (input === false) {
+    return void 0;
+  }
+  return input;
+}
+var NULL, NOOP, objectToString;
+var init_util = __esm({
+  "src/lib/utils/util.ts"() {
+    "use strict";
+    NULL = "\0";
+    NOOP = () => {
+    };
+    objectToString = Object.prototype.toString.call.bind(Object.prototype.toString);
+  }
+});
+
+// src/lib/utils/argument-filters.ts
+function filterType(input, filter, def) {
+  if (filter(input)) {
+    return input;
+  }
+  return arguments.length > 2 ? def : void 0;
+}
+function filterPrimitives(input, omit) {
+  const type = isPathSpec(input) ? "string" : typeof input;
+  return /number|string|boolean/.test(type) && (!omit || !omit.includes(type));
+}
+function filterPlainObject(input) {
+  return !!input && objectToString(input) === "[object Object]";
+}
+function filterFunction(input) {
+  return typeof input === "function";
+}
+var filterArray, filterString, filterStringArray, filterStringOrStringArray, filterHasLength;
+var init_argument_filters = __esm({
+  "src/lib/utils/argument-filters.ts"() {
+    "use strict";
+    init_util();
+    init_pathspec();
+    filterArray = (input) => {
+      return Array.isArray(input);
+    };
+    filterString = (input) => {
+      return typeof input === "string";
+    };
+    filterStringArray = (input) => {
+      return Array.isArray(input) && input.every(filterString);
+    };
+    filterStringOrStringArray = (input) => {
+      return filterString(input) || Array.isArray(input) && input.every(filterString);
+    };
+    filterHasLength = (input) => {
+      if (input == null || "number|boolean|function".includes(typeof input)) {
+        return false;
+      }
+      return Array.isArray(input) || typeof input === "string" || typeof input.length === "number";
+    };
+  }
+});
+
+// src/lib/utils/exit-codes.ts
+var ExitCodes;
+var init_exit_codes = __esm({
+  "src/lib/utils/exit-codes.ts"() {
+    "use strict";
+    ExitCodes = /* @__PURE__ */ ((ExitCodes2) => {
+      ExitCodes2[ExitCodes2["SUCCESS"] = 0] = "SUCCESS";
+      ExitCodes2[ExitCodes2["ERROR"] = 1] = "ERROR";
+      ExitCodes2[ExitCodes2["NOT_FOUND"] = -2] = "NOT_FOUND";
+      ExitCodes2[ExitCodes2["UNCLEAN"] = 128] = "UNCLEAN";
+      return ExitCodes2;
+    })(ExitCodes || {});
+  }
+});
+
+// src/lib/utils/git-output-streams.ts
+var GitOutputStreams;
+var init_git_output_streams = __esm({
+  "src/lib/utils/git-output-streams.ts"() {
+    "use strict";
+    GitOutputStreams = class {
+      constructor(stdOut, stdErr) {
+        this.stdOut = stdOut;
+        this.stdErr = stdErr;
+      }
+      asStrings() {
+        return new GitOutputStreams(this.stdOut.toString("utf8"), this.stdErr.toString("utf8"));
+      }
+    };
+  }
+});
+
+// src/lib/utils/line-parser.ts
+var LineParser, RemoteLineParser;
+var init_line_parser = __esm({
+  "src/lib/utils/line-parser.ts"() {
+    "use strict";
+    LineParser = class {
+      constructor(regExp, useMatches) {
+        this.matches = [];
+        this.parse = (line, target) => {
+          this.resetMatches();
+          if (!this._regExp.every((reg, index) => this.addMatch(reg, index, line(index)))) {
+            return false;
+          }
+          return this.useMatches(target, this.prepareMatches()) !== false;
+        };
+        this._regExp = Array.isArray(regExp) ? regExp : [regExp];
+        if (useMatches) {
+          this.useMatches = useMatches;
+        }
+      }
+      useMatches(target, match) {
+        throw new Error(`LineParser:useMatches not implemented`);
+      }
+      resetMatches() {
+        this.matches.length = 0;
+      }
+      prepareMatches() {
+        return this.matches;
+      }
+      addMatch(reg, index, line) {
+        const matched = line && reg.exec(line);
+        if (matched) {
+          this.pushMatch(index, matched);
+        }
+        return !!matched;
+      }
+      pushMatch(_index, matched) {
+        this.matches.push(...matched.slice(1));
+      }
+    };
+    RemoteLineParser = class extends LineParser {
+      addMatch(reg, index, line) {
+        return /^remote:\s/.test(String(line)) && super.addMatch(reg, index, line);
+      }
+      pushMatch(index, matched) {
+        if (index > 0 || matched.length > 1) {
+          super.pushMatch(index, matched);
+        }
+      }
+    };
+  }
+});
+
+// src/lib/utils/simple-git-options.ts
+function createInstanceConfig(...options) {
+  const baseDir = process.cwd();
+  const config = Object.assign(
+    __spreadValues({ baseDir }, defaultOptions),
+    ...options.filter((o) => typeof o === "object" && o)
+  );
+  config.baseDir = config.baseDir || baseDir;
+  config.trimmed = config.trimmed === true;
+  return config;
+}
+var defaultOptions;
+var init_simple_git_options = __esm({
+  "src/lib/utils/simple-git-options.ts"() {
+    "use strict";
+    defaultOptions = {
+      binary: "git",
+      maxConcurrentProcesses: 5,
+      config: [],
+      trimmed: false
+    };
+  }
+});
+
+// src/lib/utils/task-options.ts
+function appendTaskOptions(options, commands = []) {
+  if (!filterPlainObject(options)) {
+    return commands;
+  }
+  return Object.keys(options).reduce((commands2, key) => {
+    const value = options[key];
+    if (isPathSpec(value)) {
+      commands2.push(value);
+    } else if (filterPrimitives(value, ["boolean"])) {
+      commands2.push(key + "=" + value);
+    } else {
+      commands2.push(key);
+    }
+    return commands2;
+  }, commands);
+}
+function getTrailingOptions(args, initialPrimitive = 0, objectOnly = false) {
+  const command = [];
+  for (let i = 0, max = initialPrimitive < 0 ? args.length : initialPrimitive; i < max; i++) {
+    if ("string|number".includes(typeof args[i])) {
+      command.push(String(args[i]));
+    }
+  }
+  appendTaskOptions(trailingOptionsArgument(args), command);
+  if (!objectOnly) {
+    command.push(...trailingArrayArgument(args));
+  }
+  return command;
+}
+function trailingArrayArgument(args) {
+  const hasTrailingCallback = typeof last(args) === "function";
+  return filterType(last(args, hasTrailingCallback ? 1 : 0), filterArray, []);
+}
+function trailingOptionsArgument(args) {
+  const hasTrailingCallback = filterFunction(last(args));
+  return filterType(last(args, hasTrailingCallback ? 1 : 0), filterPlainObject);
+}
+function trailingFunctionArgument(args, includeNoop = true) {
+  const callback = asFunction(last(args));
+  return includeNoop || isUserFunction(callback) ? callback : void 0;
+}
+var init_task_options = __esm({
+  "src/lib/utils/task-options.ts"() {
+    "use strict";
+    init_argument_filters();
+    init_util();
+    init_pathspec();
+  }
+});
+
+// src/lib/utils/task-parser.ts
+function callTaskParser(parser4, streams) {
+  return parser4(streams.stdOut, streams.stdErr);
+}
+function parseStringResponse(result, parsers12, texts, trim = true) {
+  asArray(texts).forEach((text) => {
+    for (let lines = toLinesWithContent(text, trim), i = 0, max = lines.length; i < max; i++) {
+      const line = (offset = 0) => {
+        if (i + offset >= max) {
+          return;
+        }
+        return lines[i + offset];
+      };
+      parsers12.some(({ parse }) => parse(line, result));
+    }
+  });
+  return result;
+}
+var init_task_parser = __esm({
+  "src/lib/utils/task-parser.ts"() {
+    "use strict";
+    init_util();
+  }
+});
+
+// src/lib/utils/index.ts
+var utils_exports = {};
+__export(utils_exports, {
+  ExitCodes: () => ExitCodes,
+  GitOutputStreams: () => GitOutputStreams,
+  LineParser: () => LineParser,
+  NOOP: () => NOOP,
+  NULL: () => NULL,
+  RemoteLineParser: () => RemoteLineParser,
+  append: () => append,
+  appendTaskOptions: () => appendTaskOptions,
+  asArray: () => asArray,
+  asCamelCase: () => asCamelCase,
+  asFunction: () => asFunction,
+  asNumber: () => asNumber,
+  asStringArray: () => asStringArray,
+  bufferToString: () => bufferToString,
+  callTaskParser: () => callTaskParser,
+  createInstanceConfig: () => createInstanceConfig,
+  delay: () => delay,
+  filterArray: () => filterArray,
+  filterFunction: () => filterFunction,
+  filterHasLength: () => filterHasLength,
+  filterPlainObject: () => filterPlainObject,
+  filterPrimitives: () => filterPrimitives,
+  filterString: () => filterString,
+  filterStringArray: () => filterStringArray,
+  filterStringOrStringArray: () => filterStringOrStringArray,
+  filterType: () => filterType,
+  first: () => first,
+  folderExists: () => folderExists,
+  forEachLineWithContent: () => forEachLineWithContent,
+  getTrailingOptions: () => getTrailingOptions,
+  including: () => including,
+  isUserFunction: () => isUserFunction,
+  last: () => last,
+  objectToString: () => objectToString,
+  orVoid: () => orVoid,
+  parseStringResponse: () => parseStringResponse,
+  pick: () => pick,
+  prefixedArray: () => prefixedArray,
+  remove: () => remove,
+  splitOn: () => splitOn,
+  toLinesWithContent: () => toLinesWithContent,
+  trailingFunctionArgument: () => trailingFunctionArgument,
+  trailingOptionsArgument: () => trailingOptionsArgument
+});
+var init_utils = __esm({
+  "src/lib/utils/index.ts"() {
+    "use strict";
+    init_argument_filters();
+    init_exit_codes();
+    init_git_output_streams();
+    init_line_parser();
+    init_simple_git_options();
+    init_task_options();
+    init_task_parser();
+    init_util();
+  }
+});
+
+// src/lib/tasks/check-is-repo.ts
+var check_is_repo_exports = {};
+__export(check_is_repo_exports, {
+  CheckRepoActions: () => CheckRepoActions,
+  checkIsBareRepoTask: () => checkIsBareRepoTask,
+  checkIsRepoRootTask: () => checkIsRepoRootTask,
+  checkIsRepoTask: () => checkIsRepoTask
+});
+function checkIsRepoTask(action) {
+  switch (action) {
+    case "bare" /* BARE */:
+      return checkIsBareRepoTask();
+    case "root" /* IS_REPO_ROOT */:
+      return checkIsRepoRootTask();
+  }
+  const commands = ["rev-parse", "--is-inside-work-tree"];
+  return {
+    commands,
+    format: "utf-8",
+    onError,
+    parser
+  };
+}
+function checkIsRepoRootTask() {
+  const commands = ["rev-parse", "--git-dir"];
+  return {
+    commands,
+    format: "utf-8",
+    onError,
+    parser(path) {
+      return /^\.(git)?$/.test(path.trim());
+    }
+  };
+}
+function checkIsBareRepoTask() {
+  const commands = ["rev-parse", "--is-bare-repository"];
+  return {
+    commands,
+    format: "utf-8",
+    onError,
+    parser
+  };
+}
+function isNotRepoMessage(error) {
+  return /(Not a git repository|Kein Git-Repository)/i.test(String(error));
+}
+var CheckRepoActions, onError, parser;
+var init_check_is_repo = __esm({
+  "src/lib/tasks/check-is-repo.ts"() {
+    "use strict";
+    init_utils();
+    CheckRepoActions = /* @__PURE__ */ ((CheckRepoActions2) => {
+      CheckRepoActions2["BARE"] = "bare";
+      CheckRepoActions2["IN_TREE"] = "tree";
+      CheckRepoActions2["IS_REPO_ROOT"] = "root";
+      return CheckRepoActions2;
+    })(CheckRepoActions || {});
+    onError = ({ exitCode }, error, done, fail) => {
+      if (exitCode === 128 /* UNCLEAN */ && isNotRepoMessage(error)) {
+        return done(Buffer.from("false"));
+      }
+      fail(error);
+    };
+    parser = (text) => {
+      return text.trim() === "true";
+    };
+  }
+});
+
+// src/lib/responses/CleanSummary.ts
+function cleanSummaryParser(dryRun, text) {
+  const summary = new CleanResponse(dryRun);
+  const regexp = dryRun ? dryRunRemovalRegexp : removalRegexp;
+  toLinesWithContent(text).forEach((line) => {
+    const removed = line.replace(regexp, "");
+    summary.paths.push(removed);
+    (isFolderRegexp.test(removed) ? summary.folders : summary.files).push(removed);
+  });
+  return summary;
+}
+var CleanResponse, removalRegexp, dryRunRemovalRegexp, isFolderRegexp;
+var init_CleanSummary = __esm({
+  "src/lib/responses/CleanSummary.ts"() {
+    "use strict";
+    init_utils();
+    CleanResponse = class {
+      constructor(dryRun) {
+        this.dryRun = dryRun;
+        this.paths = [];
+        this.files = [];
+        this.folders = [];
+      }
+    };
+    removalRegexp = /^[a-z]+\s*/i;
+    dryRunRemovalRegexp = /^[a-z]+\s+[a-z]+\s*/i;
+    isFolderRegexp = /\/$/;
+  }
+});
+
+// src/lib/tasks/task.ts
+var task_exports = {};
+__export(task_exports, {
+  EMPTY_COMMANDS: () => EMPTY_COMMANDS,
+  adhocExecTask: () => adhocExecTask,
+  configurationErrorTask: () => configurationErrorTask,
+  isBufferTask: () => isBufferTask,
+  isEmptyTask: () => isEmptyTask,
+  straightThroughBufferTask: () => straightThroughBufferTask,
+  straightThroughStringTask: () => straightThroughStringTask
+});
+function adhocExecTask(parser4) {
+  return {
+    commands: EMPTY_COMMANDS,
+    format: "empty",
+    parser: parser4
+  };
+}
+function configurationErrorTask(error) {
+  return {
+    commands: EMPTY_COMMANDS,
+    format: "empty",
+    parser() {
+      throw typeof error === "string" ? new TaskConfigurationError(error) : error;
+    }
+  };
+}
+function straightThroughStringTask(commands, trimmed2 = false) {
+  return {
+    commands,
+    format: "utf-8",
+    parser(text) {
+      return trimmed2 ? String(text).trim() : text;
+    }
+  };
+}
+function straightThroughBufferTask(commands) {
+  return {
+    commands,
+    format: "buffer",
+    parser(buffer) {
+      return buffer;
+    }
+  };
+}
+function isBufferTask(task) {
+  return task.format === "buffer";
+}
+function isEmptyTask(task) {
+  return task.format === "empty" || !task.commands.length;
+}
+var EMPTY_COMMANDS;
+var init_task = __esm({
+  "src/lib/tasks/task.ts"() {
+    "use strict";
+    init_task_configuration_error();
+    EMPTY_COMMANDS = [];
+  }
+});
+
+// src/lib/tasks/clean.ts
+var clean_exports = {};
+__export(clean_exports, {
+  CONFIG_ERROR_INTERACTIVE_MODE: () => CONFIG_ERROR_INTERACTIVE_MODE,
+  CONFIG_ERROR_MODE_REQUIRED: () => CONFIG_ERROR_MODE_REQUIRED,
+  CONFIG_ERROR_UNKNOWN_OPTION: () => CONFIG_ERROR_UNKNOWN_OPTION,
+  CleanOptions: () => CleanOptions,
+  cleanTask: () => cleanTask,
+  cleanWithOptionsTask: () => cleanWithOptionsTask,
+  isCleanOptionsArray: () => isCleanOptionsArray
+});
+function cleanWithOptionsTask(mode, customArgs) {
+  const { cleanMode, options, valid } = getCleanOptions(mode);
+  if (!cleanMode) {
+    return configurationErrorTask(CONFIG_ERROR_MODE_REQUIRED);
+  }
+  if (!valid.options) {
+    return configurationErrorTask(CONFIG_ERROR_UNKNOWN_OPTION + JSON.stringify(mode));
+  }
+  options.push(...customArgs);
+  if (options.some(isInteractiveMode)) {
+    return configurationErrorTask(CONFIG_ERROR_INTERACTIVE_MODE);
+  }
+  return cleanTask(cleanMode, options);
+}
+function cleanTask(mode, customArgs) {
+  const commands = ["clean", `-${mode}`, ...customArgs];
+  return {
+    commands,
+    format: "utf-8",
+    parser(text) {
+      return cleanSummaryParser(mode === "n" /* DRY_RUN */, text);
+    }
+  };
+}
+function isCleanOptionsArray(input) {
+  return Array.isArray(input) && input.every((test) => CleanOptionValues.has(test));
+}
+function getCleanOptions(input) {
+  let cleanMode;
+  let options = [];
+  let valid = { cleanMode: false, options: true };
+  input.replace(/[^a-z]i/g, "").split("").forEach((char) => {
+    if (isCleanMode(char)) {
+      cleanMode = char;
+      valid.cleanMode = true;
+    } else {
+      valid.options = valid.options && isKnownOption(options[options.length] = `-${char}`);
+    }
+  });
+  return {
+    cleanMode,
+    options,
+    valid
+  };
+}
+function isCleanMode(cleanMode) {
+  return cleanMode === "f" /* FORCE */ || cleanMode === "n" /* DRY_RUN */;
+}
+function isKnownOption(option) {
+  return /^-[a-z]$/i.test(option) && CleanOptionValues.has(option.charAt(1));
+}
+function isInteractiveMode(option) {
+  if (/^-[^\-]/.test(option)) {
+    return option.indexOf("i") > 0;
+  }
+  return option === "--interactive";
+}
+var CONFIG_ERROR_INTERACTIVE_MODE, CONFIG_ERROR_MODE_REQUIRED, CONFIG_ERROR_UNKNOWN_OPTION, CleanOptions, CleanOptionValues;
+var init_clean = __esm({
+  "src/lib/tasks/clean.ts"() {
+    "use strict";
+    init_CleanSummary();
+    init_utils();
+    init_task();
+    CONFIG_ERROR_INTERACTIVE_MODE = "Git clean interactive mode is not supported";
+    CONFIG_ERROR_MODE_REQUIRED = 'Git clean mode parameter ("n" or "f") is required';
+    CONFIG_ERROR_UNKNOWN_OPTION = "Git clean unknown option found in: ";
+    CleanOptions = /* @__PURE__ */ ((CleanOptions2) => {
+      CleanOptions2["DRY_RUN"] = "n";
+      CleanOptions2["FORCE"] = "f";
+      CleanOptions2["IGNORED_INCLUDED"] = "x";
+      CleanOptions2["IGNORED_ONLY"] = "X";
+      CleanOptions2["EXCLUDING"] = "e";
+      CleanOptions2["QUIET"] = "q";
+      CleanOptions2["RECURSIVE"] = "d";
+      return CleanOptions2;
+    })(CleanOptions || {});
+    CleanOptionValues = /* @__PURE__ */ new Set([
+      "i",
+      ...asStringArray(Object.values(CleanOptions))
+    ]);
+  }
+});
+
+// src/lib/responses/ConfigList.ts
+function configListParser(text) {
+  const config = new ConfigList();
+  for (const item of configParser(text)) {
+    config.addValue(item.file, String(item.key), item.value);
+  }
+  return config;
+}
+function configGetParser(text, key) {
+  let value = null;
+  const values = [];
+  const scopes = /* @__PURE__ */ new Map();
+  for (const item of configParser(text, key)) {
+    if (item.key !== key) {
+      continue;
+    }
+    values.push(value = item.value);
+    if (!scopes.has(item.file)) {
+      scopes.set(item.file, []);
+    }
+    scopes.get(item.file).push(value);
+  }
+  return {
+    key,
+    paths: Array.from(scopes.keys()),
+    scopes,
+    value,
+    values
+  };
+}
+function configFilePath(filePath) {
+  return filePath.replace(/^(file):/, "");
+}
+function* configParser(text, requestedKey = null) {
+  const lines = text.split("\0");
+  for (let i = 0, max = lines.length - 1; i < max; ) {
+    const file = configFilePath(lines[i++]);
+    let value = lines[i++];
+    let key = requestedKey;
+    if (value.includes("\n")) {
+      const line = splitOn(value, "\n");
+      key = line[0];
+      value = line[1];
+    }
+    yield { file, key, value };
+  }
+}
+var ConfigList;
+var init_ConfigList = __esm({
+  "src/lib/responses/ConfigList.ts"() {
+    "use strict";
+    init_utils();
+    ConfigList = class {
+      constructor() {
+        this.files = [];
+        this.values = /* @__PURE__ */ Object.create(null);
+      }
+      get all() {
+        if (!this._all) {
+          this._all = this.files.reduce((all, file) => {
+            return Object.assign(all, this.values[file]);
+          }, {});
+        }
+        return this._all;
+      }
+      addFile(file) {
+        if (!(file in this.values)) {
+          const latest = last(this.files);
+          this.values[file] = latest ? Object.create(this.values[latest]) : {};
+          this.files.push(file);
+        }
+        return this.values[file];
+      }
+      addValue(file, key, value) {
+        const values = this.addFile(file);
+        if (!values.hasOwnProperty(key)) {
+          values[key] = value;
+        } else if (Array.isArray(values[key])) {
+          values[key].push(value);
+        } else {
+          values[key] = [values[key], value];
+        }
+        this._all = void 0;
+      }
+    };
+  }
+});
+
+// src/lib/tasks/config.ts
+function asConfigScope(scope, fallback) {
+  if (typeof scope === "string" && GitConfigScope.hasOwnProperty(scope)) {
+    return scope;
+  }
+  return fallback;
+}
+function addConfigTask(key, value, append2, scope) {
+  const commands = ["config", `--${scope}`];
+  if (append2) {
+    commands.push("--add");
+  }
+  commands.push(key, value);
+  return {
+    commands,
+    format: "utf-8",
+    parser(text) {
+      return text;
+    }
+  };
+}
+function getConfigTask(key, scope) {
+  const commands = ["config", "--null", "--show-origin", "--get-all", key];
+  if (scope) {
+    commands.splice(1, 0, `--${scope}`);
+  }
+  return {
+    commands,
+    format: "utf-8",
+    parser(text) {
+      return configGetParser(text, key);
+    }
+  };
+}
+function listConfigTask(scope) {
+  const commands = ["config", "--list", "--show-origin", "--null"];
+  if (scope) {
+    commands.push(`--${scope}`);
+  }
+  return {
+    commands,
+    format: "utf-8",
+    parser(text) {
+      return configListParser(text);
+    }
+  };
+}
+function config_default() {
+  return {
+    addConfig(key, value, ...rest) {
+      return this._runTask(
+        addConfigTask(
+          key,
+          value,
+          rest[0] === true,
+          asConfigScope(rest[1], "local" /* local */)
+        ),
+        trailingFunctionArgument(arguments)
+      );
+    },
+    getConfig(key, scope) {
+      return this._runTask(
+        getConfigTask(key, asConfigScope(scope, void 0)),
+        trailingFunctionArgument(arguments)
+      );
+    },
+    listConfig(...rest) {
+      return this._runTask(
+        listConfigTask(asConfigScope(rest[0], void 0)),
+        trailingFunctionArgument(arguments)
+      );
+    }
+  };
+}
+var GitConfigScope;
+var init_config = __esm({
+  "src/lib/tasks/config.ts"() {
+    "use strict";
+    init_ConfigList();
+    init_utils();
+    GitConfigScope = /* @__PURE__ */ ((GitConfigScope2) => {
+      GitConfigScope2["system"] = "system";
+      GitConfigScope2["global"] = "global";
+      GitConfigScope2["local"] = "local";
+      GitConfigScope2["worktree"] = "worktree";
+      return GitConfigScope2;
+    })(GitConfigScope || {});
+  }
+});
+
+// src/lib/tasks/diff-name-status.ts
+function isDiffNameStatus(input) {
+  return diffNameStatus.has(input);
+}
+var DiffNameStatus, diffNameStatus;
+var init_diff_name_status = __esm({
+  "src/lib/tasks/diff-name-status.ts"() {
+    "use strict";
+    DiffNameStatus = /* @__PURE__ */ ((DiffNameStatus2) => {
+      DiffNameStatus2["ADDED"] = "A";
+      DiffNameStatus2["COPIED"] = "C";
+      DiffNameStatus2["DELETED"] = "D";
+      DiffNameStatus2["MODIFIED"] = "M";
+      DiffNameStatus2["RENAMED"] = "R";
+      DiffNameStatus2["CHANGED"] = "T";
+      DiffNameStatus2["UNMERGED"] = "U";
+      DiffNameStatus2["UNKNOWN"] = "X";
+      DiffNameStatus2["BROKEN"] = "B";
+      return DiffNameStatus2;
+    })(DiffNameStatus || {});
+    diffNameStatus = new Set(Object.values(DiffNameStatus));
+  }
+});
+
+// src/lib/tasks/grep.ts
+function grepQueryBuilder(...params) {
+  return new GrepQuery().param(...params);
+}
+function parseGrep(grep) {
+  const paths = /* @__PURE__ */ new Set();
+  const results = {};
+  forEachLineWithContent(grep, (input) => {
+    const [path, line, preview] = input.split(NULL);
+    paths.add(path);
+    (results[path] = results[path] || []).push({
+      line: asNumber(line),
+      path,
+      preview
+    });
+  });
+  return {
+    paths,
+    results
+  };
+}
+function grep_default() {
+  return {
+    grep(searchTerm) {
+      const then = trailingFunctionArgument(arguments);
+      const options = getTrailingOptions(arguments);
+      for (const option of disallowedOptions) {
+        if (options.includes(option)) {
+          return this._runTask(
+            configurationErrorTask(`git.grep: use of "${option}" is not supported.`),
+            then
+          );
+        }
+      }
+      if (typeof searchTerm === "string") {
+        searchTerm = grepQueryBuilder().param(searchTerm);
+      }
+      const commands = ["grep", "--null", "-n", "--full-name", ...options, ...searchTerm];
+      return this._runTask(
+        {
+          commands,
+          format: "utf-8",
+          parser(stdOut) {
+            return parseGrep(stdOut);
+          }
+        },
+        then
+      );
+    }
+  };
+}
+var disallowedOptions, Query, _a, GrepQuery;
+var init_grep = __esm({
+  "src/lib/tasks/grep.ts"() {
+    "use strict";
+    init_utils();
+    init_task();
+    disallowedOptions = ["-h"];
+    Query = Symbol("grepQuery");
+    GrepQuery = class {
+      constructor() {
+        this[_a] = [];
+      }
+      *[(_a = Query, Symbol.iterator)]() {
+        for (const query of this[Query]) {
+          yield query;
+        }
+      }
+      and(...and) {
+        and.length && this[Query].push("--and", "(", ...prefixedArray(and, "-e"), ")");
+        return this;
+      }
+      param(...param) {
+        this[Query].push(...prefixedArray(param, "-e"));
+        return this;
+      }
+    };
+  }
+});
+
+// src/lib/tasks/reset.ts
+var reset_exports = {};
+__export(reset_exports, {
+  ResetMode: () => ResetMode,
+  getResetMode: () => getResetMode,
+  resetTask: () => resetTask
+});
+function resetTask(mode, customArgs) {
+  const commands = ["reset"];
+  if (isValidResetMode(mode)) {
+    commands.push(`--${mode}`);
+  }
+  commands.push(...customArgs);
+  return straightThroughStringTask(commands);
+}
+function getResetMode(mode) {
+  if (isValidResetMode(mode)) {
+    return mode;
+  }
+  switch (typeof mode) {
+    case "string":
+    case "undefined":
+      return "soft" /* SOFT */;
+  }
+  return;
+}
+function isValidResetMode(mode) {
+  return ResetModes.includes(mode);
+}
+var ResetMode, ResetModes;
+var init_reset = __esm({
+  "src/lib/tasks/reset.ts"() {
+    "use strict";
+    init_task();
+    ResetMode = /* @__PURE__ */ ((ResetMode2) => {
+      ResetMode2["MIXED"] = "mixed";
+      ResetMode2["SOFT"] = "soft";
+      ResetMode2["HARD"] = "hard";
+      ResetMode2["MERGE"] = "merge";
+      ResetMode2["KEEP"] = "keep";
+      return ResetMode2;
+    })(ResetMode || {});
+    ResetModes = Array.from(Object.values(ResetMode));
+  }
+});
+
+// src/lib/git-logger.ts
+
+function createLog() {
+  return src("simple-git");
+}
+function prefixedLogger(to, prefix, forward) {
+  if (!prefix || !String(prefix).replace(/\s*/, "")) {
+    return !forward ? to : (message, ...args) => {
+      to(message, ...args);
+      forward(message, ...args);
+    };
+  }
+  return (message, ...args) => {
+    to(`%s ${message}`, prefix, ...args);
+    if (forward) {
+      forward(message, ...args);
+    }
+  };
+}
+function childLoggerName(name, childDebugger, { namespace: parentNamespace }) {
+  if (typeof name === "string") {
+    return name;
+  }
+  const childNamespace = childDebugger && childDebugger.namespace || "";
+  if (childNamespace.startsWith(parentNamespace)) {
+    return childNamespace.substr(parentNamespace.length + 1);
+  }
+  return childNamespace || parentNamespace;
+}
+function createLogger(label, verbose, initialStep, infoDebugger = createLog()) {
+  const labelPrefix = label && `[${label}]` || "";
+  const spawned = [];
+  const debugDebugger = typeof verbose === "string" ? infoDebugger.extend(verbose) : verbose;
+  const key = childLoggerName(filterType(verbose, filterString), debugDebugger, infoDebugger);
+  return step(initialStep);
+  function sibling(name, initial) {
+    return append(
+      spawned,
+      createLogger(label, key.replace(/^[^:]+/, name), initial, infoDebugger)
+    );
+  }
+  function step(phase) {
+    const stepPrefix = phase && `[${phase}]` || "";
+    const debug2 = debugDebugger && prefixedLogger(debugDebugger, stepPrefix) || NOOP;
+    const info = prefixedLogger(infoDebugger, `${labelPrefix} ${stepPrefix}`, debug2);
+    return Object.assign(debugDebugger ? debug2 : info, {
+      label,
+      sibling,
+      info,
+      step
+    });
+  }
+}
+var init_git_logger = __esm({
+  "src/lib/git-logger.ts"() {
+    "use strict";
+    init_utils();
+    src.formatters.L = (value) => String(filterHasLength(value) ? value.length : "-");
+    src.formatters.B = (value) => {
+      if (Buffer.isBuffer(value)) {
+        return value.toString("utf8");
+      }
+      return objectToString(value);
+    };
+  }
+});
+
+// src/lib/runners/tasks-pending-queue.ts
+var _TasksPendingQueue, TasksPendingQueue;
+var init_tasks_pending_queue = __esm({
+  "src/lib/runners/tasks-pending-queue.ts"() {
+    "use strict";
+    init_git_error();
+    init_git_logger();
+    _TasksPendingQueue = class {
+      constructor(logLabel = "GitExecutor") {
+        this.logLabel = logLabel;
+        this._queue = /* @__PURE__ */ new Map();
+      }
+      withProgress(task) {
+        return this._queue.get(task);
+      }
+      createProgress(task) {
+        const name = _TasksPendingQueue.getName(task.commands[0]);
+        const logger = createLogger(this.logLabel, name);
+        return {
+          task,
+          logger,
+          name
+        };
+      }
+      push(task) {
+        const progress = this.createProgress(task);
+        progress.logger("Adding task to the queue, commands = %o", task.commands);
+        this._queue.set(task, progress);
+        return progress;
+      }
+      fatal(err) {
+        for (const [task, { logger }] of Array.from(this._queue.entries())) {
+          if (task === err.task) {
+            logger.info(`Failed %o`, err);
+            logger(
+              `Fatal exception, any as-yet un-started tasks run through this executor will not be attempted`
+            );
+          } else {
+            logger.info(
+              `A fatal exception occurred in a previous task, the queue has been purged: %o`,
+              err.message
+            );
+          }
+          this.complete(task);
+        }
+        if (this._queue.size !== 0) {
+          throw new Error(`Queue size should be zero after fatal: ${this._queue.size}`);
+        }
+      }
+      complete(task) {
+        const progress = this.withProgress(task);
+        if (progress) {
+          this._queue.delete(task);
+        }
+      }
+      attempt(task) {
+        const progress = this.withProgress(task);
+        if (!progress) {
+          throw new GitError(void 0, "TasksPendingQueue: attempt called for an unknown task");
+        }
+        progress.logger("Starting task");
+        return progress;
+      }
+      static getName(name = "empty") {
+        return `task:${name}:${++_TasksPendingQueue.counter}`;
+      }
+    };
+    TasksPendingQueue = _TasksPendingQueue;
+    TasksPendingQueue.counter = 0;
+  }
+});
+
+// src/lib/runners/git-executor-chain.ts
+
+function pluginContext(task, commands) {
+  return {
+    method: first(task.commands) || "",
+    commands
+  };
+}
+function onErrorReceived(target, logger) {
+  return (err) => {
+    logger(`[ERROR] child process exception %o`, err);
+    target.push(Buffer.from(String(err.stack), "ascii"));
+  };
+}
+function onDataReceived(target, name, logger, output) {
+  return (buffer) => {
+    logger(`%s received %L bytes`, name, buffer);
+    output(`%B`, buffer);
+    target.push(buffer);
+  };
+}
+var GitExecutorChain;
+var init_git_executor_chain = __esm({
+  "src/lib/runners/git-executor-chain.ts"() {
+    "use strict";
+    init_git_error();
+    init_task();
+    init_utils();
+    init_tasks_pending_queue();
+    GitExecutorChain = class {
+      constructor(_executor, _scheduler, _plugins) {
+        this._executor = _executor;
+        this._scheduler = _scheduler;
+        this._plugins = _plugins;
+        this._chain = Promise.resolve();
+        this._queue = new TasksPendingQueue();
+      }
+      get cwd() {
+        return this._cwd || this._executor.cwd;
+      }
+      set cwd(cwd) {
+        this._cwd = cwd;
+      }
+      get env() {
+        return this._executor.env;
+      }
+      get outputHandler() {
+        return this._executor.outputHandler;
+      }
+      chain() {
+        return this;
+      }
+      push(task) {
+        this._queue.push(task);
+        return this._chain = this._chain.then(() => this.attemptTask(task));
+      }
+      attemptTask(task) {
+        return __async(this, null, function* () {
+          const onScheduleComplete = yield this._scheduler.next();
+          const onQueueComplete = () => this._queue.complete(task);
+          try {
+            const { logger } = this._queue.attempt(task);
+            return yield isEmptyTask(task) ? this.attemptEmptyTask(task, logger) : this.attemptRemoteTask(task, logger);
+          } catch (e) {
+            throw this.onFatalException(task, e);
+          } finally {
+            onQueueComplete();
+            onScheduleComplete();
+          }
+        });
+      }
+      onFatalException(task, e) {
+        const gitError = e instanceof GitError ? Object.assign(e, { task }) : new GitError(task, e && String(e));
+        this._chain = Promise.resolve();
+        this._queue.fatal(gitError);
+        return gitError;
+      }
+      attemptRemoteTask(task, logger) {
+        return __async(this, null, function* () {
+          const binary = this._plugins.exec("spawn.binary", "", pluginContext(task, task.commands));
+          const args = this._plugins.exec(
+            "spawn.args",
+            [...task.commands],
+            pluginContext(task, task.commands)
+          );
+          const raw = yield this.gitResponse(
+            task,
+            binary,
+            args,
+            this.outputHandler,
+            logger.step("SPAWN")
+          );
+          const outputStreams = yield this.handleTaskData(task, args, raw, logger.step("HANDLE"));
+          logger(`passing response to task's parser as a %s`, task.format);
+          if (isBufferTask(task)) {
+            return callTaskParser(task.parser, outputStreams);
+          }
+          return callTaskParser(task.parser, outputStreams.asStrings());
+        });
+      }
+      attemptEmptyTask(task, logger) {
+        return __async(this, null, function* () {
+          logger(`empty task bypassing child process to call to task's parser`);
+          return task.parser(this);
+        });
+      }
+      handleTaskData(task, args, result, logger) {
+        const { exitCode, rejection, stdOut, stdErr } = result;
+        return new Promise((done, fail) => {
+          logger(`Preparing to handle process response exitCode=%d stdOut=`, exitCode);
+          const { error } = this._plugins.exec(
+            "task.error",
+            { error: rejection },
+            __spreadValues(__spreadValues({}, pluginContext(task, args)), result)
+          );
+          if (error && task.onError) {
+            logger.info(`exitCode=%s handling with custom error handler`);
+            return task.onError(
+              result,
+              error,
+              (newStdOut) => {
+                logger.info(`custom error handler treated as success`);
+                logger(`custom error returned a %s`, objectToString(newStdOut));
+                done(
+                  new GitOutputStreams(
+                    Array.isArray(newStdOut) ? Buffer.concat(newStdOut) : newStdOut,
+                    Buffer.concat(stdErr)
+                  )
+                );
+              },
+              fail
+            );
+          }
+          if (error) {
+            logger.info(
+              `handling as error: exitCode=%s stdErr=%s rejection=%o`,
+              exitCode,
+              stdErr.length,
+              rejection
+            );
+            return fail(error);
+          }
+          logger.info(`retrieving task output complete`);
+          done(new GitOutputStreams(Buffer.concat(stdOut), Buffer.concat(stdErr)));
+        });
+      }
+      gitResponse(task, command, args, outputHandler, logger) {
+        return __async(this, null, function* () {
+          const outputLogger = logger.sibling("output");
+          const spawnOptions = this._plugins.exec(
+            "spawn.options",
+            {
+              cwd: this.cwd,
+              env: this.env,
+              windowsHide: true
+            },
+            pluginContext(task, task.commands)
+          );
+          return new Promise((done) => {
+            const stdOut = [];
+            const stdErr = [];
+            logger.info(`%s %o`, command, args);
+            logger("%O", spawnOptions);
+            let rejection = this._beforeSpawn(task, args);
+            if (rejection) {
+              return done({
+                stdOut,
+                stdErr,
+                exitCode: 9901,
+                rejection
+              });
+            }
+            this._plugins.exec("spawn.before", void 0, __spreadProps(__spreadValues({}, pluginContext(task, args)), {
+              kill(reason) {
+                rejection = reason || rejection;
+              }
+            }));
+            const spawned = (0,external_child_process_.spawn)(command, args, spawnOptions);
+            spawned.stdout.on(
+              "data",
+              onDataReceived(stdOut, "stdOut", logger, outputLogger.step("stdOut"))
+            );
+            spawned.stderr.on(
+              "data",
+              onDataReceived(stdErr, "stdErr", logger, outputLogger.step("stdErr"))
+            );
+            spawned.on("error", onErrorReceived(stdErr, logger));
+            if (outputHandler) {
+              logger(`Passing child process stdOut/stdErr to custom outputHandler`);
+              outputHandler(command, spawned.stdout, spawned.stderr, [...args]);
+            }
+            this._plugins.exec("spawn.after", void 0, __spreadProps(__spreadValues({}, pluginContext(task, args)), {
+              spawned,
+              close(exitCode, reason) {
+                done({
+                  stdOut,
+                  stdErr,
+                  exitCode,
+                  rejection: rejection || reason
+                });
+              },
+              kill(reason) {
+                if (spawned.killed) {
+                  return;
+                }
+                rejection = reason;
+                spawned.kill("SIGINT");
+              }
+            }));
+          });
+        });
+      }
+      _beforeSpawn(task, args) {
+        let rejection;
+        this._plugins.exec("spawn.before", void 0, __spreadProps(__spreadValues({}, pluginContext(task, args)), {
+          kill(reason) {
+            rejection = reason || rejection;
+          }
+        }));
+        return rejection;
+      }
+    };
+  }
+});
+
+// src/lib/runners/git-executor.ts
+var git_executor_exports = {};
+__export(git_executor_exports, {
+  GitExecutor: () => GitExecutor
+});
+var GitExecutor;
+var init_git_executor = __esm({
+  "src/lib/runners/git-executor.ts"() {
+    "use strict";
+    init_git_executor_chain();
+    GitExecutor = class {
+      constructor(cwd, _scheduler, _plugins) {
+        this.cwd = cwd;
+        this._scheduler = _scheduler;
+        this._plugins = _plugins;
+        this._chain = new GitExecutorChain(this, this._scheduler, this._plugins);
+      }
+      chain() {
+        return new GitExecutorChain(this, this._scheduler, this._plugins);
+      }
+      push(task) {
+        return this._chain.push(task);
+      }
+    };
+  }
+});
+
+// src/lib/task-callback.ts
+function taskCallback(task, response, callback = NOOP) {
+  const onSuccess = (data) => {
+    callback(null, data);
+  };
+  const onError2 = (err) => {
+    if ((err == null ? void 0 : err.task) === task) {
+      callback(
+        err instanceof GitResponseError ? addDeprecationNoticeToError(err) : err,
+        void 0
+      );
+    }
+  };
+  response.then(onSuccess, onError2);
+}
+function addDeprecationNoticeToError(err) {
+  let log = (name) => {
+    console.warn(
+      `simple-git deprecation notice: accessing GitResponseError.${name} should be GitResponseError.git.${name}, this will no longer be available in version 3`
+    );
+    log = NOOP;
+  };
+  return Object.create(err, Object.getOwnPropertyNames(err.git).reduce(descriptorReducer, {}));
+  function descriptorReducer(all, name) {
+    if (name in err) {
+      return all;
+    }
+    all[name] = {
+      enumerable: false,
+      configurable: false,
+      get() {
+        log(name);
+        return err.git[name];
+      }
+    };
+    return all;
+  }
+}
+var init_task_callback = __esm({
+  "src/lib/task-callback.ts"() {
+    "use strict";
+    init_git_response_error();
+    init_utils();
+  }
+});
+
+// src/lib/tasks/change-working-directory.ts
+function changeWorkingDirectoryTask(directory, root) {
+  return adhocExecTask((instance) => {
+    if (!folderExists(directory)) {
+      throw new Error(`Git.cwd: cannot change to non-directory "${directory}"`);
+    }
+    return (root || instance).cwd = directory;
+  });
+}
+var init_change_working_directory = __esm({
+  "src/lib/tasks/change-working-directory.ts"() {
+    "use strict";
+    init_utils();
+    init_task();
+  }
+});
+
+// src/lib/tasks/checkout.ts
+function checkoutTask(args) {
+  const commands = ["checkout", ...args];
+  if (commands[1] === "-b" && commands.includes("-B")) {
+    commands[1] = remove(commands, "-B");
+  }
+  return straightThroughStringTask(commands);
+}
+function checkout_default() {
+  return {
+    checkout() {
+      return this._runTask(
+        checkoutTask(getTrailingOptions(arguments, 1)),
+        trailingFunctionArgument(arguments)
+      );
+    },
+    checkoutBranch(branchName, startPoint) {
+      return this._runTask(
+        checkoutTask(["-b", branchName, startPoint, ...getTrailingOptions(arguments)]),
+        trailingFunctionArgument(arguments)
+      );
+    },
+    checkoutLocalBranch(branchName) {
+      return this._runTask(
+        checkoutTask(["-b", branchName, ...getTrailingOptions(arguments)]),
+        trailingFunctionArgument(arguments)
+      );
+    }
+  };
+}
+var init_checkout = __esm({
+  "src/lib/tasks/checkout.ts"() {
+    "use strict";
+    init_utils();
+    init_task();
+  }
+});
+
+// src/lib/tasks/count-objects.ts
+function countObjectsResponse() {
+  return {
+    count: 0,
+    garbage: 0,
+    inPack: 0,
+    packs: 0,
+    prunePackable: 0,
+    size: 0,
+    sizeGarbage: 0,
+    sizePack: 0
+  };
+}
+function count_objects_default() {
+  return {
+    countObjects() {
+      return this._runTask({
+        commands: ["count-objects", "--verbose"],
+        format: "utf-8",
+        parser(stdOut) {
+          return parseStringResponse(countObjectsResponse(), [parser2], stdOut);
+        }
+      });
+    }
+  };
+}
+var parser2;
+var init_count_objects = __esm({
+  "src/lib/tasks/count-objects.ts"() {
+    "use strict";
+    init_utils();
+    parser2 = new LineParser(
+      /([a-z-]+): (\d+)$/,
+      (result, [key, value]) => {
+        const property = asCamelCase(key);
+        if (result.hasOwnProperty(property)) {
+          result[property] = asNumber(value);
+        }
+      }
+    );
+  }
+});
+
+// src/lib/parsers/parse-commit.ts
+function parseCommitResult(stdOut) {
+  const result = {
+    author: null,
+    branch: "",
+    commit: "",
+    root: false,
+    summary: {
+      changes: 0,
+      insertions: 0,
+      deletions: 0
+    }
+  };
+  return parseStringResponse(result, parsers, stdOut);
+}
+var parsers;
+var init_parse_commit = __esm({
+  "src/lib/parsers/parse-commit.ts"() {
+    "use strict";
+    init_utils();
+    parsers = [
+      new LineParser(/^\[([^\s]+)( \([^)]+\))? ([^\]]+)/, (result, [branch, root, commit]) => {
+        result.branch = branch;
+        result.commit = commit;
+        result.root = !!root;
+      }),
+      new LineParser(/\s*Author:\s(.+)/i, (result, [author]) => {
+        const parts = author.split("<");
+        const email = parts.pop();
+        if (!email || !email.includes("@")) {
+          return;
+        }
+        result.author = {
+          email: email.substr(0, email.length - 1),
+          name: parts.join("<").trim()
+        };
+      }),
+      new LineParser(
+        /(\d+)[^,]*(?:,\s*(\d+)[^,]*)(?:,\s*(\d+))/g,
+        (result, [changes, insertions, deletions]) => {
+          result.summary.changes = parseInt(changes, 10) || 0;
+          result.summary.insertions = parseInt(insertions, 10) || 0;
+          result.summary.deletions = parseInt(deletions, 10) || 0;
+        }
+      ),
+      new LineParser(
+        /^(\d+)[^,]*(?:,\s*(\d+)[^(]+\(([+-]))?/,
+        (result, [changes, lines, direction]) => {
+          result.summary.changes = parseInt(changes, 10) || 0;
+          const count = parseInt(lines, 10) || 0;
+          if (direction === "-") {
+            result.summary.deletions = count;
+          } else if (direction === "+") {
+            result.summary.insertions = count;
+          }
+        }
+      )
+    ];
+  }
+});
+
+// src/lib/tasks/commit.ts
+function commitTask(message, files, customArgs) {
+  const commands = [
+    "-c",
+    "core.abbrev=40",
+    "commit",
+    ...prefixedArray(message, "-m"),
+    ...files,
+    ...customArgs
+  ];
+  return {
+    commands,
+    format: "utf-8",
+    parser: parseCommitResult
+  };
+}
+function commit_default() {
+  return {
+    commit(message, ...rest) {
+      const next = trailingFunctionArgument(arguments);
+      const task = rejectDeprecatedSignatures(message) || commitTask(
+        asArray(message),
+        asArray(filterType(rest[0], filterStringOrStringArray, [])),
+        [...filterType(rest[1], filterArray, []), ...getTrailingOptions(arguments, 0, true)]
+      );
+      return this._runTask(task, next);
+    }
+  };
+  function rejectDeprecatedSignatures(message) {
+    return !filterStringOrStringArray(message) && configurationErrorTask(
+      `git.commit: requires the commit message to be supplied as a string/string[]`
+    );
+  }
+}
+var init_commit = __esm({
+  "src/lib/tasks/commit.ts"() {
+    "use strict";
+    init_parse_commit();
+    init_utils();
+    init_task();
+  }
+});
+
+// src/lib/tasks/first-commit.ts
+function first_commit_default() {
+  return {
+    firstCommit() {
+      return this._runTask(
+        straightThroughStringTask(["rev-list", "--max-parents=0", "HEAD"], true),
+        trailingFunctionArgument(arguments)
+      );
+    }
+  };
+}
+var init_first_commit = __esm({
+  "src/lib/tasks/first-commit.ts"() {
+    "use strict";
+    init_utils();
+    init_task();
+  }
+});
+
+// src/lib/tasks/hash-object.ts
+function hashObjectTask(filePath, write) {
+  const commands = ["hash-object", filePath];
+  if (write) {
+    commands.push("-w");
+  }
+  return straightThroughStringTask(commands, true);
+}
+var init_hash_object = __esm({
+  "src/lib/tasks/hash-object.ts"() {
+    "use strict";
+    init_task();
+  }
+});
+
+// src/lib/responses/InitSummary.ts
+function parseInit(bare, path, text) {
+  const response = String(text).trim();
+  let result;
+  if (result = initResponseRegex.exec(response)) {
+    return new InitSummary(bare, path, false, result[1]);
+  }
+  if (result = reInitResponseRegex.exec(response)) {
+    return new InitSummary(bare, path, true, result[1]);
+  }
+  let gitDir = "";
+  const tokens = response.split(" ");
+  while (tokens.length) {
+    const token = tokens.shift();
+    if (token === "in") {
+      gitDir = tokens.join(" ");
+      break;
+    }
+  }
+  return new InitSummary(bare, path, /^re/i.test(response), gitDir);
+}
+var InitSummary, initResponseRegex, reInitResponseRegex;
+var init_InitSummary = __esm({
+  "src/lib/responses/InitSummary.ts"() {
+    "use strict";
+    InitSummary = class {
+      constructor(bare, path, existing, gitDir) {
+        this.bare = bare;
+        this.path = path;
+        this.existing = existing;
+        this.gitDir = gitDir;
+      }
+    };
+    initResponseRegex = /^Init.+ repository in (.+)$/;
+    reInitResponseRegex = /^Rein.+ in (.+)$/;
+  }
+});
+
+// src/lib/tasks/init.ts
+function hasBareCommand(command) {
+  return command.includes(bareCommand);
+}
+function initTask(bare = false, path, customArgs) {
+  const commands = ["init", ...customArgs];
+  if (bare && !hasBareCommand(commands)) {
+    commands.splice(1, 0, bareCommand);
+  }
+  return {
+    commands,
+    format: "utf-8",
+    parser(text) {
+      return parseInit(commands.includes("--bare"), path, text);
+    }
+  };
+}
+var bareCommand;
+var init_init = __esm({
+  "src/lib/tasks/init.ts"() {
+    "use strict";
+    init_InitSummary();
+    bareCommand = "--bare";
+  }
+});
+
+// src/lib/args/log-format.ts
+function logFormatFromCommand(customArgs) {
+  for (let i = 0; i < customArgs.length; i++) {
+    const format = logFormatRegex.exec(customArgs[i]);
+    if (format) {
+      return `--${format[1]}`;
+    }
+  }
+  return "" /* NONE */;
+}
+function isLogFormat(customArg) {
+  return logFormatRegex.test(customArg);
+}
+var logFormatRegex;
+var init_log_format = __esm({
+  "src/lib/args/log-format.ts"() {
+    "use strict";
+    logFormatRegex = /^--(stat|numstat|name-only|name-status)(=|$)/;
+  }
+});
+
+// src/lib/responses/DiffSummary.ts
+var DiffSummary;
+var init_DiffSummary = __esm({
+  "src/lib/responses/DiffSummary.ts"() {
+    "use strict";
+    DiffSummary = class {
+      constructor() {
+        this.changed = 0;
+        this.deletions = 0;
+        this.insertions = 0;
+        this.files = [];
+      }
+    };
+  }
+});
+
+// src/lib/parsers/parse-diff-summary.ts
+function getDiffParser(format = "" /* NONE */) {
+  const parser4 = diffSummaryParsers[format];
+  return (stdOut) => parseStringResponse(new DiffSummary(), parser4, stdOut, false);
+}
+var statParser, numStatParser, nameOnlyParser, nameStatusParser, diffSummaryParsers;
+var init_parse_diff_summary = __esm({
+  "src/lib/parsers/parse-diff-summary.ts"() {
+    "use strict";
+    init_log_format();
+    init_DiffSummary();
+    init_diff_name_status();
+    init_utils();
+    statParser = [
+      new LineParser(
+        /^(.+)\s+\|\s+(\d+)(\s+[+\-]+)?$/,
+        (result, [file, changes, alterations = ""]) => {
+          result.files.push({
+            file: file.trim(),
+            changes: asNumber(changes),
+            insertions: alterations.replace(/[^+]/g, "").length,
+            deletions: alterations.replace(/[^-]/g, "").length,
+            binary: false
+          });
+        }
+      ),
+      new LineParser(
+        /^(.+) \|\s+Bin ([0-9.]+) -> ([0-9.]+) ([a-z]+)/,
+        (result, [file, before, after]) => {
+          result.files.push({
+            file: file.trim(),
+            before: asNumber(before),
+            after: asNumber(after),
+            binary: true
+          });
+        }
+      ),
+      new LineParser(
+        /(\d+) files? changed\s*((?:, \d+ [^,]+){0,2})/,
+        (result, [changed, summary]) => {
+          const inserted = /(\d+) i/.exec(summary);
+          const deleted = /(\d+) d/.exec(summary);
+          result.changed = asNumber(changed);
+          result.insertions = asNumber(inserted == null ? void 0 : inserted[1]);
+          result.deletions = asNumber(deleted == null ? void 0 : deleted[1]);
+        }
+      )
+    ];
+    numStatParser = [
+      new LineParser(
+        /(\d+)\t(\d+)\t(.+)$/,
+        (result, [changesInsert, changesDelete, file]) => {
+          const insertions = asNumber(changesInsert);
+          const deletions = asNumber(changesDelete);
+          result.changed++;
+          result.insertions += insertions;
+          result.deletions += deletions;
+          result.files.push({
+            file,
+            changes: insertions + deletions,
+            insertions,
+            deletions,
+            binary: false
+          });
+        }
+      ),
+      new LineParser(/-\t-\t(.+)$/, (result, [file]) => {
+        result.changed++;
+        result.files.push({
+          file,
+          after: 0,
+          before: 0,
+          binary: true
+        });
+      })
+    ];
+    nameOnlyParser = [
+      new LineParser(/(.+)$/, (result, [file]) => {
+        result.changed++;
+        result.files.push({
+          file,
+          changes: 0,
+          insertions: 0,
+          deletions: 0,
+          binary: false
+        });
+      })
+    ];
+    nameStatusParser = [
+      new LineParser(
+        /([ACDMRTUXB])([0-9]{0,3})\t(.[^\t]*)(\t(.[^\t]*))?$/,
+        (result, [status, similarity, from, _to, to]) => {
+          result.changed++;
+          result.files.push({
+            file: to != null ? to : from,
+            changes: 0,
+            insertions: 0,
+            deletions: 0,
+            binary: false,
+            status: orVoid(isDiffNameStatus(status) && status),
+            from: orVoid(!!to && from !== to && from),
+            similarity: asNumber(similarity)
+          });
+        }
+      )
+    ];
+    diffSummaryParsers = {
+      ["" /* NONE */]: statParser,
+      ["--stat" /* STAT */]: statParser,
+      ["--numstat" /* NUM_STAT */]: numStatParser,
+      ["--name-status" /* NAME_STATUS */]: nameStatusParser,
+      ["--name-only" /* NAME_ONLY */]: nameOnlyParser
+    };
+  }
+});
+
+// src/lib/parsers/parse-list-log-summary.ts
+function lineBuilder(tokens, fields) {
+  return fields.reduce(
+    (line, field, index) => {
+      line[field] = tokens[index] || "";
+      return line;
+    },
+    /* @__PURE__ */ Object.create({ diff: null })
+  );
+}
+function createListLogSummaryParser(splitter = SPLITTER, fields = defaultFieldNames, logFormat = "" /* NONE */) {
+  const parseDiffResult = getDiffParser(logFormat);
+  return function(stdOut) {
+    const all = toLinesWithContent(
+      stdOut.trim(),
+      false,
+      START_BOUNDARY
+    ).map(function(item) {
+      const lineDetail = item.split(COMMIT_BOUNDARY);
+      const listLogLine = lineBuilder(lineDetail[0].split(splitter), fields);
+      if (lineDetail.length > 1 && !!lineDetail[1].trim()) {
+        listLogLine.diff = parseDiffResult(lineDetail[1]);
+      }
+      return listLogLine;
+    });
+    return {
+      all,
+      latest: all.length && all[0] || null,
+      total: all.length
+    };
+  };
+}
+var START_BOUNDARY, COMMIT_BOUNDARY, SPLITTER, defaultFieldNames;
+var init_parse_list_log_summary = __esm({
+  "src/lib/parsers/parse-list-log-summary.ts"() {
+    "use strict";
+    init_utils();
+    init_parse_diff_summary();
+    init_log_format();
+    START_BOUNDARY = "\xF2\xF2\xF2\xF2\xF2\xF2 ";
+    COMMIT_BOUNDARY = " \xF2\xF2";
+    SPLITTER = " \xF2 ";
+    defaultFieldNames = ["hash", "date", "message", "refs", "author_name", "author_email"];
+  }
+});
+
+// src/lib/tasks/diff.ts
+var diff_exports = {};
+__export(diff_exports, {
+  diffSummaryTask: () => diffSummaryTask,
+  validateLogFormatConfig: () => validateLogFormatConfig
+});
+function diffSummaryTask(customArgs) {
+  let logFormat = logFormatFromCommand(customArgs);
+  const commands = ["diff"];
+  if (logFormat === "" /* NONE */) {
+    logFormat = "--stat" /* STAT */;
+    commands.push("--stat=4096");
+  }
+  commands.push(...customArgs);
+  return validateLogFormatConfig(commands) || {
+    commands,
+    format: "utf-8",
+    parser: getDiffParser(logFormat)
+  };
+}
+function validateLogFormatConfig(customArgs) {
+  const flags = customArgs.filter(isLogFormat);
+  if (flags.length > 1) {
+    return configurationErrorTask(
+      `Summary flags are mutually exclusive - pick one of ${flags.join(",")}`
+    );
+  }
+  if (flags.length && customArgs.includes("-z")) {
+    return configurationErrorTask(
+      `Summary flag ${flags} parsing is not compatible with null termination option '-z'`
+    );
+  }
+}
+var init_diff = __esm({
+  "src/lib/tasks/diff.ts"() {
+    "use strict";
+    init_log_format();
+    init_parse_diff_summary();
+    init_task();
+  }
+});
+
+// src/lib/tasks/log.ts
+function prettyFormat(format, splitter) {
+  const fields = [];
+  const formatStr = [];
+  Object.keys(format).forEach((field) => {
+    fields.push(field);
+    formatStr.push(String(format[field]));
+  });
+  return [fields, formatStr.join(splitter)];
+}
+function userOptions(input) {
+  return Object.keys(input).reduce((out, key) => {
+    if (!(key in excludeOptions)) {
+      out[key] = input[key];
+    }
+    return out;
+  }, {});
+}
+function parseLogOptions(opt = {}, customArgs = []) {
+  const splitter = filterType(opt.splitter, filterString, SPLITTER);
+  const format = !filterPrimitives(opt.format) && opt.format ? opt.format : {
+    hash: "%H",
+    date: opt.strictDate === false ? "%ai" : "%aI",
+    message: "%s",
+    refs: "%D",
+    body: opt.multiLine ? "%B" : "%b",
+    author_name: opt.mailMap !== false ? "%aN" : "%an",
+    author_email: opt.mailMap !== false ? "%aE" : "%ae"
+  };
+  const [fields, formatStr] = prettyFormat(format, splitter);
+  const suffix = [];
+  const command = [
+    `--pretty=format:${START_BOUNDARY}${formatStr}${COMMIT_BOUNDARY}`,
+    ...customArgs
+  ];
+  const maxCount = opt.n || opt["max-count"] || opt.maxCount;
+  if (maxCount) {
+    command.push(`--max-count=${maxCount}`);
+  }
+  if (opt.from || opt.to) {
+    const rangeOperator = opt.symmetric !== false ? "..." : "..";
+    suffix.push(`${opt.from || ""}${rangeOperator}${opt.to || ""}`);
+  }
+  if (filterString(opt.file)) {
+    command.push("--follow", pathspec(opt.file));
+  }
+  appendTaskOptions(userOptions(opt), command);
+  return {
+    fields,
+    splitter,
+    commands: [...command, ...suffix]
+  };
+}
+function logTask(splitter, fields, customArgs) {
+  const parser4 = createListLogSummaryParser(splitter, fields, logFormatFromCommand(customArgs));
+  return {
+    commands: ["log", ...customArgs],
+    format: "utf-8",
+    parser: parser4
+  };
+}
+function log_default() {
+  return {
+    log(...rest) {
+      const next = trailingFunctionArgument(arguments);
+      const options = parseLogOptions(
+        trailingOptionsArgument(arguments),
+        filterType(arguments[0], filterArray)
+      );
+      const task = rejectDeprecatedSignatures(...rest) || validateLogFormatConfig(options.commands) || createLogTask(options);
+      return this._runTask(task, next);
+    }
+  };
+  function createLogTask(options) {
+    return logTask(options.splitter, options.fields, options.commands);
+  }
+  function rejectDeprecatedSignatures(from, to) {
+    return filterString(from) && filterString(to) && configurationErrorTask(
+      `git.log(string, string) should be replaced with git.log({ from: string, to: string })`
+    );
+  }
+}
+var excludeOptions;
+var init_log = __esm({
+  "src/lib/tasks/log.ts"() {
+    "use strict";
+    init_log_format();
+    init_pathspec();
+    init_parse_list_log_summary();
+    init_utils();
+    init_task();
+    init_diff();
+    excludeOptions = /* @__PURE__ */ ((excludeOptions2) => {
+      excludeOptions2[excludeOptions2["--pretty"] = 0] = "--pretty";
+      excludeOptions2[excludeOptions2["max-count"] = 1] = "max-count";
+      excludeOptions2[excludeOptions2["maxCount"] = 2] = "maxCount";
+      excludeOptions2[excludeOptions2["n"] = 3] = "n";
+      excludeOptions2[excludeOptions2["file"] = 4] = "file";
+      excludeOptions2[excludeOptions2["format"] = 5] = "format";
+      excludeOptions2[excludeOptions2["from"] = 6] = "from";
+      excludeOptions2[excludeOptions2["to"] = 7] = "to";
+      excludeOptions2[excludeOptions2["splitter"] = 8] = "splitter";
+      excludeOptions2[excludeOptions2["symmetric"] = 9] = "symmetric";
+      excludeOptions2[excludeOptions2["mailMap"] = 10] = "mailMap";
+      excludeOptions2[excludeOptions2["multiLine"] = 11] = "multiLine";
+      excludeOptions2[excludeOptions2["strictDate"] = 12] = "strictDate";
+      return excludeOptions2;
+    })(excludeOptions || {});
+  }
+});
+
+// src/lib/responses/MergeSummary.ts
+var MergeSummaryConflict, MergeSummaryDetail;
+var init_MergeSummary = __esm({
+  "src/lib/responses/MergeSummary.ts"() {
+    "use strict";
+    MergeSummaryConflict = class {
+      constructor(reason, file = null, meta) {
+        this.reason = reason;
+        this.file = file;
+        this.meta = meta;
+      }
+      toString() {
+        return `${this.file}:${this.reason}`;
+      }
+    };
+    MergeSummaryDetail = class {
+      constructor() {
+        this.conflicts = [];
+        this.merges = [];
+        this.result = "success";
+      }
+      get failed() {
+        return this.conflicts.length > 0;
+      }
+      get reason() {
+        return this.result;
+      }
+      toString() {
+        if (this.conflicts.length) {
+          return `CONFLICTS: ${this.conflicts.join(", ")}`;
+        }
+        return "OK";
+      }
+    };
+  }
+});
+
+// src/lib/responses/PullSummary.ts
+var PullSummary, PullFailedSummary;
+var init_PullSummary = __esm({
+  "src/lib/responses/PullSummary.ts"() {
+    "use strict";
+    PullSummary = class {
+      constructor() {
+        this.remoteMessages = {
+          all: []
+        };
+        this.created = [];
+        this.deleted = [];
+        this.files = [];
+        this.deletions = {};
+        this.insertions = {};
+        this.summary = {
+          changes: 0,
+          deletions: 0,
+          insertions: 0
+        };
+      }
+    };
+    PullFailedSummary = class {
+      constructor() {
+        this.remote = "";
+        this.hash = {
+          local: "",
+          remote: ""
+        };
+        this.branch = {
+          local: "",
+          remote: ""
+        };
+        this.message = "";
+      }
+      toString() {
+        return this.message;
+      }
+    };
+  }
+});
+
+// src/lib/parsers/parse-remote-objects.ts
+function objectEnumerationResult(remoteMessages) {
+  return remoteMessages.objects = remoteMessages.objects || {
+    compressing: 0,
+    counting: 0,
+    enumerating: 0,
+    packReused: 0,
+    reused: { count: 0, delta: 0 },
+    total: { count: 0, delta: 0 }
+  };
+}
+function asObjectCount(source) {
+  const count = /^\s*(\d+)/.exec(source);
+  const delta = /delta (\d+)/i.exec(source);
+  return {
+    count: asNumber(count && count[1] || "0"),
+    delta: asNumber(delta && delta[1] || "0")
+  };
+}
+var remoteMessagesObjectParsers;
+var init_parse_remote_objects = __esm({
+  "src/lib/parsers/parse-remote-objects.ts"() {
+    "use strict";
+    init_utils();
+    remoteMessagesObjectParsers = [
+      new RemoteLineParser(
+        /^remote:\s*(enumerating|counting|compressing) objects: (\d+),/i,
+        (result, [action, count]) => {
+          const key = action.toLowerCase();
+          const enumeration = objectEnumerationResult(result.remoteMessages);
+          Object.assign(enumeration, { [key]: asNumber(count) });
+        }
+      ),
+      new RemoteLineParser(
+        /^remote:\s*(enumerating|counting|compressing) objects: \d+% \(\d+\/(\d+)\),/i,
+        (result, [action, count]) => {
+          const key = action.toLowerCase();
+          const enumeration = objectEnumerationResult(result.remoteMessages);
+          Object.assign(enumeration, { [key]: asNumber(count) });
+        }
+      ),
+      new RemoteLineParser(
+        /total ([^,]+), reused ([^,]+), pack-reused (\d+)/i,
+        (result, [total, reused, packReused]) => {
+          const objects = objectEnumerationResult(result.remoteMessages);
+          objects.total = asObjectCount(total);
+          objects.reused = asObjectCount(reused);
+          objects.packReused = asNumber(packReused);
+        }
+      )
+    ];
+  }
+});
+
+// src/lib/parsers/parse-remote-messages.ts
+function parseRemoteMessages(_stdOut, stdErr) {
+  return parseStringResponse({ remoteMessages: new RemoteMessageSummary() }, parsers2, stdErr);
+}
+var parsers2, RemoteMessageSummary;
+var init_parse_remote_messages = __esm({
+  "src/lib/parsers/parse-remote-messages.ts"() {
+    "use strict";
+    init_utils();
+    init_parse_remote_objects();
+    parsers2 = [
+      new RemoteLineParser(/^remote:\s*(.+)$/, (result, [text]) => {
+        result.remoteMessages.all.push(text.trim());
+        return false;
+      }),
+      ...remoteMessagesObjectParsers,
+      new RemoteLineParser(
+        [/create a (?:pull|merge) request/i, /\s(https?:\/\/\S+)$/],
+        (result, [pullRequestUrl]) => {
+          result.remoteMessages.pullRequestUrl = pullRequestUrl;
+        }
+      ),
+      new RemoteLineParser(
+        [/found (\d+) vulnerabilities.+\(([^)]+)\)/i, /\s(https?:\/\/\S+)$/],
+        (result, [count, summary, url]) => {
+          result.remoteMessages.vulnerabilities = {
+            count: asNumber(count),
+            summary,
+            url
+          };
+        }
+      )
+    ];
+    RemoteMessageSummary = class {
+      constructor() {
+        this.all = [];
+      }
+    };
+  }
+});
+
+// src/lib/parsers/parse-pull.ts
+function parsePullErrorResult(stdOut, stdErr) {
+  const pullError = parseStringResponse(new PullFailedSummary(), errorParsers, [stdOut, stdErr]);
+  return pullError.message && pullError;
+}
+var FILE_UPDATE_REGEX, SUMMARY_REGEX, ACTION_REGEX, parsers3, errorParsers, parsePullDetail, parsePullResult;
+var init_parse_pull = __esm({
+  "src/lib/parsers/parse-pull.ts"() {
+    "use strict";
+    init_PullSummary();
+    init_utils();
+    init_parse_remote_messages();
+    FILE_UPDATE_REGEX = /^\s*(.+?)\s+\|\s+\d+\s*(\+*)(-*)/;
+    SUMMARY_REGEX = /(\d+)\D+((\d+)\D+\(\+\))?(\D+(\d+)\D+\(-\))?/;
+    ACTION_REGEX = /^(create|delete) mode \d+ (.+)/;
+    parsers3 = [
+      new LineParser(FILE_UPDATE_REGEX, (result, [file, insertions, deletions]) => {
+        result.files.push(file);
+        if (insertions) {
+          result.insertions[file] = insertions.length;
+        }
+        if (deletions) {
+          result.deletions[file] = deletions.length;
+        }
+      }),
+      new LineParser(SUMMARY_REGEX, (result, [changes, , insertions, , deletions]) => {
+        if (insertions !== void 0 || deletions !== void 0) {
+          result.summary.changes = +changes || 0;
+          result.summary.insertions = +insertions || 0;
+          result.summary.deletions = +deletions || 0;
+          return true;
+        }
+        return false;
+      }),
+      new LineParser(ACTION_REGEX, (result, [action, file]) => {
+        append(result.files, file);
+        append(action === "create" ? result.created : result.deleted, file);
+      })
+    ];
+    errorParsers = [
+      new LineParser(/^from\s(.+)$/i, (result, [remote]) => void (result.remote = remote)),
+      new LineParser(/^fatal:\s(.+)$/, (result, [message]) => void (result.message = message)),
+      new LineParser(
+        /([a-z0-9]+)\.\.([a-z0-9]+)\s+(\S+)\s+->\s+(\S+)$/,
+        (result, [hashLocal, hashRemote, branchLocal, branchRemote]) => {
+          result.branch.local = branchLocal;
+          result.hash.local = hashLocal;
+          result.branch.remote = branchRemote;
+          result.hash.remote = hashRemote;
+        }
+      )
+    ];
+    parsePullDetail = (stdOut, stdErr) => {
+      return parseStringResponse(new PullSummary(), parsers3, [stdOut, stdErr]);
+    };
+    parsePullResult = (stdOut, stdErr) => {
+      return Object.assign(
+        new PullSummary(),
+        parsePullDetail(stdOut, stdErr),
+        parseRemoteMessages(stdOut, stdErr)
+      );
+    };
+  }
+});
+
+// src/lib/parsers/parse-merge.ts
+var parsers4, parseMergeResult, parseMergeDetail;
+var init_parse_merge = __esm({
+  "src/lib/parsers/parse-merge.ts"() {
+    "use strict";
+    init_MergeSummary();
+    init_utils();
+    init_parse_pull();
+    parsers4 = [
+      new LineParser(/^Auto-merging\s+(.+)$/, (summary, [autoMerge]) => {
+        summary.merges.push(autoMerge);
+      }),
+      new LineParser(/^CONFLICT\s+\((.+)\): Merge conflict in (.+)$/, (summary, [reason, file]) => {
+        summary.conflicts.push(new MergeSummaryConflict(reason, file));
+      }),
+      new LineParser(
+        /^CONFLICT\s+\((.+\/delete)\): (.+) deleted in (.+) and/,
+        (summary, [reason, file, deleteRef]) => {
+          summary.conflicts.push(new MergeSummaryConflict(reason, file, { deleteRef }));
+        }
+      ),
+      new LineParser(/^CONFLICT\s+\((.+)\):/, (summary, [reason]) => {
+        summary.conflicts.push(new MergeSummaryConflict(reason, null));
+      }),
+      new LineParser(/^Automatic merge failed;\s+(.+)$/, (summary, [result]) => {
+        summary.result = result;
+      })
+    ];
+    parseMergeResult = (stdOut, stdErr) => {
+      return Object.assign(parseMergeDetail(stdOut, stdErr), parsePullResult(stdOut, stdErr));
+    };
+    parseMergeDetail = (stdOut) => {
+      return parseStringResponse(new MergeSummaryDetail(), parsers4, stdOut);
+    };
+  }
+});
+
+// src/lib/tasks/merge.ts
+function mergeTask(customArgs) {
+  if (!customArgs.length) {
+    return configurationErrorTask("Git.merge requires at least one option");
+  }
+  return {
+    commands: ["merge", ...customArgs],
+    format: "utf-8",
+    parser(stdOut, stdErr) {
+      const merge = parseMergeResult(stdOut, stdErr);
+      if (merge.failed) {
+        throw new GitResponseError(merge);
+      }
+      return merge;
+    }
+  };
+}
+var init_merge = __esm({
+  "src/lib/tasks/merge.ts"() {
+    "use strict";
+    init_git_response_error();
+    init_parse_merge();
+    init_task();
+  }
+});
+
+// src/lib/parsers/parse-push.ts
+function pushResultPushedItem(local, remote, status) {
+  const deleted = status.includes("deleted");
+  const tag = status.includes("tag") || /^refs\/tags/.test(local);
+  const alreadyUpdated = !status.includes("new");
+  return {
+    deleted,
+    tag,
+    branch: !tag,
+    new: !alreadyUpdated,
+    alreadyUpdated,
+    local,
+    remote
+  };
+}
+var parsers5, parsePushResult, parsePushDetail;
+var init_parse_push = __esm({
+  "src/lib/parsers/parse-push.ts"() {
+    "use strict";
+    init_utils();
+    init_parse_remote_messages();
+    parsers5 = [
+      new LineParser(/^Pushing to (.+)$/, (result, [repo]) => {
+        result.repo = repo;
+      }),
+      new LineParser(/^updating local tracking ref '(.+)'/, (result, [local]) => {
+        result.ref = __spreadProps(__spreadValues({}, result.ref || {}), {
+          local
+        });
+      }),
+      new LineParser(/^[=*-]\s+([^:]+):(\S+)\s+\[(.+)]$/, (result, [local, remote, type]) => {
+        result.pushed.push(pushResultPushedItem(local, remote, type));
+      }),
+      new LineParser(
+        /^Branch '([^']+)' set up to track remote branch '([^']+)' from '([^']+)'/,
+        (result, [local, remote, remoteName]) => {
+          result.branch = __spreadProps(__spreadValues({}, result.branch || {}), {
+            local,
+            remote,
+            remoteName
+          });
+        }
+      ),
+      new LineParser(
+        /^([^:]+):(\S+)\s+([a-z0-9]+)\.\.([a-z0-9]+)$/,
+        (result, [local, remote, from, to]) => {
+          result.update = {
+            head: {
+              local,
+              remote
+            },
+            hash: {
+              from,
+              to
+            }
+          };
+        }
+      )
+    ];
+    parsePushResult = (stdOut, stdErr) => {
+      const pushDetail = parsePushDetail(stdOut, stdErr);
+      const responseDetail = parseRemoteMessages(stdOut, stdErr);
+      return __spreadValues(__spreadValues({}, pushDetail), responseDetail);
+    };
+    parsePushDetail = (stdOut, stdErr) => {
+      return parseStringResponse({ pushed: [] }, parsers5, [stdOut, stdErr]);
+    };
+  }
+});
+
+// src/lib/tasks/push.ts
+var push_exports = {};
+__export(push_exports, {
+  pushTagsTask: () => pushTagsTask,
+  pushTask: () => pushTask
+});
+function pushTagsTask(ref = {}, customArgs) {
+  append(customArgs, "--tags");
+  return pushTask(ref, customArgs);
+}
+function pushTask(ref = {}, customArgs) {
+  const commands = ["push", ...customArgs];
+  if (ref.branch) {
+    commands.splice(1, 0, ref.branch);
+  }
+  if (ref.remote) {
+    commands.splice(1, 0, ref.remote);
+  }
+  remove(commands, "-v");
+  append(commands, "--verbose");
+  append(commands, "--porcelain");
+  return {
+    commands,
+    format: "utf-8",
+    parser: parsePushResult
+  };
+}
+var init_push = __esm({
+  "src/lib/tasks/push.ts"() {
+    "use strict";
+    init_parse_push();
+    init_utils();
+  }
+});
+
+// src/lib/tasks/show.ts
+function show_default() {
+  return {
+    showBuffer() {
+      const commands = ["show", ...getTrailingOptions(arguments, 1)];
+      if (!commands.includes("--binary")) {
+        commands.splice(1, 0, "--binary");
+      }
+      return this._runTask(
+        straightThroughBufferTask(commands),
+        trailingFunctionArgument(arguments)
+      );
+    },
+    show() {
+      const commands = ["show", ...getTrailingOptions(arguments, 1)];
+      return this._runTask(
+        straightThroughStringTask(commands),
+        trailingFunctionArgument(arguments)
+      );
+    }
+  };
+}
+var init_show = __esm({
+  "src/lib/tasks/show.ts"() {
+    "use strict";
+    init_utils();
+    init_task();
+  }
+});
+
+// src/lib/responses/FileStatusSummary.ts
+var fromPathRegex, FileStatusSummary;
+var init_FileStatusSummary = __esm({
+  "src/lib/responses/FileStatusSummary.ts"() {
+    "use strict";
+    fromPathRegex = /^(.+)\0(.+)$/;
+    FileStatusSummary = class {
+      constructor(path, index, working_dir) {
+        this.path = path;
+        this.index = index;
+        this.working_dir = working_dir;
+        if (index === "R" || working_dir === "R") {
+          const detail = fromPathRegex.exec(path) || [null, path, path];
+          this.from = detail[2] || "";
+          this.path = detail[1] || "";
+        }
+      }
+    };
+  }
+});
+
+// src/lib/responses/StatusSummary.ts
+function renamedFile(line) {
+  const [to, from] = line.split(NULL);
+  return {
+    from: from || to,
+    to
+  };
+}
+function parser3(indexX, indexY, handler) {
+  return [`${indexX}${indexY}`, handler];
+}
+function conflicts(indexX, ...indexY) {
+  return indexY.map((y) => parser3(indexX, y, (result, file) => append(result.conflicted, file)));
+}
+function splitLine(result, lineStr) {
+  const trimmed2 = lineStr.trim();
+  switch (" ") {
+    case trimmed2.charAt(2):
+      return data(trimmed2.charAt(0), trimmed2.charAt(1), trimmed2.substr(3));
+    case trimmed2.charAt(1):
+      return data(" " /* NONE */, trimmed2.charAt(0), trimmed2.substr(2));
+    default:
+      return;
+  }
+  function data(index, workingDir, path) {
+    const raw = `${index}${workingDir}`;
+    const handler = parsers6.get(raw);
+    if (handler) {
+      handler(result, path);
+    }
+    if (raw !== "##" && raw !== "!!") {
+      result.files.push(new FileStatusSummary(path, index, workingDir));
+    }
+  }
+}
+var StatusSummary, parsers6, parseStatusSummary;
+var init_StatusSummary = __esm({
+  "src/lib/responses/StatusSummary.ts"() {
+    "use strict";
+    init_utils();
+    init_FileStatusSummary();
+    StatusSummary = class {
+      constructor() {
+        this.not_added = [];
+        this.conflicted = [];
+        this.created = [];
+        this.deleted = [];
+        this.ignored = void 0;
+        this.modified = [];
+        this.renamed = [];
+        this.files = [];
+        this.staged = [];
+        this.ahead = 0;
+        this.behind = 0;
+        this.current = null;
+        this.tracking = null;
+        this.detached = false;
+        this.isClean = () => {
+          return !this.files.length;
+        };
+      }
+    };
+    parsers6 = new Map([
+      parser3(
+        " " /* NONE */,
+        "A" /* ADDED */,
+        (result, file) => append(result.created, file)
+      ),
+      parser3(
+        " " /* NONE */,
+        "D" /* DELETED */,
+        (result, file) => append(result.deleted, file)
+      ),
+      parser3(
+        " " /* NONE */,
+        "M" /* MODIFIED */,
+        (result, file) => append(result.modified, file)
+      ),
+      parser3(
+        "A" /* ADDED */,
+        " " /* NONE */,
+        (result, file) => append(result.created, file) && append(result.staged, file)
+      ),
+      parser3(
+        "A" /* ADDED */,
+        "M" /* MODIFIED */,
+        (result, file) => append(result.created, file) && append(result.staged, file) && append(result.modified, file)
+      ),
+      parser3(
+        "D" /* DELETED */,
+        " " /* NONE */,
+        (result, file) => append(result.deleted, file) && append(result.staged, file)
+      ),
+      parser3(
+        "M" /* MODIFIED */,
+        " " /* NONE */,
+        (result, file) => append(result.modified, file) && append(result.staged, file)
+      ),
+      parser3(
+        "M" /* MODIFIED */,
+        "M" /* MODIFIED */,
+        (result, file) => append(result.modified, file) && append(result.staged, file)
+      ),
+      parser3("R" /* RENAMED */, " " /* NONE */, (result, file) => {
+        append(result.renamed, renamedFile(file));
+      }),
+      parser3("R" /* RENAMED */, "M" /* MODIFIED */, (result, file) => {
+        const renamed = renamedFile(file);
+        append(result.renamed, renamed);
+        append(result.modified, renamed.to);
+      }),
+      parser3("!" /* IGNORED */, "!" /* IGNORED */, (_result, _file) => {
+        append(_result.ignored = _result.ignored || [], _file);
+      }),
+      parser3(
+        "?" /* UNTRACKED */,
+        "?" /* UNTRACKED */,
+        (result, file) => append(result.not_added, file)
+      ),
+      ...conflicts("A" /* ADDED */, "A" /* ADDED */, "U" /* UNMERGED */),
+      ...conflicts(
+        "D" /* DELETED */,
+        "D" /* DELETED */,
+        "U" /* UNMERGED */
+      ),
+      ...conflicts(
+        "U" /* UNMERGED */,
+        "A" /* ADDED */,
+        "D" /* DELETED */,
+        "U" /* UNMERGED */
+      ),
+      [
+        "##",
+        (result, line) => {
+          const aheadReg = /ahead (\d+)/;
+          const behindReg = /behind (\d+)/;
+          const currentReg = /^(.+?(?=(?:\.{3}|\s|$)))/;
+          const trackingReg = /\.{3}(\S*)/;
+          const onEmptyBranchReg = /\son\s([\S]+)$/;
+          let regexResult;
+          regexResult = aheadReg.exec(line);
+          result.ahead = regexResult && +regexResult[1] || 0;
+          regexResult = behindReg.exec(line);
+          result.behind = regexResult && +regexResult[1] || 0;
+          regexResult = currentReg.exec(line);
+          result.current = regexResult && regexResult[1];
+          regexResult = trackingReg.exec(line);
+          result.tracking = regexResult && regexResult[1];
+          regexResult = onEmptyBranchReg.exec(line);
+          result.current = regexResult && regexResult[1] || result.current;
+          result.detached = /\(no branch\)/.test(line);
+        }
+      ]
+    ]);
+    parseStatusSummary = function(text) {
+      const lines = text.split(NULL);
+      const status = new StatusSummary();
+      for (let i = 0, l = lines.length; i < l; ) {
+        let line = lines[i++].trim();
+        if (!line) {
+          continue;
+        }
+        if (line.charAt(0) === "R" /* RENAMED */) {
+          line += NULL + (lines[i++] || "");
+        }
+        splitLine(status, line);
+      }
+      return status;
+    };
+  }
+});
+
+// src/lib/tasks/status.ts
+function statusTask(customArgs) {
+  const commands = [
+    "status",
+    "--porcelain",
+    "-b",
+    "-u",
+    "--null",
+    ...customArgs.filter((arg) => !ignoredOptions.includes(arg))
+  ];
+  return {
+    format: "utf-8",
+    commands,
+    parser(text) {
+      return parseStatusSummary(text);
+    }
+  };
+}
+var ignoredOptions;
+var init_status = __esm({
+  "src/lib/tasks/status.ts"() {
+    "use strict";
+    init_StatusSummary();
+    ignoredOptions = ["--null", "-z"];
+  }
+});
+
+// src/lib/tasks/version.ts
+function versionResponse(major = 0, minor = 0, patch = 0, agent = "", installed = true) {
+  return Object.defineProperty(
+    {
+      major,
+      minor,
+      patch,
+      agent,
+      installed
+    },
+    "toString",
+    {
+      value() {
+        return `${this.major}.${this.minor}.${this.patch}`;
+      },
+      configurable: false,
+      enumerable: false
+    }
+  );
+}
+function notInstalledResponse() {
+  return versionResponse(0, 0, 0, "", false);
+}
+function version_default() {
+  return {
+    version() {
+      return this._runTask({
+        commands: ["--version"],
+        format: "utf-8",
+        parser: versionParser,
+        onError(result, error, done, fail) {
+          if (result.exitCode === -2 /* NOT_FOUND */) {
+            return done(Buffer.from(NOT_INSTALLED));
+          }
+          fail(error);
+        }
+      });
+    }
+  };
+}
+function versionParser(stdOut) {
+  if (stdOut === NOT_INSTALLED) {
+    return notInstalledResponse();
+  }
+  return parseStringResponse(versionResponse(0, 0, 0, stdOut), parsers7, stdOut);
+}
+var NOT_INSTALLED, parsers7;
+var init_version = __esm({
+  "src/lib/tasks/version.ts"() {
+    "use strict";
+    init_utils();
+    NOT_INSTALLED = "installed=false";
+    parsers7 = [
+      new LineParser(
+        /version (\d+)\.(\d+)\.(\d+)(?:\s*\((.+)\))?/,
+        (result, [major, minor, patch, agent = ""]) => {
+          Object.assign(
+            result,
+            versionResponse(asNumber(major), asNumber(minor), asNumber(patch), agent)
+          );
+        }
+      ),
+      new LineParser(
+        /version (\d+)\.(\d+)\.(\D+)(.+)?$/,
+        (result, [major, minor, patch, agent = ""]) => {
+          Object.assign(result, versionResponse(asNumber(major), asNumber(minor), patch, agent));
+        }
+      )
+    ];
+  }
+});
+
+// src/lib/simple-git-api.ts
+var simple_git_api_exports = {};
+__export(simple_git_api_exports, {
+  SimpleGitApi: () => SimpleGitApi
+});
+var SimpleGitApi;
+var init_simple_git_api = __esm({
+  "src/lib/simple-git-api.ts"() {
+    "use strict";
+    init_task_callback();
+    init_change_working_directory();
+    init_checkout();
+    init_count_objects();
+    init_commit();
+    init_config();
+    init_first_commit();
+    init_grep();
+    init_hash_object();
+    init_init();
+    init_log();
+    init_merge();
+    init_push();
+    init_show();
+    init_status();
+    init_task();
+    init_version();
+    init_utils();
+    SimpleGitApi = class {
+      constructor(_executor) {
+        this._executor = _executor;
+      }
+      _runTask(task, then) {
+        const chain = this._executor.chain();
+        const promise = chain.push(task);
+        if (then) {
+          taskCallback(task, promise, then);
+        }
+        return Object.create(this, {
+          then: { value: promise.then.bind(promise) },
+          catch: { value: promise.catch.bind(promise) },
+          _executor: { value: chain }
+        });
+      }
+      add(files) {
+        return this._runTask(
+          straightThroughStringTask(["add", ...asArray(files)]),
+          trailingFunctionArgument(arguments)
+        );
+      }
+      cwd(directory) {
+        const next = trailingFunctionArgument(arguments);
+        if (typeof directory === "string") {
+          return this._runTask(changeWorkingDirectoryTask(directory, this._executor), next);
+        }
+        if (typeof (directory == null ? void 0 : directory.path) === "string") {
+          return this._runTask(
+            changeWorkingDirectoryTask(
+              directory.path,
+              directory.root && this._executor || void 0
+            ),
+            next
+          );
+        }
+        return this._runTask(
+          configurationErrorTask("Git.cwd: workingDirectory must be supplied as a string"),
+          next
+        );
+      }
+      hashObject(path, write) {
+        return this._runTask(
+          hashObjectTask(path, write === true),
+          trailingFunctionArgument(arguments)
+        );
+      }
+      init(bare) {
+        return this._runTask(
+          initTask(bare === true, this._executor.cwd, getTrailingOptions(arguments)),
+          trailingFunctionArgument(arguments)
+        );
+      }
+      merge() {
+        return this._runTask(
+          mergeTask(getTrailingOptions(arguments)),
+          trailingFunctionArgument(arguments)
+        );
+      }
+      mergeFromTo(remote, branch) {
+        if (!(filterString(remote) && filterString(branch))) {
+          return this._runTask(
+            configurationErrorTask(
+              `Git.mergeFromTo requires that the 'remote' and 'branch' arguments are supplied as strings`
+            )
+          );
+        }
+        return this._runTask(
+          mergeTask([remote, branch, ...getTrailingOptions(arguments)]),
+          trailingFunctionArgument(arguments, false)
+        );
+      }
+      outputHandler(handler) {
+        this._executor.outputHandler = handler;
+        return this;
+      }
+      push() {
+        const task = pushTask(
+          {
+            remote: filterType(arguments[0], filterString),
+            branch: filterType(arguments[1], filterString)
+          },
+          getTrailingOptions(arguments)
+        );
+        return this._runTask(task, trailingFunctionArgument(arguments));
+      }
+      stash() {
+        return this._runTask(
+          straightThroughStringTask(["stash", ...getTrailingOptions(arguments)]),
+          trailingFunctionArgument(arguments)
+        );
+      }
+      status() {
+        return this._runTask(
+          statusTask(getTrailingOptions(arguments)),
+          trailingFunctionArgument(arguments)
+        );
+      }
+    };
+    Object.assign(
+      SimpleGitApi.prototype,
+      checkout_default(),
+      commit_default(),
+      config_default(),
+      count_objects_default(),
+      first_commit_default(),
+      grep_default(),
+      log_default(),
+      show_default(),
+      version_default()
+    );
+  }
+});
+
+// src/lib/runners/scheduler.ts
+var scheduler_exports = {};
+__export(scheduler_exports, {
+  Scheduler: () => Scheduler
+});
+
+var createScheduledTask, Scheduler;
+var init_scheduler = __esm({
+  "src/lib/runners/scheduler.ts"() {
+    "use strict";
+    init_utils();
+    init_git_logger();
+    createScheduledTask = (() => {
+      let id = 0;
+      return () => {
+        id++;
+        const { promise, done } = (0,promise_deferred_dist/* createDeferred */.ud)();
+        return {
+          promise,
+          done,
+          id
+        };
+      };
+    })();
+    Scheduler = class {
+      constructor(concurrency = 2) {
+        this.concurrency = concurrency;
+        this.logger = createLogger("", "scheduler");
+        this.pending = [];
+        this.running = [];
+        this.logger(`Constructed, concurrency=%s`, concurrency);
+      }
+      schedule() {
+        if (!this.pending.length || this.running.length >= this.concurrency) {
+          this.logger(
+            `Schedule attempt ignored, pending=%s running=%s concurrency=%s`,
+            this.pending.length,
+            this.running.length,
+            this.concurrency
+          );
+          return;
+        }
+        const task = append(this.running, this.pending.shift());
+        this.logger(`Attempting id=%s`, task.id);
+        task.done(() => {
+          this.logger(`Completing id=`, task.id);
+          remove(this.running, task);
+          this.schedule();
+        });
+      }
+      next() {
+        const { promise, id } = append(this.pending, createScheduledTask());
+        this.logger(`Scheduling id=%s`, id);
+        this.schedule();
+        return promise;
+      }
+    };
+  }
+});
+
+// src/lib/tasks/apply-patch.ts
+var apply_patch_exports = {};
+__export(apply_patch_exports, {
+  applyPatchTask: () => applyPatchTask
+});
+function applyPatchTask(patches, customArgs) {
+  return straightThroughStringTask(["apply", ...customArgs, ...patches]);
+}
+var init_apply_patch = __esm({
+  "src/lib/tasks/apply-patch.ts"() {
+    "use strict";
+    init_task();
+  }
+});
+
+// src/lib/responses/BranchDeleteSummary.ts
+function branchDeletionSuccess(branch, hash) {
+  return {
+    branch,
+    hash,
+    success: true
+  };
+}
+function branchDeletionFailure(branch) {
+  return {
+    branch,
+    hash: null,
+    success: false
+  };
+}
+var BranchDeletionBatch;
+var init_BranchDeleteSummary = __esm({
+  "src/lib/responses/BranchDeleteSummary.ts"() {
+    "use strict";
+    BranchDeletionBatch = class {
+      constructor() {
+        this.all = [];
+        this.branches = {};
+        this.errors = [];
+      }
+      get success() {
+        return !this.errors.length;
+      }
+    };
+  }
+});
+
+// src/lib/parsers/parse-branch-delete.ts
+function hasBranchDeletionError(data, processExitCode) {
+  return processExitCode === 1 /* ERROR */ && deleteErrorRegex.test(data);
+}
+var deleteSuccessRegex, deleteErrorRegex, parsers8, parseBranchDeletions;
+var init_parse_branch_delete = __esm({
+  "src/lib/parsers/parse-branch-delete.ts"() {
+    "use strict";
+    init_BranchDeleteSummary();
+    init_utils();
+    deleteSuccessRegex = /(\S+)\s+\(\S+\s([^)]+)\)/;
+    deleteErrorRegex = /^error[^']+'([^']+)'/m;
+    parsers8 = [
+      new LineParser(deleteSuccessRegex, (result, [branch, hash]) => {
+        const deletion = branchDeletionSuccess(branch, hash);
+        result.all.push(deletion);
+        result.branches[branch] = deletion;
+      }),
+      new LineParser(deleteErrorRegex, (result, [branch]) => {
+        const deletion = branchDeletionFailure(branch);
+        result.errors.push(deletion);
+        result.all.push(deletion);
+        result.branches[branch] = deletion;
+      })
+    ];
+    parseBranchDeletions = (stdOut, stdErr) => {
+      return parseStringResponse(new BranchDeletionBatch(), parsers8, [stdOut, stdErr]);
+    };
+  }
+});
+
+// src/lib/responses/BranchSummary.ts
+var BranchSummaryResult;
+var init_BranchSummary = __esm({
+  "src/lib/responses/BranchSummary.ts"() {
+    "use strict";
+    BranchSummaryResult = class {
+      constructor() {
+        this.all = [];
+        this.branches = {};
+        this.current = "";
+        this.detached = false;
+      }
+      push(status, detached, name, commit, label) {
+        if (status === "*" /* CURRENT */) {
+          this.detached = detached;
+          this.current = name;
+        }
+        this.all.push(name);
+        this.branches[name] = {
+          current: status === "*" /* CURRENT */,
+          linkedWorkTree: status === "+" /* LINKED */,
+          name,
+          commit,
+          label
+        };
+      }
+    };
+  }
+});
+
+// src/lib/parsers/parse-branch.ts
+function branchStatus(input) {
+  return input ? input.charAt(0) : "";
+}
+function parseBranchSummary(stdOut) {
+  return parseStringResponse(new BranchSummaryResult(), parsers9, stdOut);
+}
+var parsers9;
+var init_parse_branch = __esm({
+  "src/lib/parsers/parse-branch.ts"() {
+    "use strict";
+    init_BranchSummary();
+    init_utils();
+    parsers9 = [
+      new LineParser(
+        /^([*+]\s)?\((?:HEAD )?detached (?:from|at) (\S+)\)\s+([a-z0-9]+)\s(.*)$/,
+        (result, [current, name, commit, label]) => {
+          result.push(branchStatus(current), true, name, commit, label);
+        }
+      ),
+      new LineParser(
+        new RegExp("^([*+]\\s)?(\\S+)\\s+([a-z0-9]+)\\s?(.*)$", "s"),
+        (result, [current, name, commit, label]) => {
+          result.push(branchStatus(current), false, name, commit, label);
+        }
+      )
+    ];
+  }
+});
+
+// src/lib/tasks/branch.ts
+var branch_exports = {};
+__export(branch_exports, {
+  branchLocalTask: () => branchLocalTask,
+  branchTask: () => branchTask,
+  containsDeleteBranchCommand: () => containsDeleteBranchCommand,
+  deleteBranchTask: () => deleteBranchTask,
+  deleteBranchesTask: () => deleteBranchesTask
+});
+function containsDeleteBranchCommand(commands) {
+  const deleteCommands = ["-d", "-D", "--delete"];
+  return commands.some((command) => deleteCommands.includes(command));
+}
+function branchTask(customArgs) {
+  const isDelete = containsDeleteBranchCommand(customArgs);
+  const commands = ["branch", ...customArgs];
+  if (commands.length === 1) {
+    commands.push("-a");
+  }
+  if (!commands.includes("-v")) {
+    commands.splice(1, 0, "-v");
+  }
+  return {
+    format: "utf-8",
+    commands,
+    parser(stdOut, stdErr) {
+      if (isDelete) {
+        return parseBranchDeletions(stdOut, stdErr).all[0];
+      }
+      return parseBranchSummary(stdOut);
+    }
+  };
+}
+function branchLocalTask() {
+  const parser4 = parseBranchSummary;
+  return {
+    format: "utf-8",
+    commands: ["branch", "-v"],
+    parser: parser4
+  };
+}
+function deleteBranchesTask(branches, forceDelete = false) {
+  return {
+    format: "utf-8",
+    commands: ["branch", "-v", forceDelete ? "-D" : "-d", ...branches],
+    parser(stdOut, stdErr) {
+      return parseBranchDeletions(stdOut, stdErr);
+    },
+    onError({ exitCode, stdOut }, error, done, fail) {
+      if (!hasBranchDeletionError(String(error), exitCode)) {
+        return fail(error);
+      }
+      done(stdOut);
+    }
+  };
+}
+function deleteBranchTask(branch, forceDelete = false) {
+  const task = {
+    format: "utf-8",
+    commands: ["branch", "-v", forceDelete ? "-D" : "-d", branch],
+    parser(stdOut, stdErr) {
+      return parseBranchDeletions(stdOut, stdErr).branches[branch];
+    },
+    onError({ exitCode, stdErr, stdOut }, error, _, fail) {
+      if (!hasBranchDeletionError(String(error), exitCode)) {
+        return fail(error);
+      }
+      throw new GitResponseError(
+        task.parser(bufferToString(stdOut), bufferToString(stdErr)),
+        String(error)
+      );
+    }
+  };
+  return task;
+}
+var init_branch = __esm({
+  "src/lib/tasks/branch.ts"() {
+    "use strict";
+    init_git_response_error();
+    init_parse_branch_delete();
+    init_parse_branch();
+    init_utils();
+  }
+});
+
+// src/lib/responses/CheckIgnore.ts
+var parseCheckIgnore;
+var init_CheckIgnore = __esm({
+  "src/lib/responses/CheckIgnore.ts"() {
+    "use strict";
+    parseCheckIgnore = (text) => {
+      return text.split(/\n/g).map((line) => line.trim()).filter((file) => !!file);
+    };
+  }
+});
+
+// src/lib/tasks/check-ignore.ts
+var check_ignore_exports = {};
+__export(check_ignore_exports, {
+  checkIgnoreTask: () => checkIgnoreTask
+});
+function checkIgnoreTask(paths) {
+  return {
+    commands: ["check-ignore", ...paths],
+    format: "utf-8",
+    parser: parseCheckIgnore
+  };
+}
+var init_check_ignore = __esm({
+  "src/lib/tasks/check-ignore.ts"() {
+    "use strict";
+    init_CheckIgnore();
+  }
+});
+
+// src/lib/tasks/clone.ts
+var clone_exports = {};
+__export(clone_exports, {
+  cloneMirrorTask: () => cloneMirrorTask,
+  cloneTask: () => cloneTask
+});
+function disallowedCommand(command) {
+  return /^--upload-pack(=|$)/.test(command);
+}
+function cloneTask(repo, directory, customArgs) {
+  const commands = ["clone", ...customArgs];
+  filterString(repo) && commands.push(repo);
+  filterString(directory) && commands.push(directory);
+  const banned = commands.find(disallowedCommand);
+  if (banned) {
+    return configurationErrorTask(`git.fetch: potential exploit argument blocked.`);
+  }
+  return straightThroughStringTask(commands);
+}
+function cloneMirrorTask(repo, directory, customArgs) {
+  append(customArgs, "--mirror");
+  return cloneTask(repo, directory, customArgs);
+}
+var init_clone = __esm({
+  "src/lib/tasks/clone.ts"() {
+    "use strict";
+    init_task();
+    init_utils();
+  }
+});
+
+// src/lib/parsers/parse-fetch.ts
+function parseFetchResult(stdOut, stdErr) {
+  const result = {
+    raw: stdOut,
+    remote: null,
+    branches: [],
+    tags: [],
+    updated: [],
+    deleted: []
+  };
+  return parseStringResponse(result, parsers10, [stdOut, stdErr]);
+}
+var parsers10;
+var init_parse_fetch = __esm({
+  "src/lib/parsers/parse-fetch.ts"() {
+    "use strict";
+    init_utils();
+    parsers10 = [
+      new LineParser(/From (.+)$/, (result, [remote]) => {
+        result.remote = remote;
+      }),
+      new LineParser(/\* \[new branch]\s+(\S+)\s*-> (.+)$/, (result, [name, tracking]) => {
+        result.branches.push({
+          name,
+          tracking
+        });
+      }),
+      new LineParser(/\* \[new tag]\s+(\S+)\s*-> (.+)$/, (result, [name, tracking]) => {
+        result.tags.push({
+          name,
+          tracking
+        });
+      }),
+      new LineParser(/- \[deleted]\s+\S+\s*-> (.+)$/, (result, [tracking]) => {
+        result.deleted.push({
+          tracking
+        });
+      }),
+      new LineParser(
+        /\s*([^.]+)\.\.(\S+)\s+(\S+)\s*-> (.+)$/,
+        (result, [from, to, name, tracking]) => {
+          result.updated.push({
+            name,
+            tracking,
+            to,
+            from
+          });
+        }
+      )
+    ];
+  }
+});
+
+// src/lib/tasks/fetch.ts
+var fetch_exports = {};
+__export(fetch_exports, {
+  fetchTask: () => fetchTask
+});
+function disallowedCommand2(command) {
+  return /^--upload-pack(=|$)/.test(command);
+}
+function fetchTask(remote, branch, customArgs) {
+  const commands = ["fetch", ...customArgs];
+  if (remote && branch) {
+    commands.push(remote, branch);
+  }
+  const banned = commands.find(disallowedCommand2);
+  if (banned) {
+    return configurationErrorTask(`git.fetch: potential exploit argument blocked.`);
+  }
+  return {
+    commands,
+    format: "utf-8",
+    parser: parseFetchResult
+  };
+}
+var init_fetch = __esm({
+  "src/lib/tasks/fetch.ts"() {
+    "use strict";
+    init_parse_fetch();
+    init_task();
+  }
+});
+
+// src/lib/parsers/parse-move.ts
+function parseMoveResult(stdOut) {
+  return parseStringResponse({ moves: [] }, parsers11, stdOut);
+}
+var parsers11;
+var init_parse_move = __esm({
+  "src/lib/parsers/parse-move.ts"() {
+    "use strict";
+    init_utils();
+    parsers11 = [
+      new LineParser(/^Renaming (.+) to (.+)$/, (result, [from, to]) => {
+        result.moves.push({ from, to });
+      })
+    ];
+  }
+});
+
+// src/lib/tasks/move.ts
+var move_exports = {};
+__export(move_exports, {
+  moveTask: () => moveTask
+});
+function moveTask(from, to) {
+  return {
+    commands: ["mv", "-v", ...asArray(from), to],
+    format: "utf-8",
+    parser: parseMoveResult
+  };
+}
+var init_move = __esm({
+  "src/lib/tasks/move.ts"() {
+    "use strict";
+    init_parse_move();
+    init_utils();
+  }
+});
+
+// src/lib/tasks/pull.ts
+var pull_exports = {};
+__export(pull_exports, {
+  pullTask: () => pullTask
+});
+function pullTask(remote, branch, customArgs) {
+  const commands = ["pull", ...customArgs];
+  if (remote && branch) {
+    commands.splice(1, 0, remote, branch);
+  }
+  return {
+    commands,
+    format: "utf-8",
+    parser(stdOut, stdErr) {
+      return parsePullResult(stdOut, stdErr);
+    },
+    onError(result, _error, _done, fail) {
+      const pullError = parsePullErrorResult(
+        bufferToString(result.stdOut),
+        bufferToString(result.stdErr)
+      );
+      if (pullError) {
+        return fail(new GitResponseError(pullError));
+      }
+      fail(_error);
+    }
+  };
+}
+var init_pull = __esm({
+  "src/lib/tasks/pull.ts"() {
+    "use strict";
+    init_git_response_error();
+    init_parse_pull();
+    init_utils();
+  }
+});
+
+// src/lib/responses/GetRemoteSummary.ts
+function parseGetRemotes(text) {
+  const remotes = {};
+  forEach(text, ([name]) => remotes[name] = { name });
+  return Object.values(remotes);
+}
+function parseGetRemotesVerbose(text) {
+  const remotes = {};
+  forEach(text, ([name, url, purpose]) => {
+    if (!remotes.hasOwnProperty(name)) {
+      remotes[name] = {
+        name,
+        refs: { fetch: "", push: "" }
+      };
+    }
+    if (purpose && url) {
+      remotes[name].refs[purpose.replace(/[^a-z]/g, "")] = url;
+    }
+  });
+  return Object.values(remotes);
+}
+function forEach(text, handler) {
+  forEachLineWithContent(text, (line) => handler(line.split(/\s+/)));
+}
+var init_GetRemoteSummary = __esm({
+  "src/lib/responses/GetRemoteSummary.ts"() {
+    "use strict";
+    init_utils();
+  }
+});
+
+// src/lib/tasks/remote.ts
+var remote_exports = {};
+__export(remote_exports, {
+  addRemoteTask: () => addRemoteTask,
+  getRemotesTask: () => getRemotesTask,
+  listRemotesTask: () => listRemotesTask,
+  remoteTask: () => remoteTask,
+  removeRemoteTask: () => removeRemoteTask
+});
+function addRemoteTask(remoteName, remoteRepo, customArgs) {
+  return straightThroughStringTask(["remote", "add", ...customArgs, remoteName, remoteRepo]);
+}
+function getRemotesTask(verbose) {
+  const commands = ["remote"];
+  if (verbose) {
+    commands.push("-v");
+  }
+  return {
+    commands,
+    format: "utf-8",
+    parser: verbose ? parseGetRemotesVerbose : parseGetRemotes
+  };
+}
+function listRemotesTask(customArgs) {
+  const commands = [...customArgs];
+  if (commands[0] !== "ls-remote") {
+    commands.unshift("ls-remote");
+  }
+  return straightThroughStringTask(commands);
+}
+function remoteTask(customArgs) {
+  const commands = [...customArgs];
+  if (commands[0] !== "remote") {
+    commands.unshift("remote");
+  }
+  return straightThroughStringTask(commands);
+}
+function removeRemoteTask(remoteName) {
+  return straightThroughStringTask(["remote", "remove", remoteName]);
+}
+var init_remote = __esm({
+  "src/lib/tasks/remote.ts"() {
+    "use strict";
+    init_GetRemoteSummary();
+    init_task();
+  }
+});
+
+// src/lib/tasks/stash-list.ts
+var stash_list_exports = {};
+__export(stash_list_exports, {
+  stashListTask: () => stashListTask
+});
+function stashListTask(opt = {}, customArgs) {
+  const options = parseLogOptions(opt);
+  const commands = ["stash", "list", ...options.commands, ...customArgs];
+  const parser4 = createListLogSummaryParser(
+    options.splitter,
+    options.fields,
+    logFormatFromCommand(commands)
+  );
+  return validateLogFormatConfig(commands) || {
+    commands,
+    format: "utf-8",
+    parser: parser4
+  };
+}
+var init_stash_list = __esm({
+  "src/lib/tasks/stash-list.ts"() {
+    "use strict";
+    init_log_format();
+    init_parse_list_log_summary();
+    init_diff();
+    init_log();
+  }
+});
+
+// src/lib/tasks/sub-module.ts
+var sub_module_exports = {};
+__export(sub_module_exports, {
+  addSubModuleTask: () => addSubModuleTask,
+  initSubModuleTask: () => initSubModuleTask,
+  subModuleTask: () => subModuleTask,
+  updateSubModuleTask: () => updateSubModuleTask
+});
+function addSubModuleTask(repo, path) {
+  return subModuleTask(["add", repo, path]);
+}
+function initSubModuleTask(customArgs) {
+  return subModuleTask(["init", ...customArgs]);
+}
+function subModuleTask(customArgs) {
+  const commands = [...customArgs];
+  if (commands[0] !== "submodule") {
+    commands.unshift("submodule");
+  }
+  return straightThroughStringTask(commands);
+}
+function updateSubModuleTask(customArgs) {
+  return subModuleTask(["update", ...customArgs]);
+}
+var init_sub_module = __esm({
+  "src/lib/tasks/sub-module.ts"() {
+    "use strict";
+    init_task();
+  }
+});
+
+// src/lib/responses/TagList.ts
+function singleSorted(a, b) {
+  const aIsNum = isNaN(a);
+  const bIsNum = isNaN(b);
+  if (aIsNum !== bIsNum) {
+    return aIsNum ? 1 : -1;
+  }
+  return aIsNum ? sorted(a, b) : 0;
+}
+function sorted(a, b) {
+  return a === b ? 0 : a > b ? 1 : -1;
+}
+function trimmed(input) {
+  return input.trim();
+}
+function toNumber(input) {
+  if (typeof input === "string") {
+    return parseInt(input.replace(/^\D+/g, ""), 10) || 0;
+  }
+  return 0;
+}
+var TagList, parseTagList;
+var init_TagList = __esm({
+  "src/lib/responses/TagList.ts"() {
+    "use strict";
+    TagList = class {
+      constructor(all, latest) {
+        this.all = all;
+        this.latest = latest;
+      }
+    };
+    parseTagList = function(data, customSort = false) {
+      const tags = data.split("\n").map(trimmed).filter(Boolean);
+      if (!customSort) {
+        tags.sort(function(tagA, tagB) {
+          const partsA = tagA.split(".");
+          const partsB = tagB.split(".");
+          if (partsA.length === 1 || partsB.length === 1) {
+            return singleSorted(toNumber(partsA[0]), toNumber(partsB[0]));
+          }
+          for (let i = 0, l = Math.max(partsA.length, partsB.length); i < l; i++) {
+            const diff = sorted(toNumber(partsA[i]), toNumber(partsB[i]));
+            if (diff) {
+              return diff;
+            }
+          }
+          return 0;
+        });
+      }
+      const latest = customSort ? tags[0] : [...tags].reverse().find((tag) => tag.indexOf(".") >= 0);
+      return new TagList(tags, latest);
+    };
+  }
+});
+
+// src/lib/tasks/tag.ts
+var tag_exports = {};
+__export(tag_exports, {
+  addAnnotatedTagTask: () => addAnnotatedTagTask,
+  addTagTask: () => addTagTask,
+  tagListTask: () => tagListTask
+});
+function tagListTask(customArgs = []) {
+  const hasCustomSort = customArgs.some((option) => /^--sort=/.test(option));
+  return {
+    format: "utf-8",
+    commands: ["tag", "-l", ...customArgs],
+    parser(text) {
+      return parseTagList(text, hasCustomSort);
+    }
+  };
+}
+function addTagTask(name) {
+  return {
+    format: "utf-8",
+    commands: ["tag", name],
+    parser() {
+      return { name };
+    }
+  };
+}
+function addAnnotatedTagTask(name, tagMessage) {
+  return {
+    format: "utf-8",
+    commands: ["tag", "-a", "-m", tagMessage, name],
+    parser() {
+      return { name };
+    }
+  };
+}
+var init_tag = __esm({
+  "src/lib/tasks/tag.ts"() {
+    "use strict";
+    init_TagList();
+  }
+});
+
+// src/git.js
+var require_git = __commonJS({
+  "src/git.js"(exports, module) {
+    "use strict";
+    var { GitExecutor: GitExecutor2 } = (init_git_executor(), __toCommonJS(git_executor_exports));
+    var { SimpleGitApi: SimpleGitApi2 } = (init_simple_git_api(), __toCommonJS(simple_git_api_exports));
+    var { Scheduler: Scheduler2 } = (init_scheduler(), __toCommonJS(scheduler_exports));
+    var { configurationErrorTask: configurationErrorTask2 } = (init_task(), __toCommonJS(task_exports));
+    var {
+      asArray: asArray2,
+      filterArray: filterArray2,
+      filterPrimitives: filterPrimitives2,
+      filterString: filterString2,
+      filterStringOrStringArray: filterStringOrStringArray2,
+      filterType: filterType2,
+      getTrailingOptions: getTrailingOptions2,
+      trailingFunctionArgument: trailingFunctionArgument2,
+      trailingOptionsArgument: trailingOptionsArgument2
+    } = (init_utils(), __toCommonJS(utils_exports));
+    var { applyPatchTask: applyPatchTask2 } = (init_apply_patch(), __toCommonJS(apply_patch_exports));
+    var {
+      branchTask: branchTask2,
+      branchLocalTask: branchLocalTask2,
+      deleteBranchesTask: deleteBranchesTask2,
+      deleteBranchTask: deleteBranchTask2
+    } = (init_branch(), __toCommonJS(branch_exports));
+    var { checkIgnoreTask: checkIgnoreTask2 } = (init_check_ignore(), __toCommonJS(check_ignore_exports));
+    var { checkIsRepoTask: checkIsRepoTask2 } = (init_check_is_repo(), __toCommonJS(check_is_repo_exports));
+    var { cloneTask: cloneTask2, cloneMirrorTask: cloneMirrorTask2 } = (init_clone(), __toCommonJS(clone_exports));
+    var { cleanWithOptionsTask: cleanWithOptionsTask2, isCleanOptionsArray: isCleanOptionsArray2 } = (init_clean(), __toCommonJS(clean_exports));
+    var { diffSummaryTask: diffSummaryTask2 } = (init_diff(), __toCommonJS(diff_exports));
+    var { fetchTask: fetchTask2 } = (init_fetch(), __toCommonJS(fetch_exports));
+    var { moveTask: moveTask2 } = (init_move(), __toCommonJS(move_exports));
+    var { pullTask: pullTask2 } = (init_pull(), __toCommonJS(pull_exports));
+    var { pushTagsTask: pushTagsTask2 } = (init_push(), __toCommonJS(push_exports));
+    var {
+      addRemoteTask: addRemoteTask2,
+      getRemotesTask: getRemotesTask2,
+      listRemotesTask: listRemotesTask2,
+      remoteTask: remoteTask2,
+      removeRemoteTask: removeRemoteTask2
+    } = (init_remote(), __toCommonJS(remote_exports));
+    var { getResetMode: getResetMode2, resetTask: resetTask2 } = (init_reset(), __toCommonJS(reset_exports));
+    var { stashListTask: stashListTask2 } = (init_stash_list(), __toCommonJS(stash_list_exports));
+    var {
+      addSubModuleTask: addSubModuleTask2,
+      initSubModuleTask: initSubModuleTask2,
+      subModuleTask: subModuleTask2,
+      updateSubModuleTask: updateSubModuleTask2
+    } = (init_sub_module(), __toCommonJS(sub_module_exports));
+    var { addAnnotatedTagTask: addAnnotatedTagTask2, addTagTask: addTagTask2, tagListTask: tagListTask2 } = (init_tag(), __toCommonJS(tag_exports));
+    var { straightThroughBufferTask: straightThroughBufferTask2, straightThroughStringTask: straightThroughStringTask2 } = (init_task(), __toCommonJS(task_exports));
+    function Git2(options, plugins) {
+      this._plugins = plugins;
+      this._executor = new GitExecutor2(
+        options.baseDir,
+        new Scheduler2(options.maxConcurrentProcesses),
+        plugins
+      );
+      this._trimmed = options.trimmed;
+    }
+    (Git2.prototype = Object.create(SimpleGitApi2.prototype)).constructor = Git2;
+    Git2.prototype.customBinary = function(command) {
+      this._plugins.reconfigure("binary", command);
+      return this;
+    };
+    Git2.prototype.env = function(name, value) {
+      if (arguments.length === 1 && typeof name === "object") {
+        this._executor.env = name;
+      } else {
+        (this._executor.env = this._executor.env || {})[name] = value;
+      }
+      return this;
+    };
+    Git2.prototype.stashList = function(options) {
+      return this._runTask(
+        stashListTask2(
+          trailingOptionsArgument2(arguments) || {},
+          filterArray2(options) && options || []
+        ),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    function createCloneTask(api, task, repoPath, localPath) {
+      if (typeof repoPath !== "string") {
+        return configurationErrorTask2(`git.${api}() requires a string 'repoPath'`);
+      }
+      return task(repoPath, filterType2(localPath, filterString2), getTrailingOptions2(arguments));
+    }
+    Git2.prototype.clone = function() {
+      return this._runTask(
+        createCloneTask("clone", cloneTask2, ...arguments),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.mirror = function() {
+      return this._runTask(
+        createCloneTask("mirror", cloneMirrorTask2, ...arguments),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.mv = function(from, to) {
+      return this._runTask(moveTask2(from, to), trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.checkoutLatestTag = function(then) {
+      var git = this;
+      return this.pull(function() {
+        git.tags(function(err, tags) {
+          git.checkout(tags.latest, then);
+        });
+      });
+    };
+    Git2.prototype.pull = function(remote, branch, options, then) {
+      return this._runTask(
+        pullTask2(
+          filterType2(remote, filterString2),
+          filterType2(branch, filterString2),
+          getTrailingOptions2(arguments)
+        ),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.fetch = function(remote, branch) {
+      return this._runTask(
+        fetchTask2(
+          filterType2(remote, filterString2),
+          filterType2(branch, filterString2),
+          getTrailingOptions2(arguments)
+        ),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.silent = function(silence) {
+      console.warn(
+        "simple-git deprecation notice: git.silent: logging should be configured using the `debug` library / `DEBUG` environment variable, this will be an error in version 3"
+      );
+      return this;
+    };
+    Git2.prototype.tags = function(options, then) {
+      return this._runTask(
+        tagListTask2(getTrailingOptions2(arguments)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.rebase = function() {
+      return this._runTask(
+        straightThroughStringTask2(["rebase", ...getTrailingOptions2(arguments)]),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.reset = function(mode) {
+      return this._runTask(
+        resetTask2(getResetMode2(mode), getTrailingOptions2(arguments)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.revert = function(commit) {
+      const next = trailingFunctionArgument2(arguments);
+      if (typeof commit !== "string") {
+        return this._runTask(configurationErrorTask2("Commit must be a string"), next);
+      }
+      return this._runTask(
+        straightThroughStringTask2(["revert", ...getTrailingOptions2(arguments, 0, true), commit]),
+        next
+      );
+    };
+    Git2.prototype.addTag = function(name) {
+      const task = typeof name === "string" ? addTagTask2(name) : configurationErrorTask2("Git.addTag requires a tag name");
+      return this._runTask(task, trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.addAnnotatedTag = function(tagName, tagMessage) {
+      return this._runTask(
+        addAnnotatedTagTask2(tagName, tagMessage),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.deleteLocalBranch = function(branchName, forceDelete, then) {
+      return this._runTask(
+        deleteBranchTask2(branchName, typeof forceDelete === "boolean" ? forceDelete : false),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.deleteLocalBranches = function(branchNames, forceDelete, then) {
+      return this._runTask(
+        deleteBranchesTask2(branchNames, typeof forceDelete === "boolean" ? forceDelete : false),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.branch = function(options, then) {
+      return this._runTask(
+        branchTask2(getTrailingOptions2(arguments)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.branchLocal = function(then) {
+      return this._runTask(branchLocalTask2(), trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.raw = function(commands) {
+      const createRestCommands = !Array.isArray(commands);
+      const command = [].slice.call(createRestCommands ? arguments : commands, 0);
+      for (let i = 0; i < command.length && createRestCommands; i++) {
+        if (!filterPrimitives2(command[i])) {
+          command.splice(i, command.length - i);
+          break;
+        }
+      }
+      command.push(...getTrailingOptions2(arguments, 0, true));
+      var next = trailingFunctionArgument2(arguments);
+      if (!command.length) {
+        return this._runTask(
+          configurationErrorTask2("Raw: must supply one or more command to execute"),
+          next
+        );
+      }
+      return this._runTask(straightThroughStringTask2(command, this._trimmed), next);
+    };
+    Git2.prototype.submoduleAdd = function(repo, path, then) {
+      return this._runTask(addSubModuleTask2(repo, path), trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.submoduleUpdate = function(args, then) {
+      return this._runTask(
+        updateSubModuleTask2(getTrailingOptions2(arguments, true)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.submoduleInit = function(args, then) {
+      return this._runTask(
+        initSubModuleTask2(getTrailingOptions2(arguments, true)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.subModule = function(options, then) {
+      return this._runTask(
+        subModuleTask2(getTrailingOptions2(arguments)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.listRemote = function() {
+      return this._runTask(
+        listRemotesTask2(getTrailingOptions2(arguments)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.addRemote = function(remoteName, remoteRepo, then) {
+      return this._runTask(
+        addRemoteTask2(remoteName, remoteRepo, getTrailingOptions2(arguments)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.removeRemote = function(remoteName, then) {
+      return this._runTask(removeRemoteTask2(remoteName), trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.getRemotes = function(verbose, then) {
+      return this._runTask(getRemotesTask2(verbose === true), trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.remote = function(options, then) {
+      return this._runTask(
+        remoteTask2(getTrailingOptions2(arguments)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.tag = function(options, then) {
+      const command = getTrailingOptions2(arguments);
+      if (command[0] !== "tag") {
+        command.unshift("tag");
+      }
+      return this._runTask(straightThroughStringTask2(command), trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.updateServerInfo = function(then) {
+      return this._runTask(
+        straightThroughStringTask2(["update-server-info"]),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.pushTags = function(remote, then) {
+      const task = pushTagsTask2(
+        { remote: filterType2(remote, filterString2) },
+        getTrailingOptions2(arguments)
+      );
+      return this._runTask(task, trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.rm = function(files) {
+      return this._runTask(
+        straightThroughStringTask2(["rm", "-f", ...asArray2(files)]),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.rmKeepLocal = function(files) {
+      return this._runTask(
+        straightThroughStringTask2(["rm", "--cached", ...asArray2(files)]),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.catFile = function(options, then) {
+      return this._catFile("utf-8", arguments);
+    };
+    Git2.prototype.binaryCatFile = function() {
+      return this._catFile("buffer", arguments);
+    };
+    Git2.prototype._catFile = function(format, args) {
+      var handler = trailingFunctionArgument2(args);
+      var command = ["cat-file"];
+      var options = args[0];
+      if (typeof options === "string") {
+        return this._runTask(
+          configurationErrorTask2("Git.catFile: options must be supplied as an array of strings"),
+          handler
+        );
+      }
+      if (Array.isArray(options)) {
+        command.push.apply(command, options);
+      }
+      const task = format === "buffer" ? straightThroughBufferTask2(command) : straightThroughStringTask2(command);
+      return this._runTask(task, handler);
+    };
+    Git2.prototype.diff = function(options, then) {
+      const task = filterString2(options) ? configurationErrorTask2(
+        "git.diff: supplying options as a single string is no longer supported, switch to an array of strings"
+      ) : straightThroughStringTask2(["diff", ...getTrailingOptions2(arguments)]);
+      return this._runTask(task, trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.diffSummary = function() {
+      return this._runTask(
+        diffSummaryTask2(getTrailingOptions2(arguments, 1)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.applyPatch = function(patches) {
+      const task = !filterStringOrStringArray2(patches) ? configurationErrorTask2(
+        `git.applyPatch requires one or more string patches as the first argument`
+      ) : applyPatchTask2(asArray2(patches), getTrailingOptions2([].slice.call(arguments, 1)));
+      return this._runTask(task, trailingFunctionArgument2(arguments));
+    };
+    Git2.prototype.revparse = function() {
+      const commands = ["rev-parse", ...getTrailingOptions2(arguments, true)];
+      return this._runTask(
+        straightThroughStringTask2(commands, true),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.clean = function(mode, options, then) {
+      const usingCleanOptionsArray = isCleanOptionsArray2(mode);
+      const cleanMode = usingCleanOptionsArray && mode.join("") || filterType2(mode, filterString2) || "";
+      const customArgs = getTrailingOptions2([].slice.call(arguments, usingCleanOptionsArray ? 1 : 0));
+      return this._runTask(
+        cleanWithOptionsTask2(cleanMode, customArgs),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.exec = function(then) {
+      const task = {
+        commands: [],
+        format: "utf-8",
+        parser() {
+          if (typeof then === "function") {
+            then();
+          }
+        }
+      };
+      return this._runTask(task);
+    };
+    Git2.prototype.clearQueue = function() {
+      return this;
+    };
+    Git2.prototype.checkIgnore = function(pathnames, then) {
+      return this._runTask(
+        checkIgnoreTask2(asArray2(filterType2(pathnames, filterStringOrStringArray2, []))),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    Git2.prototype.checkIsRepo = function(checkType, then) {
+      return this._runTask(
+        checkIsRepoTask2(filterType2(checkType, filterString2)),
+        trailingFunctionArgument2(arguments)
+      );
+    };
+    module.exports = Git2;
+  }
+});
+
+// src/lib/api.ts
+init_pathspec();
+
+// src/lib/errors/git-construct-error.ts
+init_git_error();
+var GitConstructError = class extends GitError {
+  constructor(config, message) {
+    super(void 0, message);
+    this.config = config;
+  }
+};
+
+// src/lib/api.ts
+init_git_error();
+
+// src/lib/errors/git-plugin-error.ts
+init_git_error();
+var GitPluginError = class extends GitError {
+  constructor(task, plugin, message) {
+    super(task, message);
+    this.task = task;
+    this.plugin = plugin;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+};
+
+// src/lib/api.ts
+init_git_response_error();
+init_task_configuration_error();
+init_check_is_repo();
+init_clean();
+init_config();
+init_diff_name_status();
+init_grep();
+init_reset();
+
+// src/lib/plugins/abort-plugin.ts
+function abortPlugin(signal) {
+  if (!signal) {
+    return;
+  }
+  const onSpawnAfter = {
+    type: "spawn.after",
+    action(_data, context) {
+      function kill() {
+        context.kill(new GitPluginError(void 0, "abort", "Abort signal received"));
+      }
+      signal.addEventListener("abort", kill);
+      context.spawned.on("close", () => signal.removeEventListener("abort", kill));
+    }
+  };
+  const onSpawnBefore = {
+    type: "spawn.before",
+    action(_data, context) {
+      if (signal.aborted) {
+        context.kill(new GitPluginError(void 0, "abort", "Abort already signaled"));
+      }
+    }
+  };
+  return [onSpawnBefore, onSpawnAfter];
+}
+
+// src/lib/plugins/block-unsafe-operations-plugin.ts
+function isConfigSwitch(arg) {
+  return typeof arg === "string" && arg.trim().toLowerCase() === "-c";
+}
+function preventProtocolOverride(arg, next) {
+  if (!isConfigSwitch(arg)) {
+    return;
+  }
+  if (!/^\s*protocol(.[a-z]+)?.allow/.test(next)) {
+    return;
+  }
+  throw new GitPluginError(
+    void 0,
+    "unsafe",
+    "Configuring protocol.allow is not permitted without enabling allowUnsafeExtProtocol"
+  );
+}
+function preventUploadPack(arg, method) {
+  if (/^\s*--(upload|receive)-pack/.test(arg)) {
+    throw new GitPluginError(
+      void 0,
+      "unsafe",
+      `Use of --upload-pack or --receive-pack is not permitted without enabling allowUnsafePack`
+    );
+  }
+  if (method === "clone" && /^\s*-u\b/.test(arg)) {
+    throw new GitPluginError(
+      void 0,
+      "unsafe",
+      `Use of clone with option -u is not permitted without enabling allowUnsafePack`
+    );
+  }
+  if (method === "push" && /^\s*--exec\b/.test(arg)) {
+    throw new GitPluginError(
+      void 0,
+      "unsafe",
+      `Use of push with option --exec is not permitted without enabling allowUnsafePack`
+    );
+  }
+}
+function blockUnsafeOperationsPlugin({
+  allowUnsafeProtocolOverride = false,
+  allowUnsafePack = false
+} = {}) {
+  return {
+    type: "spawn.args",
+    action(args, context) {
+      args.forEach((current, index) => {
+        const next = index < args.length ? args[index + 1] : "";
+        allowUnsafeProtocolOverride || preventProtocolOverride(current, next);
+        allowUnsafePack || preventUploadPack(current, context.method);
+      });
+      return args;
+    }
+  };
+}
+
+// src/lib/plugins/command-config-prefixing-plugin.ts
+init_utils();
+function commandConfigPrefixingPlugin(configuration) {
+  const prefix = prefixedArray(configuration, "-c");
+  return {
+    type: "spawn.args",
+    action(data) {
+      return [...prefix, ...data];
+    }
+  };
+}
+
+// src/lib/plugins/completion-detection.plugin.ts
+init_utils();
+
+var never = (0,promise_deferred_dist/* deferred */.yX)().promise;
+function completionDetectionPlugin({
+  onClose = true,
+  onExit = 50
+} = {}) {
+  function createEvents() {
+    let exitCode = -1;
+    const events = {
+      close: (0,promise_deferred_dist/* deferred */.yX)(),
+      closeTimeout: (0,promise_deferred_dist/* deferred */.yX)(),
+      exit: (0,promise_deferred_dist/* deferred */.yX)(),
+      exitTimeout: (0,promise_deferred_dist/* deferred */.yX)()
+    };
+    const result = Promise.race([
+      onClose === false ? never : events.closeTimeout.promise,
+      onExit === false ? never : events.exitTimeout.promise
+    ]);
+    configureTimeout(onClose, events.close, events.closeTimeout);
+    configureTimeout(onExit, events.exit, events.exitTimeout);
+    return {
+      close(code) {
+        exitCode = code;
+        events.close.done();
+      },
+      exit(code) {
+        exitCode = code;
+        events.exit.done();
+      },
+      get exitCode() {
+        return exitCode;
+      },
+      result
+    };
+  }
+  function configureTimeout(flag, event, timeout) {
+    if (flag === false) {
+      return;
+    }
+    (flag === true ? event.promise : event.promise.then(() => delay(flag))).then(timeout.done);
+  }
+  return {
+    type: "spawn.after",
+    action(_0, _1) {
+      return __async(this, arguments, function* (_data, { spawned, close }) {
+        var _a3, _b;
+        const events = createEvents();
+        let deferClose = true;
+        let quickClose = () => void (deferClose = false);
+        (_a3 = spawned.stdout) == null ? void 0 : _a3.on("data", quickClose);
+        (_b = spawned.stderr) == null ? void 0 : _b.on("data", quickClose);
+        spawned.on("error", quickClose);
+        spawned.on("close", (code) => events.close(code));
+        spawned.on("exit", (code) => events.exit(code));
+        try {
+          yield events.result;
+          if (deferClose) {
+            yield delay(50);
+          }
+          close(events.exitCode);
+        } catch (err) {
+          close(events.exitCode, err);
+        }
+      });
+    }
+  };
+}
+
+// src/lib/plugins/custom-binary.plugin.ts
+init_utils();
+var WRONG_NUMBER_ERR = `Invalid value supplied for custom binary, requires a single string or an array containing either one or two strings`;
+var WRONG_CHARS_ERR = `Invalid value supplied for custom binary, restricted characters must be removed or supply the unsafe.allowUnsafeCustomBinary option`;
+function isBadArgument(arg) {
+  return !arg || !/^([a-z]:)?([a-z0-9/.\\_-]+)$/i.test(arg);
+}
+function toBinaryConfig(input, allowUnsafe) {
+  if (input.length < 1 || input.length > 2) {
+    throw new GitPluginError(void 0, "binary", WRONG_NUMBER_ERR);
+  }
+  const isBad = input.some(isBadArgument);
+  if (isBad) {
+    if (allowUnsafe) {
+      console.warn(WRONG_CHARS_ERR);
+    } else {
+      throw new GitPluginError(void 0, "binary", WRONG_CHARS_ERR);
+    }
+  }
+  const [binary, prefix] = input;
+  return {
+    binary,
+    prefix
+  };
+}
+function customBinaryPlugin(plugins, input = ["git"], allowUnsafe = false) {
+  let config = toBinaryConfig(asArray(input), allowUnsafe);
+  plugins.on("binary", (input2) => {
+    config = toBinaryConfig(asArray(input2), allowUnsafe);
+  });
+  plugins.append("spawn.binary", () => {
+    return config.binary;
+  });
+  plugins.append("spawn.args", (data) => {
+    return config.prefix ? [config.prefix, ...data] : data;
+  });
+}
+
+// src/lib/plugins/error-detection.plugin.ts
+init_git_error();
+function isTaskError(result) {
+  return !!(result.exitCode && result.stdErr.length);
+}
+function getErrorMessage(result) {
+  return Buffer.concat([...result.stdOut, ...result.stdErr]);
+}
+function errorDetectionHandler(overwrite = false, isError = isTaskError, errorMessage = getErrorMessage) {
+  return (error, result) => {
+    if (!overwrite && error || !isError(result)) {
+      return error;
+    }
+    return errorMessage(result);
+  };
+}
+function errorDetectionPlugin(config) {
+  return {
+    type: "task.error",
+    action(data, context) {
+      const error = config(data.error, {
+        stdErr: context.stdErr,
+        stdOut: context.stdOut,
+        exitCode: context.exitCode
+      });
+      if (Buffer.isBuffer(error)) {
+        return { error: new GitError(void 0, error.toString("utf-8")) };
+      }
+      return {
+        error
+      };
+    }
+  };
+}
+
+// src/lib/plugins/plugin-store.ts
+init_utils();
+
+var PluginStore = class {
+  constructor() {
+    this.plugins = /* @__PURE__ */ new Set();
+    this.events = new external_node_events_.EventEmitter();
+  }
+  on(type, listener) {
+    this.events.on(type, listener);
+  }
+  reconfigure(type, data) {
+    this.events.emit(type, data);
+  }
+  append(type, action) {
+    const plugin = append(this.plugins, { type, action });
+    return () => this.plugins.delete(plugin);
+  }
+  add(plugin) {
+    const plugins = [];
+    asArray(plugin).forEach((plugin2) => plugin2 && this.plugins.add(append(plugins, plugin2)));
+    return () => {
+      plugins.forEach((plugin2) => this.plugins.delete(plugin2));
+    };
+  }
+  exec(type, data, context) {
+    let output = data;
+    const contextual = Object.freeze(Object.create(context));
+    for (const plugin of this.plugins) {
+      if (plugin.type === type) {
+        output = plugin.action(output, contextual);
+      }
+    }
+    return output;
+  }
+};
+
+// src/lib/plugins/progress-monitor-plugin.ts
+init_utils();
+function progressMonitorPlugin(progress) {
+  const progressCommand = "--progress";
+  const progressMethods = ["checkout", "clone", "fetch", "pull", "push"];
+  const onProgress = {
+    type: "spawn.after",
+    action(_data, context) {
+      var _a2;
+      if (!context.commands.includes(progressCommand)) {
+        return;
+      }
+      (_a2 = context.spawned.stderr) == null ? void 0 : _a2.on("data", (chunk) => {
+        const message = /^([\s\S]+?):\s*(\d+)% \((\d+)\/(\d+)\)/.exec(chunk.toString("utf8"));
+        if (!message) {
+          return;
+        }
+        progress({
+          method: context.method,
+          stage: progressEventStage(message[1]),
+          progress: asNumber(message[2]),
+          processed: asNumber(message[3]),
+          total: asNumber(message[4])
+        });
+      });
+    }
+  };
+  const onArgs = {
+    type: "spawn.args",
+    action(args, context) {
+      if (!progressMethods.includes(context.method)) {
+        return args;
+      }
+      return including(args, progressCommand);
+    }
+  };
+  return [onArgs, onProgress];
+}
+function progressEventStage(input) {
+  return String(input.toLowerCase().split(" ", 1)) || "unknown";
+}
+
+// src/lib/plugins/spawn-options-plugin.ts
+init_utils();
+function spawnOptionsPlugin(spawnOptions) {
+  const options = pick(spawnOptions, ["uid", "gid"]);
+  return {
+    type: "spawn.options",
+    action(data) {
+      return __spreadValues(__spreadValues({}, options), data);
+    }
+  };
+}
+
+// src/lib/plugins/timout-plugin.ts
+function timeoutPlugin({
+  block,
+  stdErr = true,
+  stdOut = true
+}) {
+  if (block > 0) {
+    return {
+      type: "spawn.after",
+      action(_data, context) {
+        var _a2, _b;
+        let timeout;
+        function wait() {
+          timeout && clearTimeout(timeout);
+          timeout = setTimeout(kill, block);
+        }
+        function stop() {
+          var _a3, _b2;
+          (_a3 = context.spawned.stdout) == null ? void 0 : _a3.off("data", wait);
+          (_b2 = context.spawned.stderr) == null ? void 0 : _b2.off("data", wait);
+          context.spawned.off("exit", stop);
+          context.spawned.off("close", stop);
+          timeout && clearTimeout(timeout);
+        }
+        function kill() {
+          stop();
+          context.kill(new GitPluginError(void 0, "timeout", `block timeout reached`));
+        }
+        stdOut && ((_a2 = context.spawned.stdout) == null ? void 0 : _a2.on("data", wait));
+        stdErr && ((_b = context.spawned.stderr) == null ? void 0 : _b.on("data", wait));
+        context.spawned.on("exit", stop);
+        context.spawned.on("close", stop);
+        wait();
+      }
+    };
+  }
+}
+
+// src/lib/plugins/suffix-paths.plugin.ts
+init_pathspec();
+function suffixPathsPlugin() {
+  return {
+    type: "spawn.args",
+    action(data) {
+      const prefix = [];
+      let suffix;
+      function append2(args) {
+        (suffix = suffix || []).push(...args);
+      }
+      for (let i = 0; i < data.length; i++) {
+        const param = data[i];
+        if (isPathSpec(param)) {
+          append2(toPaths(param));
+          continue;
+        }
+        if (param === "--") {
+          append2(
+            data.slice(i + 1).flatMap((item) => isPathSpec(item) && toPaths(item) || item)
+          );
+          break;
+        }
+        prefix.push(param);
+      }
+      return !suffix ? prefix : [...prefix, "--", ...suffix.map(String)];
+    }
+  };
+}
+
+// src/lib/git-factory.ts
+init_utils();
+var Git = require_git();
+function gitInstanceFactory(baseDir, options) {
+  var _a2;
+  const plugins = new PluginStore();
+  const config = createInstanceConfig(
+    baseDir && (typeof baseDir === "string" ? { baseDir } : baseDir) || {},
+    options
+  );
+  if (!folderExists(config.baseDir)) {
+    throw new GitConstructError(
+      config,
+      `Cannot use simple-git on a directory that does not exist`
+    );
+  }
+  if (Array.isArray(config.config)) {
+    plugins.add(commandConfigPrefixingPlugin(config.config));
+  }
+  plugins.add(blockUnsafeOperationsPlugin(config.unsafe));
+  plugins.add(suffixPathsPlugin());
+  plugins.add(completionDetectionPlugin(config.completion));
+  config.abort && plugins.add(abortPlugin(config.abort));
+  config.progress && plugins.add(progressMonitorPlugin(config.progress));
+  config.timeout && plugins.add(timeoutPlugin(config.timeout));
+  config.spawnOptions && plugins.add(spawnOptionsPlugin(config.spawnOptions));
+  plugins.add(errorDetectionPlugin(errorDetectionHandler(true)));
+  config.errors && plugins.add(errorDetectionPlugin(config.errors));
+  customBinaryPlugin(plugins, config.binary, (_a2 = config.unsafe) == null ? void 0 : _a2.allowUnsafeCustomBinary);
+  return new Git(config, plugins);
+}
+
+// src/lib/runners/promise-wrapped.ts
+init_git_response_error();
+var functionNamesBuilderApi = (/* unused pure expression or super */ null && (["customBinary", "env", "outputHandler", "silent"]));
+var functionNamesPromiseApi = (/* unused pure expression or super */ null && ([
+  "add",
+  "addAnnotatedTag",
+  "addConfig",
+  "addRemote",
+  "addTag",
+  "applyPatch",
+  "binaryCatFile",
+  "branch",
+  "branchLocal",
+  "catFile",
+  "checkIgnore",
+  "checkIsRepo",
+  "checkout",
+  "checkoutBranch",
+  "checkoutLatestTag",
+  "checkoutLocalBranch",
+  "clean",
+  "clone",
+  "commit",
+  "cwd",
+  "deleteLocalBranch",
+  "deleteLocalBranches",
+  "diff",
+  "diffSummary",
+  "exec",
+  "fetch",
+  "getRemotes",
+  "init",
+  "listConfig",
+  "listRemote",
+  "log",
+  "merge",
+  "mergeFromTo",
+  "mirror",
+  "mv",
+  "pull",
+  "push",
+  "pushTags",
+  "raw",
+  "rebase",
+  "remote",
+  "removeRemote",
+  "reset",
+  "revert",
+  "revparse",
+  "rm",
+  "rmKeepLocal",
+  "show",
+  "stash",
+  "stashList",
+  "status",
+  "subModule",
+  "submoduleAdd",
+  "submoduleInit",
+  "submoduleUpdate",
+  "tag",
+  "tags",
+  "updateServerInfo"
+]));
+function gitP(...args) {
+  let git;
+  let chain = Promise.resolve();
+  try {
+    git = gitInstanceFactory(...args);
+  } catch (e) {
+    chain = Promise.reject(e);
+  }
+  function builderReturn() {
+    return promiseApi;
+  }
+  function chainReturn() {
+    return chain;
+  }
+  const promiseApi = [...functionNamesBuilderApi, ...functionNamesPromiseApi].reduce(
+    (api, name) => {
+      const isAsync = functionNamesPromiseApi.includes(name);
+      const valid = isAsync ? asyncWrapper(name, git) : syncWrapper(name, git, api);
+      const alternative = isAsync ? chainReturn : builderReturn;
+      Object.defineProperty(api, name, {
+        enumerable: false,
+        configurable: false,
+        value: git ? valid : alternative
+      });
+      return api;
+    },
+    {}
+  );
+  return promiseApi;
+  function asyncWrapper(fn, git2) {
+    return function(...args2) {
+      if (typeof args2[args2.length] === "function") {
+        throw new TypeError(
+          "Promise interface requires that handlers are not supplied inline, trailing function not allowed in call to " + fn
+        );
+      }
+      return chain.then(function() {
+        return new Promise(function(resolve, reject) {
+          const callback = (err, result) => {
+            if (err) {
+              return reject(toError(err));
+            }
+            resolve(result);
+          };
+          args2.push(callback);
+          git2[fn].apply(git2, args2);
+        });
+      });
+    };
+  }
+  function syncWrapper(fn, git2, api) {
+    return (...args2) => {
+      git2[fn](...args2);
+      return api;
+    };
+  }
+}
+function toError(error) {
+  if (error instanceof Error) {
+    return error;
+  }
+  if (typeof error === "string") {
+    return new Error(error);
+  }
+  return new GitResponseError(error);
+}
+
+// src/esm.mjs
+var simpleGit = (/* unused pure expression or super */ null && (gitInstanceFactory));
+var esm_default = gitInstanceFactory;
+
+//# sourceMappingURL=index.js.map
+
+;// CONCATENATED MODULE: ./index.js
+
+
+
+
+
+
+
+
+
+const git = esm_default();
 
 const toAst = async (markdown) => {
-  const ast = await unified().use(stringify).parse(markdown)
+  const ast = await (0,unified_namespaceObject["default"])().use((remark_stringify_default())).parse(markdown)
   // return unified().use(parse).parse(markdown);
   return ast;
 };
 
 const toMarkdown = async (ast) => {
-  const markdown = await unified().use(stringify).stringify(ast);
+  const markdown = await (0,unified_namespaceObject["default"])().use((remark_stringify_default())).stringify(ast);
   // return unified().use(stringify).stringify(ast);
   return markdown;
 };
 
 const mainDir = ".";
-let DOCUMENTATION = readdirSync(mainDir).includes("documentation.md")
+let DOCUMENTATION = (0,external_fs_.readdirSync)(mainDir).includes("documentation.md")
   ? "documentation.md"
   : "DOCUMENTATION.md";
-const lang = core.getInput("LANG") || "zh-CN";
-const documentation = readFileSync(join(mainDir, DOCUMENTATION), { encoding: "utf8" });
+const lang = (0,core.getInput)("LANG") || "zh-CN";
+const documentation = (0,external_fs_.readFileSync)((0,external_path_.join)(mainDir, DOCUMENTATION), { encoding: "utf8" });
 const documentationAST = toAst(documentation);
 console.log("AST CREATED AND READ");
 
 let originalText = [];
 
-visit(documentationAST, async (node) => {
+unist_util_visit_default()(documentationAST, async (node) => {
   if (node.type === "text") {
     originalText.push(node.value);
-    node.value = (await $(node.value, { to: lang })).text;
+    node.value = (await google_translate_api_default()(node.value, { to: lang })).text;
   }
 });
 
 const translatedText = originalText.map(async (text) => {
-  return (await $(text, { to: lang })).text;
+  return (await google_translate_api_default()(text, { to: lang })).text;
 });
 
 async function writeToFile() {
   await Promise.all(translatedText);
-  writeFileSync(
-    join(mainDir, `DOCUMENTATION.${lang}.md`),
+  (0,external_fs_.writeFileSync)(
+    (0,external_path_.join)(mainDir, `DOCUMENTATION.${lang}.md`),
     toMarkdown(documentationAST),
     "utf8"
   );
@@ -56255,6 +41155,8 @@ async function translateDocumentation() {
 }
 
 translateDocumentation();
+
+})();
 
 module.exports = __webpack_exports__;
 /******/ })()
