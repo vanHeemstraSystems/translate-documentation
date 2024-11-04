@@ -9,7 +9,7 @@
 -   [Française](DOCUMENTATION.fr.md)
 -   [arabe](DOCUMENTATION.ar.md)
 
-**GitHub Action to translate Documentation to any language**
+**GitHub Action pour traduire la documentation dans n'importe quelle langue**
 
 Il s'agit d'une action GitHub qui traduit automatiquement la documentation de votre dépôt dans une langue spécifiée.
 
