@@ -73,13 +73,13 @@ Alors:
 
     $ npm run build
 
-Un nouveau package sera construit et stocké dans le`dist`annuaire.
+A new package will be build and stored in the `dist`annuaire.
 
 ## Configuration
 
 ### Possibilités
 
-Vous pouvez configurer davantage l'action avec les options suivantes :
+You can configure the action further with the following options:
 
 -   `LANG`: La langue dans laquelle vous souhaitez traduire votre fichier Lisez-moi. La valeur par défaut est le chinois simplifié. Les langues prises en charge peuvent être trouvées ci-dessous.
     (défaut:`zh-CH`) (requis:`false`)
@@ -88,7 +88,7 @@ Vous pouvez configurer davantage l'action avec les options suivantes :
 
 Les langues prises en charge peuvent être trouvées ici<https://cloud.google.com/translate/docs/languages>
 
-### Problèmes
+### Issues
 
 Vérifier[ici](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)pour les problèmes liés à cette action.
 
