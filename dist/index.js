@@ -56009,11 +56009,11 @@ var esm_default = gitInstanceFactory;
 
 const git = esm_default();
 
-const toAst = async (markdown) => {
+const toAst = (markdown) => {
   return unified().use(remarkParse).parse(markdown)
 };
 
-const toMarkdown = async (ast) => {
+const toMarkdown = (ast) => {
   return unified().use((remark_stringify_default())).stringify(ast)
 };
 

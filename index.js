@@ -9,11 +9,11 @@ import visit from "unist-util-visit";
 import simpleGit from "simple-git";
 const git = simpleGit();
 
-const toAst = async (markdown) => {
+const toAst = (markdown) => {
   return unified().use(parse).parse(markdown)
 };
 
-const toMarkdown = async (ast) => {
+const toMarkdown = (ast) => {
   return unified().use(stringify).stringify(ast)
 };
 
