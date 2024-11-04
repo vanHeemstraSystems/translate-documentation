@@ -68,7 +68,7 @@ async function commitChanges (lang) {
     await git.addConfig('user.name', 'github-actions[bot]')
     await git.addConfig(
       'user.email',
-      '41898282+github-actions[bot]@users.noreply.github.com'
+      'github-actions[bot]@users.noreply.github.com'
     )
     await git.commit(
       `docs: Added DOCUMENTATION."${lang}".md translation via https://github.com/vanHeemstraSystems/translate-documentation`
