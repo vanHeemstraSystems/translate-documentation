@@ -41085,15 +41085,13 @@ var esm_default = gitInstanceFactory;
 const git = esm_default();
 
 const toAst = async (markdown) => {
-  const ast = await (0,unified_namespaceObject["default"])().use((remark_stringify_default())).parse(markdown)
   // return unified().use(parse).parse(markdown);
-  return ast;
+  return await (0,unified_namespaceObject["default"])().use((remark_stringify_default())).parse(markdown)
 };
 
 const toMarkdown = async (ast) => {
-  const markdown = await (0,unified_namespaceObject["default"])().use((remark_stringify_default())).stringify(ast);
   // return unified().use(stringify).stringify(ast);
-  return markdown;
+  return await (0,unified_namespaceObject["default"])().use((remark_stringify_default())).stringify(ast)
 };
 
 const mainDir = ".";

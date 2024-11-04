@@ -10,15 +10,13 @@ import simpleGit from "simple-git";
 const git = simpleGit();
 
 const toAst = async (markdown) => {
-  const ast = await unifiedFunction().use(stringify).parse(markdown)
   // return unified().use(parse).parse(markdown);
-  return ast;
+  return await unifiedFunction().use(stringify).parse(markdown)
 };
 
 const toMarkdown = async (ast) => {
-  const markdown = await unifiedFunction().use(stringify).stringify(ast);
   // return unified().use(stringify).stringify(ast);
-  return markdown;
+  return await unifiedFunction().use(stringify).stringify(ast)
 };
 
 const mainDir = ".";
