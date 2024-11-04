@@ -1,5 +1,5 @@
 name: Translate Documentation Action
-author: Ephraim Atta-Duncan
+author: Willem van Heemstra
 description: Translate the Documentation to another language
 
 inputs:
@@ -9,7 +9,7 @@ inputs:
     default: 'zh-CN'
 
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 
 branding:
