@@ -90,7 +90,7 @@ jobs:
 
 ### समस्याएँ
 
-Check [यहाँ](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)इस कार्रवाई से संबंधित मुद्दों के लिए.
+जाँच करना[यहाँ](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)इस कार्रवाई से संबंधित मुद्दों के लिए.
 
 ### विकास
 
@@ -98,4 +98,4 @@ Check [यहाँ](https://github.com/vanHeemstraSystems/translate-documentati
 
 ### लाइसेंस
 
-[साथ](./LICENSE)
+[MIT](./LICENSE)
