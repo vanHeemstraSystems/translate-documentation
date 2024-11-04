@@ -1,11 +1,11 @@
-# Translate Readme Action
+# 翻譯自述文件操作
 
 ## 文件翻譯
 
 -   [英語](DOCUMENTATION.md)
 -   [簡體中文](DOCUMENTATION.zh-CN.md)
 -   [繁體中文](DOCUMENTATION.zh-TW.md)
--   [हिंदी](DOCUMENTATION.hi.md)
+-   [印地語](DOCUMENTATION.hi.md)
 -   [法語](DOCUMENTATION.fr.md)
 -   [阿拉伯](DOCUMENTATION.ar.md)
 
@@ -73,7 +73,7 @@ Linux / macOS：
 
     $ npm run build
 
-將建立一個新包並將其儲存在`dist` directory.
+將建立一個新包並將其儲存在`dist`目錄。
 
 ## 配置
 
@@ -81,10 +81,10 @@ Linux / macOS：
 
 您可以使用以下選項進一步配置操作：
 
--   `LANG`：您要將自述文件翻譯成的語言。預設為簡體中文。支援的語言可以在下面找到。
-    (預設:`zh-CH`) (required: `false`)
+-   `LANG`：您要將自述文件翻譯成的語言。預設為簡體中文。可以在下面找到支援的語言。
+    (預設:`zh-CH`） （必需的：`false`)
 
-## Supported Languages
+## 支援的語言
 
 可以在此處找到支援的語言<https://cloud.google.com/translate/docs/languages>
 
