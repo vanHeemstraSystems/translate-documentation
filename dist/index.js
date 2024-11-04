@@ -56038,7 +56038,7 @@ unist_util_visit_default()(documentationAST, async node => {
     }
   } catch (error) {
     console.log('visit error: ', error)
-    throw new Error(error)
+    // throw new Error(error)
   }
 })
 
@@ -56057,7 +56057,7 @@ async function writeToFile () {
     console.log(`DOCUMENTATION.${lang}.md written`)
   } catch (error) {
     console.log('writeToFile error: ', error)
-    throw new Error(error)
+    // throw new Error(error)
   }
 }
 
@@ -56078,7 +56078,7 @@ async function commitChanges (lang) {
     console.log('pushed')
   } catch (error) {
     console.log('commitChanges error: ', error)
-    throw new Error(error)
+    // throw new Error(error)
   }
 }
 
@@ -56089,7 +56089,7 @@ async function translateDocumentation () {
     console.log('Done')
   } catch (error) {
     console.log('translateDocumentation error: ', error)
-    throw new Error(error)
+    // throw new Error(error)
   }
 }
 
