@@ -1,18 +1,18 @@
 {
   "name": "translate-md",
   "version": "1.0.0",
-  "description": "A Github Action to translate Readme to a different language",
+  "description": "A Github Action to translate Documentation to a different language",
   "main": "index.js",
   "scripts": {
     "build": "ncc build ./index.js -o dist --source-map",
     "build:commit": "npm run build && git add . && git commit"
   },
   "keywords": [
-    "readme",
+    "documentation",
     "translate",
     "translator"
   ],
-  "author": "Ephraim Atta-Duncan",
+  "author": "Willem van Heemstra",
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.2.6",
