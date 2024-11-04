@@ -1,0 +1,37 @@
+name: Translate DOCUMENTATION
+
+on:
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      # ISO Language Codes: https://cloud.google.com/translate/docs/languages  
+      - name: Adding DOCUMENTATION - Chinese Simplified
+        uses: vanHeemstraSystems/translate-documentation@main
+        with:
+          LANG: zh-CN
+      - name: Adding DOCUMENTATION - Chinese Traditional
+        uses: vanHeemstraSystems/translate-documentation@main
+        with:
+          LANG: zh-TW
+      - name: Adding DOCUMENTATION - Hindi
+        uses: vanHeemstraSystems/translate-documentation@main
+        with:
+          LANG: hi
+      - name: Adding DOCUMENTATION - Arabic
+        uses: vanHeemstraSystems/translate-documentation@main
+        with:
+          LANG: ar
+      - name: Adding DOCUMENTATION - French
+        uses: vanHeemstraSystems/translate-documentation@main
+        with:
+          LANG: fr
