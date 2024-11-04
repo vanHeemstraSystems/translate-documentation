@@ -7,7 +7,7 @@
 -   [परंपरागत चीनी](DOCUMENTATION.zh-TW.md)
 -   [हिंदी](DOCUMENTATION.hi.md)
 -   [फ़्रेंच](DOCUMENTATION.fr.md)
--   [अरब](DOCUMENTATION.ar.md)
+-   [عربى](DOCUMENTATION.ar.md)
 
 **दस्तावेज़ीकरण को किसी भी भाषा में अनुवाद करने के लिए GitHub क्रिया**
 
@@ -57,7 +57,7 @@ jobs:
           LANG: fr
 ```
 
-## निर्माण
+## Build
 
 निम्नलिखित कार्य करें:
 
@@ -88,13 +88,13 @@ jobs:
 
 समर्थित भाषाएँ यहाँ पाई जा सकती हैं<https://cloud.google.com/translate/docs/languages>
 
-### समस्याएँ
+### Issues
 
 जाँच करना[यहाँ](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)इस कार्रवाई से संबंधित मुद्दों के लिए.
 
 ### विकास
 
-Suggestions and contributions are always welcome!
+सुझावों और योगदानों का हमेशा स्वागत है!
 
 ### लाइसेंस
 
