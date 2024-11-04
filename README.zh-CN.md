@@ -1,4 +1,4 @@
-# Translate Readme Action
+# 翻译自述文件操作
 
 ## 文档翻译
 
@@ -90,7 +90,7 @@ Linux / macOS：
 
 ### 问题
 
-查看[这里](https://github.com/vanHeemstraSystems/translate-documentation/issues/1) for issues related to this action.
+查看[这里](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)对于与此操作相关的问题。
 
 ### 发展
 
