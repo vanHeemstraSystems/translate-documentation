@@ -10,11 +10,13 @@ const simpleGit = require("simple-git");
 const git = simpleGit();
 
 const toAst = (markdown) => {
-  return unified().use(parse).parse(markdown);
+  // return unified().use(parse).parse(markdown);
+  return unified.use(parse).parse(markdown);
 };
 
 const toMarkdown = (ast) => {
-  return unified().use(stringify).stringify(ast);
+  // return unified().use(stringify).stringify(ast);
+  unified.use(stringify).stringify(ast);
 };
 
 const mainDir = ".";
