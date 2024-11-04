@@ -13,7 +13,7 @@
 
 这是一个 GitHub Action，可自动将存储库中的文档翻译为指定语言。
 
-## 设置
+## Setup
 
 1.  **添加工作流程文件**到您的项目（例如`.github/workflows/readme.yml`):
 
