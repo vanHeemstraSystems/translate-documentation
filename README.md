@@ -10,7 +10,7 @@
 
 **GitHub Action to translate Readme to any language**
 
-This is a GitHub Action that automatically translate the readme in your repo to a specified language.
+This is a GitHub Action that automatically translate the documentation in your repo to a specified language.
 
 _A submission for the [DEV: GitHub Actions For Open Source!](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn) hackathon_
 
