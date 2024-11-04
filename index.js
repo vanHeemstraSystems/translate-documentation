@@ -9,14 +9,16 @@ const visit = require("unist-util-visit");
 const simpleGit = require("simple-git");
 const git = simpleGit();
 
-const toAst = (markdown) => {
+const toAst = async (markdown) => {
+  const ast = await unified().use(stringify).parse(markdown)
   // return unified().use(parse).parse(markdown);
-  return unified.use(parse).parse(markdown);
+  return ast;
 };
 
-const toMarkdown = (ast) => {
+const toMarkdown = async (ast) => {
+  const markdown = await unified().use(stringify).stringify(ast);
   // return unified().use(stringify).stringify(ast);
-  unified.use(stringify).stringify(ast);
+  return markdown;
 };
 
 const mainDir = ".";
