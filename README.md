@@ -12,8 +12,6 @@
 
 This is a GitHub Action that automatically translate the documentation in your repo to a specified language.
 
-_A submission for the [DEV: GitHub Actions For Open Source!](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn) hackathon_
-
 ## Setup
 
 1. **Add a workflow file** to your project (e.g. `.github/workflows/readme.yml`):
