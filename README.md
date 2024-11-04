@@ -1,14 +1,14 @@
 # Translate Readme Action
 
-## README Translation
-- [English](README.md)
-- [简体中文](README.zh-CN.md)
-- [繁体中文](README.zh-TW.md)
-- [हिंदी](README.hi.md)
-- [Française](README.fr.md)
-- [عربى](README.ar.md)
+## DOCUMENTATION Translation
+- [English](DOCUMENTATION.md)
+- [简体中文](DOCUMENTATION.zh-CN.md)
+- [繁体中文](DOCUMENTATION.zh-TW.md)
+- [हिंदी](DOCUMENTATION.hi.md)
+- [Française](DOCUMENTATION.fr.md)
+- [عربى](DOCUMENTATION.ar.md)
 
-**GitHub Action to translate Readme to any language**
+**GitHub Action to translate Documentation to any language**
 
 This is a GitHub Action that automatically translate the documentation in your repo to a specified language.
 
@@ -16,7 +16,7 @@ This is a GitHub Action that automatically translate the documentation in your r
 
 1. **Add a workflow file** to your project (e.g. `.github/workflows/readme.yml`):
 ```yaml
-name: Translate README
+name: Translate DOCUMENTATION
 
 on:
   push:
@@ -33,23 +33,23 @@ jobs:
         with:
           node-version: 12.x
       # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
-      - name: Adding README - Chinese Simplified
+      - name: Adding DOCUMENTATION - Chinese Simplified
         uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: zh-CN
-      - name: Adding README - Chinese Traditional
+      - name: Adding DOCUMENTATION - Chinese Traditional
         uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: zh-TW
-      - name: Adding README - Hindi
+      - name: Adding DOCUMENTATION - Hindi
         uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: hi
-      - name: Adding README - Arabic
+      - name: Adding DOCUMENTATION - Arabic
         uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: ar
-      - name: Adding README - French
+      - name: Adding DOCUMENTATION - French
         uses: vanHeemstraSystems/translate-documentation@main
         with:
           LANG: fr
