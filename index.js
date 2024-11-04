@@ -1,4 +1,4 @@
-import unifiedFunction from "unified";
+import {unified} from "unified";
 import { readFileSync, writeFileSync, readdirSync } from "fs";
 import { join } from "path";
 import { getInput } from "@actions/core";
@@ -9,14 +9,12 @@ import visit from "unist-util-visit";
 import simpleGit from "simple-git";
 const git = simpleGit();
 
-const toAst = async (markdown) => {
-  // return unified().use(parse).parse(markdown);
-  return await unifiedFunction().use(stringify).parse(markdown)
+const toAst = (markdown) => {
+  return unified().use(parse).parse(markdown);
 };
 
-const toMarkdown = async (ast) => {
-  // return unified().use(stringify).stringify(ast);
-  return await unifiedFunction().use(stringify).stringify(ast)
+const toMarkdown = (ast) => {
+  return unified().use(stringify).stringify(ast);
 };
 
 const mainDir = ".";
