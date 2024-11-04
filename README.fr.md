@@ -9,7 +9,7 @@
 -   [Française](DOCUMENTATION.fr.md)
 -   [arabe](DOCUMENTATION.ar.md)
 
-**GitHub Action pour traduire la documentation dans n'importe quelle langue**
+**GitHub Action to translate Documentation to any language**
 
 Il s'agit d'une action GitHub qui traduit automatiquement la documentation de votre dépôt dans une langue spécifiée.
 
@@ -73,13 +73,13 @@ Alors:
 
     $ npm run build
 
-A new package will be build and stored in the `dist`annuaire.
+Un nouveau package sera construit et stocké dans le`dist`annuaire.
 
 ## Configuration
 
 ### Possibilités
 
-You can configure the action further with the following options:
+Vous pouvez configurer davantage l'action avec les options suivantes :
 
 -   `LANG`: La langue dans laquelle vous souhaitez traduire votre fichier Lisez-moi. La valeur par défaut est le chinois simplifié. Les langues prises en charge peuvent être trouvées ci-dessous.
     (défaut:`zh-CH`) (requis:`false`)
@@ -88,7 +88,7 @@ You can configure the action further with the following options:
 
 Les langues prises en charge peuvent être trouvées ici<https://cloud.google.com/translate/docs/languages>
 
-### Issues
+### Problèmes
 
 Vérifier[ici](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)pour les problèmes liés à cette action.
 
