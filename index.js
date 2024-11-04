@@ -1,22 +1,22 @@
-const { readFileSync, writeFileSync, readdirSync } = require("fs");
-const { join } = require("path");
-const core = require("@actions/core");
-const $ = require("google-translate-api");
-const unified = require("unified");
-const parse = require("remark-parse");
-const stringify = require("remark-stringify");
-const visit = require("unist-util-visit");
-const simpleGit = require("simple-git");
+import unifiedFunction from "unified";
+import { readFileSync, writeFileSync, readdirSync } from "fs";
+import { join } from "path";
+import { getInput } from "@actions/core";
+import $ from "google-translate-api";
+import parse from "remark-parse";
+import stringify from "remark-stringify";
+import visit from "unist-util-visit";
+import simpleGit from "simple-git";
 const git = simpleGit();
 
 const toAst = async (markdown) => {
-  const ast = await unified().use(stringify).parse(markdown)
+  const ast = await unifiedFunction().use(stringify).parse(markdown)
   // return unified().use(parse).parse(markdown);
   return ast;
 };
 
 const toMarkdown = async (ast) => {
-  const markdown = await unified().use(stringify).stringify(ast);
+  const markdown = await unifiedFunction().use(stringify).stringify(ast);
   // return unified().use(stringify).stringify(ast);
   return markdown;
 };
@@ -25,7 +25,7 @@ const mainDir = ".";
 let DOCUMENTATION = readdirSync(mainDir).includes("documentation.md")
   ? "documentation.md"
   : "DOCUMENTATION.md";
-const lang = core.getInput("LANG") || "zh-CN";
+const lang = getInput("LANG") || "zh-CN";
 const documentation = readFileSync(join(mainDir, DOCUMENTATION), { encoding: "utf8" });
 const documentationAST = toAst(documentation);
 console.log("AST CREATED AND READ");
