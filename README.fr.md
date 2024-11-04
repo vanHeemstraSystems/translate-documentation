@@ -9,7 +9,7 @@
 -   [Française](DOCUMENTATION.fr.md)
 -   [arabe](DOCUMENTATION.ar.md)
 
-**GitHub Action pour traduire la documentation dans n'importe quelle langue**
+**GitHub Action to translate Documentation to any language**
 
 Il s'agit d'une action GitHub qui traduit automatiquement la documentation de votre dépôt dans une langue spécifiée.
 
@@ -61,7 +61,7 @@ jobs:
 
 Procédez comme suit :
 
-Linux/MacOS :
+Linux / macOS:
 
     $ export NODE_OPTIONS=--openssl-legacy-provider
 
@@ -88,7 +88,7 @@ Vous pouvez configurer davantage l'action avec les options suivantes :
 
 Les langues prises en charge peuvent être trouvées ici<https://cloud.google.com/translate/docs/languages>
 
-### Problèmes
+### Issues
 
 Vérifier[ici](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)pour les problèmes liés à cette action.
 
