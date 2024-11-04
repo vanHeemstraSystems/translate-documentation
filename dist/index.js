@@ -56007,76 +56007,88 @@ var esm_default = gitInstanceFactory;
 
 
 
-const git = esm_default();
+const git = esm_default()
 
-const toAst = (markdown) => {
+const toAst = markdown => {
   return unified().use(remarkParse).parse(markdown)
-};
+}
 
-const toMarkdown = (ast) => {
+const toMarkdown = ast => {
   return unified().use((remark_stringify_default())).stringify(ast)
-};
+}
 
-const mainDir = ".";
-let DOCUMENTATION = (0,external_fs_.readdirSync)(mainDir).includes("documentation.md")
-  ? "documentation.md"
-  : "DOCUMENTATION.md";
-const lang = (0,core.getInput)("LANG") || "zh-CN";
-const documentation = (0,external_fs_.readFileSync)((0,external_path_.join)(mainDir, DOCUMENTATION), { encoding: "utf8" });
-const documentationAST = toAst(documentation);
-console.log("AST CREATED AND READ");
+const mainDir = '.'
+let DOCUMENTATION = (0,external_fs_.readdirSync)(mainDir).includes('documentation.md')
+  ? 'documentation.md'
+  : 'DOCUMENTATION.md'
+const lang = (0,core.getInput)('LANG') || 'zh-CN'
+const documentation = (0,external_fs_.readFileSync)((0,external_path_.join)(mainDir, DOCUMENTATION), {
+  encoding: 'utf8'
+})
+const documentationAST = toAst(documentation)
+console.log('AST CREATED AND READ')
 
-let originalText = [];
+let originalText = []
 
-unist_util_visit_default()(documentationAST, async (node) => {
-  if (node.type === "text") {
-    originalText.push(node.value);
-    node.value = (await google_translate_api_default()(node.value, { to: lang })).text;
+unist_util_visit_default()(documentationAST, async node => {
+  if (node.type === 'text') {
+    originalText.push(node.value)
+    node.value = (await google_translate_api_default()(node.value, { to: lang })).text
   }
-});
+})
 
-const translatedText = originalText.map(async (text) => {
-  return (await google_translate_api_default()(text, { to: lang })).text;
-});
+const translatedText = originalText.map(async text => {
+  return (await google_translate_api_default()(text, { to: lang })).text
+})
 
-async function writeToFile() {
-  await Promise.all(translatedText);
-  (0,external_fs_.writeFileSync)(
-    (0,external_path_.join)(mainDir, `DOCUMENTATION.${lang}.md`),
-    toMarkdown(documentationAST),
-    "utf8"
-  );
-  console.log(`DOCUMENTATION.${lang}.md written`);
-}
-
-async function commitChanges(lang) {
-  console.log("commit started");
-  await git.add("./*");
-  await git.addConfig("user.name", "github-actions[bot]");
-  await git.addConfig(
-    "user.email",
-    "41898282+github-actions[bot]@users.noreply.github.com"
-  );
-  await git.commit(
-    `docs: Added DOCUMENTATION."${lang}".md translation via https://github.com/vanHeemstraSystems/translate-documentation`
-  );
-  console.log("finished commit");
-  await git.push();
-  console.log("pushed");
-}
-
-async function translateDocumentation() {
+async function writeToFile () {
   try {
-    await writeToFile();
-    await commitChanges(lang);
-    console.log("Done");
+    await Promise.all(translatedText)
+    ;(0,external_fs_.writeFileSync)(
+      (0,external_path_.join)(mainDir, `DOCUMENTATION.${lang}.md`),
+      toMarkdown(documentationAST),
+      'utf8'
+    )
+    console.log(`DOCUMENTATION.${lang}.md written`)
   } catch (error) {
-    console.log("error: ", error);
-    throw new Error(error);
+    console.log('writeToFile error: ', error)
+    throw new Error(error)
   }
 }
 
-translateDocumentation();
+async function commitChanges (lang) {
+  try {
+    console.log('commit started')
+    await git.add('./*')
+    await git.addConfig('user.name', 'github-actions[bot]')
+    await git.addConfig(
+      'user.email',
+      '41898282+github-actions[bot]@users.noreply.github.com'
+    )
+    await git.commit(
+      `docs: Added DOCUMENTATION."${lang}".md translation via https://github.com/vanHeemstraSystems/translate-documentation`
+    )
+    console.log('finished commit')
+    await git.push()
+    console.log('pushed')
+  } catch (error) {
+    console.log('commitChanges error: ', error)
+    throw new Error(error)
+  }
+}
+
+async function translateDocumentation () {
+  try {
+    await writeToFile()
+    await commitChanges(lang)
+    console.log('Done')
+  } catch (error) {
+    console.log('translateDocumentation error: ', error)
+    throw new Error(error)
+  }
+}
+
+translateDocumentation()
 
 })();
 
