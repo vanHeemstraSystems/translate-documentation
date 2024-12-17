@@ -2,7 +2,7 @@
 
 ## 文件翻譯
 
--   [英語](DOCUMENTATION.md)
+-   [English](DOCUMENTATION.md)
 -   [簡體中文](DOCUMENTATION.zh-CN.md)
 -   [繁體中文](DOCUMENTATION.zh-TW.md)
 -   [印地語](DOCUMENTATION.hi.md)
