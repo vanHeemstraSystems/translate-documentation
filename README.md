@@ -23,36 +23,30 @@ on:
     branches:
       - main
       - master
+
 jobs:
-  build:
+  translate:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        language:
+          - { code: zh-CN, name: Chinese Simplified }
+          - { code: zh-TW, name: Chinese Traditional }
+          - { code: hi, name: Hindi }
+          - { code: ar, name: Arabic }
+          - { code: fr, name: French }
+    
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 12.x
-      # ISO Language Codes: https://cloud.google.com/translate/docs/languages  
-      - name: Adding DOCUMENTATION - Chinese Simplified
+          node-version: 20.x  # Updated to a more recent LTS version
+      
+      - name: Adding DOCUMENTATION - ${{ matrix.language.name }}
         uses: vanHeemstraSystems/translate-documentation@main
         with:
-          LANG: zh-CN
-      - name: Adding DOCUMENTATION - Chinese Traditional
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: zh-TW
-      - name: Adding DOCUMENTATION - Hindi
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: hi
-      - name: Adding DOCUMENTATION - Arabic
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: ar
-      - name: Adding DOCUMENTATION - French
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: fr
+          LANG: ${{ matrix.language.code }}
 ```
 
 ## Build
