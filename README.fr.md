@@ -9,13 +9,13 @@
 -   [Française](DOCUMENTATION.fr.md)
 -   [arabe](DOCUMENTATION.ar.md)
 
-**GitHub Action to translate Documentation to any language**
+**GitHub Action pour traduire la documentation dans n'importe quelle langue**
 
 Il s'agit d'une action GitHub qui traduit automatiquement la documentation de votre dépôt dans une langue spécifiée.
 
 ## Installation
 
-1.  **Ajouter un fichier de workflow**à votre projet (par ex.`.github/workflows/readme.yml`):
+1.  **Add a workflow file**à votre projet (par ex.`.github/workflows/readme.yml`):
 
 ```yaml
 name: Translate DOCUMENTATION
@@ -61,7 +61,7 @@ jobs:
 
 Procédez comme suit :
 
-Linux / macOS:
+Linux/MacOS :
 
     $ export NODE_OPTIONS=--openssl-legacy-provider
 
@@ -81,14 +81,14 @@ Un nouveau package sera construit et stocké dans le`dist`annuaire.
 
 Vous pouvez configurer davantage l'action avec les options suivantes :
 
--   `LANG`: La langue dans laquelle vous souhaitez traduire votre fichier Lisez-moi. La valeur par défaut est le chinois simplifié. Les langues prises en charge peuvent être trouvées ci-dessous.
-    (défaut:`zh-CH`) (requis:`false`)
+-   `LANG`: The language you want to translate your readme to. The default is Simplified Chinese. The supported languages can be found below.
+    (default: `zh-CH`) (requis:`false`)
 
 ## Langues prises en charge
 
 Les langues prises en charge peuvent être trouvées ici<https://cloud.google.com/translate/docs/languages>
 
-### Issues
+### Problèmes
 
 Vérifier[ici](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)pour les problèmes liés à cette action.
 
