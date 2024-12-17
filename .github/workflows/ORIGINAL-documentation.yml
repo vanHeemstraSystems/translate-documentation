@@ -3,8 +3,9 @@ name: Translate DOCUMENTATION
 on:
   push:
     branches:
-      - main
-      - master
+      # - main
+      # - master
+      - foo
 jobs:
   build:
     runs-on: ubuntu-latest
