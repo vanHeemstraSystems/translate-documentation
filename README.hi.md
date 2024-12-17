@@ -88,7 +88,7 @@ jobs:
 
 समर्थित भाषाएँ यहाँ पाई जा सकती हैं<https://cloud.google.com/translate/docs/languages>
 
-### Issues
+### समस्याएँ
 
 जाँच करना[यहाँ](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)इस कार्रवाई से संबंधित मुद्दों के लिए.
 
