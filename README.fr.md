@@ -75,7 +75,7 @@ Un nouveau package sera construit et stocké dans le`dist`annuaire.
 
 Vous pouvez configurer davantage l'action avec les options suivantes :
 
--   `LANG`: La langue dans laquelle vous souhaitez traduire votre fichier Lisez-moi. La valeur par défaut est le chinois simplifié. Les langues prises en charge peuvent être trouvées ci-dessous.
+-   `LANG`: La langue dans laquelle vous souhaitez traduire votre documentation. La valeur par défaut est le chinois simplifié. Les langues prises en charge peuvent être trouvées ci-dessous.
     (défaut:`zh-CH`) (requis:`false`)
 
 ## Langues prises en charge

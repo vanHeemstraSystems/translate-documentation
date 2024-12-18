@@ -1,6 +1,6 @@
 # रीडमी एक्शन का अनुवाद करें
 
-## DOCUMENTATION Translation
+## दस्तावेज़ीकरण अनुवाद
 
 -   [अंग्रेज़ी](DOCUMENTATION.md)
 -   [सरलीकृत चीनी](DOCUMENTATION.zh-CN.md)
@@ -9,13 +9,13 @@
 -   [फ़्रेंच](DOCUMENTATION.fr.md)
 -   [अरब](DOCUMENTATION.ar.md)
 
-**GitHub Action to translate Documentation to any language**
+**किसी भी भाषा में दस्तावेज़ीकरण का अनुवाद करने के लिए GitHub एक्शन**
 
 यह एक GitHub क्रिया है जो स्वचालित रूप से आपके रेपो में दस्तावेज़ का एक निर्दिष्ट भाषा में अनुवाद करती है।
 
 ## स्थापित करना
 
-1.  **Add a workflow file** to your project (e.g. `.github/workflows/documentation.yml`):
+1.  **वर्कफ़्लो फ़ाइल जोड़ें**आपके प्रोजेक्ट के लिए (उदा.`.github/workflows/documentation.yml`):
 
 ```yaml
 name: Translate DOCUMENTATION
@@ -75,8 +75,8 @@ jobs:
 
 आप निम्नलिखित विकल्पों के साथ कार्रवाई को आगे कॉन्फ़िगर कर सकते हैं:
 
--   `LANG`: वह भाषा जिसमें आप अपने रीडमी का अनुवाद करना चाहते हैं। डिफ़ॉल्ट सरलीकृत चीनी है. समर्थित भाषाएँ नीचे पाई जा सकती हैं।
-    (गलती करना:`zh-CH`) (required: `false`)
+-   `LANG`: वह भाषा जिसमें आप अपने दस्तावेज़ का अनुवाद करना चाहते हैं। डिफ़ॉल्ट सरलीकृत चीनी है. समर्थित भाषाएँ नीचे पाई जा सकती हैं।
+    (गलती करना:`zh-CH`) (आवश्यक:`false`)
 
 ## समर्थित भाषाएँ
 
