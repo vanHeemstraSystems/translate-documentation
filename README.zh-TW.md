@@ -75,8 +75,8 @@ Linux / macOS：
 
 您可以使用以下選項進一步配置操作：
 
--   `LANG`：您要將文件翻譯成的語言。預設為簡體中文。支援的語言可以在下面找到。
-    (預設:`zh-CH`） （必需的：`false`)
+-   `LANG`: The language you want to translate your documentation to. The default is Simplified Chinese. The supported languages can be found below.
+    (default: `zh-CH`） （必需的：`false`)
 
 ## 支援的語言
 
