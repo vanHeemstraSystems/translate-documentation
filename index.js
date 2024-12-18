@@ -74,6 +74,7 @@ async function commitChanges (lang) {
       `docs: Added DOCUMENTATION."${lang}".md translation via https://github.com/vanHeemstraSystems/translate-documentation`
     )
     console.log('finished commit')
+    await git.pull() // For any intermediate changes
     await git.push()
     console.log('pushed')
   } catch (error) {
