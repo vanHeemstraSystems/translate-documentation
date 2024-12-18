@@ -84,11 +84,11 @@ jobs:
 
 ### مشاكل
 
-يفحص[هنا](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)للقضايا المتعلقة بهذا الإجراء.
+يفحص[هنا](https://github.com/vanHeemstraSystems/translate-documentation/issues/1) for issues related to this action.
 
 ### تطوير
 
-الاقتراحات والمساهمات هي دائما موضع ترحيب!
+Suggestions and contributions are always welcome!
 
 ### رخصة
 
