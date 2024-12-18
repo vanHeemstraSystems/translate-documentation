@@ -15,7 +15,7 @@
 
 ## 设置
 
-1.  **Add a workflow file**到您的项目（例如`.github/workflows/documentation.yml`):
+1.  **添加工作流程文件**到您的项目（例如`.github/workflows/documentation.yml`):
 
 ```yaml
 name: Translate DOCUMENTATION
@@ -59,7 +59,7 @@ Linux / macOS：
 
     $ export NODE_OPTIONS=--openssl-legacy-provider
 
-视窗：
+Windows:
 
     $ setx NODE_OPTIONS=--openssl-legacy-provider
 
@@ -86,7 +86,7 @@ Linux / macOS：
 
 查看[这里](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)对于与此操作相关的问题。
 
-### 发展
+### Development
 
 随时欢迎提出建议和贡献！
 
