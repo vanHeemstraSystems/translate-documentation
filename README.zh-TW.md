@@ -9,13 +9,13 @@
 -   [法語](DOCUMENTATION.fr.md)
 -   [阿拉伯](DOCUMENTATION.ar.md)
 
-**GitHub Action to translate Documentation to any language**
+**GitHub Action 將文件翻譯成任何語言**
 
 這是一個 GitHub Action，可自動將儲存庫中的文件翻譯為指定語言。
 
 ## 設定
 
-1.  **新增工作流程文件** to your project (e.g. `.github/workflows/documentation.yml`):
+1.  **新增工作流程文件**到您的專案（例如`.github/workflows/documentation.yml`):
 
 ```yaml
 name: Translate DOCUMENTATION
@@ -53,7 +53,7 @@ jobs:
 
 ## 建造
 
-Do the following:
+執行以下操作：
 
 Linux / macOS：
 
@@ -63,7 +63,7 @@ Linux / macOS：
 
     $ setx NODE_OPTIONS=--openssl-legacy-provider
 
-Then:
+然後：
 
     $ npm run build
 
@@ -80,7 +80,7 @@ Then:
 
 ## 支援的語言
 
-Languages supported can be found here <https://cloud.google.com/translate/docs/languages>
+可以在此處找到支援的語言<https://cloud.google.com/translate/docs/languages>
 
 ### 問題
 
