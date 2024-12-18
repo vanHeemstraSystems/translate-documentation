@@ -75,18 +75,18 @@ Linux / macOS：
 
 您可以使用以下选项进一步配置操作：
 
--   `LANG`：您要将自述文件翻译成的语言。默认为简体中文。可以在下面找到支持的语言。
+-   `LANG`：您要将文档翻译成的语言。默认为简体中文。支持的语言可以在下面找到。
     （默认：`zh-CH`） （必需的：`false`)
 
 ## 支持的语言
 
-可以在此处找到支持的语言<https://cloud.google.com/translate/docs/languages>
+Languages supported can be found here <https://cloud.google.com/translate/docs/languages>
 
 ### 问题
 
 查看[这里](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)对于与此操作相关的问题。
 
-### 发展
+### Development
 
 随时欢迎提出建议和贡献！
 
