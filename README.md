@@ -79,7 +79,7 @@ A new package will be build and stored in the ```dist``` directory.
 
 You can configure the action further with the following options:
 
-- `LANG`: The language you want to translate your readme to. The default is Simplified Chinese. The supported languages can be found below.
+- `LANG`: The language you want to translate your documentation to. The default is Simplified Chinese. The supported languages can be found below.
   (default: `zh-CH`) (required: `false`)
 
 ## Supported Languages
