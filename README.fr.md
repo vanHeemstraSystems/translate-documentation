@@ -78,7 +78,7 @@ Vous pouvez configurer davantage l'action avec les options suivantes :
 -   `LANG`: La langue dans laquelle vous souhaitez traduire votre documentation. La valeur par défaut est le chinois simplifié. Les langues prises en charge peuvent être trouvées ci-dessous.
     (défaut:`zh-CH`) (requis:`false`)
 
-## Supported Languages
+## Langues prises en charge
 
 Les langues prises en charge peuvent être trouvées ici<https://cloud.google.com/translate/docs/languages>
 
