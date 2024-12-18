@@ -2,7 +2,7 @@
 
 ## 文件翻譯
 
--   [English](DOCUMENTATION.md)
+-   [英語](DOCUMENTATION.md)
 -   [簡體中文](DOCUMENTATION.zh-CN.md)
 -   [繁體中文](DOCUMENTATION.zh-TW.md)
 -   [印地語](DOCUMENTATION.hi.md)
@@ -15,7 +15,7 @@
 
 ## 設定
 
-1.  **新增工作流程文件**到您的專案（例如`.github/workflows/readme.yml`):
+1.  **新增工作流程文件**到您的專案（例如`.github/workflows/documentation.yml`):
 
 ```yaml
 name: Translate DOCUMENTATION
@@ -25,36 +25,30 @@ on:
     branches:
       - main
       - master
+
 jobs:
-  build:
+  translate:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        language:
+          - { code: zh-CN, name: Chinese Simplified }
+          - { code: zh-TW, name: Chinese Traditional }
+          - { code: hi, name: Hindi }
+          - { code: ar, name: Arabic }
+          - { code: fr, name: French }
+    
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 12.x
-      # ISO Language Codes: https://cloud.google.com/translate/docs/languages  
-      - name: Adding DOCUMENTATION - Chinese Simplified
+          node-version: 20.x  # Updated to a more recent LTS version
+      
+      - name: Adding DOCUMENTATION - ${{ matrix.language.name }}
         uses: vanHeemstraSystems/translate-documentation@main
         with:
-          LANG: zh-CN
-      - name: Adding DOCUMENTATION - Chinese Traditional
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: zh-TW
-      - name: Adding DOCUMENTATION - Hindi
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: hi
-      - name: Adding DOCUMENTATION - Arabic
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: ar
-      - name: Adding DOCUMENTATION - French
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: fr
+          LANG: ${{ matrix.language.code }}
 ```
 
 ## 建造
@@ -73,7 +67,7 @@ Linux / macOS：
 
     $ npm run build
 
-將建立一個新包並將其儲存在`dist`目錄。
+將建立一個新包並將其儲存在`dist` directory.
 
 ## 配置
 
@@ -88,9 +82,9 @@ Linux / macOS：
 
 可以在此處找到支援的語言<https://cloud.google.com/translate/docs/languages>
 
-### 問題
+### Issues
 
-查看[這裡](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)對於與此操作相關的問題。
+Check [這裡](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)對於與此操作相關的問題。
 
 ### 發展
 
