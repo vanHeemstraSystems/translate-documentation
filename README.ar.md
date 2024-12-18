@@ -11,7 +11,7 @@
 
 **إجراء GitHub لترجمة الوثائق إلى أي لغة**
 
-هذا هو إجراء GitHub الذي يقوم تلقائيًا بترجمة الوثائق الموجودة في الريبو الخاص بك إلى لغة محددة.
+This is a GitHub Action that automatically translate the documentation in your repo to a specified language.
 
 ## يثبت
 
