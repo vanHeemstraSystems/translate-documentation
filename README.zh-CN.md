@@ -2,7 +2,7 @@
 
 ## 文档翻译
 
--   [英语](DOCUMENTATION.md)
+-   [English](DOCUMENTATION.md)
 -   [简体中文](DOCUMENTATION.zh-CN.md)
 -   [繁体中文](DOCUMENTATION.zh-TW.md)
 -   [印地语](DOCUMENTATION.hi.md)
@@ -59,7 +59,7 @@ Linux / macOS：
 
     $ export NODE_OPTIONS=--openssl-legacy-provider
 
-Windows:
+视窗：
 
     $ setx NODE_OPTIONS=--openssl-legacy-provider
 
@@ -86,10 +86,10 @@ Windows:
 
 查看[这里](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)对于与此操作相关的问题。
 
-### Development
+### 发展
 
 随时欢迎提出建议和贡献！
 
 ### 执照
 
-[和](./LICENSE)
+[MIT](./LICENSE)
