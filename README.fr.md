@@ -15,7 +15,7 @@ Il s'agit d'une action GitHub qui traduit automatiquement la documentation de vo
 
 ## Installation
 
-1.  **Add a workflow file**à votre projet (par ex.`.github/workflows/readme.yml`):
+1.  **Ajouter un fichier de workflow**à votre projet (par ex.`.github/workflows/documentation.yml`):
 
 ```yaml
 name: Translate DOCUMENTATION
@@ -25,36 +25,30 @@ on:
     branches:
       - main
       - master
+
 jobs:
-  build:
+  translate:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        language:
+          - { code: zh-CN, name: Chinese Simplified }
+          - { code: zh-TW, name: Chinese Traditional }
+          - { code: hi, name: Hindi }
+          - { code: ar, name: Arabic }
+          - { code: fr, name: French }
+    
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 12.x
-      # ISO Language Codes: https://cloud.google.com/translate/docs/languages  
-      - name: Adding DOCUMENTATION - Chinese Simplified
+          node-version: 20.x  # Updated to a more recent LTS version
+      
+      - name: Adding DOCUMENTATION - ${{ matrix.language.name }}
         uses: vanHeemstraSystems/translate-documentation@main
         with:
-          LANG: zh-CN
-      - name: Adding DOCUMENTATION - Chinese Traditional
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: zh-TW
-      - name: Adding DOCUMENTATION - Hindi
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: hi
-      - name: Adding DOCUMENTATION - Arabic
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: ar
-      - name: Adding DOCUMENTATION - French
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: fr
+          LANG: ${{ matrix.language.code }}
 ```
 
 ## Construire
@@ -81,8 +75,8 @@ Un nouveau package sera construit et stocké dans le`dist`annuaire.
 
 Vous pouvez configurer davantage l'action avec les options suivantes :
 
--   `LANG`: The language you want to translate your readme to. The default is Simplified Chinese. The supported languages can be found below.
-    (default: `zh-CH`) (requis:`false`)
+-   `LANG`: La langue dans laquelle vous souhaitez traduire votre fichier Lisez-moi. La valeur par défaut est le chinois simplifié. Les langues prises en charge peuvent être trouvées ci-dessous.
+    (défaut:`zh-CH`) (requis:`false`)
 
 ## Langues prises en charge
 
