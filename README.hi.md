@@ -1,6 +1,6 @@
 # रीडमी एक्शन का अनुवाद करें
 
-## दस्तावेज़ीकरण अनुवाद
+## DOCUMENTATION Translation
 
 -   [अंग्रेज़ी](DOCUMENTATION.md)
 -   [सरलीकृत चीनी](DOCUMENTATION.zh-CN.md)
@@ -9,13 +9,13 @@
 -   [फ़्रेंच](DOCUMENTATION.fr.md)
 -   [अरब](DOCUMENTATION.ar.md)
 
-**दस्तावेज़ीकरण को किसी भी भाषा में अनुवाद करने के लिए GitHub क्रिया**
+**GitHub Action to translate Documentation to any language**
 
 यह एक GitHub क्रिया है जो स्वचालित रूप से आपके रेपो में दस्तावेज़ का एक निर्दिष्ट भाषा में अनुवाद करती है।
 
 ## स्थापित करना
 
-1.  **वर्कफ़्लो फ़ाइल जोड़ें**आपके प्रोजेक्ट के लिए (उदा.`.github/workflows/readme.yml`):
+1.  **Add a workflow file** to your project (e.g. `.github/workflows/documentation.yml`):
 
 ```yaml
 name: Translate DOCUMENTATION
@@ -25,36 +25,30 @@ on:
     branches:
       - main
       - master
+
 jobs:
-  build:
+  translate:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        language:
+          - { code: zh-CN, name: Chinese Simplified }
+          - { code: zh-TW, name: Chinese Traditional }
+          - { code: hi, name: Hindi }
+          - { code: ar, name: Arabic }
+          - { code: fr, name: French }
+    
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 12.x
-      # ISO Language Codes: https://cloud.google.com/translate/docs/languages  
-      - name: Adding DOCUMENTATION - Chinese Simplified
+          node-version: 20.x  # Updated to a more recent LTS version
+      
+      - name: Adding DOCUMENTATION - ${{ matrix.language.name }}
         uses: vanHeemstraSystems/translate-documentation@main
         with:
-          LANG: zh-CN
-      - name: Adding DOCUMENTATION - Chinese Traditional
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: zh-TW
-      - name: Adding DOCUMENTATION - Hindi
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: hi
-      - name: Adding DOCUMENTATION - Arabic
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: ar
-      - name: Adding DOCUMENTATION - French
-        uses: vanHeemstraSystems/translate-documentation@main
-        with:
-          LANG: fr
+          LANG: ${{ matrix.language.code }}
 ```
 
 ## निर्माण
@@ -82,7 +76,7 @@ jobs:
 आप निम्नलिखित विकल्पों के साथ कार्रवाई को आगे कॉन्फ़िगर कर सकते हैं:
 
 -   `LANG`: वह भाषा जिसमें आप अपने रीडमी का अनुवाद करना चाहते हैं। डिफ़ॉल्ट सरलीकृत चीनी है. समर्थित भाषाएँ नीचे पाई जा सकती हैं।
-    (गलती करना:`zh-CH`) (आवश्यक:`false`)
+    (गलती करना:`zh-CH`) (required: `false`)
 
 ## समर्थित भाषाएँ
 
