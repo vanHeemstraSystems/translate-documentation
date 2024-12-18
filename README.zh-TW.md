@@ -67,7 +67,7 @@ Linux / macOS：
 
     $ npm run build
 
-將建立一個新包並將其儲存在`dist` directory.
+將建立一個新包並將其儲存在`dist`目錄。
 
 ## 配置
 
@@ -75,16 +75,16 @@ Linux / macOS：
 
 您可以使用以下選項進一步配置操作：
 
--   `LANG`：您要將自述文件翻譯成的語言。預設為簡體中文。可以在下面找到支援的語言。
+-   `LANG`：您要將文件翻譯成的語言。預設為簡體中文。支援的語言可以在下面找到。
     (預設:`zh-CH`） （必需的：`false`)
 
 ## 支援的語言
 
 可以在此處找到支援的語言<https://cloud.google.com/translate/docs/languages>
 
-### Issues
+### 問題
 
-Check [這裡](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)對於與此操作相關的問題。
+查看[這裡](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)對於與此操作相關的問題。
 
 ### 發展
 
