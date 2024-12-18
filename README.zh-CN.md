@@ -15,7 +15,7 @@
 
 ## 设置
 
-1.  **添加工作流程文件**到您的项目（例如`.github/workflows/documentation.yml`):
+1.  **Add a workflow file**到您的项目（例如`.github/workflows/documentation.yml`):
 
 ```yaml
 name: Translate DOCUMENTATION
@@ -80,13 +80,13 @@ Linux / macOS：
 
 ## 支持的语言
 
-Languages supported can be found here <https://cloud.google.com/translate/docs/languages>
+可以在此处找到支持的语言<https://cloud.google.com/translate/docs/languages>
 
 ### 问题
 
 查看[这里](https://github.com/vanHeemstraSystems/translate-documentation/issues/1)对于与此操作相关的问题。
 
-### Development
+### 发展
 
 随时欢迎提出建议和贡献！
 
