@@ -14,7 +14,7 @@ This is a GitHub Action that automatically translate the documentation in your r
 
 ## Setup
 
-1. **Add a workflow file** to your project (e.g. `.github/workflows/readme.yml`):
+1. **Add a workflow file** to your project (e.g. `.github/workflows/documentation.yml`):
 ```yaml
 name: Translate DOCUMENTATION
 
