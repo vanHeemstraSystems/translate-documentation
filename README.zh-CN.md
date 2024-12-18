@@ -2,7 +2,7 @@
 
 ## 文档翻译
 
--   [English](DOCUMENTATION.md)
+-   [英语](DOCUMENTATION.md)
 -   [简体中文](DOCUMENTATION.zh-CN.md)
 -   [繁体中文](DOCUMENTATION.zh-TW.md)
 -   [印地语](DOCUMENTATION.hi.md)
@@ -75,7 +75,7 @@ Linux / macOS：
 
 您可以使用以下选项进一步配置操作：
 
--   `LANG`：您要将文档翻译成的语言。默认为简体中文。支持的语言可以在下面找到。
+-   `LANG`：您要将文档翻译成的语言。默认为简体中文。可以在下面找到支持的语言。
     （默认：`zh-CH`） （必需的：`false`)
 
 ## 支持的语言
@@ -92,4 +92,4 @@ Linux / macOS：
 
 ### 执照
 
-[MIT](./LICENSE)
+[和](./LICENSE)
