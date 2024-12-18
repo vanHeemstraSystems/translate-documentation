@@ -4518,7 +4518,7 @@ function whitespace(character) {
 var __webpack_unused_export__;
 
 __webpack_unused_export__ = ({ value: true });
-__webpack_unused_export__ = void 0;
+exports.T = void 0;
 const translate = async ({ query, source, target, format, apiurl, apiKey }) => {
     if (!apiurl && !apiKey)
         throw new TypeError("You need an API key to use the public LibreTranslate API!");
@@ -4559,7 +4559,7 @@ const translate = async ({ query, source, target, format, apiurl, apiKey }) => {
         throw err;
     }
 };
-__webpack_unused_export__ = translate;
+exports.T = translate;
 //# sourceMappingURL=translate.js.map
 
 /***/ }),
@@ -52386,12 +52386,19 @@ const toMarkdown = ast => {
 
 async function translateText(text, targetLanguage) {
   try {
-    // You can specify a specific server if needed
-    const translation = await (0,translate["default"])(text, {
+    // Ensure text is a non-empty string
+    if (!text || typeof text !== 'string') {
+      console.warn('Skipping translation for invalid text:', text);
+      return text;
+    }
+
+    const translation = await (0,translate/* translate */.T)(text, {
       to: targetLanguage,
       from: 'auto',
-      server: 'https://libretranslate.de' // Optional: choose a public instance
+      // Optionally specify a server
+      server: 'https://libretranslate.de'
     });
+
     return translation;
   } catch (error) {
     console.error('Translation error:', error);
@@ -52413,29 +52420,33 @@ async function translateDocumentation() {
     const documentationAST = toAst(documentation)
 
     // Translate nodes asynchronously
-    await new Promise((resolve, reject) => {
+    const translateNodes = async () => {
       const promises = [];
-      unist_util_visit_default()(documentationAST, async (node) => {
-        if (node.type === 'text' && node.value.trim()) {
+      unist_util_visit_default()(documentationAST, (node) => {
+        if (node.type === 'text' && node.value && node.value.trim()) {
           const promise = translateText(node.value, lang)
             .then(translatedText => {
               node.value = translatedText;
+            })
+            .catch(error => {
+              console.error('Node translation failed:', error);
             });
           promises.push(promise);
         }
       });
 
-      Promise.all(promises)
-        .then(() => {
-          (0,external_fs_.writeFileSync)(
-            (0,external_path_.join)(mainDir, `DOCUMENTATION.${lang}.md`),
-            toMarkdown(documentationAST),
-            'utf8'
-          );
-          resolve();
-        })
-        .catch(reject);
-    });
+      await Promise.all(promises);
+    }
+
+    // Run translation
+    await translateNodes();
+
+    // Write translated documentation
+    (0,external_fs_.writeFileSync)(
+      (0,external_path_.join)(mainDir, `DOCUMENTATION.${lang}.md`),
+      toMarkdown(documentationAST),
+      'utf8'
+    );
 
     // Commit and push changes
     await git.add('./*');

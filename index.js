@@ -2,7 +2,7 @@ import { unified } from 'unified'
 import { readFileSync, writeFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 import { getInput } from '@actions/core'
-import translate from 'libretranslate'
+import { translate } from 'libretranslate'
 import parse from 'remark-parse'
 import stringify from 'remark-stringify'
 import visit from 'unist-util-visit'
@@ -20,12 +20,19 @@ const toMarkdown = ast => {
 
 async function translateText(text, targetLanguage) {
   try {
-    // You can specify a specific server if needed
+    // Ensure text is a non-empty string
+    if (!text || typeof text !== 'string') {
+      console.warn('Skipping translation for invalid text:', text);
+      return text;
+    }
+
     const translation = await translate(text, {
       to: targetLanguage,
       from: 'auto',
-      server: 'https://libretranslate.de' // Optional: choose a public instance
+      // Optionally specify a server
+      server: 'https://libretranslate.de'
     });
+
     return translation;
   } catch (error) {
     console.error('Translation error:', error);
@@ -47,29 +54,33 @@ async function translateDocumentation() {
     const documentationAST = toAst(documentation)
 
     // Translate nodes asynchronously
-    await new Promise((resolve, reject) => {
+    const translateNodes = async () => {
       const promises = [];
-      visit(documentationAST, async (node) => {
-        if (node.type === 'text' && node.value.trim()) {
+      visit(documentationAST, (node) => {
+        if (node.type === 'text' && node.value && node.value.trim()) {
           const promise = translateText(node.value, lang)
             .then(translatedText => {
               node.value = translatedText;
+            })
+            .catch(error => {
+              console.error('Node translation failed:', error);
             });
           promises.push(promise);
         }
       });
 
-      Promise.all(promises)
-        .then(() => {
-          writeFileSync(
-            join(mainDir, `DOCUMENTATION.${lang}.md`),
-            toMarkdown(documentationAST),
-            'utf8'
-          );
-          resolve();
-        })
-        .catch(reject);
-    });
+      await Promise.all(promises);
+    }
+
+    // Run translation
+    await translateNodes();
+
+    // Write translated documentation
+    writeFileSync(
+      join(mainDir, `DOCUMENTATION.${lang}.md`),
+      toMarkdown(documentationAST),
+      'utf8'
+    );
 
     // Commit and push changes
     await git.add('./*');
